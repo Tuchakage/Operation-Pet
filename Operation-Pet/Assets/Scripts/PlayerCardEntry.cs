@@ -13,9 +13,11 @@ public class PlayerCardEntry : MonoBehaviour
 {
     [Header("UI References")]
     public TMP_Text PlayerNameText;
+
     [SerializeField]
     private int ownerId;
     private bool isPlayerReady = false;
+
 
     public GameObject readyBtn;
     //Used to turn on the indicator to show that a player is ready
@@ -37,7 +39,7 @@ public class PlayerCardEntry : MonoBehaviour
         //Initialise a Hashtable to use for the SetCustomProperties Function
         Hashtable initialHash = new Hashtable()
         {
-            {"Player Ready", isPlayerReady}
+            {"Player Ready", isPlayerReady}, 
         };
        
         //Allows PUN to track whats been changed and update it properly
@@ -56,6 +58,7 @@ public class PlayerCardEntry : MonoBehaviour
         //Reverses what it currently is
         isPlayerReady = !isPlayerReady;
 
+        //Update Hash Table
         Hashtable properties = new Hashtable(){
             {"Player Ready", isPlayerReady}
         };
@@ -66,10 +69,6 @@ public class PlayerCardEntry : MonoBehaviour
         //Depending on what the "isPlayerReady" variable is set the text
         readyBtn.transform.GetChild(0).GetComponent<TMP_Text>().text = isPlayerReady ? "Unready" : "Ready";
 
-        //Go into Menu Manager script and call the Set Ready Player function to let everyone know that you've readied up
-        MainMenuManager.menuInstance.SetReadyPlayer(isPlayerReady);
-
-        //Inspect the Start Menu of Asteroids PlayerListEntryScript
     }
 
     //Boolean parameter so other players can go into custom properties and assign it
@@ -78,5 +77,4 @@ public class PlayerCardEntry : MonoBehaviour
         //Make Ready Circle Available Or Unavailable
         ReadyCircleObject.enabled = playerReady;
     }
-    //How isPlayerReady being set after initialisation?
 }

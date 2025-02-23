@@ -47,8 +47,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public GameObject canvas;
 
-    public GameObject roomListPanel;
-    public GameObject createRoomBtn;
+    public GameObject lobbyPanel;
     public GameObject roomInfo;
 
     //Used to turn on the indicator to show that a player is ready
@@ -90,6 +89,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         menuInstance = this;
         currentReadyPlayers = 0;
         maxReadyPlayers = 2;
+
+        lobbyPanel = GameObject.Find("Lobby Panel");
 
         //Makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same rom sync their level automatically
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -169,9 +170,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         base.OnJoinedRoom();
 
-        
-        roomListPanel.SetActive(false);
-        createRoomBtn.SetActive(false);
+
+        lobbyPanel.SetActive(false);
         roomInfo.SetActive(true);
 
         //Debug.Log("Player Name is " + playerName.text);
@@ -193,7 +193,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
             GameObject playerCard = Instantiate(playerCardPrefab);
 
-            GameObject playerCardGroup = GameObject.Find("Player Card Group");
+            GameObject playerCardGroup = GameObject.Find("Unassigned Player Card Group");
 
             if (playerCardGroup) 
             {
@@ -214,6 +214,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
                 //Set the ready status
                 playerCard.GetComponent<PlayerCardEntry>().SetReadyStatus((bool) isPlayerReady);
             }
+
 
             //Add to list
             playersInRoom.Add(p.ActorNumber, playerCard);
@@ -240,11 +241,9 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         //Not seen if you're the player joining 
         Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName);
-
-        GameObject playerCard = Instantiate(playerCardPrefab);
-
         GameObject playerTwoSpawnpoint = GameObject.Find("Player 2 Name Card Spawnpoint");
-        playerCard.transform.SetParent(playerTwoSpawnpoint.transform);
+
+        GameObject playerCard = Instantiate(playerCardPrefab, playerTwoSpawnpoint.transform);
         playerCard.transform.localPosition = new Vector3(0, 0, 0);
         playerCard.GetComponent<PlayerCardEntry>().Init(other.ActorNumber, other.NickName);
 
@@ -322,6 +321,11 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     #region Button Functions
     public void CreateRoom()
     {
+        if (!PhotonNetwork.IsConnectedAndReady) 
+        {
+            Debug.LogError("Not connected to Photon Network");
+            return;
+        }
         if (playerName.text == "")
         {
             // If player name is empty then dont do anything
@@ -348,9 +352,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
         PhotonNetwork.CreateRoom(roomName.text, roomOptions, TypedLobby.Default);
 
-        //Disable player name input field
-        playerName.gameObject.SetActive(false);
-        roomName.gameObject.SetActive(false);
+        //Disable Lobby Panel
+        lobbyPanel.SetActive(false);
     }
 
     public void JoinRoom(string RoomName)
@@ -371,9 +374,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
         PhotonNetwork.JoinRoom(RoomName);
 
-        //Disable player name input field
-        playerName.gameObject.SetActive(false);
-        roomName.gameObject.SetActive(false);
+        //Disable Lobby Panel
+        lobbyPanel.SetActive(false);
     }
 
     public void LeaveRoom() 
@@ -482,19 +484,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
         //Go To The Actual Game
         PhotonNetwork.LoadLevel(1);
-    }
-
-    //Function used to keep track of how many players have readied up
-    public void SetReadyPlayer(bool isReady)
-    {
-        if (isReady)
-        {
-            currentReadyPlayers++;
-        }
-        else
-        {
-            currentReadyPlayers--;
-        }
     }
 
     //Function to check if the players are ready (Uses Photons Custom Properties)
