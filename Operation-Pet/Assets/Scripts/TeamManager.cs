@@ -8,6 +8,7 @@ using UnityEngine;
 public class TeamManager : MonoBehaviourPunCallbacks
 {
     private string teamName = "Unassigned";
+    public int ownerid;
     Player localPlayer;
     void Start()
     {
@@ -21,7 +22,13 @@ public class TeamManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom() 
     {
-        localPlayer = PhotonNetwork.CurrentRoom.GetPlayer(PhotonNetwork.LocalPlayer.ActorNumber);
+        //Get the actor number when the local player joins the room
+        ownerid = PhotonNetwork.LocalPlayer.ActorNumber;
+
+        //Get Reference to Player info when local player joins the room
+        localPlayer = PhotonNetwork.CurrentRoom.GetPlayer(ownerid);
+
+        
     }
     
     public void JoinRedTeam() 
@@ -42,12 +49,27 @@ public class TeamManager : MonoBehaviourPunCallbacks
         //Get reference to the Red Team Group List
         Transform redTeamGroupList = GameObject.Find("Red Team ").transform;
 
-        //Will be used to check the value of the Team Name property and it will be assigned
-        object teamNameProperty;
-        if (localPlayer.CustomProperties.TryGetValue("Team Name", out teamNameProperty))
+        GameObject[] cardArray;
+
+        cardArray = GameObject.FindGameObjectsWithTag("Player Card");
+
+        if (cardArray.Length > 0)
         {
-            Debug.Log("Has joined Team " + (string)teamNameProperty);
+            foreach (GameObject card in cardArray)
+            {
+                //Get the Actor number of the Player Card
+                int playerCardID = card.GetComponent<PlayerCardEntry>().ownerId;
+
+                if (playerCardID == ownerid)
+                {                  
+                    card.transform.SetParent(redTeamGroupList);
+                    card.transform.localPosition = new Vector3(0, 0, 0);
+                    card.transform.localScale = new Vector3(1, 1, 1);
+                }
+            }
         }
+
+
 
         //Get reference to the Player Card
 

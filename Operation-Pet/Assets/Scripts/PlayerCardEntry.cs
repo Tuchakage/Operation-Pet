@@ -13,9 +13,7 @@ public class PlayerCardEntry : MonoBehaviour
 {
     [Header("UI References")]
     public TMP_Text PlayerNameText;
-
-    [SerializeField]
-    private int ownerId;
+    public int ownerId;
     private bool isPlayerReady = false;
 
 
