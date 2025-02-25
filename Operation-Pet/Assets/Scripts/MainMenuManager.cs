@@ -16,7 +16,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     #region Int Variables
     //Variables used for keeping count how many players are ready in the lobby
-    private int maxReadyPlayers;
+    private int maxPlayers;
     private int currentReadyPlayers;
 
     //Indicates whether they are P1 Or P2
@@ -75,7 +75,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     Vector2 roomListScroll = Vector2.zero;
-    bool joiningRoom = false;
 
     //List<RoomInfo> cachedRoomList = new List<RoomInfo>();
 
@@ -88,7 +87,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         cachedRoomList = new Dictionary<string, RoomInfo>();
         menuInstance = this;
         currentReadyPlayers = 0;
-        maxReadyPlayers = 2;
+        maxPlayers = 2;
 
         lobbyPanel = GameObject.Find("Lobby Panel");
 
@@ -191,35 +190,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
                 Debug.Log("Master Client is "+ p.NickName);
             }
 
-            GameObject playerCard = Instantiate(playerCardPrefab);
-
-            GameObject playerCardGroup = GameObject.Find("Unassigned Player Card Group");
-
-            if (playerCardGroup) 
-            {
-                playerCard.transform.SetParent(playerCardGroup.transform);
-            }
-            
-
-            playerCard.transform.localPosition = new Vector3(0, 0, 0);
-
-            //Initialise Player card
-            playerCard.GetComponent<PlayerCardEntry>().Init(p.ActorNumber, p.NickName);
-
-            object isPlayerReady;
-
-            //Set the Ready status by Trying to get the value from the key "Player Ready"
-            if (p.CustomProperties.TryGetValue("Player Ready", out isPlayerReady))
-            {
-                //Set the ready status
-                playerCard.GetComponent<PlayerCardEntry>().SetReadyStatus((bool) isPlayerReady);
-            }
-
-
-            //Add to list
-            playersInRoom.Add(p.ActorNumber, playerCard);
-
-            Debug.Log("Actor Name: " + p.NickName + " Player Actor Number: " + p.ActorNumber);
+            SpawnPlayerCards(p);
         }
         
 
@@ -228,27 +199,18 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-
-        joiningRoom = false;
-
         //Disable player name input field
         playerName.gameObject.SetActive(true);
         roomName.gameObject.SetActive(true);
 
 
     }
+
+    //Not called if you're the player joining 
     public override void OnPlayerEnteredRoom(Player other)
     {
-        //Not seen if you're the player joining 
-        Debug.LogFormat("OnPlayerEnteredRoom() {0}", other.NickName);
-        GameObject playerTwoSpawnpoint = GameObject.Find("Player 2 Name Card Spawnpoint");
-
-        GameObject playerCard = Instantiate(playerCardPrefab, playerTwoSpawnpoint.transform);
-        playerCard.transform.localPosition = new Vector3(0, 0, 0);
-        playerCard.GetComponent<PlayerCardEntry>().Init(other.ActorNumber, other.NickName);
-
-        //Add to list
-        playersInRoom.Add(other.ActorNumber, playerCard);
+        //Not seen if you're the player 
+        SpawnPlayerCards(other);
     }
 
     public override void OnPlayerLeftRoom(Player other)
@@ -339,14 +301,11 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             roomName.text = playerName.text + "'s Room";
         }
 
-        //Player has joined the room
-        joiningRoom = true;
-
         //Shows the Room as an option to join in lobby list
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsOpen = true;
         roomOptions.IsVisible = true;
-        roomOptions.MaxPlayers = 2;
+        roomOptions.MaxPlayers = maxPlayers;
 
         //canvas.SetActive(false);
 
@@ -365,10 +324,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
             return;
         }
-
-
-        joiningRoom = true;
-
 
         //canvas.SetActive(false);
 
@@ -484,6 +439,39 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
         //Go To The Actual Game
         PhotonNetwork.LoadLevel(1);
+    }
+
+    void SpawnPlayerCards(Player player) 
+    {
+        GameObject playerCard = Instantiate(playerCardPrefab);
+
+        GameObject playerCardGroup = GameObject.Find("Unassigned Player Card Group");
+
+        if (playerCardGroup)
+        {
+            playerCard.transform.SetParent(playerCardGroup.transform);
+        }
+
+
+        playerCard.transform.localPosition = new Vector3(0, 0, 0);
+
+        //Initialise Player card
+        playerCard.GetComponent<PlayerCardEntry>().Init(player.ActorNumber, player.NickName);
+
+        object isPlayerReady;
+
+        //Set the Ready status by Trying to get the value from the key "Player Ready"
+        if (player.CustomProperties.TryGetValue("Player Ready", out isPlayerReady))
+        {
+            //Set the ready status
+            playerCard.GetComponent<PlayerCardEntry>().SetReadyStatus((bool)isPlayerReady);
+        }
+
+
+        //Add to list
+        playersInRoom.Add(player.ActorNumber, playerCard);
+
+        Debug.Log("Actor Name: " + player.NickName + " Player Actor Number: " + player.ActorNumber);
     }
 
     //Function to check if the players are ready (Uses Photons Custom Properties)

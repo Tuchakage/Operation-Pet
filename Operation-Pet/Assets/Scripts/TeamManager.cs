@@ -30,7 +30,8 @@ public class TeamManager : MonoBehaviourPunCallbacks
 
         
     }
-    
+
+    [PunRPC]
     public void JoinRedTeam() 
     {
         teamName = "Red";
@@ -75,4 +76,5 @@ public class TeamManager : MonoBehaviourPunCallbacks
 
 
     }
+
 }
