@@ -49,7 +49,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
             return;
         }
 
-
+        IncreaseTeamCount();
         //Update Hash Table 
         Hashtable properties = new Hashtable()
         {
@@ -74,9 +74,8 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
             case "Unassigned":
                 break;
             case "Red":
-                redTeamCount++;
                 teamNameCheck = "Red Team";
-                Debug.Log("Amount in Red Team = " + redTeamCount);
+                //Debug.Log("Amount in Red Team = " + redTeamCount);
                 break;
         }
 
@@ -126,18 +125,31 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    [PunRPC]
+    void IncreaseTeamCount() 
+    {
+        redTeamCount++;
+
+        //If you are not the Master Client
+        if (!photonView.IsMine) 
+        {
+            //Send to the Master Client so that they can sync the value (Since Local clients dont own the Network Manager)
+            photonView.RPC("IncreaseTeamCount", RpcTarget.MasterClient);
+        }
+    }
+
     //This function allows the variables inside to be sent over the network (Used as Observed component in photon view, this reads/writes the variables)
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
             //We own this player so send the other computers the data
-
+            stream.SendNext(redTeamCount);
         }
         else
         {
             //Network player that receives the data
-
+            redTeamCount = (int)stream.ReceiveNext();
         }
     }
 }
