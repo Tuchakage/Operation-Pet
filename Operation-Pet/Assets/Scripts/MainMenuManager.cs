@@ -16,7 +16,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     #region Int Variables
     //Variables used for keeping count how many players are ready in the lobby
-    private int maxPlayers;
+    public int maxPlayers;
     private int currentReadyPlayers;
 
     //Indicates whether they are P1 Or P2
@@ -87,7 +87,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         cachedRoomList = new Dictionary<string, RoomInfo>();
         menuInstance = this;
         currentReadyPlayers = 0;
-        maxPlayers = 2;
 
         lobbyPanel = GameObject.Find("Lobby Panel");
 
@@ -411,7 +410,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             GameObject roomItem = Instantiate(roomListItemPrefab, roomListParent);
             //Set the text of the Child Text Objects
             roomItem.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = room.Name;
-            roomItem.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = room.PlayerCount + "/2";
+            roomItem.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = room.PlayerCount + "/"+room.MaxPlayers;
 
         }
 
@@ -454,6 +453,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
         playerCard.transform.localPosition = new Vector3(0, 0, 0);
+        playerCard.transform.localScale = new Vector3(1, 1, 1);
 
         //Initialise Player card
         playerCard.GetComponent<PlayerCardEntry>().Init(player.ActorNumber, player.NickName);

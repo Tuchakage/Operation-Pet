@@ -2,6 +2,7 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using System.Collections.Generic;
 
 
 //Purpose of this script is to set the teams of the players before the game
@@ -9,6 +10,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     private string teamName = "Unassigned";
     public int ownerid;
+    private int redTeamCount;
     Player localPlayer;
     void Start()
     {
@@ -17,6 +19,11 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             {"Team Name",  teamName}
         };
+    }
+
+    void Update() 
+    {
+
     }
 
     public override void OnJoinedRoom() 
@@ -32,7 +39,16 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void JoinRedTeam() 
     {
+
         teamName = "Red";
+
+        CheckTeam();
+
+        if (redTeamCount >= 2)
+        {
+            return;
+        }
+
 
         //Update Hash Table 
         Hashtable properties = new Hashtable()
@@ -42,14 +58,9 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
         //Update the Hashtable that is being tracked by PUN
         PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
-
+        
         //Move the player card to be under the team name
         MoveCardToTeam(teamName, ownerid);
-
-
-
-
-
 
     }
 
@@ -63,8 +74,10 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
             case "Unassigned":
                 break;
             case "Red":
+                redTeamCount++;
                 teamNameCheck = "Red Team";
-            break;
+                Debug.Log("Amount in Red Team = " + redTeamCount);
+                break;
         }
 
         //Get reference to the Team Group List (Depending on what was passed through the parameter)
@@ -86,7 +99,6 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
                 if (playerCardID == cardOwner)
                 {
                     card.transform.SetParent(TeamGroupList);
-                    card.transform.localPosition = new Vector3(0, 0, 0);
                     card.transform.localScale = new Vector3(1, 1, 1);
                 }
             }
@@ -96,6 +108,22 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
         photonView.RPC("MoveCardToTeam", RpcTarget.OthersBuffered, team, cardOwner);
         
+    }
+
+    //Function that checks whether they are already in a team and if they do dont run the rest of the code
+    void CheckTeam() 
+    {
+        object isInTeam;
+        //Check the custom properties of that player to see if they are part of a team
+        if (localPlayer.CustomProperties.TryGetValue("Team Name", out isInTeam))
+        {
+            //if they are already in the same team as the button as they pressed
+            if ((string)isInTeam == teamName)
+            {
+                //Ignore them
+                return;
+            }
+        }
     }
 
     //This function allows the variables inside to be sent over the network (Used as Observed component in photon view, this reads/writes the variables)
@@ -109,7 +137,6 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         else
         {
             //Network player that receives the data
-
 
         }
     }
