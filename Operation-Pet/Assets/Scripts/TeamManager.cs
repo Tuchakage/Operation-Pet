@@ -5,14 +5,13 @@ using UnityEngine;
 
 
 //Purpose of this script is to set the teams of the players before the game
-public class TeamManager : MonoBehaviourPunCallbacks
+public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable 
 {
     private string teamName = "Unassigned";
     public int ownerid;
     Player localPlayer;
     void Start()
     {
-
         //Initialise a Hashtable first to use for the SetCustomProperties Function
         Hashtable properties = new Hashtable()
         {
@@ -31,7 +30,6 @@ public class TeamManager : MonoBehaviourPunCallbacks
         
     }
 
-    [PunRPC]
     public void JoinRedTeam() 
     {
         teamName = "Red";
@@ -45,10 +43,33 @@ public class TeamManager : MonoBehaviourPunCallbacks
         //Update the Hashtable that is being tracked by PUN
         PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
 
+        //Move the player card to be under the team name
+        MoveCardToTeam(teamName, ownerid);
 
 
-        //Get reference to the Red Team Group List
-        Transform redTeamGroupList = GameObject.Find("Red Team ").transform;
+
+
+
+
+    }
+
+    [PunRPC]
+    void MoveCardToTeam(string team, int cardOwner) 
+    {
+        //Switch case used to find the correct Group List to put the Player Card under
+        string teamNameCheck = "Unassigned";
+        switch (team) 
+        {
+            case "Unassigned":
+                break;
+            case "Red":
+                teamNameCheck = "Red Team";
+            break;
+        }
+
+        //Get reference to the Team Group List (Depending on what was passed through the parameter)
+        Transform TeamGroupList = GameObject.Find(teamNameCheck).transform;
+        
 
         GameObject[] cardArray;
 
@@ -61,20 +82,37 @@ public class TeamManager : MonoBehaviourPunCallbacks
                 //Get the Actor number of the Player Card
                 int playerCardID = card.GetComponent<PlayerCardEntry>().ownerId;
 
-                if (playerCardID == ownerid)
-                {                  
-                    card.transform.SetParent(redTeamGroupList);
+                //If the player card is the local players card that moved, then move it under the team name.
+                if (playerCardID == cardOwner)
+                {
+                    card.transform.SetParent(TeamGroupList);
                     card.transform.localPosition = new Vector3(0, 0, 0);
                     card.transform.localScale = new Vector3(1, 1, 1);
                 }
             }
         }
+        // Debug.Log("Moving " + PhotonNetwork.CurrentRoom.GetPlayer(cardOwner).NickName + " To Red Team");
 
 
-
-        //Get reference to the Player Card
-
-
+        photonView.RPC("MoveCardToTeam", RpcTarget.OthersBuffered, team, cardOwner);
+        
     }
 
+    //This function allows the variables inside to be sent over the network (Used as Observed component in photon view, this reads/writes the variables)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            //We own this player so send the other computers the data
+
+        }
+        else
+        {
+            //Network player that receives the data
+
+
+        }
+    }
 }
+
+
