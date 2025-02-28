@@ -74,6 +74,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     #endregion
 
+    TeamManager teamManager;
+
     Vector2 roomListScroll = Vector2.zero;
 
     //List<RoomInfo> cachedRoomList = new List<RoomInfo>();
@@ -87,6 +89,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         cachedRoomList = new Dictionary<string, RoomInfo>();
         menuInstance = this;
         currentReadyPlayers = 0;
+        teamManager = GameObject.Find("TeamManager").GetComponent<TeamManager>();
 
         lobbyPanel = GameObject.Find("Lobby Panel");
 
@@ -217,6 +220,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName); // seen when other disconnects
 
         GameObject playerCard;
+        //Try to get Player Card value from Hash table and put it in playerCard variable
         if (playersInRoom.TryGetValue(other.ActorNumber, out playerCard)) 
         {
 
@@ -230,6 +234,9 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
                     currentReadyPlayers--;
                 }
             }
+
+            //If they are in a team, reduce the team count
+            teamManager.DecreaseTeamCount(other);
             //Remove Player card from dictionairy
             playersInRoom.Remove(other.ActorNumber);
 

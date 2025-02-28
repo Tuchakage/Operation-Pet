@@ -74,6 +74,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
             case "Unassigned":
                 break;
             case "Red":
+                //"Red Team" is the name of the GameObject in the Unity Editor where player cards of that team will go under
                 teamNameCheck = "Red Team";
                 //Debug.Log("Amount in Red Team = " + redTeamCount);
                 break;
@@ -128,7 +129,22 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void IncreaseTeamCount() 
     {
-        redTeamCount++;
+        object isInTeam;
+        //Check the custom properties of that player to see what team they are apart of
+        if (localPlayer.CustomProperties.TryGetValue("Team Name", out isInTeam))
+        {
+            switch ((string)isInTeam)
+            {
+                case "Unassigned":
+                    break;
+
+                case "Red":
+                    redTeamCount++;
+                    break;
+
+
+            }
+        }
 
         //If you are not the Master Client
         if (!photonView.IsMine) 
@@ -136,6 +152,36 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
             //Send to the Master Client so that they can sync the value (Since Local clients dont own the Network Manager)
             photonView.RPC("IncreaseTeamCount", RpcTarget.MasterClient);
         }
+        Debug.Log("Amount in Red Team = " + redTeamCount);
+    }
+
+    public void DecreaseTeamCount(Player gonePlayer) 
+    {
+        object isInTeam;
+        //Check the custom properties of that player to see what team they are apart of
+        if (gonePlayer.CustomProperties.TryGetValue("Team Name", out isInTeam)) 
+        {
+            switch ((string)isInTeam) 
+            {
+                case "Unassigned":
+                    break;
+
+                case "Red":
+                    redTeamCount--;
+                    break;
+
+
+            }
+        }
+
+        //If you are not the Master Client
+        if (!photonView.IsMine)
+        {
+            //Send to the Master Client so that they can sync the value (Since Local clients dont own the Network Manager)
+            photonView.RPC("IncreaseTeamCount", RpcTarget.MasterClient);
+        }
+
+        Debug.Log("Amount in Red Team = " + redTeamCount);
     }
 
     //This function allows the variables inside to be sent over the network (Used as Observed component in photon view, this reads/writes the variables)
