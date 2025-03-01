@@ -74,11 +74,17 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     #endregion
 
+
+
     TeamManager teamManager;
 
     Vector2 roomListScroll = Vector2.zero;
 
     //List<RoomInfo> cachedRoomList = new List<RoomInfo>();
+    #region Debug Variables
+    [Header("Debug Variables")]
+    public TMP_Text regionTxt;
+    #endregion
 
 
     #region Unity
@@ -142,6 +148,11 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("OnConnectedToMaster");
         Debug.Log("Connection made to " + PhotonNetwork.CloudRegion + "server.");
 
+        if (regionTxt) 
+        {
+            regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
+        }
+        
         //After we connect to Master server, join the lobby
         PhotonNetwork.JoinLobby(TypedLobby.Default);
     }
@@ -164,6 +175,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public override void OnLeftRoom()
     {
         SceneManager.LoadScene(0);
+        Debug.Log("Left Room");
     }
 
 
@@ -244,7 +256,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             Destroy(playerCard);         
         }
         
-        Debug.Log("My Actor Number: " + PhotonNetwork.LocalPlayer.ActorNumber);
     }
 
     //Called when there is a change to a Players custom property
