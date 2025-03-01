@@ -47,6 +47,20 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Allows PUN to track whats been changed and update it properly
         PhotonNetwork.LocalPlayer.SetCustomProperties(initHash);
 
+        //Move the Player Cards for all players that have just joined the room
+        if (PhotonNetwork.PlayerList.Length > 0) 
+        {
+            foreach (Player p in PhotonNetwork.PlayerList)
+            {
+                string playerTeam = GetTeamName(p);
+                if (playerTeam != "Unassigned")
+                {
+                    MoveCardToTeam(playerTeam, p.ActorNumber);
+                }
+            }
+        }
+
+
 
     }
 
@@ -159,7 +173,6 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("Amount in Red Team = " + redTeamCount);
     }
 
-    [PunRPC]
     void MoveCardToTeam(string team, int cardOwner)
     {
         //Switch case used to find the correct Group List to put the Player Card under
@@ -203,9 +216,6 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         canMoveCard = false;
 
         Debug.Log("Moved ID:" + cardOwner + " to " + team);
-
-        //When players join in the Player Cards should already be moved
-        photonView.RPC("MoveCardToTeam", RpcTarget.OthersBuffered, team, cardOwner);
 
 
     }
