@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Console
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -69,8 +69,8 @@ MonoBehaviour:
     y: 0
     width: 462
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -326,7 +326,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Scripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -336,16 +336,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: F:\Unity Projects\Operation-Pet\Operation-Pet
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 75.666626}
-    m_SelectedIDs: 86ab0000
-    m_LastClickedID: 43910
-    m_ExpandedIDs: 0000000086ab000000ca9a3bffffff7f
+    m_SelectedIDs: f2ab0000
+    m_LastClickedID: 44018
+    m_ExpandedIDs: 000000008aab000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -374,7 +374,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000086ab0000
+    m_ExpandedIDs: 000000008aab0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300001a000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: c4d6ffff4ed8ffffe6dbffffeaeeffff74f0ffff1cf4ffffcafafffff4ffffff
+      m_ExpandedIDs: 6015feffea16feff821afefffa2dfeff842ffeff1c33feff3046feffba47feff524bfeff5661feffe062feff7866feffe87cfeff727efeff0a82feff9092feff1a94feffb297feff10abfeff9aacfeff32b0feffb8c5feff42c7feffdacafeff58defeffe2dffeff7ae3feff80f6feff0af8feffa2fbfeffb00fffff3a11ffffd214ffff0429ffff8e2affff022effff6a37fffff438ffffac3cffff2e44ffff8252ffff0c54ffffa457ffff066bffff906cffff2870ffff9e86ffff2888ffffc08bffff6c94ffff2aa0ffffb4a1ffff4ca5ffffa2b8ffff2cbaffffc4bdffff24d1ffffaed2ffff46d6ffffd0eaffff5aecffff02f0ffffcafafffff4ffffff0af6000056f60000d4f60000ecfe000038ff0000b6ff0000a03b0100ec3b01006a3c0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1126,9 +1126,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 1095.0822, y: 466.49588, z: -6.160046}
+    m_Target: {x: 1048.2113, y: 528.03046, z: -4.8125935}
     speed: 2
-    m_Value: {x: 1095.0822, y: 466.49588, z: -6.160046}
+    m_Value: {x: 1048.2113, y: 528.03046, z: -4.8125935}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1178,9 +1178,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 626.0047
+    m_Target: 491.2612
     speed: 2
-    m_Value: 626.0047
+    m_Value: 491.2612
   m_Ortho:
     m_Target: 1
     speed: 2

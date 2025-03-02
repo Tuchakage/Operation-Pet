@@ -76,7 +76,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
 
-    TeamManager teamManager;
+
 
     Vector2 roomListScroll = Vector2.zero;
 
@@ -86,6 +86,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public TMP_Text regionTxt;
     #endregion
 
+    TeamManager teamManager;
 
     #region Unity
 
@@ -95,10 +96,9 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         cachedRoomList = new Dictionary<string, RoomInfo>();
         menuInstance = this;
         currentReadyPlayers = 0;
-        teamManager = GameObject.Find("TeamManager").GetComponent<TeamManager>();
 
         lobbyPanel = GameObject.Find("Lobby Panel");
-
+        teamManager = GameObject.Find("TeamManager").GetComponent<TeamManager>();
         //Makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same rom sync their level automatically
         PhotonNetwork.AutomaticallySyncScene = true;
 
@@ -247,8 +247,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
 
-            //If they are in a team, reduce the team count
-            teamManager.DecreaseTeamCount(other);
             //Remove Player card from dictionairy
             playersInRoom.Remove(other.ActorNumber);
 
@@ -352,6 +350,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void LeaveRoom() 
     {
+        teamManager.JoinUnassigned();
+
         PhotonNetwork.LeaveRoom();
 
         //Rest of functionality will be in the PUN Callback "OnPlayerLeaves"
