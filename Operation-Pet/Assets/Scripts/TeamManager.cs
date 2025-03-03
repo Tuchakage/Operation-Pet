@@ -37,7 +37,16 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Get Reference to Player info when local player joins the room
         localPlayer = PhotonNetwork.CurrentRoom.GetPlayer(ownerid);
 
-        JoinUnassigned();
+        teamName = "Unassigned";
+
+        //Update Hash Table 
+        Hashtable properties = new Hashtable()
+        {
+            {"Team Name",  teamName}
+        };
+
+        //Update the Hashtable that is being tracked by PUN
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
 
 
 
@@ -78,11 +87,12 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public override void OnPlayerLeftRoom(Player gonePlayer)
     {
-        DecreaseTeamCount();
+        
     }
 
     public void JoinUnassigned()
     {
+        DecreaseTeamCount(localPlayer);
         Debug.Log("JoinUnassigned");
 
         teamName = "Unassigned";
@@ -175,10 +185,10 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    public void DecreaseTeamCount() 
+    public void DecreaseTeamCount(Player p) 
     {
         Debug.Log("Called Decrease");
-        switch (GetTeamName(localPlayer))
+        switch (GetTeamName(p))
         {
             case "Unassigned":
                 Debug.Log("Decrease Unassigned");
@@ -192,7 +202,12 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
         }
 
-        
+        if (!PhotonNetwork.IsMasterClient) 
+        {
+            //Make sure only the Master Client is changing the team count
+            photonView.RPC("DecreaseTeamCount", RpcTarget.MasterClient, p);
+        }
+
     }
 
     void MoveCardToTeam(string team, int cardOwner)
