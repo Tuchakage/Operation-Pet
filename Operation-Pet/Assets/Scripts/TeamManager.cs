@@ -10,9 +10,8 @@ using UnityEngine.UIElements;
 //Purpose of this script is to set the teams of the players before the game
 public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable 
 {
-    private string teamName = "Unassigned";
+    public enum teams {Unassigned ,Red, Blue, Yellow, Green, Purple};
     public int ownerid;
-    private int redTeamCount;
     Player localPlayer;
 
     //Variable used to check if the player card can be moved (Otherwise initially an Object reference error comes up
@@ -21,13 +20,14 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     void Start()
     {
         canMoveCard = false;
-        redTeamCount = 0;
     }
 
     void Update() 
     {
         //Debug.Log("Team count = " + redTeamCount);
     }
+
+    #region PUN Callbacks
 
     public override void OnJoinedRoom() 
     {
@@ -37,26 +37,15 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Get Reference to Player info when local player joins the room
         localPlayer = PhotonNetwork.CurrentRoom.GetPlayer(ownerid);
 
-        teamName = "Unassigned";
-
-        //Update Hash Table 
-        Hashtable properties = new Hashtable()
-        {
-            {"Team Name",  teamName}
-        };
-
-        //Update the Hashtable that is being tracked by PUN
-        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
-
-
+        IncreaseTeamCount(localPlayer, AddPlayerToTeam(teams.Unassigned));
 
         //Move the Player Cards for all players that have just joined the room
         if (PhotonNetwork.PlayerList.Length > 0) 
         {
             foreach (Player p in PhotonNetwork.PlayerList)
             {
-                string playerTeam = GetTeamName(p);
-                if (playerTeam != "Unassigned")
+                teams playerTeam = GetTeamName(p);
+                if (playerTeam != teams.Unassigned)
                 {
                     MoveCardToTeam(playerTeam, p.ActorNumber);
                 }
@@ -70,8 +59,8 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     //Called when there is a change to a Players custom property
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
-        Debug.Log("Property for " + targetPlayer.NickName + " Changed to " + changedProps["Team Name"]);
-        IncreaseTeamCount(targetPlayer);
+        //Debug.Log("Property for " + targetPlayer.NickName + " Changed to " + changedProps["Team Name"]);
+        //IncreaseTeamCount(targetPlayer);
 
         //Move the player card to be under the team name
         MoveCardToTeam(GetTeamName(targetPlayer), targetPlayer.ActorNumber);
@@ -85,141 +74,204 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         
     }
 
-    public override void OnPlayerLeftRoom(Player gonePlayer)
+    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
     {
-        
+        foreach (var hi in propertiesThatChanged)
+        {
+            Debug.Log("Key: " + hi.Key+ " = "+ hi.Value);
+        }
+
     }
 
+    #endregion
+
+    #region Button Functions
     public void JoinUnassigned()
     {
+        //Before changing the team, remove the count from there previous team
         DecreaseTeamCount(localPlayer);
         Debug.Log("JoinUnassigned");
 
-        teamName = "Unassigned";
 
-        //Update Hash Table 
-        Hashtable properties = new Hashtable()
-        {
-            {"Team Name",  teamName}
-        };
+        IncreaseTeamCount(localPlayer, AddPlayerToTeam(teams.Unassigned));
 
-        //Update the Hashtable that is being tracked by PUN
-        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
 
-        
+
 
     }
 
     public void JoinRedTeam() 
     {
-        if (redTeamCount >= 2)
+        //Check if the team is full or if they are already on Red Team or not
+        if (GetTeamCount(teams.Red) >= 2 || CheckTeam(teams.Red))
         {
             return;
         }
 
-        teamName = "Red";
-
-        CheckTeam();
+        
 
 
+        //DecreaseTeamCount(localPlayer);
 
-        //Update Hash Table 
-        Hashtable properties = new Hashtable()
-        {
-            {"Team Name",  teamName}
-        };
 
-        //Update the Hashtable that is being tracked by PUN
-        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+        //AddPlayerToTeam(teams.Red);
+
         //Player Card can be moved
         canMoveCard = true;
+
+        //Increase Red Team Count
+        IncreaseTeamCount(localPlayer, AddPlayerToTeam(teams.Red));
+        //IncreaseTeamCount(localPlayer, teams.Red);
     }
+    #endregion
 
-
-
-    string GetTeamName(Player player)
+    #region Team Related Functions
+    teams GetTeamName(Player player)
     {
         object isInTeam;
         //Check the custom properties of that player to see what team they are apart of
         if (player.CustomProperties.TryGetValue("Team Name", out isInTeam))
         {
-            return (string)isInTeam;
+            //Debug.Log("team = " + (teams)isInTeam);
+            return (teams)isInTeam;
         }
 
-        return "Null";
+        return teams.Unassigned;
     }
 
+    int GetTeamCount(teams teamToCheck) 
+    {
+        
+        switch (teamToCheck) 
+        {
+            case teams.Unassigned:
+                break;
+
+            case teams.Red:
+                object redTeamCount;
+                //Check the custom properties of that player to see what team they are apart of
+                if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamToCheck.ToString(), out redTeamCount))
+                {
+                    
+                    return (int)redTeamCount;
+                }
+
+              break;
+        }
+
+
+        return 0;
+    }
 
     //Function that checks whether they are already in a team and if they do dont run the rest of the code
-    void CheckTeam() 
+    bool CheckTeam(teams teamJoinAttempt) 
     {
         //if they are already in the same team as the button as they pressed
-        if (GetTeamName(localPlayer) == teamName)
+        if (GetTeamName(localPlayer) == teamJoinAttempt)
         {
-            //Ignore them
-            return;
+            
+            //They are in the same team so ignore them
+            return true;
         }
+        return false;
+    }
 
+    teams AddPlayerToTeam(teams teamToAdd) 
+    {
+        //Change what team the player is on
+        Hashtable properties = new Hashtable()
+        {
+            {"Team Name",  teamToAdd}
+        };
+
+        //Update the Hashtable that is being tracked by PUN to keep track of what team the player is on
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+
+        return teamToAdd;
     }
 
 
-    void IncreaseTeamCount(Player playerJoined) 
+    void IncreaseTeamCount(Player playerJoined, teams team) 
     {
-        switch (GetTeamName(playerJoined))
+        //Temporary local variable to increase the amount of players in a team
+        int teamCounter = 0;
+        //Check which team to increase
+        switch (team)
         {
-            case "Unassigned":
+            case teams.Unassigned:
                 //Debug.Log("Unassigned");
                 break;
 
-            case "Red":               
-                redTeamCount++;
-                Debug.Log("Increased Team Count for: " + GetTeamName(playerJoined) + " = " + redTeamCount);
+            case teams.Red:
+                //Get the value that is already stored for that team
+                teamCounter = GetTeamCount(teams.Red);
+                //Increase Counter by 1
+                teamCounter++;
+                Debug.Log("Increased Team Count for: " + team + " = " + teamCounter);
                 break;
 
 
         }
 
-        
+        Hashtable teamProp = new Hashtable()
+        {
+            {team.ToString(),  teamCounter}
+        };
+        Debug.Log("Team Counter =" +teamCounter + " For "+team);
+        //Set the Custom Properties for the room so that it knows how many players are in each team
+        PhotonNetwork.CurrentRoom.SetCustomProperties(teamProp);
+
+
 
         //photonView.RPC("IncreaseTeamCount", RpcTarget.OthersBuffered, playerJoined);
     }
 
-    [PunRPC]
     public void DecreaseTeamCount(Player p) 
     {
-        Debug.Log("Called Decrease");
+        //Temporary local variable to decrease the amount of players in a team
+        int teamCounter = 0;
+        //Debug.Log("Called Decrease");
+        Debug.Log("REDDD: "+ GetTeamCount(teams.Red));
+        //Check what team the player is on
         switch (GetTeamName(p))
         {
-            case "Unassigned":
+            case teams.Unassigned:
                 Debug.Log("Decrease Unassigned");
                 break;
 
-            case "Red":
-                redTeamCount--;
-                Debug.Log("Decrease Amount in Red Team = " + redTeamCount);
+            case teams.Red:
+                //Get the value that is already stored for that team
+                teamCounter = GetTeamCount(teams.Red);
+
+                //Decrease Counter by 1
+                teamCounter--;
+                Debug.Log("Decrease Amount in Red Team = " + teamCounter);
                 break;
 
 
         }
 
-        if (!PhotonNetwork.IsMasterClient) 
+        //Update the hash table telling the Room to decrease the amount of players in the team
+        Hashtable teamProp = new Hashtable()
         {
-            //Make sure only the Master Client is changing the team count
-            photonView.RPC("DecreaseTeamCount", RpcTarget.MasterClient, p);
-        }
+            {GetTeamName(p).ToString(),  teamCounter}
+        };
+
+        //Set the Custom Properties for the room so that it knows how many players are in each team
+        PhotonNetwork.CurrentRoom.SetCustomProperties(teamProp);
 
     }
 
-    void MoveCardToTeam(string team, int cardOwner)
+    void MoveCardToTeam(teams teamToJoin, int cardOwner)
     {
         //Switch case used to find the correct Group List to put the Player Card under
         string teamNameCheck = "Unassigned";
-        switch (team)
+        switch (teamToJoin)
         {
-            case "Unassigned":
+            case teams.Unassigned:
                 teamNameCheck = "Unassigned Player Card Group";
                 break;
-            case "Red":
+            case teams.Red:
                 //"Red Team" is the name of the GameObject in the Unity Editor where player cards of that team will go under
                 teamNameCheck = "Red Team";
                 break;
@@ -258,7 +310,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
-
+    #endregion
 
     //This function allows the variables inside to be sent over the network (Used as Observed component in photon view, this reads/writes the variables)
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -266,13 +318,11 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             //We own this player so send the other computers the data
-            stream.SendNext(redTeamCount);
+
         }
         else
         {
             ////Network player that receives the data
-            redTeamCount = (int)stream.ReceiveNext();
-            //Debug.Log("Receive "+ redTeamCount);
         }
     }
 }
