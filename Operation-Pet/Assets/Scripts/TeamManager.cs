@@ -261,11 +261,18 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         int readyTeamCount = 0;
        // bool canStartGame = false;
 
+        //Check through every team in the "teams" Enum that was created
         foreach (teams teamName in Enum.GetValues(typeof(teams)))
         {
             object teamCount;
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamName.ToString(), out teamCount))
             {
+                //If anyone is in unassigned then dont start the game cause not everyone is in a team
+                if (teamName.ToString() == "Unassigned" && (int)teamCount > 0) 
+                {
+                    return false;
+                }
+
                 if ((int)teamCount == 0)
                 {
                     //If there is no one in the team then ignore them
