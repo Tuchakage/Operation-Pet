@@ -29,6 +29,6 @@ public class playerPad : MonoBehaviourPunCallbacks
     void InputMovement() 
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
-        GetComponent<Rigidbody2D>().linearVelocity = new Vector2(moveValue.x * speed, moveValue.y * speed);
+        //GetComponent<Rigidbody2D>().linearVelocity = new Vector2(moveValue.x * speed, moveValue.y * speed);
     }
 }
