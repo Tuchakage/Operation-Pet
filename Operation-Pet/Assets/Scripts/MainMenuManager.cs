@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static TeamManager;
 using static Unity.Burst.Intrinsics.X86;
 
 public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
@@ -273,9 +274,9 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             }
             
         }
-
+        ;
         //Call Check Ready Players
-        if (CheckReadyPlayers()) 
+        if (teamManager.CheckReadyTeams() && CheckReadyPlayers()) 
         {
             StartGame();
             Debug.Log("Start the level");
@@ -532,6 +533,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         return false;
 
     }
+
 
 
 

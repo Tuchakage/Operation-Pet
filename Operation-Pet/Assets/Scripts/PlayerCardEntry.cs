@@ -14,7 +14,7 @@ public class PlayerCardEntry : MonoBehaviour
     [Header("UI References")]
     public TMP_Text PlayerNameText;
     public int ownerId;
-    private bool isPlayerReady = false;
+    public bool isPlayerReady = false;
 
 
     public GameObject readyBtn;

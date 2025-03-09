@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using static Photon.Pun.UtilityScripts.PunTeams;
 using UnityEngine.UIElements;
+using System;
 
 
 //Purpose of this script is to set the teams of the players before the game
@@ -13,6 +14,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     public enum teams {Unassigned ,Red, Blue, Yellow, Green, Purple};
     public int ownerid;
     Player localPlayer;
+    PlayerCardEntry localPlayerCard;
 
     //Variable used to check if the player card can be moved (Otherwise initially an Object reference error comes up
     private bool canMoveCard;
@@ -29,6 +31,11 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
     #region PUN Callbacks
 
+    public override void OnCreatedRoom()
+    {
+        //Initialise the Teams
+        InitTeams();
+    }
     public override void OnJoinedRoom() 
     {
         //Get the actor number when the local player joins the room
@@ -37,7 +44,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Get Reference to Player info when local player joins the room
         localPlayer = PhotonNetwork.CurrentRoom.GetPlayer(ownerid);
 
-        IncreaseTeamCount(localPlayer, AddPlayerToTeam(teams.Unassigned));
+        IncreaseTeamCount(AddPlayerToTeam(teams.Unassigned));
 
         //Move the Player Cards for all players that have just joined the room
         if (PhotonNetwork.PlayerList.Length > 0) 
@@ -60,7 +67,6 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
         //Debug.Log("Property for " + targetPlayer.NickName + " Changed to " + changedProps["Team Name"]);
-        //IncreaseTeamCount(targetPlayer);
 
         //Move the player card to be under the team name
         MoveCardToTeam(GetTeamName(targetPlayer), targetPlayer.ActorNumber);
@@ -89,11 +95,10 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     public void JoinUnassigned()
     {
         //Before changing the team, remove the count from there previous team
-        DecreaseTeamCount(localPlayer);
-        Debug.Log("JoinUnassigned");
+        DecreaseTeamCount();
 
 
-        IncreaseTeamCount(localPlayer, AddPlayerToTeam(teams.Unassigned));
+        IncreaseTeamCount(AddPlayerToTeam(teams.Unassigned));
 
 
 
@@ -108,20 +113,117 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
             return;
         }
 
+        //if the Player is already readied up
+        if (localPlayerCard.isPlayerReady) 
+        {
+            //Reverse it and make it so they arent readied up
+            localPlayerCard.ReadyUp();
+        }
         
 
-
-        //DecreaseTeamCount(localPlayer);
-
-
-        //AddPlayerToTeam(teams.Red);
+        DecreaseTeamCount();
 
         //Player Card can be moved
         canMoveCard = true;
 
         //Increase Red Team Count
-        IncreaseTeamCount(localPlayer, AddPlayerToTeam(teams.Red));
-        //IncreaseTeamCount(localPlayer, teams.Red);
+        IncreaseTeamCount(AddPlayerToTeam(teams.Red));
+    }
+
+    public void JoinBlueTeam()
+    {
+        //Check if the team is full or if they are already on Red Team or not
+        if (GetTeamCount(teams.Blue) >= 2 || CheckTeam(teams.Blue))
+        {
+            return;
+        }
+
+        //if the Player is already readied up
+        if (localPlayerCard.isPlayerReady)
+        {
+            //Reverse it and make it so they arent readied up
+            localPlayerCard.ReadyUp();
+        }
+
+        DecreaseTeamCount();
+
+        //Player Card can be moved
+        canMoveCard = true;
+
+        //Increase Red Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Blue));
+    }
+
+    public void JoinYellowTeam()
+    {
+        //Check if the team is full or if they are already on Red Team or not
+        if (GetTeamCount(teams.Yellow) >= 2 || CheckTeam(teams.Yellow))
+        {
+            return;
+        }
+
+        //if the Player is already readied up
+        if (localPlayerCard.isPlayerReady)
+        {
+            //Reverse it and make it so they arent readied up
+            localPlayerCard.ReadyUp();
+        }
+
+        DecreaseTeamCount();
+
+        //Player Card can be moved
+        canMoveCard = true;
+
+        //Increase Red Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Yellow));
+    }
+
+    public void JoinGreenTeam()
+    {
+        //Check if the team is full or if they are already on Red Team or not
+        if (GetTeamCount(teams.Green) >= 2 || CheckTeam(teams.Green))
+        {
+            return;
+        }
+
+        //if the Player is already readied up
+        if (localPlayerCard.isPlayerReady)
+        {
+            //Reverse it and make it so they arent readied up
+            localPlayerCard.ReadyUp();
+        }
+
+        DecreaseTeamCount();
+
+        //Player Card can be moved
+        canMoveCard = true;
+
+        //Increase Red Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Green));
+    }
+
+    public void JoinPurpleTeam()
+    {
+        //Check if the team is full or if they are already on Red Team or not
+        if (GetTeamCount(teams.Purple) >= 2 || CheckTeam(teams.Purple))
+        {
+            return;
+        }
+
+        //if the Player is already readied up
+        if (localPlayerCard.isPlayerReady)
+        {
+            //Reverse it and make it so they arent readied up
+            localPlayerCard.ReadyUp();
+        }
+
+        DecreaseTeamCount();
+
+        //Player Card can be moved
+        canMoveCard = true;
+
+        //Increase Red Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Purple));
     }
     #endregion
 
@@ -141,26 +243,58 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
     int GetTeamCount(teams teamToCheck) 
     {
-        
-        switch (teamToCheck) 
+        Debug.Log("Checking Team: " + teamToCheck);
+        object teamCount;
+        //Check the custom properties of that player to see what team they are apart of
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamToCheck.ToString(), out teamCount))
         {
-            case teams.Unassigned:
-                break;
 
-            case teams.Red:
-                object redTeamCount;
-                //Check the custom properties of that player to see what team they are apart of
-                if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamToCheck.ToString(), out redTeamCount))
-                {
-                    
-                    return (int)redTeamCount;
-                }
-
-              break;
+            return (int)teamCount;
         }
 
-
         return 0;
+    }
+
+    //Function to check if all teams are ready
+    public bool CheckReadyTeams() 
+    {
+        int readyTeamCount = 0;
+       // bool canStartGame = false;
+
+        foreach (teams teamName in Enum.GetValues(typeof(teams)))
+        {
+            object teamCount;
+            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamName.ToString(), out teamCount))
+            {
+                if ((int)teamCount == 0)
+                {
+                    //If there is no one in the team then ignore them
+                    continue;
+                }
+                else if ((int)teamCount == 2)
+                {
+                    //If there are 2 people in the team that means that team is ready
+                    readyTeamCount++;
+                }
+                else 
+                {
+                    //If there is 1 Player or more than 2 that means all teams are not ready
+                    return false;
+                }
+            }
+            //Debug.Log("Team Name: " + teamName + ": " + (int)teamCount);
+
+        }
+
+        if (readyTeamCount > 1)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+        
     }
 
     //Function that checks whether they are already in a team and if they do dont run the rest of the code
@@ -190,93 +324,74 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         return teamToAdd;
     }
 
+    void InitTeams() 
+    {
+        //Go through each team and set the player count to 0
+        foreach (teams teamName in Enum.GetValues(typeof(teams)))
+        {
+            Hashtable initTeam = new Hashtable()
+            {
+                {teamName.ToString(), 0 }
+            };
 
-    void IncreaseTeamCount(Player playerJoined, teams team) 
+            //Set the Custom Properties for the room so that it knows how many players are in each team
+            PhotonNetwork.CurrentRoom.SetCustomProperties(initTeam);
+        }
+    }
+
+
+    void IncreaseTeamCount(teams team) 
     {
         //Temporary local variable to increase the amount of players in a team
         int teamCounter = 0;
-        //Check which team to increase
-        switch (team)
-        {
-            case teams.Unassigned:
-                //Debug.Log("Unassigned");
-                break;
 
-            case teams.Red:
-                //Get the value that is already stored for that team
-                teamCounter = GetTeamCount(teams.Red);
-                //Increase Counter by 1
-                teamCounter++;
-                Debug.Log("Increased Team Count for: " + team + " = " + teamCounter);
-                break;
+        //Get the current amount of players in the team the player has joined
+        teamCounter = GetTeamCount(team);
 
+        //Increase Counter by 1
+        teamCounter++;
 
-        }
+        Debug.Log("Increased Team Count for: " + team + " = " + teamCounter);
 
-        Hashtable teamProp = new Hashtable()
-        {
-            {team.ToString(),  teamCounter}
-        };
-        Debug.Log("Team Counter =" +teamCounter + " For "+team);
-        //Set the Custom Properties for the room so that it knows how many players are in each team
-        PhotonNetwork.CurrentRoom.SetCustomProperties(teamProp);
+        UpdateTeamProp(team, teamCounter);
 
 
 
         //photonView.RPC("IncreaseTeamCount", RpcTarget.OthersBuffered, playerJoined);
     }
 
-    public void DecreaseTeamCount(Player p) 
+    public void DecreaseTeamCount() 
     {
-        //Temporary local variable to decrease the amount of players in a team
+        //Temporary local variable to increase the amount of players in a team
         int teamCounter = 0;
-        //Debug.Log("Called Decrease");
-        Debug.Log("REDDD: "+ GetTeamCount(teams.Red));
-        //Check what team the player is on
-        switch (GetTeamName(p))
+
+        //Get the current amount of players in the team the player has joined
+        teamCounter = GetTeamCount(GetTeamName(localPlayer));
+        
+        //Make sure team Counter doesn't go below 0
+        if (teamCounter > 0) 
         {
-            case teams.Unassigned:
-                Debug.Log("Decrease Unassigned");
-                break;
-
-            case teams.Red:
-                //Get the value that is already stored for that team
-                teamCounter = GetTeamCount(teams.Red);
-
-                //Decrease Counter by 1
-                teamCounter--;
-                Debug.Log("Decrease Amount in Red Team = " + teamCounter);
-                break;
-
-
+            //Decrease Counter by 1
+            teamCounter--;
         }
 
-        //Update the hash table telling the Room to decrease the amount of players in the team
-        Hashtable teamProp = new Hashtable()
-        {
-            {GetTeamName(p).ToString(),  teamCounter}
-        };
 
-        //Set the Custom Properties for the room so that it knows how many players are in each team
-        PhotonNetwork.CurrentRoom.SetCustomProperties(teamProp);
+        Debug.Log("Decreased Team Count for: " + GetTeamName(localPlayer) + " = " + teamCounter);
+
+        //Update the hash table telling the Room to decrease the amount of players in the team
+        UpdateTeamProp(GetTeamName(localPlayer), teamCounter);
+
 
     }
 
     void MoveCardToTeam(teams teamToJoin, int cardOwner)
     {
-        //Switch case used to find the correct Group List to put the Player Card under
-        string teamNameCheck = "Unassigned";
-        switch (teamToJoin)
-        {
-            case teams.Unassigned:
-                teamNameCheck = "Unassigned Player Card Group";
-                break;
-            case teams.Red:
-                //"Red Team" is the name of the GameObject in the Unity Editor where player cards of that team will go under
-                teamNameCheck = "Red Team";
-                break;
-        }
 
+
+        //Use this to find the Game Object Group of the team for the player card
+        string teamNameCheck = teamToJoin.ToString() + " Team";
+
+        Debug.Log("Name of team: " + teamNameCheck);
         //Get reference to the Team Group List (Depending on what was passed through the parameter)
         Transform TeamGroupList = GameObject.Find(teamNameCheck).transform;
 
@@ -292,11 +407,13 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
                 //Get the Actor number of the Player Card
                 int playerCardID = card.GetComponent<PlayerCardEntry>().ownerId;
 
-                //If the player card is the local players card that moved, then move it under the team name.
+                //If the player card in the array belongs to the local player that is trying to move then move it under the team name.
                 if (playerCardID == cardOwner)
                 {
                     card.transform.SetParent(TeamGroupList);
                     card.transform.localScale = new Vector3(1, 1, 1);
+                    //Keep local reference of player card
+                    localPlayerCard = card.GetComponent<PlayerCardEntry>();
                 }
             }
         }
@@ -308,6 +425,18 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Debug.Log("Moved ID:" + cardOwner + " to " + team);
 
 
+    }
+
+    //Function that will update the Room propertie to tell how many players are in each team
+    void UpdateTeamProp(teams teamName, int numOfTeamMems) 
+    {
+        Hashtable teamProp = new Hashtable()
+        {
+            {teamName.ToString(),  numOfTeamMems}
+        };
+        //Debug.Log("Team Counter =" +teamCounter + " For "+team);
+        //Set the Custom Properties for the room so that it knows how many players are in each team
+        PhotonNetwork.CurrentRoom.SetCustomProperties(teamProp);
     }
 
     #endregion
