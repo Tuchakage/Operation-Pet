@@ -484,7 +484,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             //Set the ready status
             playerCard.GetComponent<PlayerCardEntry>().SetReadyStatus((bool)isPlayerReady);
-            Debug.Log("Player " + player.NickName + " is ready = " + (bool)isPlayerReady);
         }
 
 

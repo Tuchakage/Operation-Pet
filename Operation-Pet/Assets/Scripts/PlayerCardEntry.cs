@@ -28,7 +28,6 @@ public class PlayerCardEntry : MonoBehaviour
         {
             //Lose reference to the button and Ready Icon so it doesn't get activated
             readyBtn = null;
-            ReadyCircleObject.enabled = false;
             return;
         }
         //Set the OnClick() event for the Ready Button
@@ -68,14 +67,17 @@ public class PlayerCardEntry : MonoBehaviour
         //Depending on what the "isPlayerReady" variable is set the text
         readyBtn.transform.GetChild(0).GetComponent<TMP_Text>().text = isPlayerReady ? "Unready" : "Ready";
 
+        Debug.Log("Player Ready = " + isPlayerReady);
+
     }
 
     //Boolean parameter so other players can go into custom properties and assign it
     public void SetReadyStatus(bool playerReady) 
     {
-        //Make Ready Circle Available Or Unavailable
-        ReadyCircleObject.enabled = playerReady;
-
-        Debug.Log("Ready Player Circle = " + playerReady);
+        if (ReadyCircleObject) 
+        {
+            //Make Ready Circle Available Or Unavailable
+            ReadyCircleObject.enabled = playerReady;
+        }
     }
 }

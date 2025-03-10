@@ -1,14 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\KU73461\\Documents\\Unity Projects\\Operation-Pet\\Operation-Pet\\",
+  "WorkspaceRootPath": "C:\\Users\\KU73461\\Documents\\Operation-Pet\\Operation-Pet\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\ku73461\\documents\\unity projects\\operation-pet\\operation-pet\\assets\\scripts\\teammanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\teammanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\ku73461\\documents\\operation-pet\\operation-pet\\assets\\scripts\\playercardentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercardentry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\ku73461\\documents\\unity projects\\operation-pet\\operation-pet\\assets\\scripts\\mainmenumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\ku73461\\documents\\operation-pet\\operation-pet\\assets\\scripts\\mainmenumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mainmenumanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\ku73461\\documents\\operation-pet\\operation-pet\\assets\\scripts\\teammanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\teammanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,28 +26,41 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainMenuManager.cs",
-              "DocumentMoniker": "C:\\Users\\KU73461\\Documents\\Unity Projects\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\MainMenuManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\MainMenuManager.cs",
-              "ToolTip": "C:\\Users\\KU73461\\Documents\\Unity Projects\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\MainMenuManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\MainMenuManager.cs",
-              "ViewState": "AQIAAMYAAAAAAAAAAAAowO0AAAA6AAAA",
+              "DocumentIndex": 2,
+              "Title": "TeamManager.cs",
+              "DocumentMoniker": "C:\\Users\\KU73461\\Documents\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\TeamManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\TeamManager.cs",
+              "ToolTip": "C:\\Users\\KU73461\\Documents\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\TeamManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\TeamManager.cs",
+              "ViewState": "AQIAAJYAAAAAAAAAAAAmwL4AAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-27T08:59:06.768Z",
+              "WhenOpened": "2025-03-10T12:40:57.569Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TeamManager.cs",
-              "DocumentMoniker": "C:\\Users\\KU73461\\Documents\\Unity Projects\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\TeamManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\TeamManager.cs",
-              "ToolTip": "C:\\Users\\KU73461\\Documents\\Unity Projects\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\TeamManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\TeamManager.cs",
-              "ViewState": "AQIAAJcAAAAAAAAAAAAwwJoAAAA6AAAA",
+              "Title": "PlayerCardEntry.cs",
+              "DocumentMoniker": "C:\\Users\\KU73461\\Documents\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\PlayerCardEntry.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerCardEntry.cs",
+              "ToolTip": "C:\\Users\\KU73461\\Documents\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\PlayerCardEntry.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PlayerCardEntry.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAgwDEAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-27T08:44:09.123Z",
+              "WhenOpened": "2025-03-10T12:27:14.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainMenuManager.cs",
+              "DocumentMoniker": "C:\\Users\\KU73461\\Documents\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\MainMenuManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MainMenuManager.cs",
+              "ToolTip": "C:\\Users\\KU73461\\Documents\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\MainMenuManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MainMenuManager.cs",
+              "ViewState": "AQIAAMYBAAAAAAAAAAAMwOUBAABbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T12:09:58.229Z",
               "EditorCaption": ""
             }
           ]
