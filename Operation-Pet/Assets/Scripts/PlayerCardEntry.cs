@@ -42,6 +42,7 @@ public class PlayerCardEntry : MonoBehaviour
        
         //Allows PUN to track whats been changed and update it properly
         PhotonNetwork.LocalPlayer.SetCustomProperties(initialHash);
+        Debug.Log("Player: " + isPlayerReady);
     }
     public void Init(int playerId, string playerName)
     {
@@ -74,5 +75,7 @@ public class PlayerCardEntry : MonoBehaviour
     {
         //Make Ready Circle Available Or Unavailable
         ReadyCircleObject.enabled = playerReady;
+
+        Debug.Log("Ready Player Circle = " + playerReady);
     }
 }

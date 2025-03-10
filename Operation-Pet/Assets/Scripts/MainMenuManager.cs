@@ -463,12 +463,12 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         GameObject playerCard = Instantiate(playerCardPrefab);
 
-        GameObject playerCardGroup = GameObject.Find("Unassigned Player Card Group");
+        //GameObject playerCardGroup = GameObject.Find("Unassigned Player Card Group");
 
-        if (playerCardGroup)
-        {
-            playerCard.transform.SetParent(playerCardGroup.transform);
-        }
+        //if (playerCardGroup)
+        //{
+        //    playerCard.transform.SetParent(playerCardGroup.transform);
+        //}
 
 
         playerCard.transform.localPosition = new Vector3(0, 0, 0);
@@ -484,6 +484,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             //Set the ready status
             playerCard.GetComponent<PlayerCardEntry>().SetReadyStatus((bool)isPlayerReady);
+            Debug.Log("Player " + player.NickName + " is ready = " + (bool)isPlayerReady);
         }
 
 

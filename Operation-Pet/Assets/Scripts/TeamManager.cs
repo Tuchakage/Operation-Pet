@@ -52,10 +52,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
             foreach (Player p in PhotonNetwork.PlayerList)
             {
                 teams playerTeam = GetTeamName(p);
-                if (playerTeam != teams.Unassigned)
-                {
-                    MoveCardToTeam(playerTeam, p.ActorNumber);
-                }
+                MoveCardToTeam(playerTeam, p.ActorNumber);
             }
         }
 
@@ -145,6 +142,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
             localPlayerCard.ReadyUp();
         }
 
+        Debug.Log("Player Card: " + localPlayerCard.isPlayerReady);
         DecreaseTeamCount();
 
         //Player Card can be moved
@@ -398,7 +396,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Use this to find the Game Object Group of the team for the player card
         string teamNameCheck = teamToJoin.ToString() + " Team";
 
-        Debug.Log("Name of team: " + teamNameCheck);
+        //Debug.Log("Name of team: " + teamNameCheck);
         //Get reference to the Team Group List (Depending on what was passed through the parameter)
         Transform TeamGroupList = GameObject.Find(teamNameCheck).transform;
 
