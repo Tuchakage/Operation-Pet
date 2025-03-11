@@ -60,7 +60,11 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-
+        //Check through every team in the "teams" Enum that was created
+        foreach (teams teamName in Enum.GetValues(typeof(teams))) 
+        {
+            SetTeamText(teamName, GetTeamCount(teamName));
+        }
 
     }
 
@@ -83,18 +87,18 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
     {
-        //Everytime someone joins a team update the text for each team to display the amount of players in the team
+        //When someones joins a team, update the text for everyone in the game
         foreach (var prop in propertiesThatChanged)
         {
 
-
+            //Debug.Log("Key: " + prop.Key + " = " + prop.Value);
             //Try Convert the object to the teams Enum and store into variable called "teamName"
             if (System.Enum.TryParse<teams>(prop.Key.ToString(), out teams teamName)) 
             {
                 //If Successful update Team Text
                 SetTeamText(teamName, Convert.ToInt32(prop.Value));
             }
-            //Debug.Log("Key: " + prop.Key + " = " + prop.Value);
+            
             //SetTeamText((teams)prop.Key, (int)prop.Value);
 
 

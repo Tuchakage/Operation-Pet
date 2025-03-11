@@ -24,6 +24,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     private int playerNumber;
     #endregion
 
+    
+
     #region String Variables
     string gameVersion = "0.9";
     //Holds the names of the Player
@@ -74,9 +76,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     private TMP_Text amntPlayerstxt;
 
     #endregion
-
-
-
 
 
     Vector2 roomListScroll = Vector2.zero;
@@ -232,6 +231,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         Debug.LogFormat("OnPlayerLeftRoom() {0}", other.NickName); // seen when other disconnects
 
+        
+
         GameObject playerCard;
         //Try to get Player Card value from Hash table and put it in playerCard variable
         if (playersInRoom.TryGetValue(other.ActorNumber, out playerCard)) 
@@ -252,16 +253,24 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             playersInRoom.Remove(other.ActorNumber);
 
             //Destroy the player card
-            Destroy(playerCard);         
+            Destroy(playerCard);
+
+            
         }
-        
+
+        //Check if Game can start when a player leaves (They might be the reason the game can't start
+        if (teamManager.CheckReadyTeams() && CheckReadyPlayers())
+        {
+            StartCoroutine(StartGame());
+            Debug.Log("Start the level");
+        }
+
     }
 
     //Called when there is a change to a Players custom property
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
         GameObject playerCard;
-
         //Go into the Player Card Game Object of the target player (If it exists)
 
         if (playersInRoom.TryGetValue(targetPlayer.ActorNumber, out playerCard))
@@ -273,12 +282,11 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
                 playerCard.GetComponent<PlayerCardEntry>().SetReadyStatus((bool)isPlayerReady);
             }
             
-        }
-        ;
-        //Call Check Ready Players
+        };
+        //Check if the Game can start when someone readies up
         if (teamManager.CheckReadyTeams() && CheckReadyPlayers()) 
         {
-            StartGame();
+            StartCoroutine(StartGame());
             Debug.Log("Start the level");
         }
     }
@@ -351,12 +359,15 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void LeaveRoom() 
     {
-        teamManager.JoinUnassigned();
+        teamManager.DecreaseTeamCount();
+
 
         PhotonNetwork.LeaveRoom();
 
         //Rest of functionality will be in the PUN Callback "OnPlayerLeaves"
     }
+
+
     public void RefreshRooms()
     {
         if (PhotonNetwork.IsConnected)
@@ -437,26 +448,33 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     #endregion
 
-    public void StartGame()
+    public System.Collections.IEnumerator StartGame()
     {
-
+        //Find and Disable Leave Room Button
         //If not a master client then don't load the level (PhotonNetwork.AutomaticallySyncScene, will make everyone in the room load the level)
         if (!PhotonNetwork.IsMasterClient) 
         {
             Debug.Log("test");
             Debug.LogError("Only master client can load the level");
-            return;
+            yield return null;
         }
 
         Debug.Log("Loading Level");
 
+        // Wait a few seconds
+        yield return new WaitForSeconds(1f);
 
-        //Make sure no one can join whilst game is going on
-        PhotonNetwork.CurrentRoom.IsVisible = false;
-        PhotonNetwork.CurrentRoom.IsOpen = false;
+        //One final check before starting the game
+        if (teamManager.CheckReadyTeams() && CheckReadyPlayers())
+        {
+            //Make sure no one can join whilst game is going on
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+            PhotonNetwork.CurrentRoom.IsOpen = false;
 
-        //Go To The Actual Game
-        PhotonNetwork.LoadLevel(1);
+            //Go To The Actual Game
+            PhotonNetwork.LoadLevel(1);
+        }
+
     }
 
     void SpawnPlayerCards(Player player) 
@@ -545,11 +563,11 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             //We own this player so send the other computers the data
 
+
         }
         else
         {
             //Network player that receives the data
-
 
         }
     }
