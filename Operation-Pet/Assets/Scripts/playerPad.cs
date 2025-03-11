@@ -2,33 +2,43 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.InputSystem;
 
-public class playerPad : MonoBehaviourPunCallbacks
-{/* New Input System: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.8/manual/QuickStartGuide.html */
-   
-    public float speed = 5f;
+public class PlayerPad : MonoBehaviourPunCallbacks
+{
+    [SerializeField] private float speed = 5f;
+    private Rigidbody2D rb;
     public InputAction moveAction;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
-        //Find the move action from the Default Action System
-        moveAction = InputSystem.actions.FindAction("Move");
+        rb = GetComponent<Rigidbody2D>(); // Cache Rigidbody2D component
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        //If the one triggering this function is me
-        if (photonView.IsMine) 
+        moveAction.Enable(); // Ensure InputAction is enabled
+    }
+
+    private void OnDisable()
+    {
+        moveAction.Disable(); // Disable InputAction when object is disabled
+    }
+
+    private void Update()
+    {
+        if (photonView.IsMine)
         {
             InputMovement();
         }
     }
 
-
-    void InputMovement() 
+    private void InputMovement()
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
+<<<<<<< Updated upstream
         GetComponent<Rigidbody2D>().velocity = new Vector2(moveValue.x * speed, moveValue.y * speed);
+=======
+        rb.velocity = moveValue * speed; // Set Rigidbody2D velocity correctly
+>>>>>>> Stashed changes
     }
 }
+
