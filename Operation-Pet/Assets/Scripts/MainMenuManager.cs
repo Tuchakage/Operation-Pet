@@ -174,6 +174,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public override void OnLeftRoom()
     {
+
         SceneManager.LoadScene(0);
         Debug.Log("Left Room");
     }
@@ -361,6 +362,14 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         teamManager.DecreaseTeamCount();
 
+        //Reset Properties
+        Hashtable properties = new Hashtable(){
+            {"Player Ready", false}
+        };
+
+        //Update the Hashtable that is being tracked by PUN
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+
 
         PhotonNetwork.LeaveRoom();
 
@@ -505,7 +514,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         }
 
 
-        //Add to list
+        //Add the Player Card to list
         playersInRoom.Add(player.ActorNumber, playerCard);
 
         Debug.Log("Actor Name: " + player.NickName + " Player Actor Number: " + player.ActorNumber);

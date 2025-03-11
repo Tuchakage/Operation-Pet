@@ -26,6 +26,9 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     void Start()
     {
         canMoveCard = false;
+
+        //Make sure player starts in the Unassigned tem
+        AddPlayerToTeam(teams.Unassigned);
     }
 
     void Update() 
@@ -42,13 +45,15 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     }
     public override void OnJoinedRoom() 
     {
+        
         //Get the actor number when the local player joins the room
         ownerid = PhotonNetwork.LocalPlayer.ActorNumber;
 
         //Get Reference to Player info when local player joins the room
         localPlayer = PhotonNetwork.CurrentRoom.GetPlayer(ownerid);
 
-        IncreaseTeamCount(AddPlayerToTeam(teams.Unassigned));
+
+        IncreaseTeamCount(teams.Unassigned);
 
         //Move the Player Cards for all players that have just joined the room
         if (PhotonNetwork.PlayerList.Length > 0) 
