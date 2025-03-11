@@ -42,8 +42,7 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 13
-  m_BakeOnSceneLoad: 0
+  serializedVersion: 12
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -4083,7 +4082,7 @@ GameObject:
   - component: {fileID: 182005325714065936}
   - component: {fileID: 182005325714065934}
   - component: {fileID: 182005325714065935}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4211,7 +4210,7 @@ GameObject:
   - component: {fileID: 9151952433867835424}
   - component: {fileID: 9151952433867835422}
   - component: {fileID: 9151952433867835423}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig R Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4227,7 +4226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4821808571497878416}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig R Finger2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4246,7 +4245,7 @@ GameObject:
   - component: {fileID: 2528762683700028541}
   - component: {fileID: 2528762683700028540}
   - component: {fileID: 2528762683700028539}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4262,7 +4261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4598416533250378839}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4278,7 +4277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3554545576128765183}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig L Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4294,7 +4293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7079673097028428452}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: L_hand_grap_point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4326,7 +4325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9061089344928481928}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4342,7 +4341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3419644860006901513}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig R Clavicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4358,7 +4357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6187237489846086033}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig L Clavicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4389,7 +4388,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 221565480701242618}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig R Toe0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4634,7 +4633,7 @@ GameObject:
   - component: {fileID: 2557549058221629468}
   - component: {fileID: 2557549058221629467}
   - component: {fileID: 2557549058221629466}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig R Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4746,7 +4745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2215275442355205622}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig R Finger0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4909,7 +4908,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3262169746212374285}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig R Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4928,7 +4927,7 @@ GameObject:
   - component: {fileID: 3687367659676503464}
   - component: {fileID: 3687367659676503462}
   - component: {fileID: 3687367659676503463}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig L Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5040,7 +5039,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3926697700491752427}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig R Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5143,7 +5142,7 @@ GameObject:
   - component: {fileID: 3824343101652301088}
   - component: {fileID: 3824343101652301087}
   - component: {fileID: 3824343101652301086}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig L Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5318,7 +5317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6069500083614132181}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig L Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5352,7 +5351,7 @@ GameObject:
   - component: {fileID: 8871523711931839552}
   - component: {fileID: 8871523711931839551}
   - component: {fileID: 8871523711931839550}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig L Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5383,7 +5382,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5514877100112353523}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig L Finger2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5418,7 +5417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8388496206957190912}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig L Toe0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5450,7 +5449,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3129934517160254863}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig L Finger0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5469,7 +5468,7 @@ GameObject:
   - component: {fileID: 6331000114601924557}
   - component: {fileID: 6331000114601924555}
   - component: {fileID: 6331000114601924556}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5584,7 +5583,7 @@ GameObject:
   - component: {fileID: 6627819692317171671}
   - component: {fileID: 6627819692317171669}
   - component: {fileID: 6627819692317171670}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig L UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5711,7 +5710,7 @@ Transform:
   m_GameObject: {fileID: 7631896079155510961}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.737533, y: 0.824, z: -2.65102}
+  m_LocalPosition: {x: -12.737533, y: 0.14, z: -3.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5743,7 +5742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8910974586542932907}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5760,9 +5759,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8776077901221425155}
   - component: {fileID: 3762863055712084272}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: animal_people_wolf_1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5776,13 +5775,136 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7107280137090163723}
-  m_Layer: 0
-  m_Name: animal_people_wolf_1
-  m_TagString: Untagged
+  - component: {fileID: 7631896079155510965}
+  - component: {fileID: 7631896079155510964}
+  - component: {fileID: 7631896079155510963}
+  - component: {fileID: 7631896079155510962}
+  - component: {fileID: 7631896079155510966}
+  m_Layer: 3
+  m_Name: SeekerController
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!136 &7631896079155510962
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7631896079155510961}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &7631896079155510963
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7631896079155510961}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 9312126e574e97047b72657b5431e12a, type: 3}
+  m_Controller: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &7631896079155510964
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7631896079155510961}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 90
+  m_CollisionDetection: 0
+--- !u!143 &7631896079155510965
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7631896079155510961}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7631896079155510966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7631896079155510961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217a1f23a2aea814c84957ab3c413821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  jumpForce: 7
+  dashForce: 10
+  dashCooldown: 1
+  groundCheck: {fileID: 0}
+  groundCheckRadius: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &7654839206215005051
 GameObject:
   m_ObjectHideFlags: 0
@@ -5792,7 +5914,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7114207709906263040}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig L Finger1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5823,7 +5945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3376003204984475959}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig R Finger1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5841,7 +5963,7 @@ GameObject:
   - component: {fileID: 3039533878320614869}
   - component: {fileID: 8720031064743171601}
   - component: {fileID: 8720031064743171600}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig Pelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5908,7 +6030,7 @@ GameObject:
   - component: {fileID: 8739368119784033167}
   - component: {fileID: 8739368119784033166}
   - component: {fileID: 8739368119784033165}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: basic_rig R Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6020,7 +6142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5002013210295660044}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R_hand_grap_point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6036,8 +6158,8 @@ Transform:
   m_GameObject: {fileID: 7585139731139222207}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.000002450943, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -16.729, y: -1.953, z: -0.10955}
+  m_LocalScale: {x: 0.8058707, y: 0.8058707, z: 0.8058707}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7107280137090163723}

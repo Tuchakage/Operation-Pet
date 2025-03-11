@@ -2,33 +2,50 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.InputSystem;
 
-public class playerPad : MonoBehaviourPunCallbacks
-{/* New Input System: https://docs.unity3d.com/Packages/com.unity.inputsystem@1.8/manual/QuickStartGuide.html */
-   
+public class PlayerPad : MonoBehaviourPunCallbacks
+{
+    [Header("Movement Settings")]
     public float speed = 5f;
-    public InputAction moveAction;
+    private InputAction moveAction;
+    private Rigidbody rb; // 3D Rigidbody
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //Find the move action from the Default Action System
+        // Get Rigidbody component
+        rb = GetComponent<Rigidbody>();
+
+        // Ensure Rigidbody exists
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody is missing on " + gameObject.name);
+        }
+
+        // Find the move action from the Input System
         moveAction = InputSystem.actions.FindAction("Move");
+
+        // Enable the Input Action
+        if (moveAction != null)
+            moveAction.Enable();
+        else
+            Debug.LogError("Move action not found in Input System!");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //If the one triggering this function is me
-        if (photonView.IsMine) 
+        // Ensure this is the local player before processing movement
+        if (photonView.IsMine)
         {
             InputMovement();
         }
     }
 
-
-    void InputMovement() 
+    void InputMovement()
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
-        GetComponent<Rigidbody2D>().linearVelocity = new Vector2(moveValue.x * speed, moveValue.y * speed);
+
+        // Move the Rigidbody in 3D space
+        Vector3 moveDirection = new Vector3(moveValue.x, 0f, moveValue.y); // Y is 0 since it's a 3D ground movement
+        rb.linearVelocity = moveDirection * speed;
     }
 }
+
