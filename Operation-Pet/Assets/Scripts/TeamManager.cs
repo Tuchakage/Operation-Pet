@@ -3,17 +3,17 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using System.Collections.Generic;
-using static Photon.Pun.UtilityScripts.PunTeams;
 using UnityEngine.UIElements;
 using System;
 using TMPro;
 using Unity.VisualScripting;
+using static teamsEnum;
 
 
 //Purpose of this script is to set the teams of the players before the game
 public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable 
 {
-    public enum teams {Unassigned ,Red, Blue, Yellow, Green, Purple};
+    teamsEnum.teams teams;
     //Set the Team Name text in the Unity Editor
     public TMP_Text[] teamText; 
     public int ownerid;
@@ -28,7 +28,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         canMoveCard = false;
 
         //Make sure player starts in the Unassigned tem
-        AddPlayerToTeam(teams.Unassigned);
+
     }
 
     void Update() 
