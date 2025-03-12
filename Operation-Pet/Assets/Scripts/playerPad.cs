@@ -4,41 +4,48 @@ using UnityEngine.InputSystem;
 
 public class PlayerPad : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private float speed = 5f;
-    private Rigidbody2D rb;
-    public InputAction moveAction;
+    [Header("Movement Settings")]
+    public float speed = 5f;
+    private InputAction moveAction;
+    private Rigidbody rb; // 3D Rigidbody
 
-    private void Awake()
+    void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); // Cache Rigidbody2D component
+        // Get Rigidbody component
+        rb = GetComponent<Rigidbody>();
+
+        // Ensure Rigidbody exists
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody is missing on " + gameObject.name);
+        }
+
+        // Find the move action from the Input System
+        moveAction = InputSystem.actions.FindAction("Move");
+
+        // Enable the Input Action
+        if (moveAction != null)
+            moveAction.Enable();
+        else
+            Debug.LogError("Move action not found in Input System!");
     }
 
-    private void OnEnable()
+    void Update()
     {
-        moveAction.Enable(); // Ensure InputAction is enabled
-    }
-
-    private void OnDisable()
-    {
-        moveAction.Disable(); // Disable InputAction when object is disabled
-    }
-
-    private void Update()
-    {
+        // Ensure this is the local player before processing movement
         if (photonView.IsMine)
         {
             InputMovement();
         }
     }
 
-    private void InputMovement()
+    void InputMovement()
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
-<<<<<<< Updated upstream
-        GetComponent<Rigidbody2D>().velocity = new Vector2(moveValue.x * speed, moveValue.y * speed);
-=======
-        rb.velocity = moveValue * speed; // Set Rigidbody2D velocity correctly
->>>>>>> Stashed changes
+
+        // Move the Rigidbody in 3D space
+        Vector3 moveDirection = new Vector3(moveValue.x, 0f, moveValue.y); // Y is 0 since it's a 3D ground movement
+        rb.linearVelocity = moveDirection * speed;
     }
 }
 
