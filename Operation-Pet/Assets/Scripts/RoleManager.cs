@@ -12,6 +12,7 @@ public class RoleManager : MonoBehaviourPunCallbacks
     public GameObject[] playerModels;
     public GameObject petSelectBtn;
     public GameObject wizardSelectBtn;
+    public GameObject roleSelectionScreen;
 
     private teamsEnum.teams myTeam;
 
@@ -28,6 +29,7 @@ public class RoleManager : MonoBehaviourPunCallbacks
 
         //Depending on what team the player is on change the colour of the button
         petSelectBtn.GetComponent<Image>().color = teamsEnum.ChangeColour(myTeam);
+        wizardSelectBtn.GetComponent<Image>().color = teamsEnum.ChangeColour(myTeam);
         SetTeammate();
         SetPlayerRole(roles.Unassigned);
     }
@@ -50,17 +52,35 @@ public class RoleManager : MonoBehaviourPunCallbacks
         //Find Spawnpoint for corresponding Team (The Gameobjects name would be like "Red Pet Spawnpoint")
         string spawnPointName = myTeam.ToString() + " " + roles.Pet.ToString() + " Spawnpoint";
         GameObject spawnPoint = GameObject.Find(spawnPointName);
-        Debug.Log(spawnPointName);
 
         //Check player Model array and make sure you spawn in player of correct team and correct role
-        GameObject playerModel = CheckModelToSpawn(GetTeam(PhotonNetwork.LocalPlayer), GetRole(PhotonNetwork.LocalPlayer));
+        string playerModel = CheckModelToSpawn(myTeam, roles.Pet);
 
         //Instantiate the Player and disable UI
+        roleSelectionScreen.SetActive(false);
+        PhotonNetwork.Instantiate(playerModel, spawnPoint.transform.position, Quaternion.identity, 0);
     }
 
     public void SelectWizard() 
     {
+        //Is our teammate already the Pet?
+        object teammateRole;
+        if (teammate.CustomProperties.TryGetValue("Role Name", out teammateRole))
+        {
 
+            if ((roles)teammateRole == roles.Wizard)
+            {
+                return;
+            }
+        }
+
+        string spawnPointName = myTeam.ToString() + " " + roles.Wizard.ToString() + " Spawnpoint";
+        GameObject spawnPoint = GameObject.Find(spawnPointName);
+
+        //Instantiate the Player and disable UI
+        roleSelectionScreen.SetActive(false);
+
+        //PhotonNetwork.Instantiate(playerModel, spawnPoint.transform.position, Quaternion.identity, 0);
     }
 
     Player SetTeammate() 
@@ -123,27 +143,30 @@ public class RoleManager : MonoBehaviourPunCallbacks
 
     }
 
-    GameObject CheckModelToSpawn(teams teamName, roles roleName) 
+    string CheckModelToSpawn(teams teamName, roles roleName) 
     {
         //If the player is a Pet
         if (roleName.Equals(roles.Pet)) 
         {
+            SetPlayerRole(roles.Pet);
             //Check which colour the model should be 
             switch (teamName) 
             {
                 case teams.Red:
-                    return playerModels[0];
+                    Debug.Log(playerModels[0].name);
+                    return playerModels[0].name;
                 case teams.Blue:
-                    return playerModels[1];
+                    Debug.Log(playerModels[1].name);
+                    return playerModels[1].name;
 
                 case teams.Yellow:
-                    return playerModels[2];
+                    return playerModels[2].name;
 
                 case teams.Green:
-                    return playerModels[3];
+                    return playerModels[3].name;
 
                 case teams.Purple:
-                    return playerModels[4];
+                    return playerModels[4].name;
             }
         }
 
