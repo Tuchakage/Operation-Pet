@@ -72,6 +72,11 @@ public class TestRoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CreateRoom(null, new RoomOptions());
     }
 
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("Joined Room");
+    }
+
     #endregion
 
     #region Team Button Testing
