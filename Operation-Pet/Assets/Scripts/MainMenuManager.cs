@@ -28,9 +28,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     #region String Variables
     string gameVersion = "0.9";
-    //Holds the names of the Player
-    public string pnameOne;
-    public string pnameTwo;
     #endregion
 
 
