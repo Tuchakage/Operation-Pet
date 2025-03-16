@@ -7,7 +7,8 @@ using static teamsEnum;
 
 public class TestRoleManager : MonoBehaviour
 {
-    public GameObject[] playerModels;
+    public PlayerModelScriptableObject PlayerModelScriptableObject;
+    //public GameObject[] playerModels;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,7 +18,7 @@ public class TestRoleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SelectPet()
@@ -68,20 +69,20 @@ public class TestRoleManager : MonoBehaviour
             switch (teamName)
             {
                 case teams.Red:
-                    Debug.Log(playerModels[0].name);
-                    return playerModels[0].name;
+                    //Debug.Log(playerModelsScript.playerModels[0].name);
+                    return PlayerModelScriptableObject.playerModels[0].name;
                 case teams.Blue:
-                    Debug.Log(playerModels[1].name);
-                    return playerModels[1].name;
+                    Debug.Log(PlayerModelScriptableObject.playerModels[1].name);
+                    return PlayerModelScriptableObject.playerModels[1].name;
 
                 case teams.Yellow:
-                    return playerModels[2].name;
+                    return PlayerModelScriptableObject.playerModels[2].name;
 
                 case teams.Green:
-                    return playerModels[3].name;
+                    return PlayerModelScriptableObject.playerModels[3].name;
 
                 case teams.Purple:
-                    return playerModels[4].name;
+                    return PlayerModelScriptableObject.playerModels[4].name;
             }
         }
 

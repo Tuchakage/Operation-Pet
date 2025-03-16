@@ -1579,6 +1579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145bf717bb45db8498331bd414cb3dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerModelScriptableObject: {fileID: 0}
   playerModels:
   - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
   - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
@@ -5070,12 +5071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abed2eb0ff8f424694133b1b01d2fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerModels:
-  - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
-  - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
-  - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
-  - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
-  - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+  PlayerModelScriptableObject: {fileID: 11400000, guid: 08ceba1c28253074ca4ccbf1a0b4da7e, type: 2}
 --- !u!4 &1626796082
 Transform:
   m_ObjectHideFlags: 0

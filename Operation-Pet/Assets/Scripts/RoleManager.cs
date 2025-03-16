@@ -8,6 +8,7 @@ using static teamsEnum;
 
 public class RoleManager : MonoBehaviourPunCallbacks
 {
+    public PlayerModelScriptableObject PlayerModelScriptableObject;
 
     public GameObject[] playerModels;
     public GameObject petSelectBtn;
@@ -153,20 +154,20 @@ public class RoleManager : MonoBehaviourPunCallbacks
             switch (teamName) 
             {
                 case teams.Red:
-                    Debug.Log(playerModels[0].name);
-                    return playerModels[0].name;
+                    Debug.Log(PlayerModelScriptableObject.playerModels[0].name);
+                    return PlayerModelScriptableObject.playerModels[0].name;
                 case teams.Blue:
-                    Debug.Log(playerModels[1].name);
-                    return playerModels[1].name;
+                    Debug.Log(PlayerModelScriptableObject.playerModels[1].name);
+                    return PlayerModelScriptableObject.playerModels[1].name;
 
                 case teams.Yellow:
-                    return playerModels[2].name;
+                    return PlayerModelScriptableObject.playerModels[2].name;
 
                 case teams.Green:
-                    return playerModels[3].name;
+                    return PlayerModelScriptableObject.playerModels[3].name;
 
                 case teams.Purple:
-                    return playerModels[4].name;
+                    return PlayerModelScriptableObject.playerModels[4].name;
             }
         }
 

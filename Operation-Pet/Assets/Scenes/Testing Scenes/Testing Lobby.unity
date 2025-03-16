@@ -908,6 +908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145bf717bb45db8498331bd414cb3dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerModelScriptableObject: {fileID: 11400000, guid: 08ceba1c28253074ca4ccbf1a0b4da7e, type: 2}
   playerModels:
   - {fileID: 7179444264422872889, guid: 206b1b905c94e0f4b86f23df563b82f8, type: 3}
   - {fileID: 7179444264422872889, guid: 37785831181a9864f9148a7a28560c6d, type: 3}
