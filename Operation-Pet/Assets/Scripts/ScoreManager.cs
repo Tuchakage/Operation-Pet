@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -6,9 +7,9 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using static teamsEnum;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : MonoBehaviourPunCallbacks
 {
-    
+    //Stores the scores for each team
     private Dictionary<teams, int> teamScores;
     public TMP_Text DogScoreTxt, CatScoreTxt, MouseScoreTxt, SquirrelScoreTxt, HorseScoreTxt;
 
@@ -59,13 +60,16 @@ public class ScoreManager : MonoBehaviour
     {
         teamScores[teamThatScored]++;
         SetTeamScoreTxt(teamThatScored, teamScores[teamThatScored]);
+        Debug.Log("Increased Score");
     }
 
+    [PunRPC]
     void DecreaseScore(teams teamName) 
     {
         teamScores[teamName]--;
         SetTeamScoreTxt(teamName, teamScores[teamName]);
     }
+
 
     void SetTeamScoreTxt(teams teamScoreUpdate, int score) 
     {
