@@ -28,20 +28,15 @@ public class PlayerCardEntry : MonoBehaviour
         {
             //Lose reference to the button and Ready Icon so it doesn't get activated
             readyBtn = null;
-            ReadyCircleObject.enabled = false;
             return;
         }
         //Set the OnClick() event for the Ready Button
         readyBtn.GetComponent<Button>().onClick.AddListener(ReadyUp);
 
-        //Initialise a Hashtable to use for the SetCustomProperties Function
-        Hashtable initialHash = new Hashtable()
-        {
-            {"Player Ready", isPlayerReady}, 
-        };
-       
-        //Allows PUN to track whats been changed and update it properly
-        PhotonNetwork.LocalPlayer.SetCustomProperties(initialHash);
+        //Initialise a Hashtable to use for the SetCustomProperties Function and set the player being ready to false
+        UpdatePlayerReadyProp(false);
+
+        //Debug.Log("Player: " + isPlayerReady);
     }
     public void Init(int playerId, string playerName)
     {
@@ -57,22 +52,33 @@ public class PlayerCardEntry : MonoBehaviour
         isPlayerReady = !isPlayerReady;
 
         //Update Hash Table
-        Hashtable properties = new Hashtable(){
-            {"Player Ready", isPlayerReady}
-        };
-
-        //Update the Hashtable that is being tracked by PUN
-        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+        UpdatePlayerReadyProp(isPlayerReady);
 
         //Depending on what the "isPlayerReady" variable is set the text
         readyBtn.transform.GetChild(0).GetComponent<TMP_Text>().text = isPlayerReady ? "Unready" : "Ready";
+
+        Debug.Log("Player Ready = " + isPlayerReady);
 
     }
 
     //Boolean parameter so other players can go into custom properties and assign it
     public void SetReadyStatus(bool playerReady) 
     {
-        //Make Ready Circle Available Or Unavailable
-        ReadyCircleObject.enabled = playerReady;
+        if (ReadyCircleObject) 
+        {
+            //Make Ready Circle Available Or Unavailable
+            ReadyCircleObject.enabled = playerReady;
+        }
+    }
+
+    public void UpdatePlayerReadyProp(bool playerReady) 
+    {
+        //Update Hash Table
+        Hashtable properties = new Hashtable(){
+            {"Player Ready", playerReady}
+        };
+
+        //Update the Hashtable that is being tracked by PUN
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
     }
 }

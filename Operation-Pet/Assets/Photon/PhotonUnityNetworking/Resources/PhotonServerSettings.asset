@@ -43,6 +43,7 @@ MonoBehaviour:
   - MoveCardToTeam
   - IncreaseTeamCount
   - DecreaseTeamCount
+  - IncreaseScore
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

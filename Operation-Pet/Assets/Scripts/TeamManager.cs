@@ -3,15 +3,19 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using System.Collections.Generic;
-using static Photon.Pun.UtilityScripts.PunTeams;
 using UnityEngine.UIElements;
 using System;
+using TMPro;
+using Unity.VisualScripting;
+using static teamsEnum;
 
 
 //Purpose of this script is to set the teams of the players before the game
 public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable 
 {
-    public enum teams {Unassigned ,Red, Blue, Yellow, Green, Purple};
+    teamsEnum.teams teams;
+    //Set the Team Name text in the Unity Editor
+    public TMP_Text[] teamText; 
     public int ownerid;
     Player localPlayer;
     PlayerCardEntry localPlayerCard;
@@ -22,11 +26,14 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     void Start()
     {
         canMoveCard = false;
+
+        //Make sure player starts in the Unassigned tem
+
     }
 
     void Update() 
     {
-        //Debug.Log("Team count = " + redTeamCount);
+        //Debug.Log("Team count = " + DogTeamCount);
     }
 
     #region PUN Callbacks
@@ -38,13 +45,15 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     }
     public override void OnJoinedRoom() 
     {
+        
         //Get the actor number when the local player joins the room
         ownerid = PhotonNetwork.LocalPlayer.ActorNumber;
 
         //Get Reference to Player info when local player joins the room
         localPlayer = PhotonNetwork.CurrentRoom.GetPlayer(ownerid);
 
-        IncreaseTeamCount(AddPlayerToTeam(teams.Unassigned));
+
+        IncreaseTeamCount(teams.Unassigned);
 
         //Move the Player Cards for all players that have just joined the room
         if (PhotonNetwork.PlayerList.Length > 0) 
@@ -52,14 +61,15 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
             foreach (Player p in PhotonNetwork.PlayerList)
             {
                 teams playerTeam = GetTeamName(p);
-                if (playerTeam != teams.Unassigned)
-                {
-                    MoveCardToTeam(playerTeam, p.ActorNumber);
-                }
+                MoveCardToTeam(playerTeam, p.ActorNumber);
             }
         }
 
-
+        //Check through every team in the "teams" Enum that was created
+        foreach (teams teamName in Enum.GetValues(typeof(teams))) 
+        {
+            SetTeamText(teamName, GetTeamCount(teamName));
+        }
 
     }
 
@@ -82,10 +92,23 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
     {
-        foreach (var hi in propertiesThatChanged)
+        //When someones joins a team, update the text for everyone in the game
+        foreach (var prop in propertiesThatChanged)
         {
-            Debug.Log("Key: " + hi.Key+ " = "+ hi.Value);
+
+            //Debug.Log("Key: " + prop.Key + " = " + prop.Value);
+            //Try Convert the object to the teams Enum and store into variable called "teamName"
+            if (System.Enum.TryParse<teams>(prop.Key.ToString(), out teams teamName)) 
+            {
+                //If Successful update Team Text
+                SetTeamText(teamName, Convert.ToInt32(prop.Value));
+            }
+            
+            //SetTeamText((teams)prop.Key, (int)prop.Value);
+
+
         }
+
 
     }
 
@@ -105,10 +128,10 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
-    public void JoinRedTeam() 
+    public void JoinDogTeam() 
     {
-        //Check if the team is full or if they are already on Red Team or not
-        if (GetTeamCount(teams.Red) >= 2 || CheckTeam(teams.Red))
+        //Check if the team is full or if they are already on Dog Team or not
+        if (GetTeamCount(teams.Dog) >= 2 || CheckTeam(teams.Dog))
         {
             return;
         }
@@ -126,14 +149,40 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Player Card can be moved
         canMoveCard = true;
 
-        //Increase Red Team Count
-        IncreaseTeamCount(AddPlayerToTeam(teams.Red));
+        //Increase Dog Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Dog));
+        
     }
 
-    public void JoinBlueTeam()
+    public void JoinCatTeam()
     {
-        //Check if the team is full or if they are already on Red Team or not
-        if (GetTeamCount(teams.Blue) >= 2 || CheckTeam(teams.Blue))
+        //Check if the team is full or if they are already on Dog Team or not
+        if (GetTeamCount(teams.Cat) >= 2 || CheckTeam(teams.Cat))
+        {
+            return;
+        }
+
+        //if the Player is already readied up
+        if (localPlayerCard.isPlayerReady)
+        {
+            //Reverse it and make it so they arent readied up
+            localPlayerCard.ReadyUp();
+        }
+
+        Debug.Log("Player Card: " + localPlayerCard.isPlayerReady);
+        DecreaseTeamCount();
+
+        //Player Card can be moved
+        canMoveCard = true;
+
+        //Increase Dog Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Cat));
+    }
+
+    public void JoinMouseTeam()
+    {
+        //Check if the team is full or if they are already on Dog Team or not
+        if (GetTeamCount(teams.Mouse) >= 2 || CheckTeam(teams.Mouse))
         {
             return;
         }
@@ -150,14 +199,14 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Player Card can be moved
         canMoveCard = true;
 
-        //Increase Red Team Count
-        IncreaseTeamCount(AddPlayerToTeam(teams.Blue));
+        //Increase Dog Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Mouse));
     }
 
-    public void JoinYellowTeam()
+    public void JoinSquirrelTeam()
     {
-        //Check if the team is full or if they are already on Red Team or not
-        if (GetTeamCount(teams.Yellow) >= 2 || CheckTeam(teams.Yellow))
+        //Check if the team is full or if they are already on Dog Team or not
+        if (GetTeamCount(teams.Squirrel) >= 2 || CheckTeam(teams.Squirrel))
         {
             return;
         }
@@ -174,14 +223,14 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Player Card can be moved
         canMoveCard = true;
 
-        //Increase Red Team Count
-        IncreaseTeamCount(AddPlayerToTeam(teams.Yellow));
+        //Increase Dog Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Squirrel));
     }
 
-    public void JoinGreenTeam()
+    public void JoinHorseTeam()
     {
-        //Check if the team is full or if they are already on Red Team or not
-        if (GetTeamCount(teams.Green) >= 2 || CheckTeam(teams.Green))
+        //Check if the team is full or if they are already on Dog Team or not
+        if (GetTeamCount(teams.Horse) >= 2 || CheckTeam(teams.Horse))
         {
             return;
         }
@@ -198,33 +247,10 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Player Card can be moved
         canMoveCard = true;
 
-        //Increase Red Team Count
-        IncreaseTeamCount(AddPlayerToTeam(teams.Green));
+        //Increase Dog Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Horse));
     }
 
-    public void JoinPurpleTeam()
-    {
-        //Check if the team is full or if they are already on Red Team or not
-        if (GetTeamCount(teams.Purple) >= 2 || CheckTeam(teams.Purple))
-        {
-            return;
-        }
-
-        //if the Player is already readied up
-        if (localPlayerCard.isPlayerReady)
-        {
-            //Reverse it and make it so they arent readied up
-            localPlayerCard.ReadyUp();
-        }
-
-        DecreaseTeamCount();
-
-        //Player Card can be moved
-        canMoveCard = true;
-
-        //Increase Red Team Count
-        IncreaseTeamCount(AddPlayerToTeam(teams.Purple));
-    }
     #endregion
 
     #region Team Related Functions
@@ -243,12 +269,12 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
     int GetTeamCount(teams teamToCheck) 
     {
-        Debug.Log("Checking Team: " + teamToCheck);
+        //Debug.Log("Checking Team: " + teamToCheck);
         object teamCount;
         //Check the custom properties of that player to see what team they are apart of
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamToCheck.ToString(), out teamCount))
         {
-
+            Debug.Log("Checking Team: " + teamToCheck + " Has " + (int)teamCount);
             return (int)teamCount;
         }
 
@@ -261,11 +287,18 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         int readyTeamCount = 0;
        // bool canStartGame = false;
 
+        //Check through every team in the "teams" Enum that was created
         foreach (teams teamName in Enum.GetValues(typeof(teams)))
         {
             object teamCount;
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamName.ToString(), out teamCount))
             {
+                //If anyone is in unassigned then dont start the game cause not everyone is in a team
+                if (teamName.ToString() == "Unassigned" && (int)teamCount > 0) 
+                {
+                    return false;
+                }
+
                 if ((int)teamCount == 0)
                 {
                     //If there is no one in the team then ignore them
@@ -355,9 +388,9 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
         UpdateTeamProp(team, teamCounter);
 
+        //SetTeamText(team, teamCounter);
 
-
-        //photonView.RPC("IncreaseTeamCount", RpcTarget.OthersBuffered, playerJoined);
+        //photonView.RPC("IncreaseTeamCount", RpcTarget.OthersBuffeDog, playerJoined);
     }
 
     public void DecreaseTeamCount() 
@@ -365,8 +398,9 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Temporary local variable to increase the amount of players in a team
         int teamCounter = 0;
 
+        teams teamName = GetTeamName(localPlayer);
         //Get the current amount of players in the team the player has joined
-        teamCounter = GetTeamCount(GetTeamName(localPlayer));
+        teamCounter = GetTeamCount(teamName);
         
         //Make sure team Counter doesn't go below 0
         if (teamCounter > 0) 
@@ -379,9 +413,9 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("Decreased Team Count for: " + GetTeamName(localPlayer) + " = " + teamCounter);
 
         //Update the hash table telling the Room to decrease the amount of players in the team
-        UpdateTeamProp(GetTeamName(localPlayer), teamCounter);
+        UpdateTeamProp(teamName, teamCounter);
 
-
+        //SetTeamText(teamName, teamCounter);
     }
 
     void MoveCardToTeam(teams teamToJoin, int cardOwner)
@@ -391,7 +425,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Use this to find the Game Object Group of the team for the player card
         string teamNameCheck = teamToJoin.ToString() + " Team";
 
-        Debug.Log("Name of team: " + teamNameCheck);
+        //Debug.Log("Name of team: " + teamNameCheck);
         //Get reference to the Team Group List (Depending on what was passed through the parameter)
         Transform TeamGroupList = GameObject.Find(teamNameCheck).transform;
 
@@ -417,12 +451,13 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
         }
-        // Debug.Log("Moving " + PhotonNetwork.CurrentRoom.GetPlayer(cardOwner).NickName + " To Red Team");
+        // Debug.Log("Moving " + PhotonNetwork.CurrentRoom.GetPlayer(cardOwner).NickName + " To Dog Team");
 
         //Cant move Player Card anymore
         canMoveCard = false;
 
-        //Debug.Log("Moved ID:" + cardOwner + " to " + team);
+        //SetTeamText(teamToJoin, GetTeamCount(teamToJoin));
+        //Debug.Log("Moved ID:" + cardOwner + " to " + teamToJoin);
 
 
     }
@@ -437,6 +472,39 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Debug.Log("Team Counter =" +teamCounter + " For "+team);
         //Set the Custom Properties for the room so that it knows how many players are in each team
         PhotonNetwork.CurrentRoom.SetCustomProperties(teamProp);
+        
+    }
+
+
+    void SetTeamText(teams teamName, int teamCounter) 
+    {
+
+        //Get the current amount of players in the team the player has joined
+        //int teamCounter = GetTeamCount(teamName);
+        switch (teamName) 
+        {
+            case teams.Unassigned:
+                teamText[0].text = "Unassigned " + teamCounter;
+                break;
+            case teams.Dog:
+                teamText[1].text = "Dog Team " + teamCounter + "/2";
+                break;
+            case teams.Cat:
+                teamText[2].text = "Cat Team " + teamCounter + "/2";
+                break;
+            case teams.Mouse:
+                teamText[3].text = "Mouse Team " + teamCounter + "/2";
+                break;
+            case teams.Squirrel:
+                teamText[4].text = "Squirrel Team " + teamCounter + "/2";
+                break;
+            case teams.Horse:
+                teamText[5].text = "Horse Team " + teamCounter + "/2";
+                break;
+
+        }
+
+        //Debug.Log(teamName + " Team " + teamCounter + "/2");
     }
 
     #endregion
