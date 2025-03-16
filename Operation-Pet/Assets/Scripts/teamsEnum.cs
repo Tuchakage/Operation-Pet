@@ -2,7 +2,7 @@
 using UnityEngine;
 public static class teamsEnum
 {
-    public enum teams { Unassigned, Red, Blue, Yellow, Green, Purple };
+    public enum teams { Unassigned, Dog, Cat, Mouse, Squirrel, Horse };
     public enum roles { Unassigned, Pet, Wizard};
 
     public static Color ChangeColour(teams teamName) 
@@ -10,24 +10,24 @@ public static class teamsEnum
         Color colour = Color.black;
         switch (teamName) 
         {
-            case teams.Red:
+            case teams.Dog:
 
                 colour = Color.red;
                 break;
 
-            case teams.Blue:
+            case teams.Cat:
                 colour = Color.blue;
                 break;
 
-            case teams.Yellow:
+            case teams.Mouse:
                 colour = Color.yellow;
                 break;
 
-            case teams.Green:
+            case teams.Squirrel:
                 colour = Color.green;
                 break;
 
-            case teams.Purple:
+            case teams.Horse:
                 colour = Color.magenta;
                 break;
         }

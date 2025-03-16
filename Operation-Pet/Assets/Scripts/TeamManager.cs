@@ -33,7 +33,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update() 
     {
-        //Debug.Log("Team count = " + redTeamCount);
+        //Debug.Log("Team count = " + DogTeamCount);
     }
 
     #region PUN Callbacks
@@ -128,10 +128,10 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
-    public void JoinRedTeam() 
+    public void JoinDogTeam() 
     {
-        //Check if the team is full or if they are already on Red Team or not
-        if (GetTeamCount(teams.Red) >= 2 || CheckTeam(teams.Red))
+        //Check if the team is full or if they are already on Dog Team or not
+        if (GetTeamCount(teams.Dog) >= 2 || CheckTeam(teams.Dog))
         {
             return;
         }
@@ -149,15 +149,15 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Player Card can be moved
         canMoveCard = true;
 
-        //Increase Red Team Count
-        IncreaseTeamCount(AddPlayerToTeam(teams.Red));
+        //Increase Dog Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Dog));
         
     }
 
-    public void JoinBlueTeam()
+    public void JoinCatTeam()
     {
-        //Check if the team is full or if they are already on Red Team or not
-        if (GetTeamCount(teams.Blue) >= 2 || CheckTeam(teams.Blue))
+        //Check if the team is full or if they are already on Dog Team or not
+        if (GetTeamCount(teams.Cat) >= 2 || CheckTeam(teams.Cat))
         {
             return;
         }
@@ -175,14 +175,14 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Player Card can be moved
         canMoveCard = true;
 
-        //Increase Red Team Count
-        IncreaseTeamCount(AddPlayerToTeam(teams.Blue));
+        //Increase Dog Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Cat));
     }
 
-    public void JoinYellowTeam()
+    public void JoinMouseTeam()
     {
-        //Check if the team is full or if they are already on Red Team or not
-        if (GetTeamCount(teams.Yellow) >= 2 || CheckTeam(teams.Yellow))
+        //Check if the team is full or if they are already on Dog Team or not
+        if (GetTeamCount(teams.Mouse) >= 2 || CheckTeam(teams.Mouse))
         {
             return;
         }
@@ -199,14 +199,14 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Player Card can be moved
         canMoveCard = true;
 
-        //Increase Red Team Count
-        IncreaseTeamCount(AddPlayerToTeam(teams.Yellow));
+        //Increase Dog Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Mouse));
     }
 
-    public void JoinGreenTeam()
+    public void JoinSquirrelTeam()
     {
-        //Check if the team is full or if they are already on Red Team or not
-        if (GetTeamCount(teams.Green) >= 2 || CheckTeam(teams.Green))
+        //Check if the team is full or if they are already on Dog Team or not
+        if (GetTeamCount(teams.Squirrel) >= 2 || CheckTeam(teams.Squirrel))
         {
             return;
         }
@@ -223,14 +223,14 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Player Card can be moved
         canMoveCard = true;
 
-        //Increase Red Team Count
-        IncreaseTeamCount(AddPlayerToTeam(teams.Green));
+        //Increase Dog Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Squirrel));
     }
 
-    public void JoinPurpleTeam()
+    public void JoinHorseTeam()
     {
-        //Check if the team is full or if they are already on Red Team or not
-        if (GetTeamCount(teams.Purple) >= 2 || CheckTeam(teams.Purple))
+        //Check if the team is full or if they are already on Dog Team or not
+        if (GetTeamCount(teams.Horse) >= 2 || CheckTeam(teams.Horse))
         {
             return;
         }
@@ -247,8 +247,8 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         //Player Card can be moved
         canMoveCard = true;
 
-        //Increase Red Team Count
-        IncreaseTeamCount(AddPlayerToTeam(teams.Purple));
+        //Increase Dog Team Count
+        IncreaseTeamCount(AddPlayerToTeam(teams.Horse));
     }
 
     #endregion
@@ -390,7 +390,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
         //SetTeamText(team, teamCounter);
 
-        //photonView.RPC("IncreaseTeamCount", RpcTarget.OthersBuffered, playerJoined);
+        //photonView.RPC("IncreaseTeamCount", RpcTarget.OthersBuffeDog, playerJoined);
     }
 
     public void DecreaseTeamCount() 
@@ -451,7 +451,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
         }
-        // Debug.Log("Moving " + PhotonNetwork.CurrentRoom.GetPlayer(cardOwner).NickName + " To Red Team");
+        // Debug.Log("Moving " + PhotonNetwork.CurrentRoom.GetPlayer(cardOwner).NickName + " To Dog Team");
 
         //Cant move Player Card anymore
         canMoveCard = false;
@@ -486,20 +486,20 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
             case teams.Unassigned:
                 teamText[0].text = "Unassigned " + teamCounter;
                 break;
-            case teams.Red:
-                teamText[1].text = "Red Team " + teamCounter + "/2";
+            case teams.Dog:
+                teamText[1].text = "Dog Team " + teamCounter + "/2";
                 break;
-            case teams.Blue:
-                teamText[2].text = "Blue Team " + teamCounter + "/2";
+            case teams.Cat:
+                teamText[2].text = "Cat Team " + teamCounter + "/2";
                 break;
-            case teams.Yellow:
-                teamText[3].text = "Yellow Team " + teamCounter + "/2";
+            case teams.Mouse:
+                teamText[3].text = "Mouse Team " + teamCounter + "/2";
                 break;
-            case teams.Green:
-                teamText[4].text = "Green Team " + teamCounter + "/2";
+            case teams.Squirrel:
+                teamText[4].text = "Squirrel Team " + teamCounter + "/2";
                 break;
-            case teams.Purple:
-                teamText[5].text = "Purple Team " + teamCounter + "/2";
+            case teams.Horse:
+                teamText[5].text = "Horse Team " + teamCounter + "/2";
                 break;
 
         }

@@ -80,12 +80,72 @@ public class TestRoomManager : MonoBehaviourPunCallbacks
     #endregion
 
     #region Team Button Testing
-    public void JoinRedTeam() 
+    public void JoinDogTeam() 
     {
         //Change what team the player is on
         Hashtable properties = new Hashtable()
         {
-            {"Team Name",  teams.Red}
+            {"Team Name",  teams.Dog}
+        };
+
+        //Update the Hashtable that is being tracked by PUN to keep track of what team the player is on
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+
+        testTeamSelectionPanel.SetActive(false);
+        roleSelectionPanel.SetActive(true);
+    }
+
+    public void JoinCatTeam()
+    {
+        //Change what team the player is on
+        Hashtable properties = new Hashtable()
+        {
+            {"Team Name",  teams.Cat}
+        };
+
+        //Update the Hashtable that is being tracked by PUN to keep track of what team the player is on
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+
+        testTeamSelectionPanel.SetActive(false);
+        roleSelectionPanel.SetActive(true);
+    }
+
+    public void JoinMouseTeam()
+    {
+        //Change what team the player is on
+        Hashtable properties = new Hashtable()
+        {
+            {"Team Name",  teams.Mouse}
+        };
+
+        //Update the Hashtable that is being tracked by PUN to keep track of what team the player is on
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+
+        testTeamSelectionPanel.SetActive(false);
+        roleSelectionPanel.SetActive(true);
+    }
+
+    public void JoinSquirrelTeam()
+    {
+        //Change what team the player is on
+        Hashtable properties = new Hashtable()
+        {
+            {"Team Name",  teams.Squirrel}
+        };
+
+        //Update the Hashtable that is being tracked by PUN to keep track of what team the player is on
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+
+        testTeamSelectionPanel.SetActive(false);
+        roleSelectionPanel.SetActive(true);
+    }
+
+    public void JoinHorseTeam()
+    {
+        //Change what team the player is on
+        Hashtable properties = new Hashtable()
+        {
+            {"Team Name",  teams.Horse}
         };
 
         //Update the Hashtable that is being tracked by PUN to keep track of what team the player is on

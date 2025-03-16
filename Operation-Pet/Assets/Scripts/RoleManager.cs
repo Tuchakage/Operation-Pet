@@ -50,7 +50,7 @@ public class RoleManager : MonoBehaviourPunCallbacks
             }
         }
 
-        //Find Spawnpoint for corresponding Team (The Gameobjects name would be like "Red Pet Spawnpoint")
+        //Find Spawnpoint for corresponding Team (The Gameobjects name would be like "Dog Pet Spawnpoint")
         string spawnPointName = myTeam.ToString() + " " + roles.Pet.ToString() + " Spawnpoint";
         GameObject spawnPoint = GameObject.Find(spawnPointName);
 
@@ -153,20 +153,20 @@ public class RoleManager : MonoBehaviourPunCallbacks
             //Check which colour the model should be 
             switch (teamName) 
             {
-                case teams.Red:
+                case teams.Dog:
                     Debug.Log(PlayerModelScriptableObject.playerModels[0].name);
                     return PlayerModelScriptableObject.playerModels[0].name;
-                case teams.Blue:
+                case teams.Cat:
                     Debug.Log(PlayerModelScriptableObject.playerModels[1].name);
                     return PlayerModelScriptableObject.playerModels[1].name;
 
-                case teams.Yellow:
+                case teams.Mouse:
                     return PlayerModelScriptableObject.playerModels[2].name;
 
-                case teams.Green:
+                case teams.Squirrel:
                     return PlayerModelScriptableObject.playerModels[3].name;
 
-                case teams.Purple:
+                case teams.Horse:
                     return PlayerModelScriptableObject.playerModels[4].name;
             }
         }

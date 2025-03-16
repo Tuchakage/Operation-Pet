@@ -564,7 +564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 146572906}
   m_Layer: 0
-  m_Name: Green Wizard Spawnpoint
+  m_Name: Squirrel Wizard Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -595,7 +595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 157573588}
   m_Layer: 0
-  m_Name: Purple Pet Spawnpoint
+  m_Name: Horse Pet Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -626,7 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 168928916}
   m_Layer: 0
-  m_Name: Purple Wizard Spawnpoint
+  m_Name: Horse Wizard Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1297,7 +1297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 372966635}
   m_Layer: 0
-  m_Name: Blue Pet Spawnpoint
+  m_Name: Cat Pet Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3876,7 +3876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 956001594}
   m_Layer: 0
-  m_Name: Blue Wizard Spawnpoint
+  m_Name: Cat Wizard Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4232,7 +4232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1062826380}
   m_Layer: 0
-  m_Name: Red Wizard Spawnpoint
+  m_Name: Dog Wizard Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5418,7 +5418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1796160427}
   m_Layer: 0
-  m_Name: Red Pet Spawnpoint
+  m_Name: Dog Pet Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5877,7 +5877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1956438683}
   m_Layer: 0
-  m_Name: Yellow Pet Spawnpoint
+  m_Name: Mouse Pet Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6115,7 +6115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2074451581}
   m_Layer: 0
-  m_Name: Green Pet Spawnpoint
+  m_Name: Squirrel Pet Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6146,7 +6146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2108749625}
   m_Layer: 0
-  m_Name: Yellow Wizard Spawnpoint
+  m_Name: Mouse Wizard Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
