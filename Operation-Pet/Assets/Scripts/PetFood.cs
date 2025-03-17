@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using static teamsEnum;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class PetFood : MonoBehaviourPunCallbacks
 {
@@ -9,7 +10,7 @@ public class PetFood : MonoBehaviourPunCallbacks
     public teams foodFor;
 
     //Randomly determines if the food is fake
-    private bool isFake;
+    public bool isFake;
 
     ScoreManager scoreManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,6 +30,7 @@ public class PetFood : MonoBehaviourPunCallbacks
     {
         if (other.tag == "Player") 
         {
+            Debug.Log(other.tag + "Collided");
             if (!isFake)
             {
                 //Get the player information
@@ -46,8 +48,8 @@ public class PetFood : MonoBehaviourPunCallbacks
                     scoreManager.photonView.RPC("DecreaseScore", RpcTarget.All, playerTeam);
                 }
 
-                //NOT SURE IF THIS WORKS BUT TEST ANYWAYS
-                photonView.RPC("Destroy", RpcTarget.All);
+                
+                photonView.RPC("DestroyFood", RpcTarget.All);
             }
             else 
             {
@@ -77,5 +79,11 @@ public class PetFood : MonoBehaviourPunCallbacks
         //Push Player back
 
         //Destroy Object
+    }
+
+    [PunRPC]
+    void DestroyFood() 
+    {
+        Destroy(this.gameObject);
     }
 }
