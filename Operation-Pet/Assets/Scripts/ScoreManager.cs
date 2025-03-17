@@ -11,6 +11,9 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 {
     //Stores the scores for each team
     private Dictionary<teams, int> teamScores;
+
+    //Store all the possible winners of the round
+    private Dictionary<teams, int> possibleRoundWinner;
     public TMP_Text DogScoreTxt, CatScoreTxt, MouseScoreTxt, SquirrelScoreTxt, HorseScoreTxt;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -122,6 +125,66 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             case teams.Horse:
                 HorseScoreTxt.enabled = true;
                 break;
+        }
+    }
+
+    //Go through all the scores 
+    void CheckWinner() 
+    {
+
+        //Variable used to compare each team score
+        int highestScore = 0;
+
+
+        //Check all the values of the team in the dictionary
+        foreach (teams teamName in teamScores.Keys)
+        {
+            int teamRoundScore;
+            if (teamScores.TryGetValue(teamName, out teamRoundScore))
+            {
+                //If the score of this team is higher than the highest
+                if (teamRoundScore > highestScore)
+                {
+                    //set this score to be highest
+                    highestScore = teamRoundScore;
+
+                    //Add this as a team that could potentially be the winner of the game
+                    possibleRoundWinner.Add(teamName, teamRoundScore);
+
+                    //If there are multiple round winners
+                    if (possibleRoundWinner.Count > 1) 
+                    {
+                        //Check all their values and if they are lower than the current Highest Score then remove them from the list
+                        RemoveFromWinningTeams(highestScore);
+                    } 
+
+                }
+                else if (teamRoundScore == highestScore) //If the score is the same as the highest
+                {
+                    //Add the team to the list
+                    possibleRoundWinner.Add(teamName, highestScore);
+                }
+            }
+
+
+        }
+    }
+
+    void RemoveFromWinningTeams(int currHighScore) 
+    {
+        //Check through all the possible winners
+        foreach (teams teamName in possibleRoundWinner.Keys) 
+        {
+            //If anyone in the team has a lower score than the current Highest Score 
+            int teamScore;
+            if (possibleRoundWinner.TryGetValue(teamName, out teamScore)) 
+            {
+                if (teamScore < currHighScore) 
+                {
+                    //Remove it from the list
+                    possibleRoundWinner.Remove(teamName);
+                }
+            }
         }
     }
 }
