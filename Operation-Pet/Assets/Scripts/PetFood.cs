@@ -12,6 +12,9 @@ public class PetFood : MonoBehaviourPunCallbacks
     //Randomly determines if the food is fake
     public bool isFake;
 
+    [SerializeField] private float explosionRadius = 5f;
+    [SerializeField] private float explosionForce = 500;
+
     ScoreManager scoreManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -77,6 +80,19 @@ public class PetFood : MonoBehaviourPunCallbacks
         //Play explosion effect
 
         //Push Player back
+        var surroundingPlayers = Physics.OverlapSphere(transform.position, explosionRadius);
+
+        foreach (var player in surroundingPlayers) 
+        {
+            //Get the rigid body of the player
+            var rb = player.GetComponent<Rigidbody>();
+            //If they dont have a rigidbody then just skip to the next player in the list
+            if (rb == null) continue;
+
+            // Throw the players away
+            rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            Destroy(this.gameObject);
+        }
 
         //Destroy Object
     }
