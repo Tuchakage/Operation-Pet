@@ -1,6 +1,7 @@
 using UnityEngine;
-
-public class CharacterMovement : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+public class CharacterMove : MonoBehaviourPunCallbacks
 {
     public float moveSpeed = 5.0f;
 

@@ -1,6 +1,8 @@
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class ReticleTargeting : MonoBehaviour
+public class ReticleTargeting : MonoBehaviourPunCallbacks
 {
     public RectTransform reticle; // Assign the UI image for the reticle
     public Color defaultColor = Color.white;
