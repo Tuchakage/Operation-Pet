@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class CharacterPunch : MonoBehaviour
+public class CharacterPunch : MonoBehaviourPunCallbacks
 {
     public float punchCooldown = 1.0f;
     public float pushBackForce = 2.0f;

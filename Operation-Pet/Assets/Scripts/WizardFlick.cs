@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class WizardFlick : MonoBehaviour
+public class WizardFlick : MonoBehaviourPunCallbacks
 {
     public Camera playerCamera; // Camera used for aiming
     public float lockOnRange = 10f; // Maximum range to lock on to a target

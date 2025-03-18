@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class ChargedPunch : MonoBehaviour
+public class ChargedPunch : MonoBehaviourPunCallbacks
 {
     public float chargeTime = 2.0f; // Time required to charge the punch
     public float pushBackForce = 5.0f; // Force to knock the target back

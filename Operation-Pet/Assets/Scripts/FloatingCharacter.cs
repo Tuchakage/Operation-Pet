@@ -1,6 +1,7 @@
 using UnityEngine;
-
-public class FloatingCharacter : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+public class FloatingCharacter : MonoBehaviourPunCallbacks
 {
     public float hoverHeight = 5.0f; // Height above the terrain
     public float hoverSpeed = 2.0f; // Up-and-down floating speed

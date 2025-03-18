@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7183425726082764059}
   - component: {fileID: 1387920526795507417}
   - component: {fileID: 3581500837721698212}
+  - component: {fileID: 4593343688801045733}
   m_Layer: 0
   m_Name: WIZARDwMechanics
   m_TagString: Untagged
@@ -187,7 +188,7 @@ MonoBehaviour:
   playerCamera: {fileID: 3671059526351296669}
   lockOnRange: 20
   pushForce: 10
-  reticle: {fileID: 0}
+  reticle: {fileID: 5274162598121797063, guid: 9424a7ed9d76acc48ac17219f50536b6, type: 3}
   lockableLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -210,10 +211,27 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 4593343688801045733}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &4593343688801045733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3472152221767592597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &9148402687085794582
 GameObject:
   m_ObjectHideFlags: 0
