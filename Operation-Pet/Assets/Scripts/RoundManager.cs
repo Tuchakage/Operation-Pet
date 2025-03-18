@@ -117,22 +117,6 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
                     //set this score to be highest
                     highestScore = teamRoundScore;
                     Debug.Log(teamName + "Added to winning list with score: "+ teamRoundScore);
-
-                    //Add this as a team that could potentially be the winner of the game
-                    possibleWinners.Add(teamName, teamRoundScore);
-                    
-                    //If there are multiple round winners
-                    if (possibleWinners.Count > 1)
-                    {
-                        //Check all their values and if they are lower than the current Highest Score then remove them from the list
-                        RemoveFromWinningTeams(highestScore);
-                    }
-
-                }
-                else if (teamRoundScore == highestScore) //If the score is the same as the highest
-                {
-                    //Add the team to the list
-                    possibleWinners.Add(teamName, highestScore);
                 }
             }
 

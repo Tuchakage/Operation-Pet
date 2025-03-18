@@ -10,10 +10,10 @@ public class RoleManager : MonoBehaviourPunCallbacks
 {
     public PlayerModelScriptableObject PlayerModelScriptableObject;
 
-    public GameObject[] playerModels;
     public GameObject petSelectBtn;
     public GameObject wizardSelectBtn;
     public GameObject roleSelectionScreen;
+    public GameObject wizardModel;
 
     private teamsEnum.teams myTeam;
 
@@ -81,7 +81,7 @@ public class RoleManager : MonoBehaviourPunCallbacks
         //Instantiate the Player and disable UI
         roleSelectionScreen.SetActive(false);
 
-        //PhotonNetwork.Instantiate(playerModel, spawnPoint.transform.position, Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(wizardModel.name, spawnPoint.transform.position, Quaternion.identity, 0);
     }
 
     Player SetTeammate() 
