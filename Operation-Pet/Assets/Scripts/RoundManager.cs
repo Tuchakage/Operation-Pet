@@ -36,7 +36,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         currRoundNum = 1;
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         roundEnd = false;
-        currRoundTime = maxRoundTime;
+
 
         //Check through every team in the "teams" Enum that was created
         foreach (teams teamName in Enum.GetValues(typeof(teams)))
@@ -52,9 +52,10 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
 
             }
-
-
         }
+
+        //Start the countdown of the round
+        currRoundTime = maxRoundTime;
     }
 
     // Update is called once per frame
@@ -83,7 +84,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     void NextRound() 
     {
         //Check what round number the game is in
-        if (currRoundNum < 4)
+        if (currRoundNum < 3)
         {
             scoreManager.photonView.RPC("ResetScore", RpcTarget.All);
             currRoundTime = maxRoundTime;
