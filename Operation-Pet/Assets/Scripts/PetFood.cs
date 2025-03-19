@@ -39,16 +39,16 @@ public class PetFood : MonoBehaviourPunCallbacks
                 //Get the player information
                 Player p = other.GetComponent<PhotonView>().Controller;
                 teams playerTeam = GetTeam(p);
+
+                //Go into the score manager and call the increase score function for the food that was picked up
+                scoreManager.photonView.RPC("IncreaseScore", RpcTarget.All, foodFor);
                 //If the team the player is on matches who the food is for
                 if (playerTeam == foodFor)
                 {
-                    //Go into the score manager and call the increase score function for everyone
-                    scoreManager.photonView.RPC("IncreaseScore", RpcTarget.All, playerTeam);
+
                 }
                 else 
                 {
-                    //Go into the score manager and call the decrease score function for everyone
-                    scoreManager.photonView.RPC("DecreaseScore", RpcTarget.All, playerTeam);
                 }
 
                 

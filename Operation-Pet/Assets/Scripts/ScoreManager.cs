@@ -66,13 +66,6 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         Debug.Log("Increased Score");
     }
 
-    [PunRPC]
-    void DecreaseScore(teams teamName) 
-    {
-        teamScores[teamName]--;
-        SetTeamScoreTxt(teamName, teamScores[teamName]);
-    }
-
 
     void SetTeamScoreTxt(teams teamScoreUpdate, int score) 
     {
