@@ -26,6 +26,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     public TMP_Text roundTxt;
 
     ScoreManager scoreManager;
+    PetFoodSpawner foodSpawner;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,8 +34,9 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         roundWon = new Dictionary<teams, int>();
         possibleWinners = new Dictionary<teams, int>();
 
-        currRoundNum = 1;
+        currRoundNum = 0;
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        foodSpawner = GameObject.Find("FoodSpawner").GetComponent<PetFoodSpawner>();
         roundEnd = false;
 
 
@@ -54,8 +56,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        //Start the countdown of the round
-        currRoundTime = maxRoundTime;
+
     }
 
     // Update is called once per frame
@@ -81,18 +82,20 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         timerTxt.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    void NextRound() 
+    public void NextRound() 
     {
         //Check what round number the game is in
         if (currRoundNum < 3)
         {
             scoreManager.photonView.RPC("ResetScore", RpcTarget.All);
+            //Start the countdown of the round
             currRoundTime = maxRoundTime;
             roundEnd = false;         
             currRoundNum++;
             Debug.Log("We are on Round " + currRoundNum);
 
             //Spawn food from Spawn Manager
+            foodSpawner.SpawnFood();
         }
         else 
         {

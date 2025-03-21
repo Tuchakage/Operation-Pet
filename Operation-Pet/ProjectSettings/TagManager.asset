@@ -8,6 +8,8 @@ TagManager:
   - Target
   - SeekerChar
   - WizardChar
+  - Player Card
+  - Spawnpoints
   layers:
   - Default
   - TransparentFX

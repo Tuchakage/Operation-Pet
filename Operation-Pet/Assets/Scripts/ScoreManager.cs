@@ -16,11 +16,21 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     private Dictionary<teams, int> possibleRoundWinner;
     public TMP_Text DogScoreTxt, CatScoreTxt, MouseScoreTxt, SquirrelScoreTxt, HorseScoreTxt;
 
+    PetFoodSpawner foodSpawner;
+    RoundManager roundManager;
+
+    //Determines the score the teams need to get to end the round
+    int maxFoodPerTeam;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         teamScores = new Dictionary<teams, int>();
-
+        roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
+        foodSpawner = GameObject.Find("FoodSpawner").GetComponent<PetFoodSpawner>();
+        //Get the amount of points each team needs to collect
+        maxFoodPerTeam = foodSpawner.Init();
+        
         //Make sure that all the text isn't visible
         DogScoreTxt.enabled = false;
         CatScoreTxt.enabled = false;
@@ -50,6 +60,9 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             
 
         }
+
+        //Start the round
+        roundManager.NextRound();
     }
 
     // Update is called once per frame
@@ -63,6 +76,8 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     {
         teamScores[teamThatScored]++;
         SetTeamScoreTxt(teamThatScored, teamScores[teamThatScored]);
+
+        //Check if Next Round should be called
         Debug.Log("Increased Score");
     }
 
