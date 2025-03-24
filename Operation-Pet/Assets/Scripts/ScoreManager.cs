@@ -53,7 +53,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
 
 
-                    Debug.Log("Team Name: " + teamName + " Score: " + teamScores[teamName]);
+                    //Debug.Log("Team Name: " + teamName + " Score: " + teamScores[teamName]);
                 }
 
             }
@@ -76,6 +76,14 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     {
         teamScores[teamThatScored]++;
         SetTeamScoreTxt(teamThatScored, teamScores[teamThatScored]);
+
+        //If team has reached the maximum score they can get
+        if (teamScores[teamThatScored] == maxFoodPerTeam) 
+        {
+            Debug.Log("Round Winner is " + teamThatScored.ToString());
+            //
+            roundManager.IncreaseTeamRound(teamThatScored);
+        }
 
         //Check if Next Round should be called
         Debug.Log("Increased Score");
@@ -141,11 +149,10 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     {
         foreach (teams teamName in teamScores.Keys)
         {
-            //If anyone in the team has a lower score than the current Highest Score 
             int teamScore;
             if (teamScores.TryGetValue(teamName, out teamScore))
             {
-                teamScores[teamName] = teamScore;
+                teamScores[teamName] = 0;
             }
         }
     }

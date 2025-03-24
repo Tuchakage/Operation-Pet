@@ -85,7 +85,16 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     public void NextRound() 
     {
         //Check what round number the game is in
-        if (currRoundNum < 3)
+        if (currRoundNum == 0) 
+        {
+            //Start the countdown of the round
+            currRoundTime = maxRoundTime;
+            currRoundNum++;
+            //Spawn food from Spawn Manager
+            foodSpawner.SpawnFood();
+            //Debug.Log("First Round");
+        }
+        else if (currRoundNum < 3)
         {
             scoreManager.photonView.RPC("ResetScore", RpcTarget.All);
             //Start the countdown of the round
@@ -104,8 +113,9 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    #region After Timer ends
     //Function that is called after timer runs out
-    void CheckRoundWinner() 
+    public void CheckRoundWinner() 
     {
         int highestScore = 0;
         //Check all the values of the team in the dictionary
@@ -117,6 +127,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
                 //If the score of this team is higher than the highest
                 if (teamRoundScore > highestScore)
                 {
+
                     //set this score to be highest
                     highestScore = teamRoundScore;
                     Debug.Log(teamName + "Added to winning list with score: "+ teamRoundScore);
@@ -130,9 +141,39 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         IncreaseRoundWon();
     }
 
+    void IncreaseRoundWon()
+    {
+        //For each team that could be possible winners due to having the highest score
+        foreach (var teamName in possibleWinners.Keys)
+        {
+            //Increase the amount of Rounds that team has won
+            roundWon[teamName]++;
+        }
+
+        //Clear the list because the next time it will be called it will need to be empty
+        possibleWinners.Clear();
+
+        //Start the next round
+        NextRound();
+    }
+
+    #endregion
+
+    //Function used when a team collects all the points
+    public void IncreaseTeamRound(teams winningTeam) 
+    {
+        //Increase the amount of Rounds that team has won
+        roundWon[winningTeam]++;
+
+        //Start the next round
+        NextRound();
+
+    }
+
     void CheckGameWinner() 
     {
-
+        //Make sure list is empty
+        possibleWinners.Clear();
         //Variable used to compare each team score
         int highestScore = 0;
 
@@ -209,21 +250,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
-    void IncreaseRoundWon() 
-    {
-        //For each team that could be possible winners due to having the highest score
-        foreach (var teamName in possibleWinners.Keys) 
-        {
-            //Increase the amount of Rounds that team has won
-            roundWon[teamName]++;
-        }
 
-        //Clear the list because the next time it will be called it will need to be empty
-        possibleWinners.Clear();
-
-        //Start the next round
-        NextRound();
-    }
 
     //This function allows the variables inside to be sent over the network (Used as Observed component in photon view, this reads/writes the variables)
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
