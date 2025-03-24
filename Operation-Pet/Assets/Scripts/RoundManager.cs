@@ -44,11 +44,13 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         foreach (teams teamName in Enum.GetValues(typeof(teams)))
         {
             object teamCount;
+            //Try to get the value from the Hashtable and put it into 'teamCount'
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamName.ToString(), out teamCount))
             {
                 //If the team is in the game
                 if ((int)teamCount > 1)
                 {
+                    Debug.Log("Initialised " + teamName);
                     //Initialise the amount of rounds they won
                     roundWon.Add(teamName, 0);
                 }
@@ -164,6 +166,15 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         //Increase the amount of Rounds that team has won
         roundWon[winningTeam]++;
+
+        //Get all the remaining food in the scene
+        GameObject[] foodToDestroy = GameObject.FindGameObjectsWithTag("Food");
+
+        //Destroy all the food
+        foreach (GameObject food in foodToDestroy) 
+        {
+            Destroy(food);
+        }
 
         //Start the next round
         NextRound();

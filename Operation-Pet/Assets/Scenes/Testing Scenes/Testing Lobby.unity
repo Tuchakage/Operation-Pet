@@ -2715,7 +2715,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPointList: []
   foodToSpawn:
+  - {fileID: 6833855503871543365, guid: e3c8d2d8d1dcd674dab0178f488ef019, type: 3}
   - {fileID: 6833855503871543365, guid: a6cc54ca30db5f648b65ad21160b3574, type: 3}
+  - {fileID: 6833855503871543365, guid: afbc89376640dcf4081ca76a237e9176, type: 3}
+  - {fileID: 6833855503871543365, guid: c9b9f9a5f50cfb54494090b25e1e5355, type: 3}
+  - {fileID: 6833855503871543365, guid: 7a936f0016cf826469d7bce07190c50e, type: 3}
 --- !u!4 &833283164
 Transform:
   m_ObjectHideFlags: 0

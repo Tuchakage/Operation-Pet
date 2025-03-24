@@ -48,9 +48,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: 89feb9acb310b24419fbb77dd276d659, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -1258736543099589447, guid: 89feb9acb310b24419fbb77dd276d659, type: 3}
     - target: {fileID: 919132149155446097, guid: 89feb9acb310b24419fbb77dd276d659, type: 3}
       propertyPath: m_Name
       value: fish
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 89feb9acb310b24419fbb77dd276d659, type: 3}
+      propertyPath: m_TagString
+      value: Food
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -10,6 +10,7 @@ TagManager:
   - WizardChar
   - Player Card
   - Spawnpoints
+  - Food
   layers:
   - Default
   - TransparentFX

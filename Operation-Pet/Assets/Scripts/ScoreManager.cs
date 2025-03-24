@@ -149,11 +149,12 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     {
         foreach (teams teamName in teamScores.Keys)
         {
-            int teamScore;
-            if (teamScores.TryGetValue(teamName, out teamScore))
-            {
-                teamScores[teamName] = 0;
-            }
+            Debug.Log("Resetting Team " + teamName);
+            //int teamScore;
+            //if (teamScores.TryGetValue(teamName, out teamScore))
+            //{
+            //    teamScores[teamName] = 0;
+            //}
         }
     }
 }
