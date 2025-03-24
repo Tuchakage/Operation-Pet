@@ -4,13 +4,13 @@ using UnityEngine;
 using static teamsEnum;
 using Photon.Pun;
 using Photon.Realtime;
+using ExitGames.Client.Photon;
 using System.IO;
 using System;
 
 public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     private int currRoundNum;
-    private Dictionary<teams, int> roundWon;
 
 
     //Store all the possible winners of the round
@@ -47,17 +47,36 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             //Try to get the value from the Hashtable and put it into 'teamCount'
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamName.ToString(), out teamCount))
             {
-                //If the team is in the game
+                //If the team is in the game and this 
                 if ((int)teamCount > 1)
                 {
-                    Debug.Log("Initialised " + teamName);
-                    //Initialise the amount of rounds they won
-                    roundWon.Add(teamName, 0);
+                    //If the Hashtable doesn't exist
+                    if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey(teamName.ToString() + " Rounds")) 
+                    {
+                        //Initialise the table starting the team off with 0 rounds won
+                        Hashtable initTeam = new Hashtable()
+                        {
+                            {teamName.ToString() + " Rounds", 0 }
+                        };
+                        //Set the Custom Properties for the room so that it knows how many rounds each team has won
+                        PhotonNetwork.CurrentRoom.SetCustomProperties(initTeam);
+                    }
+
                 }
 
             }
         }
 
+        //Go through each team and set the player count to 0
+        foreach (teams teamName in Enum.GetValues(typeof(teams)))
+        {
+            Hashtable initTeam = new Hashtable()
+            {
+                {teamName.ToString() + " Rounds", 0 }
+            };
+
+
+        }
 
     }
 
@@ -260,8 +279,6 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     {
 
     }
-
-
 
     //This function allows the variables inside to be sent over the network (Used as Observed component in photon view, this reads/writes the variables)
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
