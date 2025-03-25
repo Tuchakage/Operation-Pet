@@ -8,10 +8,10 @@ using ExitGames.Client.Photon;
 using System.IO;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 
 public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 {
-    private int currRoundNum;
 
 
     //Store all the possible winners of the round
@@ -34,7 +34,6 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         //Create Dictionarys
         possibleWinners = new Dictionary<teams, int>();
 
-        currRoundNum = 0;
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         foodSpawner = GameObject.Find("FoodSpawner").GetComponent<PetFoodSpawner>();
         roundEnd = false;
@@ -67,17 +66,21 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        //Go through each team and set the player count to 0
-        foreach (teams teamName in Enum.GetValues(typeof(teams)))
+
+        //If the Hashtable for keeping track of the current round doesn't exist
+        if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("Round Number"))
         {
-            Hashtable initTeam = new Hashtable()
+            //Initialise the table starting the team off with 0 rounds won
+            Hashtable initRound = new Hashtable()
             {
-                {teamName.ToString() + " Rounds", 0 }
+                {"Round Number", 1 }
             };
-
-
+            //Set the Custom Properties for the room so that it knows how many rounds each team has won
+            PhotonNetwork.CurrentRoom.SetCustomProperties(initRound);
         }
 
+        //Start the countdown of the round
+        currRoundTime = maxRoundTime;
     }
 
     // Update is called once per frame
@@ -106,23 +109,13 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     public void NextRound() 
     {
         //Check what round number the game is in
-        if (currRoundNum == 0) 
+        if (GetCurrentRound() <= 3)
         {
-            //Start the countdown of the round
-            currRoundTime = maxRoundTime;
-            currRoundNum++;
-            //Spawn food from Spawn Manager
-            foodSpawner.SpawnFood();
-            //Debug.Log("First Round");
-        }
-        else if (currRoundNum < 3)
-        {
-            scoreManager.photonView.RPC("ResetScore", RpcTarget.All);
-            //Start the countdown of the round
-            currRoundTime = maxRoundTime;
-            roundEnd = false;         
-            currRoundNum++;
-            Debug.Log("We are on Round " + currRoundNum);
+            //scoreManager.photonView.RPC("ResetScore", RpcTarget.All);
+            roundEnd = false;
+            //Increase Round Number
+            IncreaseRoundNumProperty();
+            Debug.Log("We are on Round " + GetCurrentRound());
 
         }
         else 
@@ -130,6 +123,8 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             CheckGameWinner();
             //End Game
         }
+
+        PhotonNetwork.LoadLevel(1);
     }
 
     #region After Timer ends
@@ -151,7 +146,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
                     highestScore = teamRoundScore;
                     //Add team as a possible winner
                     possibleWinners.Add(teamName, teamRoundScore);
-                    Debug.Log(teamName + "Added to winning list with score: "+ teamRoundScore);
+                    //Debug.Log(teamName + "Added to winning list with score: "+ teamRoundScore);
                 }
             }
 
@@ -179,6 +174,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
                 int num = (int)roundsWon;
                 num++;
 
+                Debug.Log(teamName + " has won a round");
                 //Update Room Properties Hashtable
                 UpdateRoundProperties(keyName, num);
             }
@@ -282,7 +278,9 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    //Function to update the Hashtable
+    #region Photon Property Related Functions
+
+    //Function to update the Hashtable to increase the amount of Rounds a team has won
     void UpdateRoundProperties(string key, int roundsWon) 
     {
         //Update Hashtable
@@ -294,6 +292,41 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         //Update the Hashtable that is being tracked by PUN
         PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
     }
+    
+    //Get the current Round Number of the game
+    int GetCurrentRound() 
+    {
+        object currentroundNum;
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("Round Number", out currentroundNum)) 
+        {
+            return (int)currentroundNum;
+        }
+        return 0;
+    }
+
+    //Function to increase the Round Number of the game
+    void IncreaseRoundNumProperty() 
+    {
+        object currentroundNum;
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("Round Number", out currentroundNum))
+        {
+            //Store current Round Num into this variable whilst also conerting it to integer
+            int newRoundNum = (int)currentroundNum;
+            newRoundNum++;
+            //Debug.Log("New Round number SHOULD be " + newRoundNum);
+            //Update Hashtable
+            Hashtable properties = new Hashtable()
+            {
+                {"Round Number", newRoundNum}
+            };
+
+            //Update the Hashtable that is being tracked by PUN
+            PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
+        }
+
+    }
+
+    #endregion
 
     void CheckPossibleWinners()
     {
@@ -315,6 +348,36 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
+    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
+    {
+        //Check the properties that have changed in the Hashtable
+        foreach (var prop in propertiesThatChanged)
+        {
+            if (PhotonNetwork.IsMasterClient) 
+            {
+                Debug.Log("Key: " + prop.Key + " = " + prop.Value);
+            }
+            
+            //Try Convert the object to the teams Enum and store into variable called "teamName"
+            //if (System.Enum.TryParse<teams>(prop.Key.ToString(), out teams teamName))
+            //{
+            //    //The key for the winning team
+            //    string keyName = teamName.ToString() + " Rounds";
+            //    if (prop.Key.ToString() == keyName) 
+            //    {
+            //        Debug.Log(keyName);
+            //    }
+            //    //If Successful update Team Text
+            //    //SetTeamText(teamName, Convert.ToInt32(prop.Value));
+            //}
+
+            //SetTeamText((teams)prop.Key, (int)prop.Value);
+
+
+        }
+
+
+    }
 
     //This function allows the variables inside to be sent over the network (Used as Observed component in photon view, this reads/writes the variables)
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

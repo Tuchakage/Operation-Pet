@@ -47,6 +47,8 @@ public class PetFoodSpawner : MonoBehaviour
         foodPerTeam = (spawnpointAmnt / CountTeams()) / 2;
         Debug.Log("Spawnpoint amnt = " + spawnpointAmnt);
         Debug.Log("Food Per team = " + foodPerTeam);
+        //Spawn the Food in
+        SpawnFood();
 
         return foodPerTeam;
     }
@@ -86,7 +88,7 @@ public class PetFoodSpawner : MonoBehaviour
 
 
         //After everything is spawned, amount of food spawned value per team to 0 so they can be respawned after round is finished
-        ResetFoodSpawned();
+        //ResetFoodSpawned();
 
 
 
@@ -148,7 +150,7 @@ public class PetFoodSpawner : MonoBehaviour
                     //Increase the amount of food spawned
                     foodSpawnedPerTeam[team]++;
 
-                    Debug.Log("Team " + team + " has " + foodSpawnedPerTeam[team] + " spawned");
+                    //Debug.Log("Team " + team + " has " + foodSpawnedPerTeam[team] + " spawned");
                     //Check what food needs to be spawned in
                     switch (team) 
                     {

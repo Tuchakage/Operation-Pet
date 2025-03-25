@@ -61,8 +61,6 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
         }
 
-        //Start the round
-        roundManager.NextRound();
     }
 
     // Update is called once per frame
