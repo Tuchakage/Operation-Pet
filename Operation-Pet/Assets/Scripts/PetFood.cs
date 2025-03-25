@@ -12,6 +12,9 @@ public class PetFood : MonoBehaviourPunCallbacks
     //Randomly determines if the food is fake
     public bool isFake;
 
+    //Is used for deathmatch, if set to true then anyone can pick this up
+    public bool anyoneCanPickUp;
+
     [SerializeField] private float explosionRadius = 5f;
     [SerializeField] private float explosionForce = 500;
 
@@ -36,20 +39,23 @@ public class PetFood : MonoBehaviourPunCallbacks
             Debug.Log(other.tag + "Collided");
             if (!isFake)
             {
-                //Get the player information
-                Player p = other.GetComponent<PhotonView>().Controller;
-                teams playerTeam = GetTeam(p);
-
-                //Go into the score manager and call the increase score function for the food that was picked up
-                scoreManager.photonView.RPC("IncreaseScore", RpcTarget.All, foodFor);
-                //If the team the player is on matches who the food is for
-                if (playerTeam == foodFor)
+                //If its not a deathmatch then not everyone can pick up the food
+                if (!anyoneCanPickUp)
                 {
-
+                    //Go into the score manager and call the increase score function for the food that was picked up
+                    scoreManager.photonView.RPC("IncreaseScore", RpcTarget.All, foodFor);
                 }
                 else 
                 {
+                    //Get the player information
+                    Player p = other.GetComponent<PhotonView>().Controller;
+                    teams playerTeam = GetTeam(p);
+
+                    //
+                    scoreManager.photonView.RPC("IncreaseScore", RpcTarget.All, playerTeam);
+                    scoreManager.photonView.RPC("GameWinner", RpcTarget.All, playerTeam);
                 }
+
 
                 
                 photonView.RPC("DestroyFood", RpcTarget.All);

@@ -9,6 +9,7 @@ public class PetFoodSpawner : MonoBehaviour
 {
     Dictionary<teams, int> foodSpawnedPerTeam; //Keeps count of how much food has been spawned for each team
     public List<GameObject> spawnPointList; //This list will store all the spawnpoints in the game and won't delete any
+    public GameObject deathMatchSpawnPoint; //Spawnpoint for where the food for the deathmatch will spawn
 
     public GameObject[] foodToSpawn; // Food that will be spawned into the game depdending on Team (0 = Dog, 1 = Cat, 2 = Mouse, 3 = Squrirrel, 4= Horse)
 
@@ -61,30 +62,46 @@ public class PetFoodSpawner : MonoBehaviour
             return;
         }
 
-         List<GameObject> tempSpawnList = new List<GameObject>();
-        tempSpawnList = GameObject.FindGameObjectsWithTag("Spawnpoints").ToList<GameObject>();
-
-        //Get the amount of spawnpoints in the list
-        int spawnpointAmnt = spawnPointList.Count;
-
-        for (int i = 0; i < spawnpointAmnt; i++) 
+        //Check the round number to see if it is a death match
+        object roundNum;
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("Round Number", out roundNum)) 
         {
-            //Debug.Log("Spawnpoint Count = " + tempSpawnList.Count + "\n Also i = "+i);
-            //Select a random Spawnpoint to spawn the food on
-            GameObject randomSpawnpoint = ChooseRandomSpawnpoint(tempSpawnList);
-
-            //Before Instantiating, Check the food that needs to be spawned in
-            GameObject food = PhotonNetwork.Instantiate(CheckActiveTeams().name, randomSpawnpoint.transform.position, Quaternion.identity, 0);
-
-            //50% of the food will be mines
-
-            //The '-1' is there because the object first object that should be a mine is spawned in before i is incremented 
-            if (i >= (spawnpointAmnt / 2) - 1) 
+            //Normal Rounds
+            if ((int)roundNum > 0 && (int)roundNum <= 3)
             {
-                food.GetComponent<PetFood>().isFake = true;
+                List<GameObject> tempSpawnList = new List<GameObject>();
+                tempSpawnList = GameObject.FindGameObjectsWithTag("Spawnpoints").ToList<GameObject>();
+
+                //Get the amount of spawnpoints in the list
+                int spawnpointAmnt = spawnPointList.Count;
+
+                for (int i = 0; i < spawnpointAmnt; i++)
+                {
+                    //Debug.Log("Spawnpoint Count = " + tempSpawnList.Count + "\n Also i = "+i);
+                    //Select a random Spawnpoint to spawn the food on
+                    GameObject randomSpawnpoint = ChooseRandomSpawnpoint(tempSpawnList);
+
+                    //Before Instantiating, Check the food that needs to be spawned in
+                    GameObject food = PhotonNetwork.Instantiate(CheckActiveTeams().name, randomSpawnpoint.transform.position, Quaternion.identity, 0);
+
+                    //50% of the food will be mines
+
+                    //The '-1' is there because the object first object that should be a mine is spawned in before i is incremented 
+                    if (i >= (spawnpointAmnt / 2) - 1)
+                    {
+                        food.GetComponent<PetFood>().isFake = true;
+                    }
+
+                }
             }
-            
+            else if ((int)roundNum > 4) //Deathmatch Round
+            {
+                GameObject food = PhotonNetwork.Instantiate(CheckActiveTeams().name, deathMatchSpawnPoint.transform.position, Quaternion.identity, 0);
+                food.GetComponent<PetFood>().anyoneCanPickUp = true;
+            }
         }
+
+
 
 
         //After everything is spawned, amount of food spawned value per team to 0 so they can be respawned after round is finished

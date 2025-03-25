@@ -48,6 +48,7 @@ MonoBehaviour:
   - Explode
   - DestroyFood
   - ResetScore
+  - GameWinner
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -258,6 +258,19 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
         }
+
+        //If there is more than one team in the possibleWinners Dictionary
+        if (possibleWinners.Count > 1)
+        {
+            //Increase round by 1 more
+            //Start Deathmatch
+            Debug.Log("Start Deathmatch");
+        }
+        else 
+        {
+            //The only team in the dictionary is the winner of the game!
+            Debug.Log(possibleWinners[0] + "IS THE WINNER!");
+        }
     }
 
     void RemoveFromWinningTeams(int currHighScore)
@@ -327,6 +340,13 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     #endregion
+
+    //Function called when the deathmatch food is picked up, setting the winning team
+    [PunRPC]
+    public void GameWinner(teams winningTeam) 
+    {
+        Debug.Log(winningTeam.ToString() + "HAS WON THE GAME");
+    }
 
     void CheckPossibleWinners()
     {
