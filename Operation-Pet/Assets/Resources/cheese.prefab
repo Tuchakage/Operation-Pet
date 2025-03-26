@@ -93,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodFor: 3
   isFake: 0
+  anyoneCanPickUp: 0
   explosionRadius: 5
   explosionForce: 500
 --- !u!114 &6500988005409386717

@@ -27,9 +27,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     {
         teamScores = new Dictionary<teams, int>();
         roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
-        foodSpawner = GameObject.Find("FoodSpawner").GetComponent<PetFoodSpawner>();
-        //Get the amount of points each team needs to collect
-        maxFoodPerTeam = foodSpawner.Init();
+
         
         //Make sure that all the text isn't visible
         DogScoreTxt.enabled = false;
@@ -154,5 +152,12 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             //    teamScores[teamName] = 0;
             //}
         }
+    }
+
+    public void SetMaxFoodPerTeam() 
+    {
+        foodSpawner = GameObject.Find("FoodSpawner").GetComponent<PetFoodSpawner>();
+        //Get the amount of points each team needs to collect
+        maxFoodPerTeam = foodSpawner.Init();
     }
 }

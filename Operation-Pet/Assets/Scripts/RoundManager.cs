@@ -28,9 +28,14 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
     ScoreManager scoreManager;
     PetFoodSpawner foodSpawner;
+
+    //Variable to make sure only 1 set of food is spawned
+    bool foodSpawned;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same rom sync their level automatically
+        PhotonNetwork.AutomaticallySyncScene = true;
         //Create Dictionarys
         possibleWinners = new Dictionary<teams, int>();
 
@@ -38,7 +43,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         foodSpawner = GameObject.Find("FoodSpawner").GetComponent<PetFoodSpawner>();
         roundEnd = false;
 
-
+        foodSpawned = false;
         //Check through every team in the "teams" Enum that was created
         foreach (teams teamName in Enum.GetValues(typeof(teams)))
         {
@@ -81,6 +86,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
         //Start the countdown of the round
         currRoundTime = maxRoundTime;
+
     }
 
     // Update is called once per frame
@@ -106,6 +112,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         timerTxt.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
+
     public void NextRound() 
     {
         //Check what round number the game is in
@@ -115,7 +122,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             roundEnd = false;
             //Increase Round Number
             IncreaseRoundNumProperty();
-            Debug.Log("We are on Round " + GetCurrentRound());
+            
 
         }
         else 
@@ -370,31 +377,26 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
     {
-        //Check the properties that have changed in the Hashtable
-        foreach (var prop in propertiesThatChanged)
+        //If the round property was changed then spawn the food in (Only make the Master Client do this
+        if (propertiesThatChanged.ContainsKey("Round Number") && PhotonNetwork.IsMasterClient && !foodSpawned) 
         {
-            if (PhotonNetwork.IsMasterClient) 
-            {
-                Debug.Log("Key: " + prop.Key + " = " + prop.Value);
-            }
-            
-            //Try Convert the object to the teams Enum and store into variable called "teamName"
-            //if (System.Enum.TryParse<teams>(prop.Key.ToString(), out teams teamName))
-            //{
-            //    //The key for the winning team
-            //    string keyName = teamName.ToString() + " Rounds";
-            //    if (prop.Key.ToString() == keyName) 
-            //    {
-            //        Debug.Log(keyName);
-            //    }
-            //    //If Successful update Team Text
-            //    //SetTeamText(teamName, Convert.ToInt32(prop.Value));
-            //}
-
-            //SetTeamText((teams)prop.Key, (int)prop.Value);
-
-
+            //Set the amount of food each team needs to collect (We put this here so this is done after the round has been 
+            scoreManager.SetMaxFoodPerTeam();
+            foodSpawned = true;
         }
+
+        if (propertiesThatChanged.ContainsKey("Round Number") && PhotonNetwork.IsMasterClient) 
+        {
+            Debug.Log("We are on Round " + GetCurrentRound());
+        }
+        //Check the properties that have changed in the Hashtable
+        //foreach (var prop in propertiesThatChanged)
+        //{
+        //    if (PhotonNetwork.IsMasterClient) 
+        //    {
+        //        Debug.Log("Key: " + prop.Key + " = " + prop.Value);
+        //    }
+        //}
 
 
     }

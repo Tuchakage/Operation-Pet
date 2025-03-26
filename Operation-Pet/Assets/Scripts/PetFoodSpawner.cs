@@ -56,18 +56,13 @@ public class PetFoodSpawner : MonoBehaviour
 
     public void SpawnFood(bool isFake = false) 
     {
-        //If we are not the Master Client don't spawn in the food
-        if (!PhotonNetwork.IsMasterClient) 
-        {
-            return;
-        }
 
         //Check the round number to see if it is a death match
         object roundNum;
-        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("Round Number", out roundNum)) 
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("Round Number", out roundNum))
         {
             //Normal Rounds
-            if ((int)roundNum > 0 && (int)roundNum <= 3)
+            if ((int)roundNum >= 0 && (int)roundNum <= 3)
             {
                 List<GameObject> tempSpawnList = new List<GameObject>();
                 tempSpawnList = GameObject.FindGameObjectsWithTag("Spawnpoints").ToList<GameObject>();
@@ -100,7 +95,6 @@ public class PetFoodSpawner : MonoBehaviour
                 food.GetComponent<PetFood>().anyoneCanPickUp = true;
             }
         }
-
 
 
 
