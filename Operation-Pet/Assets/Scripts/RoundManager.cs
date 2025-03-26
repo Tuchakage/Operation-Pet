@@ -9,6 +9,7 @@ using System.IO;
 using System;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -90,7 +91,6 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             }
 
         }
-
         //Start the countdown of the round
         currRoundTime = maxRoundTime;
 
@@ -109,7 +109,6 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             {
                 roundEnd = true;
                 CheckRoundWinner();
-                
             }
         }
 
@@ -122,14 +121,13 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public System.Collections.IEnumerator NextRound() 
     {
+
         //Check what round number the game is in
         if (GetCurrentRound() <= 3)
         {
-            //scoreManager.photonView.RPC("ResetScore", RpcTarget.All);
-            roundEnd = false;
             //Increase Round Number
             IncreaseRoundNumProperty();
-            
+            Debug.Log("Increasing");
 
         }
         else 
@@ -149,7 +147,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     //Function that is called after timer runs out
     public void CheckRoundWinner() 
     {
-        int highestScore = 0;
+        int highestScore = -1;
         //Check all the values of the team in the dictionary
         foreach (teams teamName in scoreManager.teamScores.Keys)
         {
@@ -164,7 +162,20 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
                     highestScore = teamRoundScore;
                     //Add team as a possible winner
                     possibleWinners.Add(teamName, teamRoundScore);
+                    Debug.Log("Check Round Winner: " + teamName);
+
+                    //If there are multiple round winners
+                    if (possibleWinners.Count > 1)
+                    {
+                        //Check all their values and if they are lower than the current Highest Score then remove them from the list
+                        RemoveFromWinningTeams(highestScore);
+                    }
                     //Debug.Log(teamName + "Added to winning list with score: "+ teamRoundScore);
+                }
+                else if (teamRoundScore == highestScore) //If they have the same highscore
+                {
+                    //Add team as a possible winner
+                    possibleWinners.Add(teamName, teamRoundScore);
                 }
             }
 
@@ -233,6 +244,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
+    //Function called at the end of the game
     void CheckGameWinner() 
     {
         //Make sure list is empty
@@ -259,6 +271,8 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
                     //Add this as a team that could potentially be the winner of the game
                     possibleWinners.Add(teamName, (int)teamRoundScore);
 
+                    Debug.Log("Check Game Winner");
+
                     //If there are multiple round winners
                     if (possibleWinners.Count > 1)
                     {
@@ -277,6 +291,8 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
         }
 
+
+
         //If there is more than one team in the possibleWinners Dictionary
         if (possibleWinners.Count > 1)
         {
@@ -287,19 +303,21 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         else 
         {
             //The only team in the dictionary is the winner of the game!
-            Debug.Log(possibleWinners[0] + "IS THE WINNER!");
+            Debug.Log(possibleWinners.First() + "IS THE WINNER!");
         }
     }
 
     void RemoveFromWinningTeams(int currHighScore)
     {
         //Check through all the possible winners
-        foreach (teams teamName in possibleWinners.Keys)
+        foreach (teams teamName in possibleWinners.Keys.ToArray())
         {
+            
             //If anyone in the team has a lower score than the current Highest Score 
             int teamScore;
             if (possibleWinners.TryGetValue(teamName, out teamScore))
             {
+                
                 if (teamScore < currHighScore)
                 {
                     //Remove it from the list
@@ -307,6 +325,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
         }
+
     }
 
     #region Photon Property Related Functions
@@ -332,6 +351,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             return (int)currentroundNum;
         }
+
         return 0;
     }
 
