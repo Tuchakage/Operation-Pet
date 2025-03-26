@@ -44,6 +44,7 @@ public class PetFood : MonoBehaviourPunCallbacks
                 {
                     //Go into the score manager and call the increase score function for the food that was picked up
                     scoreManager.photonView.RPC("IncreaseScore", RpcTarget.All, foodFor);
+                    
                 }
                 else 
                 {
@@ -107,5 +108,11 @@ public class PetFood : MonoBehaviourPunCallbacks
     void DestroyFood() 
     {
         Destroy(this.gameObject);
+    }
+
+    [PunRPC]
+    void SetAsMine() 
+    {
+        isFake = true;
     }
 }

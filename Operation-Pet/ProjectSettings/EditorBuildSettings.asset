@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing Scenes/Testing Lobby.unity
     guid: 2ff5a49f9e423a64e8cdbde165a2a98e
+  - enabled: 1
+    path: Assets/Scenes/ResultScreen.unity
+    guid: 622ac28ef95692f4aaa445efec3dce23
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

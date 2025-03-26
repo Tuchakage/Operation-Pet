@@ -1285,6 +1285,7 @@ MonoBehaviour:
   currRoundTime: 0
   timerTxt: {fileID: 1675277826}
   roundTxt: {fileID: 0}
+  foodSpawned: 0
 --- !u!4 &368420142
 Transform:
   m_ObjectHideFlags: 0
@@ -2715,7 +2716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPointList: []
-  deathMatchSpawnPoint: {fileID: 0}
+  deathMatchSpawnPoint: {fileID: 1107374582}
   foodToSpawn:
   - {fileID: 6833855503871543365, guid: e3c8d2d8d1dcd674dab0178f488ef019, type: 3}
   - {fileID: 6833855503871543365, guid: a6cc54ca30db5f648b65ad21160b3574, type: 3}

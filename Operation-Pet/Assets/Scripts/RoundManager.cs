@@ -30,12 +30,10 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     PetFoodSpawner foodSpawner;
 
     //Variable to make sure only 1 set of food is spawned
-    bool foodSpawned;
+    public bool foodSpawned;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //Makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same rom sync their level automatically
-        PhotonNetwork.AutomaticallySyncScene = true;
         //Create Dictionarys
         possibleWinners = new Dictionary<teams, int>();
 
@@ -83,6 +81,15 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             //Set the Custom Properties for the room so that it knows how many rounds each team has won
             PhotonNetwork.CurrentRoom.SetCustomProperties(initRound);
         }
+        else //If the Hashtable does exist 
+        {
+            if (PhotonNetwork.IsMasterClient) 
+            {
+                //Set the amount of food each team needs to collect (We put this here so this is done after the round has been 
+                scoreManager.SetMaxFoodPerTeam();
+            }
+
+        }
 
         //Start the countdown of the round
         currRoundTime = maxRoundTime;
@@ -113,7 +120,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     }
 
 
-    public void NextRound() 
+    public System.Collections.IEnumerator NextRound() 
     {
         //Check what round number the game is in
         if (GetCurrentRound() <= 3)
@@ -128,10 +135,14 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         else 
         {
             CheckGameWinner();
+            yield return null;
             //End Game
         }
 
-        PhotonNetwork.LoadLevel(1);
+        yield return new WaitForSeconds(1f);
+
+        PhotonNetwork.LoadLevel(2);
+
     }
 
     #region After Timer ends
@@ -191,7 +202,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         possibleWinners.Clear();
 
         //Start the next round
-        NextRound();
+        StartCoroutine(NextRound());
     }
 
     #endregion
@@ -212,13 +223,13 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
             //Update Room Property Hashtable
             UpdateRoundProperties(keyName, num);
-        } 
-        
+        }
+
 
 
 
         //Start the next round
-        NextRound();
+        StartCoroutine(NextRound());
 
     }
 
@@ -377,7 +388,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
     {
-        //If the round property was changed then spawn the food in (Only make the Master Client do this
+        //If the round property was changed then spawn the food in (Only make the Master Client do this) This is called when the Rounds are initialised at the start
         if (propertiesThatChanged.ContainsKey("Round Number") && PhotonNetwork.IsMasterClient && !foodSpawned) 
         {
             //Set the amount of food each team needs to collect (We put this here so this is done after the round has been 
@@ -385,7 +396,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             foodSpawned = true;
         }
 
-        if (propertiesThatChanged.ContainsKey("Round Number") && PhotonNetwork.IsMasterClient) 
+        if (propertiesThatChanged.ContainsKey("Round Number")) 
         {
             Debug.Log("We are on Round " + GetCurrentRound());
         }

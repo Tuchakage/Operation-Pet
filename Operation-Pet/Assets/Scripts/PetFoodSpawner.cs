@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +63,7 @@ public class PetFoodSpawner : MonoBehaviour
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("Round Number", out roundNum))
         {
             //Normal Rounds
-            if ((int)roundNum >= 0 && (int)roundNum <= 3)
+            if ((int)roundNum >= 0 && (int)roundNum <= 4)
             {
                 List<GameObject> tempSpawnList = new List<GameObject>();
                 tempSpawnList = GameObject.FindGameObjectsWithTag("Spawnpoints").ToList<GameObject>();
@@ -84,14 +85,15 @@ public class PetFoodSpawner : MonoBehaviour
                     //The '-1' is there because the object first object that should be a mine is spawned in before i is incremented 
                     if (i >= (spawnpointAmnt / 2) - 1)
                     {
-                        food.GetComponent<PetFood>().isFake = true;
+                        //Set the food as a mine for everyone
+                        food.GetPhotonView().RPC("SetAsMine", RpcTarget.All);
                     }
 
                 }
             }
             else if ((int)roundNum > 4) //Deathmatch Round
             {
-                GameObject food = PhotonNetwork.Instantiate(CheckActiveTeams().name, deathMatchSpawnPoint.transform.position, Quaternion.identity, 0);
+                GameObject food = PhotonNetwork.Instantiate("nut", deathMatchSpawnPoint.transform.position, Quaternion.identity, 0);
                 food.GetComponent<PetFood>().anyoneCanPickUp = true;
             }
         }
@@ -104,6 +106,12 @@ public class PetFoodSpawner : MonoBehaviour
 
 
         //Let the master Client spawn food for everyone so everything spawns in the same place for everyone
+    }
+
+    [PunRPC]
+    void SetFoodAsMine(GameObject foodToTurn) 
+    {
+
     }
 
     int CountTeams() 
