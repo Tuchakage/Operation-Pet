@@ -115,4 +115,10 @@ public class PetFood : MonoBehaviourPunCallbacks
     {
         isFake = true;
     }
+
+    [PunRPC]
+    void EveryoneCanPickUp() 
+    {
+        anyoneCanPickUp = true;
+    }
 }

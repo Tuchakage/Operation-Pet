@@ -18,7 +18,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     //Store all the possible winners of the round
     private Dictionary<teams, int> possibleWinners;
 
-    [SerializeField]private float maxRoundTime;
+    public float maxRoundTime;
     [SerializeField]private float currRoundTime;
 
     //Determines whether the round has ended
@@ -130,7 +130,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             Debug.Log("Increasing");
 
         }
-        else 
+        else //After Round 4 Check game winner
         {
             CheckGameWinner();
             yield return null;
@@ -297,6 +297,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         if (possibleWinners.Count > 1)
         {
             //Increase round by 1 more
+            IncreaseRoundNumProperty();
             //Start Deathmatch
             Debug.Log("Start Deathmatch");
         }

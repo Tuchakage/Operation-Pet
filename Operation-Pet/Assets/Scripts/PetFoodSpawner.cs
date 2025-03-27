@@ -90,11 +90,18 @@ public class PetFoodSpawner : MonoBehaviour
                     }
 
                 }
+                Debug.Log("Normal spawn");
             }
             else if ((int)roundNum > 4) //Deathmatch Round
             {
                 GameObject food = PhotonNetwork.Instantiate("nut", deathMatchSpawnPoint.transform.position, Quaternion.identity, 0);
-                food.GetComponent<PetFood>().anyoneCanPickUp = true;
+                //Make it so that anyone can pick up the food
+                food.GetPhotonView().RPC("EveryoneCanPickUp", RpcTarget.All);
+
+                RoundManager roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
+                //Set the timer of the round
+                roundManager.maxRoundTime = 30f;
+                Debug.Log("Deathmatch spawn");
             }
         }
 
