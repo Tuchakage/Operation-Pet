@@ -29,6 +29,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
     ScoreManager scoreManager;
     PetFoodSpawner foodSpawner;
+    RoleManager roleManager;
 
     //Variable to make sure only 1 set of food is spawned
     public bool foodSpawned;
@@ -40,6 +41,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         foodSpawner = GameObject.Find("FoodSpawner").GetComponent<PetFoodSpawner>();
+        roleManager = GameObject.Find("RoleManager").GetComponent<RoleManager>();
         roundEnd = false;
 
         foodSpawned = false;
@@ -74,7 +76,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         //If the Hashtable for keeping track of the current round doesn't exist
         if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("Round Number"))
         {
-            //Initialise the table starting the team off with 0 rounds won
+            //Initialise the table starting the round number at 1
             Hashtable initRound = new Hashtable()
             {
                 {"Round Number", 1 }
@@ -82,13 +84,17 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             //Set the Custom Properties for the room so that it knows how many rounds each team has won
             PhotonNetwork.CurrentRoom.SetCustomProperties(initRound);
         }
-        else //If the Hashtable does exist 
+        else //If the Hashtable does exist (Round 1 has already been completed)
         {
             if (PhotonNetwork.IsMasterClient) 
             {
                 //Set the amount of food each team needs to collect (We put this here so this is done after the round has been 
                 scoreManager.SetMaxFoodPerTeam();
             }
+
+            //Swap Roles
+            StartCoroutine(roleManager.SwapRoles());
+
 
         }
         //Start the countdown of the round
@@ -388,11 +394,6 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     void CheckPossibleWinners()
-    {
-
-    }
-
-    void SwapRoles() 
     {
 
     }

@@ -20,11 +20,14 @@ public class RoleManager : MonoBehaviourPunCallbacks
     //Keep reference to your teammate
     Player teammate;
 
+    //When this variable is set to true then that means the game has passed the first round so you dont get the option to choose the role and instead the roles swap
+    bool initRole;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        initRole = false;
         //Store the team that this player is on
         myTeam = GetTeam(PhotonNetwork.LocalPlayer);
 
@@ -40,15 +43,19 @@ public class RoleManager : MonoBehaviourPunCallbacks
 
 
         //Is our teammate already the Pet?
+        //Check that its not the first time we are selecting a spawn
         object teammateRole;
         if (teammate.CustomProperties.TryGetValue("Role Name", out teammateRole))
         {
 
-            if ((roles)teammateRole == roles.Pet)
+            if ((roles)teammateRole == roles.Pet && !initRole)
             {
+                Debug.Log("Cant be the same role");
                 return;
             }
         }
+
+        Debug.Log("Spawning Pet");
 
         //Find Spawnpoint for corresponding Team (The Gameobjects name would be like "Dog Pet Spawnpoint")
         string spawnPointName = myTeam.ToString() + " " + roles.Pet.ToString() + " Spawnpoint";
@@ -69,18 +76,20 @@ public class RoleManager : MonoBehaviourPunCallbacks
         if (teammate.CustomProperties.TryGetValue("Role Name", out teammateRole))
         {
 
-            if ((roles)teammateRole == roles.Wizard)
+            if ((roles)teammateRole == roles.Wizard && !initRole)
             {
+                Debug.Log("Cant be the same role");
                 return;
             }
         }
 
+        Debug.Log("Spawning Wizard");
         string spawnPointName = myTeam.ToString() + " " + roles.Wizard.ToString() + " Spawnpoint";
         GameObject spawnPoint = GameObject.Find(spawnPointName);
 
         //Instantiate the Player and disable UI
         roleSelectionScreen.SetActive(false);
-
+        SetPlayerRole(roles.Wizard);
         PhotonNetwork.Instantiate(wizardModel.name, spawnPoint.transform.position, Quaternion.identity, 0);
     }
 
@@ -174,4 +183,31 @@ public class RoleManager : MonoBehaviourPunCallbacks
         return null;
     }
 
+    public System.Collections.IEnumerator SwapRoles()
+    {
+
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("Swap Roles Function Called");
+        initRole = true;
+        //Check to see if the player already has a role assigned
+        object playerRole;
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Role Name", out playerRole)) 
+        {
+            Debug.Log("Found Something");
+            if ((roles)playerRole == roles.Pet)
+            {
+                Debug.Log("Swapping Roles To Wizard");
+                SelectWizard();
+                
+
+            }
+            else if ((roles)playerRole == roles.Wizard) 
+            {
+                Debug.Log("Swapping Roles To Pet");
+                SelectPet();
+                
+            }
+        }
+    }
 }
