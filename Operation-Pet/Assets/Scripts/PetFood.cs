@@ -19,10 +19,12 @@ public class PetFood : MonoBehaviourPunCallbacks
     [SerializeField] private float explosionForce = 500;
 
     ScoreManager scoreManager;
+    RoundManager roundManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
         //Randomly choose if the food is fake or not
     }
 
@@ -54,7 +56,7 @@ public class PetFood : MonoBehaviourPunCallbacks
 
                     //
                     scoreManager.photonView.RPC("IncreaseScore", RpcTarget.All, playerTeam);
-                    scoreManager.photonView.RPC("GameWinner", RpcTarget.All, playerTeam);
+                    roundManager.photonView.RPC("GameWinner", RpcTarget.All, playerTeam);
                 }
 
 
