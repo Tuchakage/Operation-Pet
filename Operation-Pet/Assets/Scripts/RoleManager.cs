@@ -35,7 +35,13 @@ public class RoleManager : MonoBehaviourPunCallbacks
         petSelectBtn.GetComponent<Image>().color = teamsEnum.ChangeColour(myTeam);
         wizardSelectBtn.GetComponent<Image>().color = teamsEnum.ChangeColour(myTeam);
         SetTeammate();
-        SetPlayerRole(roles.Unassigned);
+
+        //If this is the first time the player is loading in
+        if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role Name"))
+        {
+            SetPlayerRole(roles.Unassigned);
+        }
+        
     }
 
     public void SelectPet() 
@@ -55,7 +61,7 @@ public class RoleManager : MonoBehaviourPunCallbacks
             }
         }
 
-        Debug.Log("Spawning Pet");
+        
 
         //Find Spawnpoint for corresponding Team (The Gameobjects name would be like "Dog Pet Spawnpoint")
         string spawnPointName = myTeam.ToString() + " " + roles.Pet.ToString() + " Spawnpoint";
@@ -67,6 +73,7 @@ public class RoleManager : MonoBehaviourPunCallbacks
         //Instantiate the Player and disable UI
         roleSelectionScreen.SetActive(false);
         PhotonNetwork.Instantiate(playerModel, spawnPoint.transform.position, Quaternion.identity, 0);
+
     }
 
     public void SelectWizard() 
@@ -83,7 +90,6 @@ public class RoleManager : MonoBehaviourPunCallbacks
             }
         }
 
-        Debug.Log("Spawning Wizard");
         string spawnPointName = myTeam.ToString() + " " + roles.Wizard.ToString() + " Spawnpoint";
         GameObject spawnPoint = GameObject.Find(spawnPointName);
 
@@ -188,23 +194,20 @@ public class RoleManager : MonoBehaviourPunCallbacks
 
         yield return new WaitForSeconds(1f);
 
-        Debug.Log("Swap Roles Function Called");
         initRole = true;
         //Check to see if the player already has a role assigned
         object playerRole;
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Role Name", out playerRole)) 
         {
-            Debug.Log("Found Something");
             if ((roles)playerRole == roles.Pet)
             {
-                Debug.Log("Swapping Roles To Wizard");
                 SelectWizard();
                 
 
             }
             else if ((roles)playerRole == roles.Wizard) 
             {
-                Debug.Log("Swapping Roles To Pet");
+
                 SelectPet();
                 
             }
