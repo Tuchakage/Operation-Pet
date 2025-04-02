@@ -24,6 +24,9 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     //Determines whether the round has ended
     private bool roundEnd;
 
+    //Indicate whether the deathmatch has started (Set in PetFoodSpawner Script)
+    public bool hasDeathmatchStarted;
+
     public TMP_Text timerTxt;
     public TMP_Text roundTxt;
 
@@ -111,10 +114,16 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             {
                 currRoundTime -= Time.deltaTime;
             }
-            else if (currRoundTime < 0 && !roundEnd)
+            else if (currRoundTime < 0 && !roundEnd && !hasDeathmatchStarted)
             {
+                
                 roundEnd = true;
                 CheckRoundWinner();
+            }
+            else if (currRoundTime < 0 && !roundEnd && hasDeathmatchStarted) 
+            {
+                roundEnd = true;
+                CheckGameWinner();
             }
         }
 
@@ -136,7 +145,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             Debug.Log("Increasing");
 
         }
-        else //After Round 4 Check game winner
+        else //After Round 4 Check if there is someone who won the game
         {
             CheckGameWinner();
             yield return null;
@@ -302,10 +311,25 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         //If there is more than one team in the possibleWinners Dictionary
         if (possibleWinners.Count > 1)
         {
-            //Increase round by 1 more
-            IncreaseRoundNumProperty();
-            //Start Deathmatch
-            Debug.Log("Start Deathmatch");
+            //If not in the deathmatch
+            if (!hasDeathmatchStarted)
+            {
+                //Increase round by 1 more to start Deathmatch
+                IncreaseRoundNumProperty();
+                //Start Deathmatch
+                Debug.Log("Start Deathmatch");
+            }
+            else 
+            {
+                foreach (teams team in possibleWinners.Keys) 
+                {
+                    Debug.Log(team.ToString() + " Has won, game is a draw");
+                }
+            }
+            //Check if currently in deathmatch
+
+
+
         }
         else 
         {

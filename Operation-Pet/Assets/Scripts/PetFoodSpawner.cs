@@ -101,6 +101,7 @@ public class PetFoodSpawner : MonoBehaviour
                 RoundManager roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
                 //Set the timer of the round
                 roundManager.maxRoundTime = 30f;
+                roundManager.hasDeathmatchStarted = true;
                 Debug.Log("Deathmatch spawn");
             }
         }
