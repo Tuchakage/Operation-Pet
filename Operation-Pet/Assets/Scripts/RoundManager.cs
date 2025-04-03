@@ -10,6 +10,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using System.Linq;
+using UnityEngine.UI;
 
 public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -29,6 +30,8 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public TMP_Text timerTxt;
     public TMP_Text roundTxt;
+    //Indicators for in game to show how many rounds each team has won
+    public GameObject roundWonIndicatorPrefab;
 
     ScoreManager scoreManager;
     PetFoodSpawner foodSpawner;
@@ -59,7 +62,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
                 if ((int)teamCount > 1)
                 {
                     //If the Hashtable doesn't exist
-                    if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey(teamName.ToString() + " Rounds")) 
+                    if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey(teamName.ToString() + " Rounds"))
                     {
                         //Initialise the table starting the team off with 0 rounds won
                         Hashtable initTeam = new Hashtable()
@@ -68,6 +71,11 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
                         };
                         //Set the Custom Properties for the room so that it knows how many rounds each team has won
                         PhotonNetwork.CurrentRoom.SetCustomProperties(initTeam);
+                    }
+                    else //If team already has the custom property set
+                    {
+                        //Update the UI indicating the amount of rounds each team has won
+                        UpdateRoundWonUI(teamName);
                     }
 
                 }
@@ -97,6 +105,8 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
             //Swap Roles
             StartCoroutine(roleManager.SwapRoles());
+
+
 
 
         }
@@ -250,9 +260,6 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             //Update Room Property Hashtable
             UpdateRoundProperties(keyName, num);
         }
-
-
-
 
         //Start the next round
         StartCoroutine(NextRound());
@@ -417,19 +424,41 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log(winningTeam.ToString() + "HAS WON THE GAME");
     }
 
-    void CheckPossibleWinners()
+    //Functions used to update the 
+    void UpdateRoundWonUI(teams teamToUpdate) 
     {
 
-    }
+        Debug.Log("Checking Team: " + teamToUpdate);
+        //Find the empty game object the rounds won indicator will be spawned on
+        GameObject spawnLocation = GameObject.Find(teamToUpdate + " Rounds Won");
 
-    void ResetRound() 
-    {
+        if (!spawnLocation) 
+        {
+            Debug.LogError("Couldnt find game object to hold Round Won Indicators");
+            return;
+        }
 
-    }
+        //The key for checking how many rounds the team has won
+        string keyName = teamToUpdate.ToString() + " Rounds";
 
-    void StartDeathMatch() 
-    {
+        //Get the amount of rounds the winning team has got
+        object roundsWon;
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(keyName, out roundsWon)) 
+        {
+            if ((int)roundsWon > 0) 
+            {
+                //Foreach round that has been won
+                for (int i = 0; i < (int)roundsWon; i++)
+                {
+                    //Spawn in Winning indicator
 
+                    GameObject indicator = Instantiate(roundWonIndicatorPrefab, spawnLocation.transform);
+                }
+            }
+
+
+
+        }
     }
 
     public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
