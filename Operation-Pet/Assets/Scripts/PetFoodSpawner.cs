@@ -78,7 +78,13 @@ public class PetFoodSpawner : MonoBehaviour
                     GameObject randomSpawnpoint = ChooseRandomSpawnpoint(tempSpawnList);
 
                     //Before Instantiating, Check the food that needs to be spawned in
-                    GameObject food = PhotonNetwork.Instantiate(CheckActiveTeams().name, randomSpawnpoint.transform.position, Quaternion.identity, 0);
+                    GameObject food = PhotonNetwork.Instantiate("PetFood", randomSpawnpoint.transform.position, Quaternion.identity, 0);
+
+                    //Check what teams food needs to be spawned in and increment the counter
+                    teams foodForTeam = CheckActiveTeams();
+
+                    //Depending on the team set the model for the food
+                    food.GetPhotonView().RPC("CallSetFoodModel", RpcTarget.All, foodForTeam);
 
                     //50% of the food will be mines
 
@@ -160,7 +166,28 @@ public class PetFoodSpawner : MonoBehaviour
         return randomPoint;
     }
 
-    GameObject CheckActiveTeams() 
+    //Function to set the amount of food spawned value per team to 0
+    void ResetFoodSpawned()
+    {
+        //Check through every team in the "teams" Enum that was created
+        foreach (teams teamName in Enum.GetValues(typeof(teams)))
+        {
+            object teamCount;
+            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamName.ToString(), out teamCount))
+            {
+                //If the team is in the game
+                if ((int)teamCount > 1)
+                {
+                    //Initialise the amount of food spawned for each team
+                    foodSpawnedPerTeam.Add(teamName, 0);
+                }
+
+            }
+        }
+    }
+
+    //Purpose of this function is to increment how much of the food was spawned in per team
+    teams CheckActiveTeams() 
     {
         //Check each team in dictionary 'foodSpawnedPerTeam'
         foreach (teams team in foodSpawnedPerTeam.Keys) 
@@ -178,50 +205,14 @@ public class PetFoodSpawner : MonoBehaviour
                     foodSpawnedPerTeam[team]++;
 
                     //Debug.Log("Team " + team + " has " + foodSpawnedPerTeam[team] + " spawned");
-                    //Check what food needs to be spawned in
-                    switch (team) 
-                    {
-                        case teams.Dog:
-                            return foodToSpawn[0];
 
-                        case teams.Cat:
-                            return foodToSpawn[1];
-
-                        case teams.Mouse:
-                            return foodToSpawn[2];
-
-                        case teams.Squirrel:
-                            return foodToSpawn[3];
-
-                        case teams.Horse:
-                            return foodToSpawn[4];
-                    }
+                    //Return the team that was checked
+                    return team;
 
                 }
             }
         }
-        //Spawns in a mine (Use Meat as placeholder for now)
-        return foodToSpawn[0];
-    }
-
-    //Function to set the amount of food spawned value per team to 0
-    void ResetFoodSpawned() 
-    {
-        //Check through every team in the "teams" Enum that was created
-        foreach (teams teamName in Enum.GetValues(typeof(teams)))
-        {
-            object teamCount;
-            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamName.ToString(), out teamCount))
-            {
-                //If the team is in the game
-                if ((int)teamCount > 1)
-                {
-                    //Initialise the amount of food spawned for each team
-                    foodSpawnedPerTeam.Add(teamName, 0);
-                }
-
-            }
-        }
+        return teams.Unassigned;
     }
 
 }

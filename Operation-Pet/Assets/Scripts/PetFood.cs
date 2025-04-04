@@ -3,9 +3,14 @@ using Photon.Pun;
 using static teamsEnum;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class PetFood : MonoBehaviourPunCallbacks
 {
+    public TeamModelScriptableObject foodModelScriptableObject;
+
+
     //Set in Unity Editor, Indicates which team the food is for
     public teams foodFor;
 
@@ -14,6 +19,8 @@ public class PetFood : MonoBehaviourPunCallbacks
 
     //Is used for deathmatch, if set to true then anyone can pick this up
     public bool anyoneCanPickUp;
+
+
 
     [SerializeField] private float explosionRadius = 5f;
     [SerializeField] private float explosionForce = 500;
@@ -123,4 +130,70 @@ public class PetFood : MonoBehaviourPunCallbacks
     {
         anyoneCanPickUp = true;
     }
+
+    [PunRPC]
+    public void CallSetFoodModel(teams foodToSet) 
+    {
+        StartCoroutine(SetFoodModel(foodToSet));
+
+
+
+    }
+
+    IEnumerator SetFoodModel(teams foodToSet) 
+    {
+        //Set which team the food is for so that they will gain points when they pick it up
+        foodFor = foodToSet;
+
+        //Set the Mesh of the food
+        SetMesh(foodToSet);
+
+        BoxCollider boxCollider = GetComponent<BoxCollider>();
+        //Destroy the box collider
+        Destroy(boxCollider);
+
+        //Wait until the Box Collider has been destroyed to continue
+        yield return boxCollider.IsDestroyed();
+
+        //Respawn it so that it is resized to the Mesh size automatically
+        gameObject.AddComponent<BoxCollider>();
+
+        GetComponent<BoxCollider>().isTrigger = true;
+
+        
+    }
+
+    public void SetMesh(teams teamName) 
+    {
+        //Set the mesh for the food
+        Mesh thisMesh = GetComponent<MeshFilter>().mesh;
+        switch (teamName)
+        {
+            case teams.Unassigned: //If Unassigned then it is a mine
+                GetComponent<MeshFilter>().mesh =  foodModelScriptableObject.foodModels[5];
+                break;
+            case teams.Dog:
+                //Debug.Log(foodModelScriptableObject.foodModels[0].name);
+                GetComponent<MeshFilter>().mesh = foodModelScriptableObject.foodModels[0];
+                break;
+            case teams.Cat:
+                //Debug.Log(foodModelScriptableObject.foodModels[1].name);
+                GetComponent<MeshFilter>().mesh = foodModelScriptableObject.foodModels[1];
+                break;
+
+            case teams.Mouse:
+                GetComponent<MeshFilter>().mesh = foodModelScriptableObject.foodModels[2];
+                break;
+
+            case teams.Squirrel:
+                GetComponent<MeshFilter>().mesh = foodModelScriptableObject.foodModels[3];
+                break;
+
+            case teams.Horse:
+                GetComponent<MeshFilter>().mesh = foodModelScriptableObject.foodModels[4];
+                break;
+        }
+    }
+
+
 }

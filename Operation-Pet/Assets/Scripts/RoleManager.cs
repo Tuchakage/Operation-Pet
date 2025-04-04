@@ -2,13 +2,15 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static teamsEnum;
 
 public class RoleManager : MonoBehaviourPunCallbacks
 {
-    public PlayerModelScriptableObject PlayerModelScriptableObject;
+    public TeamModelScriptableObject PlayerModelScriptableObject;
 
     public GameObject petSelectBtn;
     public GameObject wizardSelectBtn;
@@ -61,7 +63,16 @@ public class RoleManager : MonoBehaviourPunCallbacks
             }
         }
 
-        
+        //Find all the Food in the game
+        List<GameObject> foodInGameList = new List<GameObject>();
+        foodInGameList = GameObject.FindGameObjectsWithTag("Food").ToList<GameObject>();
+
+        //Foreach food that was found
+        foreach (var food in foodInGameList) 
+        {
+            //Set the food model to be the model for the Pets team (They can only see one type of food)
+            food.GetComponent<PetFood>().SetMesh(myTeam);
+        }
 
         //Find Spawnpoint for corresponding Team (The Gameobjects name would be like "Dog Pet Spawnpoint")
         string spawnPointName = myTeam.ToString() + " " + roles.Pet.ToString() + " Spawnpoint";
