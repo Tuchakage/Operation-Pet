@@ -81,22 +81,15 @@ public class PetFoodSpawner : MonoBehaviour
                     GameObject food = PhotonNetwork.Instantiate("PetFood", randomSpawnpoint.transform.position, Quaternion.identity, 0);
 
                     //Check what teams food needs to be spawned in and increment the counter
-                    teams foodForTeam = CheckActiveTeams();
+                    teams foodForTeam = CheckActiveTeams(food);
 
                     //Depending on the team set the model for the food
                     food.GetPhotonView().RPC("CallSetFoodModel", RpcTarget.All, foodForTeam);
 
-                    //50% of the food will be mines
 
-                    //The '-1' is there because the object first object that should be a mine is spawned in before i is incremented 
-                    if (i >= (spawnpointAmnt / 2) - 1)
-                    {
-                        //Set the food as a mine for everyone
-                        food.GetPhotonView().RPC("SetAsMine", RpcTarget.All);
-                    }
+
 
                 }
-                Debug.Log("Normal spawn");
             }
             else if ((int)roundNum > 4) //Deathmatch Round
             {
@@ -187,7 +180,7 @@ public class PetFoodSpawner : MonoBehaviour
     }
 
     //Purpose of this function is to increment how much of the food was spawned in per team
-    teams CheckActiveTeams() 
+    teams CheckActiveTeams(GameObject foodRef) 
     {
         //Check each team in dictionary 'foodSpawnedPerTeam'
         foreach (teams team in foodSpawnedPerTeam.Keys) 
@@ -212,6 +205,9 @@ public class PetFoodSpawner : MonoBehaviour
                 }
             }
         }
+
+        //Set the food as a mine for everyone
+        foodRef.GetPhotonView().RPC("SetAsMine", RpcTarget.All);
         return teams.Unassigned;
     }
 
