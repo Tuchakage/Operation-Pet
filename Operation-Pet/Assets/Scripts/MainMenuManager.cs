@@ -26,9 +26,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     
 
-    #region String Variables
-    string gameVersion = "0.9";
-    #endregion
+
 
 
     #region Dictionary Variables
@@ -50,10 +48,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject lobbyPanel;
     public GameObject roomInfo;
 
-    //Used to turn on the indicator to show that a player is ready
-    public GameObject pOneReadyCircle;
-    public GameObject pTwoReadyCircle;
-
     [SerializeField]
     private GameObject playerCardPrefab;
     #endregion
@@ -66,11 +60,12 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField]
     private TMP_InputField roomName;
 
-    [SerializeField]
-    private TMP_InputField playerName;
 
     [SerializeField]
     private TMP_Text amntPlayerstxt;
+
+    [SerializeField]
+    private TMP_Text playerUsername;
 
     #endregion
 
@@ -96,24 +91,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
         lobbyPanel = GameObject.Find("Lobby Panel");
         teamManager = GameObject.Find("TeamManager").GetComponent<TeamManager>();
-        //Makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same rom sync their level automatically
-        PhotonNetwork.AutomaticallySyncScene = true;
 
-        if (!PhotonNetwork.IsConnected)
-        {
-
-            //Set the App version before connecting
-            PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
-            //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
-            PhotonNetwork.ConnectUsingSettings();
-
-            if (photonView.IsMine)
-            {
-                //Debug.Log("Player ID:" + photonView.ViewID);
-            }
-
-        }
-
+        playerUsername.text = PhotonNetwork.NickName;
 
     }
 
@@ -135,24 +114,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     #region Photon Callbacks
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.Log("OnFailedToConnectToPhoton. StatusCode: " + cause.ToString() + "ServerAddress: " + PhotonNetwork.ServerAddress);
-    }
-
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("OnConnectedToMaster");
-        Debug.Log("Connection made to " + PhotonNetwork.CloudRegion + "server.");
-
-        if (regionTxt) 
-        {
-            regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
-        }
-        
-        //After we connect to Master server, join the lobby
-        PhotonNetwork.JoinLobby(TypedLobby.Default);
-    }
 
 
     // roomList variable will already be populated automatically by Photon (Only sends things that change)
@@ -172,7 +133,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public override void OnLeftRoom()
     {
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         Debug.Log("Left Room");
     }
 
@@ -211,8 +172,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        //Disable player name input field
-        playerName.gameObject.SetActive(true);
+        //Disable room name input field
         roomName.gameObject.SetActive(true);
 
 
@@ -310,17 +270,12 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             Debug.LogError("Not connected to Photon Network");
             return;
         }
-        if (playerName.text == "")
-        {
-            // If player name is empty then dont do anything
 
-            return;
-        }
 
         if (roomName.text == "") //If Room Name is empty
         {
             //Set a default name that includes the player name
-            roomName.text = playerName.text + "'s Room";
+            roomName.text = PhotonNetwork.NickName + "'s Room";
         }
 
         //Shows the Room as an option to join in lobby list
@@ -339,13 +294,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void JoinRoom(string RoomName)
     {
-
-        if (playerName.text == "")
-        {
-            // If player name is empty then dont do anything
-
-            return;
-        }
 
         //canvas.SetActive(false);
 

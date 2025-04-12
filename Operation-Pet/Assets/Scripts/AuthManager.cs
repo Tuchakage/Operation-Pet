@@ -3,8 +3,11 @@ using Firebase;
 using Firebase.Auth;
 using TMPro;
 using System.Collections;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
-public class AuthManager : MonoBehaviour
+public class AuthManager : MonoBehaviourPunCallbacks
 {
     //Firebase variables
     [Header("Firebase")]
@@ -24,6 +27,10 @@ public class AuthManager : MonoBehaviour
     public TMP_InputField passwordRegisterField;
     public TMP_InputField passwordRegisterVerifyField;
     public TMP_Text warningRegisterText;
+
+    #region String Variables
+    string gameVersion = "0.9";
+    #endregion
 
     void Awake()
     {
@@ -48,6 +55,45 @@ public class AuthManager : MonoBehaviour
         });
     }
 
+    void Start()
+    {
+        //Makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same rom sync their level automatically
+        PhotonNetwork.AutomaticallySyncScene = true;
+
+        if (!PhotonNetwork.IsConnected)
+        {
+
+            //Set the App version before connecting
+            PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
+            //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
+            PhotonNetwork.ConnectUsingSettings();
+
+        }
+    }
+
+    #region Photon Callbacks
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("OnFailedToConnectToPhoton. StatusCode: " + cause.ToString() + "ServerAddress: " + PhotonNetwork.ServerAddress);
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("OnConnectedToMaster");
+        Debug.Log("Connection made to " + PhotonNetwork.CloudRegion + "server.");
+
+        //if (regionTxt)
+        //{
+        //    regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
+        //}
+
+        //After we connect to Master server, join the lobby
+        PhotonNetwork.JoinLobby(TypedLobby.Default);
+    }
+
+    #endregion
+
+    #region Login & Register
     void InitialiseFirebase() 
     {
         Debug.Log("Setting up Firebase Auth");
@@ -124,9 +170,11 @@ public class AuthManager : MonoBehaviour
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
             confirmLoginText.text = "Logged In: "+User.DisplayName;
+            //Set Photon Nickname to be the same as signed in Username
+            PhotonNetwork.NickName = User.DisplayName;
 
-            //Make the Input Fields empty
-            ResetInputFields();
+            //Go to Main Menu
+            SceneManager.LoadScene("Main Menu");
         }
     }
 
@@ -213,6 +261,10 @@ public class AuthManager : MonoBehaviour
                     {
                         //Username is now set
                         warningRegisterText.text = "";
+
+                        //Set Photon Nickname to be the same as signed in Username
+                        //PhotonNetwork.NickName = User.DisplayName;
+
                         //Make the Input Fields empty
                         ResetInputFields();
                     }
@@ -231,5 +283,10 @@ public class AuthManager : MonoBehaviour
         emailRegisterField.text = "";
         passwordRegisterField.text = "";
         passwordRegisterVerifyField.text = "";
+    }
+    #endregion
+
+    public void Test(int h) 
+    {
     }
 }
