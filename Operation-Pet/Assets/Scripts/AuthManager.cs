@@ -124,6 +124,9 @@ public class AuthManager : MonoBehaviour
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
             confirmLoginText.text = "Logged In: "+User.DisplayName;
+
+            //Make the Input Fields empty
+            ResetInputFields();
         }
     }
 
@@ -210,9 +213,23 @@ public class AuthManager : MonoBehaviour
                     {
                         //Username is now set
                         warningRegisterText.text = "";
+                        //Make the Input Fields empty
+                        ResetInputFields();
                     }
+
+
                 }
             }
         }
+    }
+
+    public void ResetInputFields() 
+    {
+        emailLoginField.text = "";
+        passwordLoginField.text = "";
+        usernameRegisterField.text = "";
+        emailRegisterField.text = "";
+        passwordRegisterField.text = "";
+        passwordRegisterVerifyField.text = "";
     }
 }
