@@ -6,6 +6,7 @@ using System.Collections;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class AuthManager : MonoBehaviourPunCallbacks
 {
@@ -32,6 +33,9 @@ public class AuthManager : MonoBehaviourPunCallbacks
     string gameVersion = "0.9";
     #endregion
 
+    //Variables to allow the enter key to be pressed when focused onto an input field
+    bool allowEnterLogin;
+    bool allowEnterRegister;
     void Awake()
     {
 
@@ -68,6 +72,33 @@ public class AuthManager : MonoBehaviourPunCallbacks
             //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
             PhotonNetwork.ConnectUsingSettings();
 
+        }
+    }
+
+    void Update()
+    {
+
+        //This is reversed because otherwise when you press the enter key whilst focused on an Input field it will not call the function, it will just unfocus from the inputfield
+        if (allowEnterLogin && Input.GetKeyDown(KeyCode.Return))
+        {
+            LoginButton();
+        }
+        else 
+        {
+            //If pressing Enter doesn't work then we set the allowEnterLogin to whether we are focused on the login field or not, then Update() will check the next frame and
+            //allowEnterLogin will still be true (If we focused on the input field) and the LoginButton Function will be called
+            allowEnterLogin = emailLoginField.isFocused || passwordLoginField.isFocused;
+        }
+
+        if (allowEnterRegister && Input.GetKeyDown(KeyCode.Return))
+        {
+            RegisterButton();
+        }
+        else 
+        {
+            //If pressing Enter doesn't work then we set the allowEnterRegister to whether we are focused on the register field or not, then Update() will check the next frame and
+            //allowEnterRegister will still be true (If we focused on the input field) and the RegisterButton Function will be called
+            allowEnterRegister = usernameRegisterField.isFocused || emailRegisterField.isFocused || passwordRegisterField.isFocused || passwordRegisterVerifyField.isFocused;
         }
     }
 
@@ -215,6 +246,9 @@ public class AuthManager : MonoBehaviourPunCallbacks
                     case AuthError.MissingEmail:
                         message = "Missing Email";
                         break;
+                    case AuthError.InvalidEmail:
+                        message = "Invalid Email";
+                        break;
                     case AuthError.MissingPassword:
                         message = "Missing Password";
                         break;
@@ -283,6 +317,8 @@ public class AuthManager : MonoBehaviourPunCallbacks
         emailRegisterField.text = "";
         passwordRegisterField.text = "";
         passwordRegisterVerifyField.text = "";
+        warningLoginText.text = "";
+        warningRegisterText.text = "";
     }
     #endregion
 
