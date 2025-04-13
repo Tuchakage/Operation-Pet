@@ -250,10 +250,13 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             //Update Database
             StartCoroutine(UpdateUsernameDatabase(User.DisplayName));
             yield return new WaitForSeconds(1);
-            //UIManager.Instance.ShowStatScreen();
-            //StartCoroutine(LoadMatchPlayedData());
+
+            // FOR TESTING
+            UIManager.Instance.ShowStatScreen();
+            StartCoroutine(LoadMatchPlayedData());
+
             //Go to Main Menu
-            SceneManager.LoadScene("Main Menu");
+            //SceneManager.LoadScene("Main Menu");
         }
     }
 
@@ -389,7 +392,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public IEnumerator LoadMatchPlayedData(TMP_Text textToChange) 
+    public IEnumerator LoadMatchPlayedData() 
     {
         //Get the data from the Database under the users branch from the current Users ID
         var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
@@ -404,7 +407,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         else if (DBTask.Result.Value == null)
         {
             //No Data exists
-            //matchesPlayedtext.text = "0";
+            matchesPlayedtext.text = "0";
         }
         else // Data does exist 
         {
@@ -412,8 +415,8 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             DataSnapshot snapshot = DBTask.Result;
 
             //Get the "Matches Played" Value from the database
-            //matchesPlayedtext.text = snapshot.Child("Matches Played").Value.ToString();
-            textToChange.text = snapshot.Child("Matches Played").Value.ToString();
+            matchesPlayedtext.text = snapshot.Child("Matches Played").Value.ToString();
+
         }
     }
 
