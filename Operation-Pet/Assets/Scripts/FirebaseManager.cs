@@ -36,6 +36,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
     [Header("UserData")]
     public TMP_InputField matchesPlayedField;
+    public TMP_Text matchesPlayedtext;
 
     
     #region String Variables
@@ -239,6 +240,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             StartCoroutine(UpdateUsernameDatabase(User.DisplayName));
             yield return new WaitForSeconds(2);
             UIManager.Instance.ShowStatScreen();
+            StartCoroutine(LoadMatchPlayedData());
             //Go to Main Menu
             //SceneManager.LoadScene("Main Menu");
         }
@@ -366,6 +368,20 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
         // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches played and then set the value that has been passed in, to the database
         var DBTask = DBreference.Child("users").Child(User.UserId).Child("username").SetValueAsync(username);
+         
+        //Wait until task is completed
+        yield return new WaitUntil(() => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
+        }
+    }
+
+    IEnumerator LoadMatchPlayedData() 
+    {
+        //Get the data from the Database under the users branch from the current Users ID
+        var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
 
         //Wait until task is completed
         yield return new WaitUntil(() => DBTask.IsCompleted);
@@ -373,6 +389,19 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         if (DBTask.Exception != null)
         {
             Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            //No Data exists
+            matchesPlayedtext.text = "0";
+        }
+        else // Data does exist 
+        {
+            //Data from the database is received as a DataSnapshot hence why we create this variable
+            DataSnapshot snapshot = DBTask.Result;
+
+            //Get the "Matches Played" Value from the database
+            matchesPlayedtext.text = snapshot.Child("Matches Played").Value.ToString();
         }
     }
 
