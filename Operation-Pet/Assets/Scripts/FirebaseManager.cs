@@ -12,6 +12,7 @@ using Unity.Android.Gradle.Manifest;
 
 public class FirebaseManager : MonoBehaviourPunCallbacks
 {
+    public static FirebaseManager Instance;
     [Header("General")]
     public TMP_Text usernameTxt;
     //Firebase variables
@@ -67,6 +68,16 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
                 Debug.LogError("Could not resolve all Firebase dependences:" + dependencyStatus);
             }
         });
+
+        //Make sure there isnt a duplicate of this instance
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
     void Start()
@@ -238,11 +249,11 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             PhotonNetwork.NickName = User.DisplayName;
             //Update Database
             StartCoroutine(UpdateUsernameDatabase(User.DisplayName));
-            yield return new WaitForSeconds(2);
-            UIManager.Instance.ShowStatScreen();
-            StartCoroutine(LoadMatchPlayedData());
+            yield return new WaitForSeconds(1);
+            //UIManager.Instance.ShowStatScreen();
+            //StartCoroutine(LoadMatchPlayedData());
             //Go to Main Menu
-            //SceneManager.LoadScene("Main Menu");
+            SceneManager.LoadScene("Main Menu");
         }
     }
 
@@ -378,7 +389,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         }
     }
 
-    IEnumerator LoadMatchPlayedData() 
+    public IEnumerator LoadMatchPlayedData(TMP_Text textToChange) 
     {
         //Get the data from the Database under the users branch from the current Users ID
         var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
@@ -393,7 +404,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         else if (DBTask.Result.Value == null)
         {
             //No Data exists
-            matchesPlayedtext.text = "0";
+            //matchesPlayedtext.text = "0";
         }
         else // Data does exist 
         {
@@ -401,7 +412,8 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             DataSnapshot snapshot = DBTask.Result;
 
             //Get the "Matches Played" Value from the database
-            matchesPlayedtext.text = snapshot.Child("Matches Played").Value.ToString();
+            //matchesPlayedtext.text = snapshot.Child("Matches Played").Value.ToString();
+            textToChange.text = snapshot.Child("Matches Played").Value.ToString();
         }
     }
 
