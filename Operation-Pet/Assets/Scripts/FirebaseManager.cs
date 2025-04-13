@@ -7,14 +7,19 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using Firebase.Database;
+using Unity.Android.Gradle.Manifest;
 
 public class FirebaseManager : MonoBehaviourPunCallbacks
 {
+    [Header("General")]
+    public TMP_Text usernameTxt;
     //Firebase variables
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
     public FirebaseAuth auth;
     public FirebaseUser User;
+    public DatabaseReference DBreference;
 
     [Header("Login")]
     public TMP_InputField emailLoginField;
@@ -28,6 +33,9 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
     public TMP_InputField passwordRegisterField;
     public TMP_InputField passwordRegisterVerifyField;
     public TMP_Text warningRegisterText;
+
+    [Header("UserData")]
+    public TMP_InputField matchesPlayedField;
 
     
     #region String Variables
@@ -124,15 +132,19 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
     #endregion
 
-    #region Login & Register
+    #region Firebase Functionality
     void InitialiseFirebase() 
     {
         Debug.Log("Setting up Firebase Auth");
-
-        //Set the authentication instance object;
+        
+        //Get reference to the Firebase Authentication Instance so we can call the Firebase Authentication functions to login
         auth = FirebaseAuth.DefaultInstance;
+        //Get Reference to Firebase Database Instance so we can call the Firebase Database functions to manage our database
+        DBreference = FirebaseDatabase.DefaultInstance.RootReference;
+
     }
 
+    #region Buttons
     public void LoginButton() 
     {
         StartCoroutine(Login(emailLoginField.text, passwordLoginField.text));
@@ -143,13 +155,33 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         StartCoroutine(Register(emailRegisterField.text, passwordRegisterField.text, usernameRegisterField.text));
     }
 
-    
+    public void SignOutButton() 
+    {
+        auth.SignOut();
+        usernameTxt.text = "Username: Not Logged In";
+
+        if (!UIManager.Instance.loginScreen.activeInHierarchy) 
+        {
+            UIManager.Instance.ShowLoginScreen();
+        }
+
+        ResetInputFields();
+    }
+
+    public void SaveData() 
+    {
+        //Convert string from input field to an integer and then pass it through
+        StartCoroutine(UpdateMatchPlayedDatabase((int.Parse(matchesPlayedField.text))));
+    }
+
+    #endregion
+
+
 
     IEnumerator Login(string email, string password) 
     {
         //Call the Firebase auth signin function passing the email and password
         var LoginTask = auth.SignInWithEmailAndPasswordAsync(email, password);
-
 
         //Wait until the task completes (We use Lambda expression because WaitUntil expects a function that returns a boolean)
         yield return new WaitUntil(() => LoginTask.IsCompleted);
@@ -200,10 +232,12 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             User = LoginTask.Result.User;
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
-            confirmLoginText.text = "Logged In: "+User.DisplayName;
+            usernameTxt.text = "Logged In: "+User.DisplayName;
             //Set Photon Nickname to be the same as signed in Username
             PhotonNetwork.NickName = User.DisplayName;
-
+            //Update Database
+            StartCoroutine(UpdateUsernameDatabase(User.DisplayName));
+            yield return new WaitForSeconds(2);
             UIManager.Instance.ShowStatScreen();
             //Go to Main Menu
             //SceneManager.LoadScene("Main Menu");
@@ -312,6 +346,36 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         }
     }
 
+    IEnumerator UpdateMatchPlayedDatabase(int matchesPlayed) 
+    {
+        // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches played and then set the value that has been passed in, to the database
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("Matches Played").SetValueAsync(matchesPlayed);
+
+        //Wait until task is completed
+        yield return new WaitUntil(() => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null) 
+        {
+            Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
+        }
+        
+    }
+
+    IEnumerator UpdateUsernameDatabase(string username) 
+    {
+
+        // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches played and then set the value that has been passed in, to the database
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("username").SetValueAsync(username);
+
+        //Wait until task is completed
+        yield return new WaitUntil(() => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
+        }
+    }
+
     public void ResetInputFields() 
     {
         emailLoginField.text = "";
@@ -323,6 +387,8 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         warningLoginText.text = "";
         warningRegisterText.text = "";
     }
+
+
     #endregion
 
 }

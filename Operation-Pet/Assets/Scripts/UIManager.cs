@@ -25,6 +25,15 @@ public class UIManager : MonoBehaviour
         
     }
 
+    void Start()
+    {
+        //If Login Screen is set in Inspector but it is not currently active in the scene
+        if (loginScreen != null && !loginScreen.activeInHierarchy) 
+        {
+            ShowLoginScreen();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
