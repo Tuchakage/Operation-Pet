@@ -35,9 +35,15 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
     public TMP_InputField passwordRegisterVerifyField;
     public TMP_Text warningRegisterText;
 
-    [Header("UserData")]
+    [Header("UserData Display")]
     public TMP_InputField matchesPlayedField;
     public TMP_Text matchesPlayedtext;
+
+    [Header("Stats")]
+    public int matchesplayed;
+    public int matcheswon;
+    public bool isOnline;
+
 
     
     #region String Variables
@@ -183,7 +189,12 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
     public void SaveData() 
     {
         //Convert string from input field to an integer and then pass it through
-        StartCoroutine(UpdateMatchPlayedDatabase((int.Parse(matchesPlayedField.text))));
+        StartCoroutine(UpdateMatchPlayedDatabase());
+    }
+
+    public void LoadData() 
+    {
+        StartCoroutine(LoadMatchPlayedData());
     }
 
     #endregion
@@ -247,13 +258,13 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             usernameTxt.text = "Logged In: "+User.DisplayName;
             //Set Photon Nickname to be the same as signed in Username
             PhotonNetwork.NickName = User.DisplayName;
-            //Update Database
-            StartCoroutine(UpdateUsernameDatabase(User.DisplayName));
+
             yield return new WaitForSeconds(1);
 
             // FOR TESTING
             UIManager.Instance.ShowStatScreen();
             StartCoroutine(LoadMatchPlayedData());
+            
 
             //Go to Main Menu
             //SceneManager.LoadScene("Main Menu");
@@ -344,6 +355,8 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
                     }
                     else 
                     {
+                        //Initialise Database
+                        StartCoroutine(InitialiseDatabase());
                         //Username is now set
                         warningRegisterText.text = "";
 
@@ -354,6 +367,8 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
                         ResetInputFields();
 
                         UIManager.Instance.ShowLoginScreen();
+
+
                     }
 
 
@@ -362,10 +377,28 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         }
     }
 
-    IEnumerator UpdateMatchPlayedDatabase(int matchesPlayed) 
+    IEnumerator InitialiseDatabase() 
     {
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("username").SetValueAsync(User.DisplayName);
+        yield return new WaitUntil(() => DBTask.IsCompleted);
         // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches played and then set the value that has been passed in, to the database
-        var DBTask = DBreference.Child("users").Child(User.UserId).Child("Matches Played").SetValueAsync(matchesPlayed);
+        DBTask = DBreference.Child("users").Child(User.UserId).Child("Matches Played").SetValueAsync(0);
+        //Wait until task is completed
+        yield return new WaitUntil(() => DBTask.IsCompleted);
+
+        DBTask = DBreference.Child("users").Child(User.UserId).Child("Matches Won").SetValueAsync(0);
+        yield return new WaitUntil(() => DBTask.IsCompleted);
+    }
+
+    IEnumerator UpdateMatchPlayedDatabase() 
+    {
+        //Get the amount of matches played from the database
+        StartCoroutine(LoadMatchPlayedData());
+
+        //Increase it by one
+        matchesplayed++;
+        // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches played and then set the value that has been passed in, to the database
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("Matches Played").SetValueAsync(matchesplayed);
 
         //Wait until task is completed
         yield return new WaitUntil(() => DBTask.IsCompleted);
@@ -374,7 +407,24 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         {
             Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
         }
+
         
+    }
+
+    IEnumerator UpdateMatchesWonDatabase() 
+    {
+        //Increment Matches won
+        matcheswon++;
+        // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches won and then set the value that has been passed in, to the database
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("Matches Won").SetValueAsync(matcheswon);
+
+        //Wait until task is completed
+        yield return new WaitUntil(() => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
+        }
     }
 
     IEnumerator UpdateUsernameDatabase(string username) 
@@ -414,8 +464,14 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             //Data from the database is received as a DataSnapshot hence why we create this variable
             DataSnapshot snapshot = DBTask.Result;
 
-            //Get the "Matches Played" Value from the database
-            matchesPlayedtext.text = snapshot.Child("Matches Played").Value.ToString();
+            //Get the "Matches Played" Value from the database and load it into a variable for later use
+            matchesplayed = int.Parse(snapshot.Child("Matches Played").Value.ToString());
+
+            if (matchesPlayedtext != null) 
+            {
+                matchesPlayedtext.text = matchesplayed.ToString();
+            }
+            
 
         }
     }
