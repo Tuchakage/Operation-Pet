@@ -247,11 +247,16 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             }
             
         };
+
         //Check if the Game can start when someone readies up
         if (teamManager.CheckReadyTeams() && CheckReadyPlayers()) 
         {
+            //Tell each player to go into the database and increase the amount of matches they have played by 1
+            photonView.RPC("IncreaseMatchPlayedForAll", RpcTarget.All);
+
             StartCoroutine(StartGame());
             Debug.Log("Start the level");
+
         }
     }
 
@@ -512,7 +517,12 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
-
+    [PunRPC]
+    void IncreaseMatchPlayedForAll() 
+    {
+        //Increase the amount of games the player has played
+        StartCoroutine(FirebaseManager.Instance.UpdateMatchPlayedDatabase());
+    }
 
 
 

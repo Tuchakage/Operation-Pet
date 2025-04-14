@@ -323,6 +323,10 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
                 //UIManager.Instance.ShowStatScreen();
                 //StartCoroutine(LoadMatchPlayedData());
 
+                //Load Data from database into variables
+                StartCoroutine(LoadMatchPlayedData());
+                StartCoroutine(LoadMatchWonData());
+
                 //Go to Main Menu
                 SceneManager.LoadScene("Main Menu");
             }
@@ -455,7 +459,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         yield return new WaitUntil(() => DBTask.IsCompleted);
     }
 
-    IEnumerator UpdateUsernameDatabase(string username)
+    public IEnumerator UpdateUsernameDatabase(string username)
     {
 
         // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches played and then set the value that has been passed in, to the database
@@ -470,7 +474,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         }
     }
 
-    IEnumerator UpdateMatchPlayedDatabase()
+    public IEnumerator UpdateMatchPlayedDatabase()
     {
         //Increase it by one
         matchesplayed++;
@@ -489,7 +493,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         StartCoroutine(LoadMatchPlayedData());
     }
 
-    IEnumerator UpdateMatchesWonDatabase()
+    public IEnumerator UpdateMatchesWonDatabase()
     {
         //Increment Matches won
         matcheswon++;
