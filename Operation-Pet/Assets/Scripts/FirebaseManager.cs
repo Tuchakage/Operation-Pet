@@ -85,6 +85,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         {
             //Destroy the old Instance
             Destroy(Instance.gameObject);
+            Debug.Log("Destroy Old");
 
         }
         Instance = this;
@@ -104,16 +105,17 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
             PhotonNetwork.ConnectUsingSettings();
 
-            Scene currentScene = SceneManager.GetActiveScene();
-
-            //This will be called when we are in Login Screen but when the scene changes to main menu onLoginScene will be set to false
-            if (currentScene.buildIndex == 0) 
-            {
-
-                onLoginScene = true;
-            }
-
+            
         }
+
+        Scene currentScene = SceneManager.GetActiveScene();
+        //This will be called when we are in Login Screen but when the scene changes to main menu onLoginScene will be set to false
+        if (currentScene.buildIndex == 0)
+        {
+
+            onLoginScene = true;
+        }
+
     }
 
     void Update()
