@@ -34,3 +34,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+Operation-Pet/Assets/google-services.json.meta
+Operation-Pet/Assets/StreamingAssets/google-services-desktop.json.meta

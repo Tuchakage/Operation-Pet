@@ -8,7 +8,7 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using Firebase.Database;
-using Unity.Android.Gradle.Manifest;
+
 
 public class FirebaseManager : MonoBehaviourPunCallbacks
 {
@@ -38,14 +38,19 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
     [Header("UserData Display")]
     public TMP_InputField matchesPlayedField;
     public TMP_Text matchesPlayedtext;
+    public TMP_Text matchesWontext;
 
     [Header("Stats")]
     public int matchesplayed;
     public int matcheswon;
     public bool isOnline;
 
+    [Header("Scene Checker")]
+    //Check if we are on the logins scene (For the Update function code that deals with the input fields
+    public bool onLoginScene;
 
-    
+
+
     #region String Variables
     string gameVersion = "0.9";
     #endregion
@@ -69,21 +74,21 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
                 //If all the Dependencies are there, Initialise Firebase
                 InitialiseFirebase();
             }
-            else 
+            else
             {
                 Debug.LogError("Could not resolve all Firebase dependences:" + dependencyStatus);
             }
         });
 
-        //Make sure there isnt a duplicate of this instance
+        //Make sure there isnt a duplicate of this instance and if there is, destroy the old one
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            //Destroy the old Instance
+            Destroy(Instance.gameObject);
+
         }
-        else
-        {
-            Instance = this;
-        }
+        Instance = this;
+        DontDestroyOnLoad(Instance);
     }
 
     void Start()
@@ -99,33 +104,57 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
             PhotonNetwork.ConnectUsingSettings();
 
+            Scene currentScene = SceneManager.GetActiveScene();
+
+            //This will be called when we are in Login Screen but when the scene changes to main menu onLoginScene will be set to false
+            if (currentScene.buildIndex == 0) 
+            {
+
+                onLoginScene = true;
+            }
+
         }
     }
 
     void Update()
     {
-        //This is reversed because otherwise when you press the enter key whilst focused on an Input field it will not call the function, it will just unfocus from the inputfield
-        if (allowEnterLogin && Input.GetKeyDown(KeyCode.Return))
+        if (onLoginScene) 
         {
-            LoginButton();
-        }
-        else 
-        {
-            //If pressing Enter doesn't work then we set the allowEnterLogin to whether we are focused on the login field or not, then Update() will check the next frame and
-            //allowEnterLogin will still be true (If we focused on the input field) and the LoginButton Function will be called
-            allowEnterLogin = emailLoginField.isFocused || passwordLoginField.isFocused;
+            //This is reversed because otherwise when you press the enter key whilst focused on an Input field it will not call the function, it will just unfocus from the inputfield
+            if (allowEnterLogin && Input.GetKeyDown(KeyCode.Return))
+            {
+                LoginButton();
+            }
+            else
+            {
+                //If pressing Enter doesn't work then we set the allowEnterLogin to whether we are focused on the login field or not, then Update() will check the next frame and
+                //allowEnterLogin will still be true (If we focused on the input field) and the LoginButton Function will be called
+                allowEnterLogin = emailLoginField.isFocused || passwordLoginField.isFocused;
+            }
+
+            if (allowEnterRegister && Input.GetKeyDown(KeyCode.Return))
+            {
+                RegisterButton();
+            }
+            else
+            {
+                //If pressing Enter doesn't work then we set the allowEnterRegister to whether we are focused on the register field or not, then Update() will check the next frame and
+                //allowEnterRegister will still be true (If we focused on the input field) and the RegisterButton Function will be called
+                allowEnterRegister = usernameRegisterField.isFocused || emailRegisterField.isFocused || passwordRegisterField.isFocused || passwordRegisterVerifyField.isFocused;
+            }
         }
 
-        if (allowEnterRegister && Input.GetKeyDown(KeyCode.Return))
+    }
+
+    void OnApplicationQuit()
+    {
+        //If a User is logged in
+        if (auth.CurrentUser != null)
         {
-            RegisterButton();
+            //Set the user to be offline
+            StartCoroutine(UpdateOnlineStatusDatabase(false));
         }
-        else 
-        {
-            //If pressing Enter doesn't work then we set the allowEnterRegister to whether we are focused on the register field or not, then Update() will check the next frame and
-            //allowEnterRegister will still be true (If we focused on the input field) and the RegisterButton Function will be called
-            allowEnterRegister = usernameRegisterField.isFocused || emailRegisterField.isFocused || passwordRegisterField.isFocused || passwordRegisterVerifyField.isFocused;
-        }
+
     }
 
     #region Photon Callbacks
@@ -151,10 +180,10 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
     #endregion
 
     #region Firebase Functionality
-    void InitialiseFirebase() 
+    void InitialiseFirebase()
     {
         Debug.Log("Setting up Firebase Auth");
-        
+
         //Get reference to the Firebase Authentication Instance so we can call the Firebase Authentication functions to login
         auth = FirebaseAuth.DefaultInstance;
         //Get Reference to Firebase Database Instance so we can call the Firebase Database functions to manage our database
@@ -163,36 +192,41 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
     }
 
     #region Buttons
-    public void LoginButton() 
+    public void LoginButton()
     {
         StartCoroutine(Login(emailLoginField.text, passwordLoginField.text));
     }
 
-    public void RegisterButton() 
+    public void RegisterButton()
     {
         StartCoroutine(Register(emailRegisterField.text, passwordRegisterField.text, usernameRegisterField.text));
     }
 
-    public void SignOutButton() 
+    //called by other scripts
+    public void SignOutButton()
     {
+        //Set the user to be offline and sign them out
+        SignOut();
         auth.SignOut();
-        usernameTxt.text = "Username: Not Logged In";
 
-        if (!UIManager.Instance.loginScreen.activeInHierarchy) 
-        {
-            UIManager.Instance.ShowLoginScreen();
-        }
+        SceneManager.LoadScene(0);
+        //usernameTxt.text = "Username: Not Logged In";
 
-        ResetInputFields();
+        //if (!UIManager.Instance.loginScreen.activeInHierarchy)
+        //{
+        //    UIManager.Instance.ShowLoginScreen();
+        //}
+
+        //ResetInputFields();
     }
 
-    public void SaveData() 
+    public void SaveData()
     {
         //Convert string from input field to an integer and then pass it through
         StartCoroutine(UpdateMatchPlayedDatabase());
     }
 
-    public void LoadData() 
+    public void LoadData()
     {
         StartCoroutine(LoadMatchPlayedData());
     }
@@ -201,7 +235,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
 
 
-    IEnumerator Login(string email, string password) 
+    IEnumerator Login(string email, string password)
     {
         //Call the Firebase auth signin function passing the email and password
         var LoginTask = auth.SignInWithEmailAndPasswordAsync(email, password);
@@ -209,8 +243,11 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         //Wait until the task completes (We use Lambda expression because WaitUntil expects a function that returns a boolean)
         yield return new WaitUntil(() => LoginTask.IsCompleted);
 
+
+
+
         //If there is any errors with this tasks
-        if (LoginTask.Exception != null) 
+        if (LoginTask.Exception != null)
         {
             //If there are errors handle them
             Debug.LogWarning($"Failed to register task with {LoginTask.Exception}");
@@ -223,7 +260,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
             string message = "Login Failed!";
 
-            switch (errorCode) 
+            switch (errorCode)
             {
                 case AuthError.MissingEmail:
                     message = "Missing Email";
@@ -253,25 +290,48 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         {
             //Store the result
             User = LoginTask.Result.User;
-            Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
-            warningLoginText.text = "";
-            usernameTxt.text = "Logged In: "+User.DisplayName;
-            //Set Photon Nickname to be the same as signed in Username
-            PhotonNetwork.NickName = User.DisplayName;
 
-            yield return new WaitForSeconds(1);
 
-            // FOR TESTING
-            UIManager.Instance.ShowStatScreen();
-            StartCoroutine(LoadMatchPlayedData());
-            
 
-            //Go to Main Menu
-            //SceneManager.LoadScene("Main Menu");
+            //Check if the user is already logged in by first going into the database of the user (Yield until this Coroutine is done)
+            yield return StartCoroutine(LoadOnlineStatusData());
+
+            //IsOnline is set by the LoadOnlineStatusData function
+            if (isOnline)
+            {
+                //If the user is already logged in sign they out
+                warningLoginText.text = "User already logged in";
+                auth.SignOut();
+            }
+            else
+            {
+                //If the user is not already logged in continue 
+                Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
+                warningLoginText.text = "";
+                usernameTxt.text = "Logged In: " + User.DisplayName;
+                //Set Photon Nickname to be the same as signed in Username
+                PhotonNetwork.NickName = User.DisplayName;
+
+                //Set the player to be online
+                StartCoroutine(UpdateOnlineStatusDatabase(true));
+
+                yield return new WaitForSeconds(1);
+
+                // FOR TESTING
+                //UIManager.Instance.ShowStatScreen();
+                //StartCoroutine(LoadMatchPlayedData());
+
+                //Go to Main Menu
+                SceneManager.LoadScene("Main Menu");
+            }
+
+
+
+
         }
     }
 
-    IEnumerator Register(string email, string password, string username) 
+    IEnumerator Register(string email, string password, string username)
     {
         if (username == "") //If Username section is blank
         {
@@ -287,7 +347,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             var RegisterTask = auth.CreateUserWithEmailAndPasswordAsync(email, password);
 
             //Wait until task is complete
-            yield return new WaitUntil( () => RegisterTask.IsCompleted);
+            yield return new WaitUntil(() => RegisterTask.IsCompleted);
 
             //If there are any errors with this task
             if (RegisterTask.Exception != null)
@@ -329,7 +389,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
                 //Store the Result
                 User = RegisterTask.Result.User;
 
-                if (User != null) 
+                if (User != null)
                 {
                     //Create a user profile and set the username
                     UserProfile profile = new UserProfile { DisplayName = username };
@@ -353,7 +413,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
                         warningRegisterText.text = "Username Set Failed!";
                     }
-                    else 
+                    else
                     {
                         //Initialise Database
                         StartCoroutine(InitialiseDatabase());
@@ -377,7 +437,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         }
     }
 
-    IEnumerator InitialiseDatabase() 
+    IEnumerator InitialiseDatabase()
     {
         var DBTask = DBreference.Child("users").Child(User.UserId).Child("username").SetValueAsync(User.DisplayName);
         yield return new WaitUntil(() => DBTask.IsCompleted);
@@ -388,13 +448,28 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
         DBTask = DBreference.Child("users").Child(User.UserId).Child("Matches Won").SetValueAsync(0);
         yield return new WaitUntil(() => DBTask.IsCompleted);
+
+        DBTask = DBreference.Child("users").Child(User.UserId).Child("Online Status").SetValueAsync(false);
+        yield return new WaitUntil(() => DBTask.IsCompleted);
     }
 
-    IEnumerator UpdateMatchPlayedDatabase() 
+    IEnumerator UpdateUsernameDatabase(string username)
     {
-        //Get the amount of matches played from the database
-        StartCoroutine(LoadMatchPlayedData());
 
+        // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches played and then set the value that has been passed in, to the database
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("username").SetValueAsync(username);
+
+        //Wait until task is completed
+        yield return new WaitUntil(() => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
+        }
+    }
+
+    IEnumerator UpdateMatchPlayedDatabase()
+    {
         //Increase it by one
         matchesplayed++;
         // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches played and then set the value that has been passed in, to the database
@@ -403,15 +478,16 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         //Wait until task is completed
         yield return new WaitUntil(() => DBTask.IsCompleted);
 
-        if (DBTask.Exception != null) 
+        if (DBTask.Exception != null)
         {
             Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
         }
 
-        
+        //Load the amount from the database into a variable
+        StartCoroutine(LoadMatchPlayedData());
     }
 
-    IEnumerator UpdateMatchesWonDatabase() 
+    IEnumerator UpdateMatchesWonDatabase()
     {
         //Increment Matches won
         matcheswon++;
@@ -425,14 +501,16 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         {
             Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
         }
+
+        //Load the amount from the database into a variable
+        StartCoroutine(LoadMatchWonData());
     }
 
-    IEnumerator UpdateUsernameDatabase(string username) 
+    IEnumerator UpdateOnlineStatusDatabase(bool online)
     {
+        // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches won and then set the value that has been passed in, to the database
+        var DBTask = DBreference.Child("users").Child(User.UserId).Child("Online Status").SetValueAsync(online);
 
-        // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches played and then set the value that has been passed in, to the database
-        var DBTask = DBreference.Child("users").Child(User.UserId).Child("username").SetValueAsync(username);
-         
         //Wait until task is completed
         yield return new WaitUntil(() => DBTask.IsCompleted);
 
@@ -440,9 +518,12 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         {
             Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
         }
+
     }
 
-    public IEnumerator LoadMatchPlayedData() 
+
+
+    public IEnumerator LoadMatchPlayedData()
     {
         //Get the data from the Database under the users branch from the current Users ID
         var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
@@ -467,12 +548,84 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
             //Get the "Matches Played" Value from the database and load it into a variable for later use
             matchesplayed = int.Parse(snapshot.Child("Matches Played").Value.ToString());
 
-            if (matchesPlayedtext != null) 
+            if (matchesPlayedtext != null)
             {
                 matchesPlayedtext.text = matchesplayed.ToString();
             }
-            
 
+
+        }
+    }
+
+    public IEnumerator LoadMatchWonData()
+    {
+        //Get the data from the Database under the users branch from the current Users ID
+        var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+
+        //Wait until task is completed
+        yield return new WaitUntil(() => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            //No Data exists
+            matchesWontext.text = "0";
+        }
+        else // Data does exist 
+        {
+            //Data from the database is received as a DataSnapshot hence why we create this variable
+            DataSnapshot snapshot = DBTask.Result;
+
+            //Get the "Matches Played" Value from the database and load it into a variable for later use
+            matcheswon = int.Parse(snapshot.Child("Matches Won").Value.ToString());
+
+            if (matchesWontext != null)
+            {
+                matchesWontext.text = matchesplayed.ToString();
+            }
+
+
+        }
+    }
+
+    IEnumerator LoadOnlineStatusData()
+    {
+        //Get the data from the Database under the users branch from the current Users ID
+        var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+
+        //Wait until task is completed
+        yield return new WaitUntil(() => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning($"Failed to register task with {DBTask.Exception}");
+        }
+        else if (DBTask.Result.Value == null)
+        {
+            //No Data exists
+            isOnline = false;
+        }
+        else // Data does exist 
+        {
+            //Data from the database is received as a DataSnapshot hence why we create this variable
+            DataSnapshot snapshot = DBTask.Result;
+
+            //Get the "Online Status" Value from the database and load it into a variable for later use
+            isOnline = bool.Parse(snapshot.Child("Online Status").Value.ToString());
+        }
+
+    }
+
+    public void SignOut() 
+    {
+        //If a User is logged in
+        if (auth.CurrentUser != null)
+        {
+            //Set the user to be offline
+            StartCoroutine(UpdateOnlineStatusDatabase(false));
         }
     }
 

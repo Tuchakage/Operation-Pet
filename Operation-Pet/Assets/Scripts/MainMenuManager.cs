@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static TeamManager;
 using static Unity.Burst.Intrinsics.X86;
 
@@ -78,6 +79,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public TMP_Text regionTxt;
     #endregion
 
+    public Button signOutBtn;
+
     TeamManager teamManager;
 
     #region Unity
@@ -94,6 +97,9 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
         playerUsername.text = PhotonNetwork.NickName;
 
+        signOutBtn.onClick.AddListener(FirebaseManager.Instance.SignOutButton);
+
+        FirebaseManager.Instance.onLoginScene = false;
     }
 
     // Update is called once per frame
@@ -426,7 +432,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             PhotonNetwork.CurrentRoom.IsOpen = false;
 
             //Go To The Actual Game
-            PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.LoadLevel("Testing Lobby");
         }
 
     }

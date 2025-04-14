@@ -2967,6 +2967,7 @@ MonoBehaviour:
   warningRegisterText: {fileID: 386317858}
   matchesPlayedField: {fileID: 1022543538}
   matchesPlayedtext: {fileID: 733172526}
+  matchesWontext: {fileID: 0}
   matchesplayed: 0
   matcheswon: 0
   isOnline: 0
@@ -4199,11 +4200,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1529299457}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -93.79202, y: 223}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 718.4158, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1271771134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6402,8 +6403,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 166.7}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 162.87715, y: 166.7}
+  m_SizeDelta: {x: 525.7543, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1853599715
 CanvasRenderer:
