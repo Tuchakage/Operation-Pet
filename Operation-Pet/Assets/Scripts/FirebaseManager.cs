@@ -3,14 +3,12 @@ using Firebase;
 using Firebase.Auth;
 using TMPro;
 using System.Collections;
-using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using Firebase.Database;
 
 
-public class FirebaseManager : MonoBehaviourPunCallbacks
+public class FirebaseManager : MonoBehaviour
 {
     public static FirebaseManager Instance;
     [Header("General")]
@@ -35,10 +33,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
     public TMP_InputField passwordRegisterVerifyField;
     public TMP_Text warningRegisterText;
 
-    [Header("UserData Display")]
-    public TMP_InputField matchesPlayedField;
-    public TMP_Text matchesPlayedtext;
-    public TMP_Text matchesWontext;
+
 
     [Header("Stats")]
     public int matchesplayed;
@@ -51,9 +46,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
 
 
-    #region String Variables
-    string gameVersion = "0.9";
-    #endregion
+
 
     //Variables to allow the enter key to be pressed when focused onto an input field
     bool allowEnterLogin;
@@ -94,19 +87,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        //Makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same rom sync their level automatically
-        PhotonNetwork.AutomaticallySyncScene = true;
 
-        if (!PhotonNetwork.IsConnected)
-        {
-
-            //Set the App version before connecting
-            PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
-            //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
-            PhotonNetwork.ConnectUsingSettings();
-
-            
-        }
 
         Scene currentScene = SceneManager.GetActiveScene();
         //This will be called when we are in Login Screen but when the scene changes to main menu onLoginScene will be set to false
@@ -159,27 +140,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
     }
 
-    #region Photon Callbacks
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.Log("OnFailedToConnectToPhoton. StatusCode: " + cause.ToString() + "ServerAddress: " + PhotonNetwork.ServerAddress);
-    }
 
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("OnConnectedToMaster");
-        Debug.Log("Connection made to " + PhotonNetwork.CloudRegion + "server.");
-
-        //if (regionTxt)
-        //{
-        //    regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
-        //}
-
-        //After we connect to Master server, join the lobby
-        PhotonNetwork.JoinLobby(TypedLobby.Default);
-    }
-
-    #endregion
 
     #region Firebase Functionality
     void InitialiseFirebase()
@@ -209,7 +170,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
     {
         //Set the user to be offline and sign them out
         SignOut();
-        auth.SignOut();
+
 
         SceneManager.LoadScene(0);
         //usernameTxt.text = "Username: Not Logged In";
@@ -311,8 +272,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
                 Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
                 warningLoginText.text = "";
                 usernameTxt.text = "Logged In: " + User.DisplayName;
-                //Set Photon Nickname to be the same as signed in Username
-                PhotonNetwork.NickName = User.DisplayName;
+
 
                 //Set the player to be online
                 StartCoroutine(UpdateOnlineStatusDatabase(true));
@@ -544,7 +504,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         else if (DBTask.Result.Value == null)
         {
             //No Data exists
-            matchesPlayedtext.text = "0";
+            matchesplayed = 0;
         }
         else // Data does exist 
         {
@@ -553,12 +513,6 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
             //Get the "Matches Played" Value from the database and load it into a variable for later use
             matchesplayed = int.Parse(snapshot.Child("Matches Played").Value.ToString());
-
-            if (matchesPlayedtext != null)
-            {
-                matchesPlayedtext.text = matchesplayed.ToString();
-            }
-
 
         }
     }
@@ -578,7 +532,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         else if (DBTask.Result.Value == null)
         {
             //No Data exists
-            matchesWontext.text = "0";
+            matcheswon = 0;
         }
         else // Data does exist 
         {
@@ -587,12 +541,6 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
 
             //Get the "Matches Played" Value from the database and load it into a variable for later use
             matcheswon = int.Parse(snapshot.Child("Matches Won").Value.ToString());
-
-            if (matchesWontext != null)
-            {
-                matchesWontext.text = matchesplayed.ToString();
-            }
-
 
         }
     }
@@ -632,6 +580,7 @@ public class FirebaseManager : MonoBehaviourPunCallbacks
         {
             //Set the user to be offline
             StartCoroutine(UpdateOnlineStatusDatabase(false));
+            auth.SignOut();
         }
     }
 

@@ -16,13 +16,11 @@ public class UIManager : MonoBehaviour
         //Make sure there isnt a duplicate of this instance
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            //Destroy the old Instance
+            Destroy(Instance.gameObject);
         }
-        else 
-        {
-            Instance = this;
-        }
-        
+        Instance = this;
+
     }
 
     void Start()

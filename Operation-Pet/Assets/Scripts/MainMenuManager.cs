@@ -13,65 +13,65 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     //Variable that is shared between all instances
     public static MainMenuManager menuInstance;
-
+    TeamManager teamManager;
 
 
     #region Int Variables
+
+    #endregion
+
+
+    [Header("General")]
+    string gameVersion = "0.9";
     //Variables used for keeping count how many players are ready in the lobby
     public int maxPlayers;
     private int currentReadyPlayers;
 
-    //Indicates whether they are P1 Or P2
-    private int playerNumber;
-    #endregion
-
-    
 
 
 
 
-    #region Dictionary Variables
+    [Header("Room List")]
+
+    public Transform roomListParent;
+    public GameObject roomListItemPrefab;
+    [SerializeField]
+    private TMP_Text amntPlayerstxt;
+
     //Stores the List of Rooms
     private Dictionary<string, RoomInfo> cachedRoomList;
     //Keep a hold of all the Player cards in the room
     private Dictionary<int, GameObject> playersInRoom;
-    #endregion
 
 
-    #region GameObject Variables
+
+    [SerializeField]
+    private TMP_InputField roomName;
 
     //This will be the child named "Content" from the scroll view
-    [Header("UI")] public Transform roomListParent;
-    public GameObject roomListItemPrefab;
-
+    [Header("UI")] 
     public GameObject canvas;
 
     public GameObject lobbyPanel;
     public GameObject roomInfo;
 
+
     [SerializeField]
     private GameObject playerCardPrefab;
-    #endregion
 
+    public Button signOutBtn;
 
-
-
-    #region Text Variables
-
-    [SerializeField]
-    private TMP_InputField roomName;
-
-
-    [SerializeField]
-    private TMP_Text amntPlayerstxt;
+    [Header("UserData Display")]
+    public TMP_Text matchesPlayedtext;
+    public TMP_Text matchesWontext;
+    public TMP_Text playernameforStats;
 
     [SerializeField]
     private TMP_Text playerUsername;
 
-    #endregion
 
 
-    Vector2 roomListScroll = Vector2.zero;
+
 
     //List<RoomInfo> cachedRoomList = new List<RoomInfo>();
     #region Debug Variables
@@ -79,9 +79,9 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public TMP_Text regionTxt;
     #endregion
 
-    public Button signOutBtn;
 
-    TeamManager teamManager;
+
+
 
     #region Unity
 
@@ -95,7 +95,23 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         lobbyPanel = GameObject.Find("Lobby Panel");
         teamManager = GameObject.Find("TeamManager").GetComponent<TeamManager>();
 
-        playerUsername.text = PhotonNetwork.NickName;
+        //Makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same rom sync their level automatically
+        PhotonNetwork.AutomaticallySyncScene = true;
+
+        if (!PhotonNetwork.IsConnected)
+        {
+
+            //Set the App version before connecting
+            PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
+            //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
+            PhotonNetwork.ConnectUsingSettings();
+
+            //Set Photon Nickname to be the same as signed in Username
+            PhotonNetwork.NickName = FirebaseManager.Instance.User.DisplayName;
+            playerUsername.text = PhotonNetwork.NickName;
+
+        }
+        
 
         signOutBtn.onClick.AddListener(FirebaseManager.Instance.SignOutButton);
 
@@ -121,6 +137,24 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     #region Photon Callbacks
 
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("OnFailedToConnectToPhoton. StatusCode: " + cause.ToString() + "ServerAddress: " + PhotonNetwork.ServerAddress);
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("OnConnectedToMaster");
+        Debug.Log("Connection made to " + PhotonNetwork.CloudRegion + "server.");
+
+        //if (regionTxt)
+        //{
+        //    regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
+        //}
+
+        //After we connect to Master server, join the lobby
+        PhotonNetwork.JoinLobby(TypedLobby.Default);
+    }
 
     // roomList variable will already be populated automatically by Photon (Only sends things that change)
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -148,9 +182,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         base.OnJoinedRoom();
 
-
-        lobbyPanel.SetActive(false);
-        roomInfo.SetActive(true);
+        UIManager.Instance.ShowRoomInfoScreen();
 
         //Debug.Log("Player Name is " + playerName.text);
 
@@ -271,6 +303,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
 
+
     #endregion
 
     #region Button Functions
@@ -300,7 +333,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         PhotonNetwork.CreateRoom(roomName.text, roomOptions, TypedLobby.Default);
 
         //Disable Lobby Panel
-        lobbyPanel.SetActive(false);
+        //lobbyPanel.SetActive(false);
     }
 
     public void JoinRoom(string RoomName)
@@ -311,7 +344,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         PhotonNetwork.JoinRoom(RoomName);
 
         //Disable Lobby Panel
-        lobbyPanel.SetActive(false);
+        //lobbyPanel.SetActive(false);
     }
 
     public void LeaveRoom() 
@@ -345,6 +378,14 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             //We are not connected, establish a new connection
             PhotonNetwork.ConnectUsingSettings();
         }
+    }
+
+    public void ShowStats() 
+    {
+        playernameforStats.text = PhotonNetwork.NickName + "'s Stats";
+        matchesPlayedtext.text = "Matches Played: " + FirebaseManager.Instance.matchesplayed.ToString();
+        matchesWontext.text = "Matches Won: " + FirebaseManager.Instance.matcheswon.ToString();
+        UIManager.Instance.ShowStatScreen();
     }
 
     #endregion
