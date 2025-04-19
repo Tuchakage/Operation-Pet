@@ -166,7 +166,8 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
         yield return new WaitForSeconds(1f);
 
-        PhotonNetwork.LoadLevel("Testing Lobby");
+        //Go to the Scene Switcher scene (If we don't go to a different scene then the clients won't be able to reload
+        PhotonNetwork.LoadLevel("SceneSwitcher");
 
     }
 
@@ -331,7 +332,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             }
             else 
             {
-                SceneManager.LoadScene("ResultScreen");
+                PhotonNetwork.LoadLevel("ResultScreen");
             }
             //Check if currently in deathmatch
 
@@ -342,6 +343,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             //The only team in the dictionary is the winner of the game!
             Debug.Log(possibleWinners.First() + "IS THE WINNER!");
+            PhotonNetwork.LoadLevel("ResultScreen");
         }
     }
 
@@ -473,7 +475,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
         if (propertiesThatChanged.ContainsKey("Round Number")) 
         {
-            Debug.Log(PhotonNetwork.NickName + "We are on Round " + GetCurrentRound());
+            Debug.Log("We are on Round " + GetCurrentRound());
         }
         //Check the properties that have changed in the Hashtable
         //foreach (var prop in propertiesThatChanged)

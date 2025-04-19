@@ -42,7 +42,7 @@ public class SceneSwitcher : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         //Go To The Actual Game
-        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.LoadLevel("Testing Lobby");
 
     }
 }
