@@ -11,6 +11,7 @@ using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -58,7 +59,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             //Try to get the value from the Hashtable and put it into 'teamCount'
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(teamName.ToString(), out teamCount))
             {
-                //If the team is in the game and this 
+                //If the team is in the game  
                 if ((int)teamCount > 1)
                 {
                     //If the Hashtable doesn't exist
@@ -81,6 +82,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
 
             }
+            
         }
 
 
@@ -164,7 +166,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
         yield return new WaitForSeconds(1f);
 
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel("Testing Lobby");
 
     }
 
@@ -246,6 +248,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     //Function used when a team collects all the points
     public void IncreaseTeamRound(teams winningTeam) 
     {
+        Debug.Log("Increase Team Round");
         //The key for the winning team
         string keyName = winningTeam.ToString() + " Rounds";
 
@@ -328,10 +331,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             }
             else 
             {
-                foreach (teams team in possibleWinners.Keys) 
-                {
-                    Debug.Log(team.ToString() + " Has won, game is a draw");
-                }
+                SceneManager.LoadScene("ResultScreen");
             }
             //Check if currently in deathmatch
 
@@ -473,7 +473,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
         if (propertiesThatChanged.ContainsKey("Round Number")) 
         {
-            Debug.Log("We are on Round " + GetCurrentRound());
+            Debug.Log(PhotonNetwork.NickName + "We are on Round " + GetCurrentRound());
         }
         //Check the properties that have changed in the Hashtable
         //foreach (var prop in propertiesThatChanged)

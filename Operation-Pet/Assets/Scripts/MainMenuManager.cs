@@ -281,7 +281,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         };
 
         //Check if the Game can start when someone readies up
-        if (teamManager.CheckReadyTeams() && CheckReadyPlayers()) 
+        if (PhotonNetwork.IsMasterClient && teamManager.CheckReadyTeams() && CheckReadyPlayers()) 
         {
             //Tell each player to go into the database and increase the amount of matches they have played by 1
             photonView.RPC("IncreaseMatchPlayedForAll", RpcTarget.All);
@@ -523,12 +523,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         //If there is more than one player
         if (PhotonNetwork.CurrentRoom.PlayerCount > 1) 
         {
-            //Make sure only the Master Client is checking which players are ready
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                return false;
-            }
-
             //Check each players Custom Property if one of them is false then that means everyone is not ready
             foreach (Player p in PhotonNetwork.PlayerList)
             {

@@ -20,6 +20,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     RoundManager roundManager;
 
     //Determines the score the teams need to get to end the round
+    [SerializeField]
     int maxFoodPerTeam;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -72,6 +73,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     {
         teamScores[teamThatScored]++;
         SetTeamScoreTxt(teamThatScored, teamScores[teamThatScored]);
+
 
         //If team has reached the maximum score they can get
         if (teamScores[teamThatScored] == maxFoodPerTeam) 
