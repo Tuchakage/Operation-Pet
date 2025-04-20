@@ -457,6 +457,7 @@ public class FirebaseManager : MonoBehaviour
     {
         //Increment Matches won
         matcheswon++;
+        Debug.Log("Matches won incremented");
         // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches won and then set the value that has been passed in, to the database
         var DBTask = DBreference.Child("users").Child(User.UserId).Child("Matches Won").SetValueAsync(matcheswon);
 

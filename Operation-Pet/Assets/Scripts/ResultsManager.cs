@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,12 +7,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static teamsEnum;
 
-public class ResultsManager : MonoBehaviour
+public class ResultsManager : MonoBehaviourPun
 {
     public TeamModelScriptableObject PlayerModelScriptableObject;
 
     private Dictionary<teams, int> sortedRankedTeams;
     private Dictionary<teams, int> possibleWinners;
+
+    public teams[] testArray;
 
     [SerializeField]
     private List<GameObject> SetsList;
@@ -19,6 +22,8 @@ public class ResultsManager : MonoBehaviour
     //Stores the index of the Set from the SetList that should not be destroyed
     private int setToKeep;
 
+    //For Keeping track of the highest score when sorting the array (Made a global variable otherwise the Sort Team() function will look too messy)
+    private int highScore;
     void Awake() 
     {
 
@@ -68,7 +73,9 @@ public class ResultsManager : MonoBehaviour
                         sortedRankedTeams.Add(teamName, (int)teamScore);
 
                         //Check who the winners of the game are and populate and manage the possibleWinners Dictionary
-                        CheckAmntWinners(teamName, (int)teamScore, highScore);
+                        CheckAmntWinners(teamName, (int)teamScore);
+
+                        Debug.Log("Team Score For " + teamName + " : " + (int)teamScore);
                     }
                 }
             }
@@ -76,6 +83,9 @@ public class ResultsManager : MonoBehaviour
 
         //Order the Dictionary which will convert it to a IOrderedEnumerable List and then convert it back to a Dictionary using the original keys and the original values
         sortedRankedTeams = sortedRankedTeams.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+
+        /////////// FOR TESTING DELETE LATER ///////////////
+        testArray = sortedRankedTeams.Keys.ToArray();
     }
 
     void SelectSet() 
@@ -105,7 +115,8 @@ public class ResultsManager : MonoBehaviour
                 setToKeep = 4;
                 break;
         }
-        Debug.Log(SetsList[setToKeep] + " has been selected");
+        Debug.Log(SetsList[setToKeep] + " has been selected since " +possibleWinners.Count + " winners");
+
 
 
         for (int i = 0; i < SetsList.Count; i++) 
@@ -132,7 +143,21 @@ public class ResultsManager : MonoBehaviour
             Transform spawnpoint = SetsList[setToKeep].transform.GetChild(i);
             GameObject model = Instantiate(CheckModelToSpawn(sortedRankedTeams.ElementAt(i).Key), spawnpoint);
             model.transform.position = new Vector3(0, 0, 0);
+            model.GetComponent<BoxCollider>().enabled = false;
+            Rigidbody rb = model.GetComponent<Rigidbody>();
+            Destroy(rb);
+
+            
         }
+
+        //Let the Master Client tell everyone to update match won stat if they won
+        if (PhotonNetwork.IsMasterClient) 
+        {
+            //Update Matches Won Stat in the database
+            photonView.RPC("IncreaseMatchWonStat", RpcTarget.All);
+            
+        }
+        
 
     }
 
@@ -160,31 +185,29 @@ public class ResultsManager : MonoBehaviour
         return null;
     }
     //Function to check who the winners of the game are
-    void CheckAmntWinners(teams team, int teamRoundScore, int highestScore) 
+    void CheckAmntWinners(teams team, int teamRoundScore) 
     {
-        
-        if ((int)teamRoundScore > highestScore)
+        if ((int)teamRoundScore > highScore)
         {
             //set this score to be highest
-            highestScore = teamRoundScore;
+            highScore = teamRoundScore;
 
             //Add this as a team that could potentially be the winner of the game
             possibleWinners.Add(team, teamRoundScore);
 
-            Debug.Log("Check Game Winner");
 
             //If there are multiple gane winners
             if (possibleWinners.Count > 1)
             {
                 //Check all their values and if they are lower than the current Highest Score then remove them from the list
-                RemoveFromWinningTeams(highestScore);
+                RemoveFromWinningTeams(highScore);
             }
 
         }
-        else if ((int)teamRoundScore == highestScore) //If the score is the same as the highest
+        else if ((int)teamRoundScore == highScore) //If the score is the same as the highest
         {
             //Add the team to the list
-            possibleWinners.Add(team, highestScore);
+            possibleWinners.Add(team, highScore);
         }
     }
 
@@ -207,5 +230,34 @@ public class ResultsManager : MonoBehaviour
             }
         }
 
+    }
+
+
+    [PunRPC]
+    void IncreaseMatchWonStat() 
+    {
+        //Get the team this player is on
+        teams myTeam = GetTeam(PhotonNetwork.LocalPlayer);
+
+        //If the possible winners key contains the team of this player
+        if (possibleWinners.ContainsKey(myTeam)) 
+        {
+            Debug.Log(PhotonNetwork.NickName + " Is a Winner");
+            //Call the Firebase Database and increase matches won
+            StartCoroutine(FirebaseManager.Instance.UpdateMatchesWonDatabase());
+        }
+    }
+
+    teams GetTeam(Player player)
+    {
+        object isInTeam;
+        //Check the custom properties of that player to see what team they are apart of
+        if (player.CustomProperties.TryGetValue("Team Name", out isInTeam))
+        {
+            //Debug.Log("team = " + (teams)isInTeam);
+            return (teams)isInTeam;
+        }
+
+        return teams.Unassigned;
     }
 }
