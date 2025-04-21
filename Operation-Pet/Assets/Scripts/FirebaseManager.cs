@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using Firebase.Database;
 
 
+
 public class FirebaseManager : MonoBehaviour
 {
     public static FirebaseManager Instance;
@@ -19,6 +20,8 @@ public class FirebaseManager : MonoBehaviour
     public FirebaseAuth auth;
     public FirebaseUser User;
     public DatabaseReference DBreference;
+
+
 
     [Header("Login")]
     public TMP_InputField emailLoginField;
@@ -54,6 +57,7 @@ public class FirebaseManager : MonoBehaviour
     void Awake()
     {
 
+
         //Check that all of the necesary dependenceies for Firebase are present on the system
         //"CheckAndFixDependenciesAsync" is a function that returns Task<DependencyStatus> and ".ContinueWith" is a continuation to that task
         //"task =>{} defines what is done after Firebase has checked/fixed the dependencies
@@ -79,6 +83,7 @@ public class FirebaseManager : MonoBehaviour
             //Destroy the old Instance
             Destroy(Instance.gameObject);
             Debug.Log("Destroy Old");
+            
 
         }
         Instance = this;
@@ -87,7 +92,6 @@ public class FirebaseManager : MonoBehaviour
 
     void Start()
     {
-
 
         Scene currentScene = SceneManager.GetActiveScene();
         //This will be called when we are in Login Screen but when the scene changes to main menu onLoginScene will be set to false

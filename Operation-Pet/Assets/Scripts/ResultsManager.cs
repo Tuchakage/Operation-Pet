@@ -14,7 +14,8 @@ public class ResultsManager : MonoBehaviourPun
     private Dictionary<teams, int> sortedRankedTeams;
     private Dictionary<teams, int> possibleWinners;
 
-    public teams[] testArray;
+    //FOR TESTING
+    //public teams[] testArray;
 
     [SerializeField]
     private List<GameObject> SetsList;
@@ -82,10 +83,10 @@ public class ResultsManager : MonoBehaviourPun
         }
 
         //Order the Dictionary which will convert it to a IOrderedEnumerable List and then convert it back to a Dictionary using the original keys and the original values
-        sortedRankedTeams = sortedRankedTeams.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        sortedRankedTeams = sortedRankedTeams.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
         /////////// FOR TESTING DELETE LATER ///////////////
-        testArray = sortedRankedTeams.Keys.ToArray();
+        //testArray = sortedRankedTeams.Keys.ToArray();
     }
 
     void SelectSet() 
@@ -142,7 +143,7 @@ public class ResultsManager : MonoBehaviourPun
             //Get the child of the set list in order
             Transform spawnpoint = SetsList[setToKeep].transform.GetChild(i);
             GameObject model = Instantiate(CheckModelToSpawn(sortedRankedTeams.ElementAt(i).Key), spawnpoint);
-            model.transform.position = new Vector3(0, 0, 0);
+            model.transform.localPosition = new Vector3(0, 0, 0);
             model.GetComponent<BoxCollider>().enabled = false;
             Rigidbody rb = model.GetComponent<Rigidbody>();
             Destroy(rb);
