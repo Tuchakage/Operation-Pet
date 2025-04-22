@@ -1,7 +1,8 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 
-public class ChargedPunch : MonoBehaviour
+public class ChargedPunch : MonoBehaviourPunCallbacks
 {
     public float chargeTime = 2.0f; // Time required to charge the punch
     public float pushBackForce = 5.0f; // Force to knock the target back
@@ -13,11 +14,18 @@ public class ChargedPunch : MonoBehaviour
 
     void Update()
     {
+        if (!photonView.IsMine) return;
         // Check if the left mouse button is pressed
         if (Input.GetMouseButtonDown(1) && canPunch) // 0 represents the left mouse button
         {
             StartCoroutine(ChargePunch());
         }
+    }
+
+    [PunRPC]
+    private void PerformPunchRPC()
+    {
+        StartCoroutine(ChargePunch());
     }
 
     private IEnumerator ChargePunch()

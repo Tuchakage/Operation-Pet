@@ -3,104 +3,39 @@ using System.Collections;
 
 public class WizardFlick : MonoBehaviour
 {
-    public Camera playerCamera; // Camera used for aiming
-    public float lockOnRange = 10f; // Maximum range to lock on to a target
-    public float pushForce = 10f; // Force applied to the target
-    public Transform reticle; // Reticle for visualizing lock-on
-    public LayerMask lockableLayers; // Layers to determine lockable targets
-    public float cooldownTime = 1.0f; // Cooldown time between pushes
-
-    private Transform lockedTarget; // The currently locked-on target
-    private bool isLockedOn = false; // Whether the player has locked on
-    private bool canPush = true; // Cooldown state
+    public float flickForce = 15.0f; // Force applied to flick the target
+    public FloatingPlayertargeting targetingScript; // Reference to the targeting script
 
     void Update()
     {
-        // Lock-on mechanic (press "E" to lock/unlock a target)
-        if (Input.GetKeyDown(KeyCode.E))
+        // Check if the left mouse button is clicked and a target is locked
+        if (targetingScript != null && targetingScript.isLockedOn && Input.GetMouseButtonDown(0)) // Left mouse button
         {
-            if (isLockedOn)
-            {
-                UnlockTarget();
-            }
-            else
-            {
-                LockOnTarget();
-            }
-        }
-
-        // Push mechanic (use right mouse button to push target)
-        if (isLockedOn && Input.GetMouseButtonDown(1) && canPush) // Right mouse button
-        {
-            PushTarget();
-        }
-
-        // Update the reticle position to match the locked target
-        if (reticle != null)
-        {
-            reticle.gameObject.SetActive(isLockedOn && lockedTarget != null);
-            if (isLockedOn && lockedTarget != null)
-            {
-                reticle.position = lockedTarget.position;
-            }
+            FlickTarget();
         }
     }
 
-    // Perform a raycast to find the nearest lockable target
-    private void LockOnTarget()
+    private void FlickTarget()
     {
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        // Get the currently locked target from the targeting script
+        Transform lockedTarget = targetingScript.lockedTarget;
 
-        if (Physics.Raycast(ray, out hit, lockOnRange, lockableLayers))
-        {
-            lockedTarget = hit.transform;                                           // Lock onto the target
-            isLockedOn = true;
-            Debug.Log($"Locked onto: {lockedTarget.name}");
-        }
-        else
-        {
-            Debug.Log("No valid target in range to lock onto!");
-        }
-    }
-
-    private void UnlockTarget()
-    {
-        // Unlock the current target
-        lockedTarget = null;
-        isLockedOn = false;
-        Debug.Log("Target unlocked.");
-    }
-
-    private void PushTarget()
-    {
         if (lockedTarget != null)
         {
-            Rigidbody rb = lockedTarget.GetComponent<Rigidbody>();              // Ensure the target has a Rigidbody to apply force
+            // Ensure the target has a Rigidbody to apply force
+            Rigidbody rb = lockedTarget.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);   // Calculate push direction based on mouse position and camera
-                RaycastHit hit;
+                // Use the player's forward direction as the flick direction
+                Vector3 flickDirection = transform.forward; // Floating player's forward direction
 
-                if (Physics.Raycast(ray, out hit))
-                {
-                    Vector3 pushDirection = (hit.point - lockedTarget.position).normalized;
-                    pushDirection.y = 0;                                                            // Optional: Keep the push horizontal
+                // Apply the flick force
+                rb.AddForce(flickDirection * flickForce, ForceMode.Impulse);
+                Debug.Log($"Flicked target: {lockedTarget.name} in direction {flickDirection}");
 
-                    rb.AddForce(pushDirection * pushForce, ForceMode.Impulse);
-                    Debug.Log($"Pushed target: {lockedTarget.name} in direction {pushDirection}");
-
-                                                                                                   // Start cooldown after push
-                    StartCoroutine(PushCooldown());
-                }
+                // Optionally, unlock the target after the flick
+                targetingScript.UnlockTarget();
             }
         }
-    }
-
-    private IEnumerator PushCooldown()
-    {
-        canPush = false;
-        yield return new WaitForSeconds(cooldownTime);
-        canPush = true;
     }
 }

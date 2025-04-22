@@ -1,7 +1,8 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 
-public class CharacterPunch : MonoBehaviour
+public class CharacterPunch : MonoBehaviourPunCallbacks
 {
     public float punchCooldown = 1.0f;
     public float pushBackForce = 2.0f;
@@ -12,11 +13,18 @@ public class CharacterPunch : MonoBehaviour
 
     void Update()
     {
+        if (!photonView.IsMine) return;
         // Check if the left mouse button is clicked and punching is allowed
         if (Input.GetMouseButtonDown(0) && canPunch) // 0 represents the left mouse button
         {
             StartCoroutine(Punch());
         }
+    }
+
+    [PunRPC]
+    private void PerformPunchRPC()
+    {
+        StartCoroutine(Punch());
     }
 
     private IEnumerator Punch()
