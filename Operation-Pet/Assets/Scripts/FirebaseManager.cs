@@ -57,6 +57,8 @@ public class FirebaseManager : MonoBehaviour
     void Awake()
     {
 
+        //Stop Persistence error DELETE LATER
+        //Firebase.Database.FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
 
         //Check that all of the necesary dependenceies for Firebase are present on the system
         //"CheckAndFixDependenciesAsync" is a function that returns Task<DependencyStatus> and ".ContinueWith" is a continuation to that task

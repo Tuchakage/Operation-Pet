@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21785d9262383f740a5e59990bd398da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodModelScriptableObject: {fileID: 0}
   foodFor: 4
   isFake: 0
   anyoneCanPickUp: 0

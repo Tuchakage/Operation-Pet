@@ -384,7 +384,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     }
     
     //Get the current Round Number of the game
-    int GetCurrentRound() 
+    public int GetCurrentRound() 
     {
         object currentroundNum;
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("Round Number", out currentroundNum)) 
