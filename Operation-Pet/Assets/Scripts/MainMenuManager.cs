@@ -26,9 +26,9 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     //Variables used for keeping count how many players are ready in the lobby
     public int maxPlayers;
     private int currentReadyPlayers;
-
     [SerializeField]
-    private TMP_InputField nameInputField;
+    private GameObject playerCardPrefab;
+
 
 
 
@@ -49,17 +49,16 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     private TMP_InputField roomName;
 
     //This will be the child named "Content" from the scroll view
-    [Header("UI")] 
-    public GameObject canvas;
+    [Header("UI")]
+    [SerializeField]
+    private TMP_InputField nameInputField;
 
+    public GameObject canvas;
     public GameObject lobbyPanel;
     public GameObject roomInfo;
 
-
-    [SerializeField]
-    private GameObject playerCardPrefab;
-
     public Button signOutBtn;
+    public Button statsBtn;
 
     [Header("UserData Display")]
     public TMP_Text matchesPlayedtext;
@@ -99,6 +98,9 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         lobbyPanel = GameObject.Find("Lobby Panel");
         teamManager = GameObject.Find("TeamManager").GetComponent<TeamManager>();
 
+        //Make sure the stats button is not visible
+        statsBtn.gameObject.SetActive(false);
+
         //Makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same rom sync their level automatically
         PhotonNetwork.AutomaticallySyncScene = true;
 
@@ -118,6 +120,10 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
                 //Display Username on screen
                 playerUsername.text = PhotonNetwork.NickName;
+                //Debug.Log("Name = " + PhotonNetwork.NickName);
+
+                //Allow the Stats button to appear
+                statsBtn.gameObject.SetActive(true);
             }
 
             

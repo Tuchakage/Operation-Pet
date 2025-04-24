@@ -947,16 +947,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayers: 10
-  nameInputField: {fileID: 1087495586}
+  playerCardPrefab: {fileID: 5020410345912816193, guid: 232f0b5de01ee60438d033a0b704774e, type: 3}
   roomListParent: {fileID: 1216703520}
   roomListItemPrefab: {fileID: 8754251926604252550, guid: 073191b3aabe3ea47bc21abfd8508dd4, type: 3}
   amntPlayerstxt: {fileID: 310235902}
   roomName: {fileID: 2045960049}
+  nameInputField: {fileID: 1087495586}
   canvas: {fileID: 1201745328}
   lobbyPanel: {fileID: 1706729576}
   roomInfo: {fileID: 1731515871}
-  playerCardPrefab: {fileID: 5020410345912816193, guid: 232f0b5de01ee60438d033a0b704774e, type: 3}
   signOutBtn: {fileID: 1889827734}
+  statsBtn: {fileID: 285392966}
   matchesPlayedtext: {fileID: 915154385}
   matchesWontext: {fileID: 390495772}
   playernameforStats: {fileID: 2094986670}
