@@ -27,7 +27,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public int maxPlayers;
     private int currentReadyPlayers;
 
-
+    [SerializeField]
+    private TMP_InputField nameInputField;
 
 
 
@@ -42,7 +43,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     private Dictionary<string, RoomInfo> cachedRoomList;
     //Keep a hold of all the Player cards in the room
     private Dictionary<int, GameObject> playersInRoom;
-
 
 
     [SerializeField]
@@ -73,6 +73,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
 
+
     //List<RoomInfo> cachedRoomList = new List<RoomInfo>();
     #region Debug Variables
     [Header("Debug Variables")]
@@ -88,6 +89,9 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Depending on whether the player is playing without an account or not determines whether the input field for player name shows up
+        nameInputField.gameObject.SetActive(FirebaseManager.Instance.playWithoutAccount);
+
         cachedRoomList = new Dictionary<string, RoomInfo>();
         menuInstance = this;
         currentReadyPlayers = 0;
@@ -106,9 +110,17 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
             PhotonNetwork.ConnectUsingSettings();
 
-            //Set Photon Nickname to be the same as signed in Username
-            PhotonNetwork.NickName = FirebaseManager.Instance.User.DisplayName;
-            playerUsername.text = PhotonNetwork.NickName;
+            //If player decided to log in with an account
+            if (!nameInputField.gameObject.activeInHierarchy) 
+            {
+                //Set Photon Nickname to be the same as signed in Username
+                PhotonNetwork.NickName = FirebaseManager.Instance.User.DisplayName;
+
+                //Display Username on screen
+                playerUsername.text = PhotonNetwork.NickName;
+            }
+
+            
 
         }
         
@@ -315,6 +327,14 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             return;
         }
 
+        //If Name Input field is active && Player name is empty
+        if (nameInputField.gameObject.activeInHierarchy && nameInputField.text == "")
+        {
+            // dont do anything
+            Debug.LogError("Empty Name");
+            return;
+        }
+
 
         if (roomName.text == "") //If Room Name is empty
         {
@@ -338,6 +358,14 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void JoinRoom(string RoomName)
     {
+
+        //If Name Input field is active && Player name is empty
+        if (nameInputField.gameObject.activeInHierarchy && nameInputField.text == "")
+        {
+            // dont do anything
+
+            return;
+        }
 
         //canvas.SetActive(false);
 
@@ -386,6 +414,22 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         matchesPlayedtext.text = "Matches Played: " + FirebaseManager.Instance.matchesplayed.ToString();
         matchesWontext.text = "Matches Won: " + FirebaseManager.Instance.matcheswon.ToString();
         UIManager.Instance.ShowStatScreen();
+    }
+
+    //Is called by the Player Name Input field whenever something is typed in
+    public void SetPlayerName(string value)
+    {
+
+        //Check if the value is empty
+        if (string.IsNullOrEmpty(value))
+        {
+            Debug.LogError("Player Name is null or empty");
+            return;
+        }
+
+        PhotonNetwork.NickName = value;
+        //Display Username on screen
+        playerUsername.text = value;
     }
 
     #endregion

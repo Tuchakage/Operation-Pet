@@ -14,6 +14,7 @@ public class FirebaseManager : MonoBehaviour
     public static FirebaseManager Instance;
     [Header("General")]
     public TMP_Text usernameTxt;
+    public bool playWithoutAccount; // Variable used to indicate whether the player decided to use an account to play the game
     //Firebase variables
     [Header("Firebase")]
     public DependencyStatus dependencyStatus;
@@ -146,20 +147,6 @@ public class FirebaseManager : MonoBehaviour
 
     }
 
-
-
-    #region Firebase Functionality
-    void InitialiseFirebase()
-    {
-        Debug.Log("Setting up Firebase Auth");
-
-        //Get reference to the Firebase Authentication Instance so we can call the Firebase Authentication functions to login
-        auth = FirebaseAuth.DefaultInstance;
-        //Get Reference to Firebase Database Instance so we can call the Firebase Database functions to manage our database
-        DBreference = FirebaseDatabase.DefaultInstance.RootReference;
-
-    }
-
     #region Buttons
     public void LoginButton()
     {
@@ -200,7 +187,30 @@ public class FirebaseManager : MonoBehaviour
         StartCoroutine(LoadMatchPlayedData());
     }
 
+    public void LoginWithoutAccount() 
+    {
+        //Player doesn't log in with an account
+        playWithoutAccount = true;
+
+        SceneManager.LoadScene("Main Menu");
+
+    }
+
     #endregion
+
+    #region Firebase Functionality
+    void InitialiseFirebase()
+    {
+        Debug.Log("Setting up Firebase Auth");
+
+        //Get reference to the Firebase Authentication Instance so we can call the Firebase Authentication functions to login
+        auth = FirebaseAuth.DefaultInstance;
+        //Get Reference to Firebase Database Instance so we can call the Firebase Database functions to manage our database
+        DBreference = FirebaseDatabase.DefaultInstance.RootReference;
+
+    }
+
+
 
 
 
@@ -292,6 +302,8 @@ public class FirebaseManager : MonoBehaviour
                 //Load Data from database into variables
                 StartCoroutine(LoadMatchPlayedData());
                 StartCoroutine(LoadMatchWonData());
+
+                playWithoutAccount = false;
 
                 //Go to Main Menu
                 SceneManager.LoadScene("Main Menu");
