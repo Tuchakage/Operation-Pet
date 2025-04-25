@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 using Photon.Pun;
@@ -15,11 +16,18 @@ public class ChargedPunch : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        if (!photonView.IsMine) return;
         // Check if the left mouse button is pressed
         if (Input.GetMouseButtonDown(1) && canPunch) // 0 represents the left mouse button
         {
             StartCoroutine(ChargePunch());
         }
+    }
+
+    [PunRPC]
+    private void PerformPunchRPC()
+    {
+        StartCoroutine(ChargePunch());
     }
 
     private IEnumerator ChargePunch()
