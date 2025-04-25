@@ -79,6 +79,10 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     #region Debug Variables
     [Header("Debug Variables")]
     public TMP_Text regionTxt;
+
+    
+    [SerializeField]
+    private TMP_Text playerErrorMessage; //Variable used to display error
     #endregion
 
 
@@ -338,7 +342,9 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         //If Name Input field is active && Player name is empty
         if (nameInputField.gameObject.activeInHierarchy && nameInputField.text == "")
         {
-            // dont do anything
+            //Show error message
+            StartCoroutine(ShowErrorMessage());
+
             Debug.LogError("Empty Name");
             return;
         }
@@ -370,7 +376,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         //If Name Input field is active && Player name is empty
         if (nameInputField.gameObject.activeInHierarchy && nameInputField.text == "")
         {
-            // dont do anything
+            //Show error message
+            StartCoroutine(ShowErrorMessage());
 
             return;
         }
@@ -613,6 +620,15 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         //Increase the amount of games the player has played
         StartCoroutine(FirebaseManager.Instance.UpdateMatchPlayedDatabase());
+    }
+
+    System.Collections.IEnumerator ShowErrorMessage() 
+    {
+        playerErrorMessage.text = "Player name is Empty";
+
+        yield return new WaitForSeconds(1f);
+
+        playerErrorMessage.text = "";
     }
 
 

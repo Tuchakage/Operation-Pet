@@ -41,8 +41,15 @@ public class SceneSwitcher : MonoBehaviour
         // Wait a few seconds
         yield return new WaitForSeconds(1f);
 
-        //Go To The Actual Game
-        PhotonNetwork.LoadLevel("Testing Lobby");
+        object mapName;
+        //Check the name of the map called in the Current Rooms Custom Property and put that output into variable named "mapName"
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(MapManager.mapKeyName, out mapName)) 
+        {
+            //Load that map
+            PhotonNetwork.LoadLevel(mapName.ToString());
+        }
+
+
 
     }
 }

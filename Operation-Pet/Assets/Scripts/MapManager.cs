@@ -23,6 +23,7 @@ public class MapManager : MonoBehaviour
         //Set the Custom Properties for the room so that it knows what Map to use 
         PhotonNetwork.CurrentRoom.SetCustomProperties(mapChosen);
 
+        //return "Testing Lobby";
         return mapsToLoad[randomIndex];
     }
 }
