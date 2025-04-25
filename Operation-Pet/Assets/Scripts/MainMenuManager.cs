@@ -11,10 +11,12 @@ using static Unity.Burst.Intrinsics.X86;
 
 public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 {
+    #region Manager Scripts
     //Variable that is shared between all instances
     public static MainMenuManager menuInstance;
     TeamManager teamManager;
-
+    MapManager mapManager;
+    #endregion
 
     #region Int Variables
 
@@ -97,7 +99,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
         lobbyPanel = GameObject.Find("Lobby Panel");
         teamManager = GameObject.Find("TeamManager").GetComponent<TeamManager>();
-
+        mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         //Make sure the stats button is not visible
         statsBtn.gameObject.SetActive(false);
 
@@ -527,8 +529,12 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             PhotonNetwork.CurrentRoom.IsVisible = false;
             PhotonNetwork.CurrentRoom.IsOpen = false;
 
+
+            //Select a random Map
+            PhotonNetwork.LoadLevel(mapManager.SelectRandomMap());
+
             //Go To The Actual Game
-            PhotonNetwork.LoadLevel("Testing Lobby");
+            //PhotonNetwork.LoadLevel("Testing Lobby");
         }
 
     }

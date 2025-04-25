@@ -45,7 +45,6 @@ public class ResultsManager : MonoBehaviourPun
 
         SpawnTeam();
 
-
     }
     // Update is called once per frame
     void Update()

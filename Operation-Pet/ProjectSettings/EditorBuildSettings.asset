@@ -20,6 +20,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ResultScreen.unity
     guid: 622ac28ef95692f4aaa445efec3dce23
+  - enabled: 1
+    path: Assets/Scenes/Dog-Park.unity
+    guid: 32895e24e5c404f58bfb9bdb7a730abe
+  - enabled: 1
+    path: Assets/Scenes/Arena.unity
+    guid: d042ddd09b7da47f89c9b8ee3a211115
+  - enabled: 1
+    path: Assets/Scenes/Horse Arena.unity
+    guid: 2169524cb8f51f4488541a0fa3792544
+  - enabled: 1
+    path: Assets/Scenes/Street.unity
+    guid: 152ddaf2d5488964b99fd6721f4ad03b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
