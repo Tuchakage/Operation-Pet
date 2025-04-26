@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerModelScriptableObject
   m_EditorClassIdentifier: 
   playerModels:
-  - {fileID: 7179444264422872889, guid: 206b1b905c94e0f4b86f23df563b82f8, type: 3}
-  - {fileID: 7179444264422872889, guid: 37785831181a9864f9148a7a28560c6d, type: 3}
-  - {fileID: 7179444264422872889, guid: 82a4e28e01b3efb4385e4d655d2af72f, type: 3}
-  - {fileID: 7179444264422872889, guid: 93e3172e118c0354f97a96272415c551, type: 3}
-  - {fileID: 7179444264422872889, guid: 8ea44ea40193c1e47808543d9e0dafc0, type: 3}
+  - {fileID: 603201666958415052, guid: e90ce281d951e74488a6e8b1b286d2fd, type: 3}
+  - {fileID: 603201666958415052, guid: e90ce281d951e74488a6e8b1b286d2fd, type: 3}
+  - {fileID: 603201666958415052, guid: e90ce281d951e74488a6e8b1b286d2fd, type: 3}
+  - {fileID: 603201666958415052, guid: e90ce281d951e74488a6e8b1b286d2fd, type: 3}
+  - {fileID: 603201666958415052, guid: e90ce281d951e74488a6e8b1b286d2fd, type: 3}
