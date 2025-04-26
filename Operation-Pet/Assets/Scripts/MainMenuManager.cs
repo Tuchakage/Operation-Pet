@@ -5,97 +5,108 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static TeamManager;
 using static Unity.Burst.Intrinsics.X86;
 
 public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 {
+    #region Manager Scripts
     //Variable that is shared between all instances
     public static MainMenuManager menuInstance;
-
-
+    TeamManager teamManager;
+    MapManager mapManager;
+    #endregion
 
     #region Int Variables
+
+    #endregion
+
+
+    [Header("General")]
+    string gameVersion = "0.9";
     //Variables used for keeping count how many players are ready in the lobby
     public int maxPlayers;
     private int currentReadyPlayers;
-
-    //Indicates whether they are P1 Or P2
-    private int playerNumber;
-    #endregion
-
-    
-
-    #region String Variables
-    string gameVersion = "0.9";
-    #endregion
+    [SerializeField]
+    private GameObject playerCardPrefab;
 
 
-    #region Dictionary Variables
+
+
+    [Header("Room List")]
+
+    public Transform roomListParent;
+    public GameObject roomListItemPrefab;
+    [SerializeField]
+    private TMP_Text amntPlayerstxt;
+
     //Stores the List of Rooms
     private Dictionary<string, RoomInfo> cachedRoomList;
     //Keep a hold of all the Player cards in the room
     private Dictionary<int, GameObject> playersInRoom;
-    #endregion
 
-
-    #region GameObject Variables
-
-    //This will be the child named "Content" from the scroll view
-    [Header("UI")] public Transform roomListParent;
-    public GameObject roomListItemPrefab;
-
-    public GameObject canvas;
-
-    public GameObject lobbyPanel;
-    public GameObject roomInfo;
-
-    //Used to turn on the indicator to show that a player is ready
-    public GameObject pOneReadyCircle;
-    public GameObject pTwoReadyCircle;
-
-    [SerializeField]
-    private GameObject playerCardPrefab;
-    #endregion
-
-
-
-
-    #region Text Variables
 
     [SerializeField]
     private TMP_InputField roomName;
 
+    //This will be the child named "Content" from the scroll view
+    [Header("UI")]
     [SerializeField]
-    private TMP_InputField playerName;
+    private TMP_InputField nameInputField;
+
+    public GameObject canvas;
+    public GameObject lobbyPanel;
+    public GameObject roomInfo;
+
+    public Button signOutBtn;
+    public Button statsBtn;
+
+    [Header("UserData Display")]
+    public TMP_Text matchesPlayedtext;
+    public TMP_Text matchesWontext;
+    public TMP_Text playernameforStats;
 
     [SerializeField]
-    private TMP_Text amntPlayerstxt;
-
-    #endregion
+    private TMP_Text playerUsername;
 
 
-    Vector2 roomListScroll = Vector2.zero;
+
+
+
 
     //List<RoomInfo> cachedRoomList = new List<RoomInfo>();
     #region Debug Variables
     [Header("Debug Variables")]
     public TMP_Text regionTxt;
+
+    
+    [SerializeField]
+    private TMP_Text playerErrorMessage; //Variable used to display error
     #endregion
 
-    TeamManager teamManager;
+
+
+
 
     #region Unity
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Depending on whether the player is playing without an account or not determines whether the input field for player name shows up
+        nameInputField.gameObject.SetActive(FirebaseManager.Instance.playWithoutAccount);
+
         cachedRoomList = new Dictionary<string, RoomInfo>();
         menuInstance = this;
         currentReadyPlayers = 0;
 
         lobbyPanel = GameObject.Find("Lobby Panel");
         teamManager = GameObject.Find("TeamManager").GetComponent<TeamManager>();
+        mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
+        //Make sure the stats button is not visible
+        statsBtn.gameObject.SetActive(false);
+
         //Makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same rom sync their level automatically
         PhotonNetwork.AutomaticallySyncScene = true;
 
@@ -107,14 +118,28 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
             PhotonNetwork.ConnectUsingSettings();
 
-            if (photonView.IsMine)
+            //If player decided to log in with an account
+            if (!nameInputField.gameObject.activeInHierarchy) 
             {
-                //Debug.Log("Player ID:" + photonView.ViewID);
+                //Set Photon Nickname to be the same as signed in Username
+                PhotonNetwork.NickName = FirebaseManager.Instance.User.DisplayName;
+
+                //Display Username on screen
+                playerUsername.text = PhotonNetwork.NickName;
+                //Debug.Log("Name = " + PhotonNetwork.NickName);
+
+                //Allow the Stats button to appear
+                statsBtn.gameObject.SetActive(true);
             }
 
+            
+
         }
+        
 
+        signOutBtn.onClick.AddListener(FirebaseManager.Instance.SignOutButton);
 
+        FirebaseManager.Instance.onLoginScene = false;
     }
 
     // Update is called once per frame
@@ -135,6 +160,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     #region Photon Callbacks
+
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log("OnFailedToConnectToPhoton. StatusCode: " + cause.ToString() + "ServerAddress: " + PhotonNetwork.ServerAddress);
@@ -145,15 +171,14 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("OnConnectedToMaster");
         Debug.Log("Connection made to " + PhotonNetwork.CloudRegion + "server.");
 
-        if (regionTxt) 
-        {
-            regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
-        }
-        
+        //if (regionTxt)
+        //{
+        //    regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
+        //}
+
         //After we connect to Master server, join the lobby
         PhotonNetwork.JoinLobby(TypedLobby.Default);
     }
-
 
     // roomList variable will already be populated automatically by Photon (Only sends things that change)
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -172,7 +197,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public override void OnLeftRoom()
     {
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         Debug.Log("Left Room");
     }
 
@@ -181,9 +206,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         base.OnJoinedRoom();
 
-
-        lobbyPanel.SetActive(false);
-        roomInfo.SetActive(true);
+        UIManager.Instance.ShowRoomInfoScreen();
 
         //Debug.Log("Player Name is " + playerName.text);
 
@@ -211,8 +234,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        //Disable player name input field
-        playerName.gameObject.SetActive(true);
+        //Disable room name input field
         roomName.gameObject.SetActive(true);
 
 
@@ -281,11 +303,16 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             }
             
         };
+
         //Check if the Game can start when someone readies up
-        if (teamManager.CheckReadyTeams() && CheckReadyPlayers()) 
+        if (PhotonNetwork.IsMasterClient && teamManager.CheckReadyTeams() && CheckReadyPlayers()) 
         {
+            //Tell each player to go into the database and increase the amount of matches they have played by 1
+            photonView.RPC("IncreaseMatchPlayedForAll", RpcTarget.All);
+
             StartCoroutine(StartGame());
             Debug.Log("Start the level");
+
         }
     }
 
@@ -300,6 +327,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
 
+
     #endregion
 
     #region Button Functions
@@ -310,17 +338,22 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             Debug.LogError("Not connected to Photon Network");
             return;
         }
-        if (playerName.text == "")
-        {
-            // If player name is empty then dont do anything
 
+        //If Name Input field is active && Player name is empty
+        if (nameInputField.gameObject.activeInHierarchy && nameInputField.text == "")
+        {
+            //Show error message
+            StartCoroutine(ShowErrorMessage());
+
+            Debug.LogError("Empty Name");
             return;
         }
+
 
         if (roomName.text == "") //If Room Name is empty
         {
             //Set a default name that includes the player name
-            roomName.text = playerName.text + "'s Room";
+            roomName.text = PhotonNetwork.NickName + "'s Room";
         }
 
         //Shows the Room as an option to join in lobby list
@@ -334,15 +367,17 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         PhotonNetwork.CreateRoom(roomName.text, roomOptions, TypedLobby.Default);
 
         //Disable Lobby Panel
-        lobbyPanel.SetActive(false);
+        //lobbyPanel.SetActive(false);
     }
 
     public void JoinRoom(string RoomName)
     {
 
-        if (playerName.text == "")
+        //If Name Input field is active && Player name is empty
+        if (nameInputField.gameObject.activeInHierarchy && nameInputField.text == "")
         {
-            // If player name is empty then dont do anything
+            //Show error message
+            StartCoroutine(ShowErrorMessage());
 
             return;
         }
@@ -352,7 +387,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         PhotonNetwork.JoinRoom(RoomName);
 
         //Disable Lobby Panel
-        lobbyPanel.SetActive(false);
+        //lobbyPanel.SetActive(false);
     }
 
     public void LeaveRoom() 
@@ -386,6 +421,30 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             //We are not connected, establish a new connection
             PhotonNetwork.ConnectUsingSettings();
         }
+    }
+
+    public void ShowStats() 
+    {
+        playernameforStats.text = PhotonNetwork.NickName + "'s Stats";
+        matchesPlayedtext.text = "Matches Played: " + FirebaseManager.Instance.matchesplayed.ToString();
+        matchesWontext.text = "Matches Won: " + FirebaseManager.Instance.matcheswon.ToString();
+        UIManager.Instance.ShowStatScreen();
+    }
+
+    //Is called by the Player Name Input field whenever something is typed in
+    public void SetPlayerName(string value)
+    {
+
+        //Check if the value is empty
+        if (string.IsNullOrEmpty(value))
+        {
+            Debug.LogError("Player Name is null or empty");
+            return;
+        }
+
+        PhotonNetwork.NickName = value;
+        //Display Username on screen
+        playerUsername.text = value;
     }
 
     #endregion
@@ -477,8 +536,12 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             PhotonNetwork.CurrentRoom.IsVisible = false;
             PhotonNetwork.CurrentRoom.IsOpen = false;
 
+
+            //Select a random Map
+            PhotonNetwork.LoadLevel(mapManager.SelectRandomMap());
+
             //Go To The Actual Game
-            PhotonNetwork.LoadLevel(1);
+            //PhotonNetwork.LoadLevel("Testing Lobby");
         }
 
     }
@@ -523,12 +586,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         //If there is more than one player
         if (PhotonNetwork.CurrentRoom.PlayerCount > 1) 
         {
-            //Make sure only the Master Client is checking which players are ready
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                return false;
-            }
-
             //Check each players Custom Property if one of them is false then that means everyone is not ready
             foreach (Player p in PhotonNetwork.PlayerList)
             {
@@ -558,7 +615,21 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
+    [PunRPC]
+    void IncreaseMatchPlayedForAll() 
+    {
+        //Increase the amount of games the player has played
+        StartCoroutine(FirebaseManager.Instance.UpdateMatchPlayedDatabase());
+    }
 
+    System.Collections.IEnumerator ShowErrorMessage() 
+    {
+        playerErrorMessage.text = "Player name is Empty";
+
+        yield return new WaitForSeconds(1f);
+
+        playerErrorMessage.text = "";
+    }
 
 
 

@@ -7,7 +7,7 @@ using static teamsEnum;
 
 public class TestRoleManager : MonoBehaviour
 {
-    public PlayerModelScriptableObject PlayerModelScriptableObject;
+    public TeamModelScriptableObject PlayerModelScriptableObject;
     //public GameObject[] playerModels;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
