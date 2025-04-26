@@ -135,6 +135,8 @@ public class FirebaseManager : MonoBehaviour
         }
 
     }
+    
+
 
     void OnApplicationQuit()
     {
@@ -221,7 +223,6 @@ public class FirebaseManager : MonoBehaviour
 
         //Wait until the task completes (We use Lambda expression because WaitUntil expects a function that returns a boolean)
         yield return new WaitUntil(() => LoginTask.IsCompleted);
-
 
 
 
@@ -452,13 +453,15 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
+    
+
     public IEnumerator UpdateMatchPlayedDatabase()
     {
         //Increase it by one
         matchesplayed++;
         // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches played and then set the value that has been passed in, to the database
         var DBTask = DBreference.Child("users").Child(User.UserId).Child("Matches Played").SetValueAsync(matchesplayed);
-
+        
         //Wait until task is completed
         yield return new WaitUntil(() => DBTask.IsCompleted);
 
@@ -496,6 +499,8 @@ public class FirebaseManager : MonoBehaviour
         // Go into the database, find the users list and then under that find the userID and then under that find the amount of Matches won and then set the value that has been passed in, to the database
         var DBTask = DBreference.Child("users").Child(User.UserId).Child("Online Status").SetValueAsync(online);
 
+        //When player is offline automatically set the online status to false (Sends the instruction to the server)
+        var DBDisconnect = DBreference.Child("users").Child(User.UserId).Child("Online Status").OnDisconnect().SetValue(false);
         //Wait until task is completed
         yield return new WaitUntil(() => DBTask.IsCompleted);
 
@@ -532,7 +537,7 @@ public class FirebaseManager : MonoBehaviour
 
             //Get the "Matches Played" Value from the database and load it into a variable for later use
             matchesplayed = int.Parse(snapshot.Child("Matches Played").Value.ToString());
-
+            
         }
     }
 
