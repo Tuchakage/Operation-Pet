@@ -8,6 +8,7 @@ TagManager:
   - Target
   - SeekerChar
   - WizardChar
+  - Ground
   layers:
   - Default
   - TransparentFX
