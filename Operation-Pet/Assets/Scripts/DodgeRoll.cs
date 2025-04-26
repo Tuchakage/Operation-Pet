@@ -27,7 +27,7 @@ public class GroundPlayerDodgeRoll : MonoBehaviourPunCallbacks
     {
         if (!photonView.IsMine) return;
         // Check for player input to dodge roll (e.g., pressing Left Shift)
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canRoll)
+        if (Input.GetKeyDown(KeyCode.RightShift) && canRoll)
         {
             photonView.RPC("PerformRollRPC", RpcTarget.All);
         }
