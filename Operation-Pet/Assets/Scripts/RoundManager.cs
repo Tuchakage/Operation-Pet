@@ -43,6 +43,8 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Now that everyone is in the game, set the player ready property to false
+        PlayerCardEntry.UpdatePlayerReadyProp(false);
         //Create Dictionarys
         possibleWinners = new Dictionary<teams, int>();
 

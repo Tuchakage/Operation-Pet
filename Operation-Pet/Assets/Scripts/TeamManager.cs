@@ -8,6 +8,7 @@ using System;
 using TMPro;
 using Unity.VisualScripting;
 using static teamsEnum;
+using UnityEngine.Analytics;
 
 
 //Purpose of this script is to set the teams of the players before the game
@@ -53,7 +54,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         localPlayer = PhotonNetwork.CurrentRoom.GetPlayer(ownerid);
 
 
-        IncreaseTeamCount(teams.Unassigned);
+        JoinUnassigned();
 
         //Move the Player Cards for all players that have just joined the room
         if (PhotonNetwork.PlayerList.Length > 0) 
@@ -344,7 +345,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         return false;
     }
 
-    teams AddPlayerToTeam(teams teamToAdd) 
+    public static teams AddPlayerToTeam(teams teamToAdd) 
     {
         //Change what team the player is on
         Hashtable properties = new Hashtable()

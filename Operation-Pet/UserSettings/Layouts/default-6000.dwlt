@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GameView
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -273,12 +273,12 @@ MonoBehaviour:
     height: 664
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 16}
+  m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
   - {fileID: 16}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -342,10 +342,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 63}
+    scrollPos: {x: 0, y: 78}
     m_SelectedIDs: deb20000
     m_LastClickedID: 45790
-    m_ExpandedIDs: 00000000eeb10000f0b10000f2b1000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000eeb10000f0b10000f2b10000dcb2000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -400,9 +400,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 58ae0000
-    m_LastClickedInstanceID: 44632
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 2a900000
+    m_LastClickedInstanceID: 36906
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000eee10000f0e1000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: aefafffff4ffffff
+      m_ExpandedIDs: aa36feff3438feffa83cfeff4845feffea4dfeffde4ffeffec4ffeff3251feff4051feff8251feffbc51fefff471feff7e73feffea77feff8280feff1c89feff088bfeff0e8bfeff4c8cfeff528cfeff848cfeffb68cfeff14b3feff9eb4feff0eb9feffaac1feff48cafeff38ccfeff42ccfeff84cdfeff8ecdfeffcccdfeff02cefeffd6e3feff1218ffff9c19ffff081effffa026ffff3a2fffff2631ffff2c31ffff6a32ffff7032ffffa232ffffd432fffffe4effff8850fffff454ffff8c5dffff2666ffff1268ffff1868ffff5669ffff5c69ffff8e69ffffc069ffff8e82ffff1884ffff8c88ffff2c91ffffce99ffffc29bffffd09bffff169dffff249dffff669dffffa09dffffd2bcffff5cbeffffd0c2ffff70cbffff12d4ffff06d6ffff14d6ffff5ad7ffff68d7ffffaad7ffffe4d7ffff62dbffff22f1ffffd2f3ffff78f5ffff82f7ffff24f8ffffaefafffff4ffffff32b70000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1126,9 +1126,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 394.01996, y: 373.8213, z: -11.572434}
+    m_Target: {x: 743.65753, y: 335.75867, z: -10.011816}
     speed: 2
-    m_Value: {x: 394.01996, y: 373.8213, z: -11.572434}
+    m_Value: {x: 743.65753, y: 335.75867, z: -10.011816}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1178,9 +1178,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 680.6145
+    m_Target: 524.5505
     speed: 2
-    m_Value: 680.6145
+    m_Value: 524.5505
   m_Ortho:
     m_Target: 1
     speed: 2

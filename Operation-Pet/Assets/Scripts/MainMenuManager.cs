@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static TeamManager;
+using static teamsEnum;
 using static Unity.Burst.Intrinsics.X86;
 
 public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
@@ -196,7 +197,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public override void OnLeftRoom()
     {
-
+        //teamManager.JoinUnassigned();
         SceneManager.LoadScene(1);
         Debug.Log("Left Room");
     }
@@ -393,6 +394,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public void LeaveRoom() 
     {
         teamManager.DecreaseTeamCount();
+        TeamManager.AddPlayerToTeam(teams.Unassigned);
 
         //Reset Properties
         Hashtable properties = new Hashtable(){
@@ -538,10 +540,10 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
             //Select a random Map
-            PhotonNetwork.LoadLevel(mapManager.SelectRandomMap());
+            //PhotonNetwork.LoadLevel(mapManager.SelectRandomMap());
 
             //Go To The Actual Game
-            //PhotonNetwork.LoadLevel("Testing Lobby");
+            PhotonNetwork.LoadLevel("Testing Lobby");
         }
 
     }
