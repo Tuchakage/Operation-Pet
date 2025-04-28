@@ -249,7 +249,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     //Function used when a team collects all the points
-    public void IncreaseTeamRound(teams winningTeam) 
+    public void IncreaseTeamRoundWon(teams winningTeam) 
     {
         Debug.Log("Increase Team Round");
         //The key for the winning team

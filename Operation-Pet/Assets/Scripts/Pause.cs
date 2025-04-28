@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using static teamsEnum;
 
+
 public class Pause : MonoBehaviour
 {
     [SerializeField]
@@ -22,10 +23,14 @@ public class Pause : MonoBehaviour
     {
         isMenuActive = false;
 
-        //Find UI Elements
-        pauseMenuPanel = GameObject.Find("Pause Menu");
-        resumeBtn = GameObject.Find("ResumeBtn").GetComponent<Button>();
-        mainMenuBtn = GameObject.Find("MainMenuBtn").GetComponent<Button>();
+        if (SceneManager.GetActiveScene().name != "ResultScreen") 
+        {
+            //Find UI Elements
+            pauseMenuPanel = GameObject.Find("Pause Menu");
+            resumeBtn = GameObject.Find("ResumeBtn").GetComponent<Button>();
+            mainMenuBtn = GameObject.Find("MainMenuBtn").GetComponent<Button>();
+        }
+
 
         if (pauseMenuPanel) 
         {

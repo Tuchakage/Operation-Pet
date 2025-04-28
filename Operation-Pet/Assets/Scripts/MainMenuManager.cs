@@ -59,6 +59,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject canvas;
     public GameObject lobbyPanel;
     public GameObject roomInfo;
+    public GameObject buttonPanel; //Variable storing all the Buttons in the main menu so we can activate them when connected to Photon
 
     public Button signOutBtn;
     public Button statsBtn;
@@ -95,6 +96,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        buttonPanel.SetActive(false);
         //Depending on whether the player is playing without an account or not determines whether the input field for player name shows up
         nameInputField.gameObject.SetActive(FirebaseManager.Instance.playWithoutAccount);
 
@@ -127,6 +129,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         else //If already connected
         {
+            buttonPanel.SetActive(true);
             Debug.Log("Already Connected");
             if (regionTxt)
             {
@@ -184,6 +187,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("OnConnectedToMaster");
         Debug.Log("Connection made to " + PhotonNetwork.CloudRegion + "server.");
 
+
+        buttonPanel.SetActive(true);
         if (regionTxt)
         {
             regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
