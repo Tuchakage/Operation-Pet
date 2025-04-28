@@ -104,7 +104,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             if (PhotonNetwork.IsMasterClient) 
             {
                 //Set the amount of food each team needs to collect (We put this here so this is done after the round has been 
-                scoreManager.SetMaxFoodPerTeam();
+                scoreManager.SetMaxFoodPerTeam(GetCurrentRound());
             }
 
             //Swap Roles
@@ -471,7 +471,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         if (propertiesThatChanged.ContainsKey("Round Number") && PhotonNetwork.IsMasterClient && !foodSpawned) 
         {
             //Set the amount of food each team needs to collect (We put this here so this is done after the round has been 
-            scoreManager.SetMaxFoodPerTeam();
+            scoreManager.SetMaxFoodPerTeam(GetCurrentRound());
             foodSpawned = true;
         }
 

@@ -22,10 +22,7 @@ EditorBuildSettings:
     guid: 622ac28ef95692f4aaa445efec3dce23
   - enabled: 1
     path: Assets/Scenes/Dog-Park.unity
-    guid: 32895e24e5c404f58bfb9bdb7a730abe
-  - enabled: 1
-    path: Assets/Scenes/Arena.unity
-    guid: d042ddd09b7da47f89c9b8ee3a211115
+    guid: eac1b29fa88a84ce78efd78901e8c944
   - enabled: 1
     path: Assets/Scenes/Horse Arena.unity
     guid: 2169524cb8f51f4488541a0fa3792544

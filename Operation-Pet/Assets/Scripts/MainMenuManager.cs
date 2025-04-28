@@ -119,8 +119,22 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
             PhotonNetwork.ConnectUsingSettings();
 
+
+
+
+
+
+        }
+        else //If already connected
+        {
+            Debug.Log("Already Connected");
+            if (regionTxt)
+            {
+                regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
+            }
+
             //If player decided to log in with an account
-            if (!nameInputField.gameObject.activeInHierarchy) 
+            if (!nameInputField.gameObject.activeSelf)
             {
                 //Set Photon Nickname to be the same as signed in Username
                 PhotonNetwork.NickName = FirebaseManager.Instance.User.DisplayName;
@@ -132,11 +146,9 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
                 //Allow the Stats button to appear
                 statsBtn.gameObject.SetActive(true);
             }
-
-            
-
         }
-        
+
+
 
         signOutBtn.onClick.AddListener(FirebaseManager.Instance.SignOutButton);
 
@@ -172,10 +184,24 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("OnConnectedToMaster");
         Debug.Log("Connection made to " + PhotonNetwork.CloudRegion + "server.");
 
-        //if (regionTxt)
-        //{
-        //    regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
-        //}
+        if (regionTxt)
+        {
+            regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
+        }
+
+        //If player decided to log in with an account
+        if (!nameInputField.gameObject.activeSelf)
+        {
+            //Set Photon Nickname to be the same as signed in Username
+            PhotonNetwork.NickName = FirebaseManager.Instance.User.DisplayName;
+
+            //Display Username on screen
+            playerUsername.text = PhotonNetwork.NickName;
+            //Debug.Log("Name = " + PhotonNetwork.NickName);
+
+            //Allow the Stats button to appear
+            statsBtn.gameObject.SetActive(true);
+        }
 
         //After we connect to Master server, join the lobby
         PhotonNetwork.JoinLobby(TypedLobby.Default);
@@ -540,10 +566,10 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
             //Select a random Map
-            //PhotonNetwork.LoadLevel(mapManager.SelectRandomMap());
+            PhotonNetwork.LoadLevel(mapManager.SelectRandomMap());
 
             //Go To The Actual Game
-            PhotonNetwork.LoadLevel("Testing Lobby");
+            //PhotonNetwork.LoadLevel("Testing Lobby");
         }
 
     }
