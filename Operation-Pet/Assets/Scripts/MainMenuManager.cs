@@ -120,12 +120,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
             //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
             PhotonNetwork.ConnectUsingSettings();
-
-
-
-
-
-
         }
         else //If already connected
         {
@@ -149,6 +143,15 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
                 //Allow the Stats button to appear
                 statsBtn.gameObject.SetActive(true);
             }
+
+            //Make sure Roles for players are reset
+            Hashtable playerProp = new Hashtable()
+            {
+            {"Role Name",  roles.Unassigned}
+            };
+            //Debug.Log("Team Counter =" +teamCounter + " For "+team);
+            //Set the Custom Properties for the room so that it knows how many players are in each team
+            PhotonNetwork.LocalPlayer.SetCustomProperties(playerProp);
         }
 
 
@@ -574,7 +577,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             PhotonNetwork.LoadLevel(mapManager.SelectRandomMap());
 
             //Go To The Actual Game
-            //PhotonNetwork.LoadLevel("Testing Lobby");
+            //PhotonNetwork.LoadLevel("Street");
         }
 
     }

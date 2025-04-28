@@ -80,7 +80,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("Round Winner is " + teamThatScored.ToString());
             //
-            roundManager.IncreaseTeamRoundWon(teamThatScored);
+            StartCoroutine(roundManager.IncreaseTeamRoundWon(teamThatScored));
         }
 
         //Check if Next Round should be called

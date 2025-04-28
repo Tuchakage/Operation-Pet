@@ -32,8 +32,6 @@ public class ResultsManager : MonoBehaviourPun
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //No need to Sync Scenes because anyone can go back to the main menu at any time
-        PhotonNetwork.AutomaticallySyncScene = false;
         sortedRankedTeams = new Dictionary<teams, int>();
         possibleWinners = new Dictionary<teams, int>();
 
@@ -44,6 +42,9 @@ public class ResultsManager : MonoBehaviourPun
         SelectSet();
 
         SpawnTeam();
+
+        //No need to Sync Scenes because anyone can go back to the main menu at any time
+        PhotonNetwork.AutomaticallySyncScene = false;
 
     }
     // Update is called once per frame
