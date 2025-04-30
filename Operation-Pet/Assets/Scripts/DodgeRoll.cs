@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundPlayerDodgeRoll : MonoBehaviourPunCallbacks
+public class DodgeRoll : MonoBehaviourPunCallbacks
 {
     public float rollDistance = 5.0f; // Distance covered in the dodge roll
     public float rollSpeed = 10.0f; // Speed of the dodge roll
@@ -17,19 +17,13 @@ public class GroundPlayerDodgeRoll : MonoBehaviourPunCallbacks
     {
         characterController = GetComponent<CharacterController>();
     }
-
-    private T GetComponent<T>()
-    {
-        throw new NotImplementedException();
-    }
-
     void Update()
     {
         if (!photonView.IsMine) return;
         // Check for player input to dodge roll (e.g., pressing Left Shift)
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canRoll)
+        if (Input.GetKeyDown(KeyCode.RightShift) && canRoll)
         {
-            photonView.RPC("PerformRollRPC", RpcTarget.All);
+            StartCoroutine(PerformRoll());
         }
     }
     [PunRPC]
