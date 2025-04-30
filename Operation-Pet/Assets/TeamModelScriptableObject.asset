@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c2a76f404efc234f9006212ba7b115b, type: 3}
-  m_Name: PlayerModelScriptableObject
+  m_Name: TeamModelScriptableObject
   m_EditorClassIdentifier: 
   playerModels:
-  - {fileID: 603201666958415052, guid: e90ce281d951e74488a6e8b1b286d2fd, type: 3}
-  - {fileID: 603201666958415052, guid: e90ce281d951e74488a6e8b1b286d2fd, type: 3}
-  - {fileID: 603201666958415052, guid: e90ce281d951e74488a6e8b1b286d2fd, type: 3}
-  - {fileID: 603201666958415052, guid: e90ce281d951e74488a6e8b1b286d2fd, type: 3}
-  - {fileID: 603201666958415052, guid: e90ce281d951e74488a6e8b1b286d2fd, type: 3}
+  - {fileID: 3894494575806304871, guid: e555cd9cc9872c74fb5e7f5f18db5370, type: 3}
+  - {fileID: 3894494575806304871, guid: e555cd9cc9872c74fb5e7f5f18db5370, type: 3}
+  - {fileID: 3894494575806304871, guid: e555cd9cc9872c74fb5e7f5f18db5370, type: 3}
+  - {fileID: 3894494575806304871, guid: e555cd9cc9872c74fb5e7f5f18db5370, type: 3}
+  - {fileID: 3894494575806304871, guid: e555cd9cc9872c74fb5e7f5f18db5370, type: 3}
+  foodModels: []
