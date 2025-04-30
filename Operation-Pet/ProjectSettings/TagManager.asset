@@ -9,6 +9,8 @@ TagManager:
   - SeekerChar
   - WizardChar
   - Ground
+  - CorrectItem
+  - WrongItem
   layers:
   - Default
   - TransparentFX

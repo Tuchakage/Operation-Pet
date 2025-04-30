@@ -12,7 +12,7 @@ public class LightBeam : MonoBehaviour
     void Update()
     {
         // Check for player input to create the beam (e.g., left mouse button)
-        if (Input.GetMouseButtonDown(0)) // Left mouse button
+        if (Input.GetKeyDown(KeyCode.Q)) // Left mouse button
         {
             CreateBeam();
         }
