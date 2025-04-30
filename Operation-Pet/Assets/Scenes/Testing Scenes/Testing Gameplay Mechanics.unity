@@ -1580,15 +1580,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerModelScriptableObject: {fileID: 0}
-  playerModels:
-  - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
-  - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
-  - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
-  - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
-  - {fileID: 8047161636021232021, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
   petSelectBtn: {fileID: 669523802}
   wizardSelectBtn: {fileID: 774990773}
   roleSelectionScreen: {fileID: 1522386693}
+  wizardModel: {fileID: 0}
 --- !u!4 &451593801
 Transform:
   m_ObjectHideFlags: 0
