@@ -2,16 +2,14 @@ using UnityEngine;
 
 public class FloatingPlayerMine : MonoBehaviour
 {
-    public GameObject minePrefab; // Prefab of the mine to place
-    public float placeDistance = 2.0f; // Distance in front of the floating player where the mine is placed
-    public float explosionForce = 10.0f; // Force of the mine explosion
-    public float explosionRadius = 5.0f; // Radius within which the mine affects objects
-    public float upwardModifier = 2.0f; // Adds upward force to the explosion
+    public GameObject minePrefab; // Prefab of the mine
+    public Camera playerCamera; // Camera for reticle targeting
+    public LayerMask targetLayer; // Layer for valid mine placement
 
     void Update()
     {
-        // Check if the player presses the right mouse button to place a mine
-        if (Input.GetMouseButtonDown(1)) // Right mouse button
+        // Place mine when right mouse button is clicked
+        if (Input.GetMouseButtonDown(1)) // Right Mouse Button
         {
             PlaceMine();
         }
@@ -19,10 +17,14 @@ public class FloatingPlayerMine : MonoBehaviour
 
     private void PlaceMine()
     {
-        // Calculate the placement position in front of the player
-        Vector3 placePosition = transform.position + transform.forward * placeDistance;
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-        // Instantiate the mine prefab at the calculated position
-        Instantiate(minePrefab, placePosition, Quaternion.identity);
+        // Perform raycast to find the target position
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, targetLayer))
+        {
+            Vector3 minePosition = hit.point; // Position where reticle is aimed
+            Instantiate(minePrefab, minePosition, Quaternion.identity);
+        }
     }
 }
