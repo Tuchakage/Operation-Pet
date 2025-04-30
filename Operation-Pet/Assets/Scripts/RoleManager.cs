@@ -2,29 +2,36 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static teamsEnum;
 
 public class RoleManager : MonoBehaviourPunCallbacks
 {
-    public PlayerModelScriptableObject PlayerModelScriptableObject;
+    public TeamModelScriptableObject PlayerModelScriptableObject;
 
-    public GameObject[] playerModels;
     public GameObject petSelectBtn;
     public GameObject wizardSelectBtn;
     public GameObject roleSelectionScreen;
+    public GameObject wizardModel;
 
     private teamsEnum.teams myTeam;
+    RoundManager roundManager;
 
     //Keep reference to your teammate
     Player teammate;
+
+    //When this variable is set to true then that means the game has passed the first round so you dont get the option to choose the role and instead the roles swap
+    bool initRole;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        initRole = false;
         //Store the team that this player is on
         myTeam = GetTeam(PhotonNetwork.LocalPlayer);
 
@@ -32,7 +39,15 @@ public class RoleManager : MonoBehaviourPunCallbacks
         petSelectBtn.GetComponent<Image>().color = teamsEnum.ChangeColour(myTeam);
         wizardSelectBtn.GetComponent<Image>().color = teamsEnum.ChangeColour(myTeam);
         SetTeammate();
-        SetPlayerRole(roles.Unassigned);
+
+        roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
+
+        //If this is the first time the player is loading in
+        if (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Role Name"))
+        {
+            SetPlayerRole(roles.Unassigned);
+        }
+        
     }
 
     public void SelectPet() 
@@ -40,15 +55,32 @@ public class RoleManager : MonoBehaviourPunCallbacks
 
 
         //Is our teammate already the Pet?
+        //Check that its not the first time we are selecting a spawn
         object teammateRole;
         if (teammate.CustomProperties.TryGetValue("Role Name", out teammateRole))
         {
 
-            if ((roles)teammateRole == roles.Pet)
+            if ((roles)teammateRole == roles.Pet && !initRole)
             {
+                Debug.Log("Cant be the same role");
                 return;
             }
         }
+
+        //Find all the Food in the game
+        List<GameObject> foodInGameList = new List<GameObject>();
+        foodInGameList = GameObject.FindGameObjectsWithTag("Food").ToList<GameObject>();
+
+        if (roundManager.GetCurrentRound() <= 3) 
+        {
+            //Foreach food that was found
+            foreach (var food in foodInGameList)
+            {
+                //Set the food model to be the model for the Pets team (They can only see one type of food)
+                food.GetComponent<PetFood>().SetMesh(myTeam);
+            }
+        }
+
 
         //Find Spawnpoint for corresponding Team (The Gameobjects name would be like "Dog Pet Spawnpoint")
         string spawnPointName = myTeam.ToString() + " " + roles.Pet.ToString() + " Spawnpoint";
@@ -60,6 +92,7 @@ public class RoleManager : MonoBehaviourPunCallbacks
         //Instantiate the Player and disable UI
         roleSelectionScreen.SetActive(false);
         PhotonNetwork.Instantiate(playerModel, spawnPoint.transform.position, Quaternion.identity, 0);
+
     }
 
     public void SelectWizard() 
@@ -69,8 +102,9 @@ public class RoleManager : MonoBehaviourPunCallbacks
         if (teammate.CustomProperties.TryGetValue("Role Name", out teammateRole))
         {
 
-            if ((roles)teammateRole == roles.Wizard)
+            if ((roles)teammateRole == roles.Wizard && !initRole)
             {
+                Debug.Log("Cant be the same role");
                 return;
             }
         }
@@ -80,8 +114,8 @@ public class RoleManager : MonoBehaviourPunCallbacks
 
         //Instantiate the Player and disable UI
         roleSelectionScreen.SetActive(false);
-
-        //PhotonNetwork.Instantiate(playerModel, spawnPoint.transform.position, Quaternion.identity, 0);
+        SetPlayerRole(roles.Wizard);
+        PhotonNetwork.Instantiate(wizardModel.name, spawnPoint.transform.position, Quaternion.identity, 0);
     }
 
     Player SetTeammate() 
@@ -174,4 +208,28 @@ public class RoleManager : MonoBehaviourPunCallbacks
         return null;
     }
 
+    public System.Collections.IEnumerator SwapRoles()
+    {
+
+        yield return new WaitForSeconds(1f);
+
+        initRole = true;
+        //Check to see if the player already has a role assigned
+        object playerRole;
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Role Name", out playerRole)) 
+        {
+            if ((roles)playerRole == roles.Pet)
+            {
+                SelectWizard();
+                
+
+            }
+            else if ((roles)playerRole == roles.Wizard) 
+            {
+
+                SelectPet();
+                
+            }
+        }
+    }
 }

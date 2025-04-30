@@ -8,6 +8,10 @@ TagManager:
   - Target
   - SeekerChar
   - WizardChar
+  - Player Card
+  - Spawnpoints
+  - Food
+  - UIScreen
   layers:
   - Default
   - TransparentFX

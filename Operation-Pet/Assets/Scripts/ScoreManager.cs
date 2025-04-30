@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -6,17 +7,29 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using static teamsEnum;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : MonoBehaviourPunCallbacks
 {
-    
-    private Dictionary<teams, int> teamScores;
+    //Stores the scores for each team
+    public Dictionary<teams, int> teamScores;
+
+    //Store all the possible winners of the round
+    private Dictionary<teams, int> possibleRoundWinner;
     public TMP_Text DogScoreTxt, CatScoreTxt, MouseScoreTxt, SquirrelScoreTxt, HorseScoreTxt;
+
+    PetFoodSpawner foodSpawner;
+    RoundManager roundManager;
+
+    //Determines the score the teams need to get to end the round
+    [SerializeField]
+    int maxFoodPerTeam;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         teamScores = new Dictionary<teams, int>();
+        roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
 
+        
         //Make sure that all the text isn't visible
         DogScoreTxt.enabled = false;
         CatScoreTxt.enabled = false;
@@ -39,13 +52,14 @@ public class ScoreManager : MonoBehaviour
 
 
 
-                    Debug.Log("Team Name: " + teamName + " Score: " + teamScores[teamName]);
+                    //Debug.Log("Team Name: " + teamName + " Score: " + teamScores[teamName]);
                 }
 
             }
             
 
         }
+
     }
 
     // Update is called once per frame
@@ -59,13 +73,20 @@ public class ScoreManager : MonoBehaviour
     {
         teamScores[teamThatScored]++;
         SetTeamScoreTxt(teamThatScored, teamScores[teamThatScored]);
+
+
+        //If team has reached the maximum score they can get
+        if (teamScores[teamThatScored] == maxFoodPerTeam) 
+        {
+            Debug.Log("Round Winner is " + teamThatScored.ToString());
+            //
+            roundManager.IncreaseTeamRound(teamThatScored);
+        }
+
+        //Check if Next Round should be called
+        Debug.Log("Increased Score");
     }
 
-    void DecreaseScore(teams teamName) 
-    {
-        teamScores[teamName]--;
-        SetTeamScoreTxt(teamName, teamScores[teamName]);
-    }
 
     void SetTeamScoreTxt(teams teamScoreUpdate, int score) 
     {
@@ -119,5 +140,26 @@ public class ScoreManager : MonoBehaviour
                 HorseScoreTxt.enabled = true;
                 break;
         }
+    }
+
+    [PunRPC]
+    void ResetScore() 
+    {
+        foreach (teams teamName in teamScores.Keys)
+        {
+            Debug.Log("Resetting Team " + teamName);
+            //int teamScore;
+            //if (teamScores.TryGetValue(teamName, out teamScore))
+            //{
+            //    teamScores[teamName] = 0;
+            //}
+        }
+    }
+
+    public void SetMaxFoodPerTeam() 
+    {
+        foodSpawner = GameObject.Find("FoodSpawner").GetComponent<PetFoodSpawner>();
+        //Get the amount of points each team needs to collect
+        maxFoodPerTeam = foodSpawner.Init();
     }
 }
