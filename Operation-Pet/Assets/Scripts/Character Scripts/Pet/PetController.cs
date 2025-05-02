@@ -145,6 +145,7 @@ public class PetController : MonoBehaviourPun
 
      void Jump(InputAction.CallbackContext context)
     {
+        Debug.Log(IsGrounded());
         if (IsGrounded()) 
         {
             //Jump upwards
@@ -156,15 +157,18 @@ public class PetController : MonoBehaviourPun
     {
         //Use Raycast to check what is below us
         // transform.position + Vector3.up * 0.25f = Makes sure we ray cast from above
-        Ray ray = new Ray(transform.position + Vector3.up * 0.25f, Vector3.down);
+        Vector3 origin = transform.position + Vector3.up * .25f;
+        Ray ray = new Ray(origin, Vector3.down);
 
         //Spawn in the raycast and if it hit something return true
-        if (Physics.Raycast(ray, out RaycastHit hit, 0.3f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1.2f))
         {
+            Debug.DrawLine(origin, Vector3.down, Color.red);
             return true;
         }
         else 
         {
+            Debug.DrawLine(origin, Vector3.down, Color.green);
             return false;
         }
         
