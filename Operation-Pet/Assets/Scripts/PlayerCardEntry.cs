@@ -71,7 +71,7 @@ public class PlayerCardEntry : MonoBehaviour
         }
     }
 
-    public void UpdatePlayerReadyProp(bool playerReady) 
+    public static void UpdatePlayerReadyProp(bool playerReady) 
     {
         //Update Hash Table
         Hashtable properties = new Hashtable(){

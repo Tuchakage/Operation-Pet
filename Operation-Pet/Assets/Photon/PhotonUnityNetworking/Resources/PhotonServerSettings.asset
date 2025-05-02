@@ -44,18 +44,21 @@ MonoBehaviour:
   - IncreaseTeamCount
   - DecreaseTeamCount
   - IncreaseScore
-  - PerformPunchRPC
-  - PerformRollRPC
-  - CallSetFoodModel
-  - DestroyFood
-  - EveryoneCanPickUp
+  - DecreaseScore
   - Explode
-  - GameWinner
-  - IncreaseMatchPlayedForAll
-  - IncreaseMatchWonStat
+  - DestroyFood
   - ResetScore
+  - GameWinner
   - SetAsMine
   - SetFoodAsMine
+  - EveryoneCanPickUp
+  - SetFoodModel
+  - CallSetFoodModel
+  - IncreaseMatchPlayedForAll
+  - CallIncreaseMatchWon
+  - IncreaseMatchWonStat
+  - PerformPunchRPC
+  - PerformRollRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

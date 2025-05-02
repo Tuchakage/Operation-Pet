@@ -43,6 +43,8 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Now that everyone is in the game, set the player ready property to false
+        PlayerCardEntry.UpdatePlayerReadyProp(false);
         //Create Dictionarys
         possibleWinners = new Dictionary<teams, int>();
 
@@ -102,7 +104,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
             if (PhotonNetwork.IsMasterClient) 
             {
                 //Set the amount of food each team needs to collect (We put this here so this is done after the round has been 
-                scoreManager.SetMaxFoodPerTeam();
+                scoreManager.SetMaxFoodPerTeam(GetCurrentRound());
             }
 
             //Swap Roles
@@ -148,7 +150,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public System.Collections.IEnumerator NextRound() 
     {
-
+        Debug.Log("Start New Round");
         //Check what round number the game is in
         if (GetCurrentRound() <= 3)
         {
@@ -233,7 +235,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
                 Debug.Log(teamName + " has won a round");
                 //Update Room Properties Hashtable
-                UpdateRoundProperties(keyName, num);
+                StartCoroutine(UpdateRoundProperties(keyName, num));
             }
         }
 
@@ -247,24 +249,27 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     #endregion
 
     //Function used when a team collects all the points
-    public void IncreaseTeamRound(teams winningTeam) 
+    public System.Collections.IEnumerator IncreaseTeamRoundWon(teams winningTeam) 
     {
-        Debug.Log("Increase Team Round");
+        
         //The key for the winning team
         string keyName = winningTeam.ToString() + " Rounds";
-
+        
         //Get the amount of rounds the winning team has got
         object roundsWon;
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(keyName, out roundsWon))
         {
             //Get the value and increment it by 1
             int num = (int)roundsWon;
+            Debug.Log("Before Increase Team Round of "+ keyName + " to "+num);
             num++;
 
             //Update Room Property Hashtable
-            UpdateRoundProperties(keyName, num);
+            yield return StartCoroutine(UpdateRoundProperties(keyName, num));
+            Debug.Log("Update Round Props "+keyName +" "+num);
         }
 
+        yield return new WaitForSeconds(1f);
         //Start the next round
         StartCoroutine(NextRound());
 
@@ -371,8 +376,9 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
     #region Photon Property Related Functions
 
     //Function to update the Hashtable to increase the amount of Rounds a team has won
-    void UpdateRoundProperties(string key, int roundsWon) 
+    System.Collections.IEnumerator UpdateRoundProperties(string key, int roundsWon) 
     {
+        
         //Update Hashtable
         Hashtable properties = new Hashtable()
         {
@@ -381,6 +387,8 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
 
         //Update the Hashtable that is being tracked by PUN
         PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
+
+        yield return null;
     }
     
     //Get the current Round Number of the game
@@ -469,7 +477,7 @@ public class RoundManager : MonoBehaviourPunCallbacks, IPunObservable
         if (propertiesThatChanged.ContainsKey("Round Number") && PhotonNetwork.IsMasterClient && !foodSpawned) 
         {
             //Set the amount of food each team needs to collect (We put this here so this is done after the round has been 
-            scoreManager.SetMaxFoodPerTeam();
+            scoreManager.SetMaxFoodPerTeam(GetCurrentRound());
             foodSpawned = true;
         }
 

@@ -61,9 +61,8 @@ public class PetFood : MonoBehaviourPunCallbacks
                     Player p = other.GetComponent<PhotonView>().Controller;
                     teams playerTeam = GetTeam(p);
 
-                    //
+                    // Check Game winner is called in RoundManager in NextRound() function
                     scoreManager.photonView.RPC("IncreaseScore", RpcTarget.All, playerTeam);
-                    roundManager.photonView.RPC("GameWinner", RpcTarget.All, playerTeam);
                 }
 
 

@@ -80,7 +80,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         {
             Debug.Log("Round Winner is " + teamThatScored.ToString());
             //
-            roundManager.IncreaseTeamRound(teamThatScored);
+            StartCoroutine(roundManager.IncreaseTeamRoundWon(teamThatScored));
         }
 
         //Check if Next Round should be called
@@ -156,10 +156,22 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void SetMaxFoodPerTeam() 
+    public void SetMaxFoodPerTeam(int currentRound) 
     {
-        foodSpawner = GameObject.Find("FoodSpawner").GetComponent<PetFoodSpawner>();
-        //Get the amount of points each team needs to collect
-        maxFoodPerTeam = foodSpawner.Init();
+        Debug.Log("Round Number is " + currentRound);
+        if (currentRound <= 4)
+        {
+            foodSpawner = GameObject.Find("FoodSpawner").GetComponent<PetFoodSpawner>();
+            //Get the amount of points each team needs to collect
+            maxFoodPerTeam = foodSpawner.Init();
+        }
+        else //We are in a deathmatch
+        {
+            foodSpawner = GameObject.Find("FoodSpawner").GetComponent<PetFoodSpawner>();
+            foodSpawner.SpawnFood();
+            //Teams only need to collect one food which is the deathmatch food
+            maxFoodPerTeam = 1;
+        }
+
     }
 }

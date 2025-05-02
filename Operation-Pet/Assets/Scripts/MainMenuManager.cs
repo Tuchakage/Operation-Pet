@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static TeamManager;
+using static teamsEnum;
 using static Unity.Burst.Intrinsics.X86;
 
 public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
@@ -58,6 +59,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject canvas;
     public GameObject lobbyPanel;
     public GameObject roomInfo;
+    public GameObject buttonPanel; //Variable storing all the Buttons in the main menu so we can activate them when connected to Photon
 
     public Button signOutBtn;
     public Button statsBtn;
@@ -94,6 +96,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        buttonPanel.SetActive(false);
         //Depending on whether the player is playing without an account or not determines whether the input field for player name shows up
         nameInputField.gameObject.SetActive(FirebaseManager.Instance.playWithoutAccount);
 
@@ -117,9 +120,18 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
             //Connect to photon master-server. Uses the settings saved in PhotonServerSettings (An asset file in project)
             PhotonNetwork.ConnectUsingSettings();
+        }
+        else //If already connected
+        {
+            buttonPanel.SetActive(true);
+            Debug.Log("Already Connected");
+            if (regionTxt)
+            {
+                regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
+            }
 
             //If player decided to log in with an account
-            if (!nameInputField.gameObject.activeInHierarchy) 
+            if (!nameInputField.gameObject.activeSelf)
             {
                 //Set Photon Nickname to be the same as signed in Username
                 PhotonNetwork.NickName = FirebaseManager.Instance.User.DisplayName;
@@ -132,10 +144,17 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
                 statsBtn.gameObject.SetActive(true);
             }
 
-            
-
+            //Make sure Roles for players are reset
+            Hashtable playerProp = new Hashtable()
+            {
+            {"Role Name",  roles.Unassigned}
+            };
+            //Debug.Log("Team Counter =" +teamCounter + " For "+team);
+            //Set the Custom Properties for the room so that it knows how many players are in each team
+            PhotonNetwork.LocalPlayer.SetCustomProperties(playerProp);
         }
-        
+
+
 
         signOutBtn.onClick.AddListener(FirebaseManager.Instance.SignOutButton);
 
@@ -171,10 +190,26 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("OnConnectedToMaster");
         Debug.Log("Connection made to " + PhotonNetwork.CloudRegion + "server.");
 
-        //if (regionTxt)
-        //{
-        //    regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
-        //}
+
+        buttonPanel.SetActive(true);
+        if (regionTxt)
+        {
+            regionTxt.text = "Region = " + PhotonNetwork.CloudRegion;
+        }
+
+        //If player decided to log in with an account
+        if (!nameInputField.gameObject.activeSelf)
+        {
+            //Set Photon Nickname to be the same as signed in Username
+            PhotonNetwork.NickName = FirebaseManager.Instance.User.DisplayName;
+
+            //Display Username on screen
+            playerUsername.text = PhotonNetwork.NickName;
+            //Debug.Log("Name = " + PhotonNetwork.NickName);
+
+            //Allow the Stats button to appear
+            statsBtn.gameObject.SetActive(true);
+        }
 
         //After we connect to Master server, join the lobby
         PhotonNetwork.JoinLobby(TypedLobby.Default);
@@ -196,7 +231,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public override void OnLeftRoom()
     {
-
+        //teamManager.JoinUnassigned();
         SceneManager.LoadScene(1);
         Debug.Log("Left Room");
     }
@@ -393,6 +428,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     public void LeaveRoom() 
     {
         teamManager.DecreaseTeamCount();
+        TeamManager.AddPlayerToTeam(teams.Unassigned);
 
         //Reset Properties
         Hashtable properties = new Hashtable(){
@@ -541,7 +577,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
             PhotonNetwork.LoadLevel(mapManager.SelectRandomMap());
 
             //Go To The Actual Game
-            //PhotonNetwork.LoadLevel("Testing Lobby");
+            //PhotonNetwork.LoadLevel("Street");
         }
 
     }

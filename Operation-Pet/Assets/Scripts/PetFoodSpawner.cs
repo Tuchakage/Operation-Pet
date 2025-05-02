@@ -93,7 +93,7 @@ public class PetFoodSpawner : MonoBehaviour
             }
             else if ((int)roundNum > 4) //Deathmatch Round
             {
-                GameObject food = PhotonNetwork.Instantiate("nut", deathMatchSpawnPoint.transform.position, Quaternion.identity, 0);
+                GameObject food = PhotonNetwork.Instantiate("DeathmatchFood", deathMatchSpawnPoint.transform.position, Quaternion.identity, 0);
                 //Make it so that anyone can pick up the food
                 food.GetPhotonView().RPC("EveryoneCanPickUp", RpcTarget.All);
 
