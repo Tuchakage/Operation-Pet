@@ -13,12 +13,22 @@ public class CharacterPunch : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (!photonView.IsMine) return;
-        // Check if the left mouse button is clicked and punching is allowed
-        if (Input.GetMouseButtonDown(0) && canPunch) // 0 represents the left mouse button
+        if (photonView.IsMine)
         {
-            StartCoroutine(Punch());
+            if (target == null)
+            {
+                Debug.LogError("Target is null, cannot proceed with punch!");
+                return;
+            }
+
+
+            // Check if the left mouse button is clicked and punching is allowed
+            if (Input.GetMouseButtonDown(0) && canPunch) // 0 represents the left mouse button
+            {
+                StartCoroutine(Punch());
+            }
         }
+        
     }
 
     [PunRPC]

@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ReticleTargeting : MonoBehaviour
 {
-    public RectTransform reticle; // Assign the UI image for the reticle
+    public Image reticle; // UI Image for the reticle
     public Color defaultColor = Color.white;
     public Color targetColor = Color.red;
-    public float detectionRange = 5.0f; // Range within which targets are highlighted
+    public float detectionRange = 5.0f;
+    public LayerMask targetLayer; // Assign the target layer in Inspector
 
     private Camera mainCamera;
 
@@ -21,23 +23,23 @@ public class ReticleTargeting : MonoBehaviour
 
     private void UpdateReticleColor()
     {
-        Ray ray = mainCamera.ScreenPointToRay(reticle.position);
+        Ray ray = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, detectionRange))
+        if (Physics.Raycast(ray, out hit, detectionRange, targetLayer))
         {
-            if (hit.collider.CompareTag("Target")) // Set the target object's tag to "Target"
+            if (hit.collider.CompareTag("Target"))
             {
-                reticle.GetComponent<UnityEngine.UI.Image>().color = targetColor; // Change color when aiming at a target
+                reticle.color = targetColor; // Change color when aiming at a target
             }
             else
             {
-                reticle.GetComponent<UnityEngine.UI.Image>().color = defaultColor; // Default color
+                reticle.color = defaultColor; // Default color
             }
         }
         else
         {
-            reticle.GetComponent<UnityEngine.UI.Image>().color = defaultColor; // Default color
+            reticle.color = defaultColor; // Default color
         }
     }
 }
