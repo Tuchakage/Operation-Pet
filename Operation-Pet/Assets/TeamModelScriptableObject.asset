@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: TeamModelScriptableObject
   m_EditorClassIdentifier: 
   playerModels:
-  - {fileID: 5351468842620337884, guid: 7af922d9ba3344241b512d3e5ebf3b75, type: 3}
-  - {fileID: 5351468842620337884, guid: 7af922d9ba3344241b512d3e5ebf3b75, type: 3}
-  - {fileID: 5351468842620337884, guid: 7af922d9ba3344241b512d3e5ebf3b75, type: 3}
-  - {fileID: 5351468842620337884, guid: 7af922d9ba3344241b512d3e5ebf3b75, type: 3}
-  - {fileID: 5351468842620337884, guid: 7af922d9ba3344241b512d3e5ebf3b75, type: 3}
+  - {fileID: 3565553582414268400, guid: 9aaf45d5a73608e4384a2ecc28b8d60e, type: 3}
+  - {fileID: 3565553582414268400, guid: 9aaf45d5a73608e4384a2ecc28b8d60e, type: 3}
+  - {fileID: 3565553582414268400, guid: 9aaf45d5a73608e4384a2ecc28b8d60e, type: 3}
+  - {fileID: 3565553582414268400, guid: 9aaf45d5a73608e4384a2ecc28b8d60e, type: 3}
+  - {fileID: 3565553582414268400, guid: 9aaf45d5a73608e4384a2ecc28b8d60e, type: 3}
   foodModels:
   - {fileID: 1972710783972859061, guid: 0c593ddc6a782c840bd812e859253aa3, type: 3}
   - {fileID: -1258736543099589447, guid: 9a0337067046cbf40bfe8427a388c98d, type: 3}
