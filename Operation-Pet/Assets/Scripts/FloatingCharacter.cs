@@ -1,73 +1,82 @@
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
+
 public class FloatingCharacter : MonoBehaviourPunCallbacks
 {
     public float hoverHeight = 5.0f; // Height above the terrain
-    public float hoverSpeed = 2.0f; // Up-and-down floating speed
+    public float hoverSpeed = 2.0f; // Floating speed
     public float moveSpeed = 5.0f; // Movement speed
-    public float hoverAmplitude = 0.5f; // Amplitude of the hover motion
-    public Camera characterCamera; // Assign the Camera in the Inspector
-    public float mouseSensitivity = 2.0f; // Sensitivity of mouse movement
-
-    private float verticalLookRotation = 0f; // Tracks vertical camera tilt
+    public float hoverAmplitude = 0.5f; // Amplitude of hover motion
+    public Camera characterCamera; // Assign the Camera in Inspector
+    public float mouseSensitivity = 2.0f; // Camera sensitivity
+    private float verticalLookRotation = 0f;
     private float hoverOffset;
 
     void Start()
     {
-        // Initialize hover offset for smooth motion
-        hoverOffset = Random.Range(0, Mathf.PI * 2);
-
-        // Ensure the camera starts at the character's position and orientation
-        if (characterCamera != null)
+        if (!photonView.IsMine)
         {
-            characterCamera.transform.position = transform.position;
-            characterCamera.transform.rotation = transform.rotation;
+            // Disable local controls for other players' characters
+            characterCamera.gameObject.SetActive(false);
+            return;
         }
 
-        // Lock the cursor to the game window for better camera control
+        hoverOffset = Random.Range(0, Mathf.PI * 2);
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        // Hovering: Smooth up-and-down motion
+        if (!photonView.IsMine) return;
+
+        HandleHovering();
+        HandleMovement();
+        HandleCameraControl();
+    }
+
+    private void HandleHovering()
+    {
         float hover = Mathf.Sin(Time.time * hoverSpeed + hoverOffset) * hoverAmplitude;
         Vector3 position = transform.position;
         position.y = hoverHeight + hover;
         transform.position = position;
-
-        // Movement (WASD or arrow keys)
-        MoveCharacter();
-
-        // Mouse look: Rotate character horizontally and camera vertically
-        LookAround();
     }
 
-    private void MoveCharacter()
+    private void HandleMovement()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        Vector3 moveDirection = Vector3.zero;
 
-        Vector3 movement = new Vector3(horizontal, 0, vertical).normalized * moveSpeed * Time.deltaTime;
-        transform.Translate(movement, Space.World);
-    }
-
-    private void LookAround()
-    {
-        // Horizontal rotation (character rotation)
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        transform.Rotate(0, mouseX, 0);
-
-        // Vertical rotation (camera tilt)
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-        verticalLookRotation -= mouseY; // Invert vertical movement for natural control
-        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f); // Limit vertical rotation
-
-        // Apply vertical rotation to the camera
-        if (characterCamera != null)
+        if (Input.GetKey(KeyCode.A))
         {
-            characterCamera.transform.localRotation = Quaternion.Euler(verticalLookRotation, 0, 0);
+            moveDirection = -transform.right;
         }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            moveDirection = transform.right;
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            moveDirection += transform.forward;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            moveDirection -= transform.forward;
+        }
+
+        if (moveDirection != Vector3.zero)
+        {
+            transform.Translate(moveDirection.normalized * moveSpeed * Time.deltaTime, Space.World);
+        }
+    }
+
+    private void HandleCameraControl()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+        transform.Rotate(0, mouseX, 0);
+        verticalLookRotation -= mouseY;
+        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
+        characterCamera.transform.localRotation = Quaternion.Euler(verticalLookRotation, 0, 0);
     }
 }
