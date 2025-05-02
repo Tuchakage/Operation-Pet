@@ -8,6 +8,7 @@ public class PetController : MonoBehaviourPun
 {
     InputSystem_Actions playerActionAsset;
     InputAction move;
+    ThirdPersonAnimation animationScript; //Set the animation values within the script
 
     Vector2 currentMovement;
     private float horizontalMovement;
@@ -19,7 +20,7 @@ public class PetController : MonoBehaviourPun
     [SerializeField]
     private float movementForce = 1f;
     [SerializeField]
-    private float movementSpeed = 5f;
+    private float maxSpeed = 5f;
 
     private Vector3 forceDirection = Vector3.zero;
 
@@ -36,6 +37,8 @@ public class PetController : MonoBehaviourPun
             rb = GetComponent<Rigidbody>();
             playerCamera.enabled = true;
         }
+
+        animationScript = GetComponent<ThirdPersonAnimation>();
 
         //performed is a callback function and will return the current state of the callback of the player input (Stored in ctx)
         //Code Syntax for callbacks is "+ = ctx"
@@ -65,7 +68,7 @@ public class PetController : MonoBehaviourPun
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        animationScript.SetMaxSpeed(maxSpeed);
     }
 
     // Update is called once per frame
@@ -95,9 +98,9 @@ public class PetController : MonoBehaviourPun
         horizontalVelocity.y = 0f;
 
         //Is the square magnitude more than the movement Speed squared
-        if (horizontalVelocity.sqrMagnitude > movementSpeed * movementSpeed) 
+        if (horizontalVelocity.sqrMagnitude > maxSpeed * maxSpeed) 
         {
-            rb.linearVelocity = horizontalVelocity.normalized * movementSpeed + Vector3.up * rb.linearVelocity.y;
+            rb.linearVelocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.linearVelocity.y;
         }
 
         LookAt();
