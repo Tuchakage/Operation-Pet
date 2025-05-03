@@ -55,6 +55,8 @@ MonoBehaviour:
   explosionRadius: 5
   explosionForce: 500
   upwardMod: 0.7
+  mineMaterial: {fileID: 2100000, guid: b8c6e6e8cae9bd24d9e64ffabbbf05d7, type: 2}
+  foodMaterial: {fileID: -6538903991835684241, guid: 4ccae3e4a3df6724db76e38557c44c06, type: 3}
 --- !u!114 &3682920538495401112
 MonoBehaviour:
   m_ObjectHideFlags: 0
