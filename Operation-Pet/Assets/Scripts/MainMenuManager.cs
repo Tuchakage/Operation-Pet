@@ -467,21 +467,6 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         UIManager.Instance.ShowStatScreen();
     }
 
-    //Is called by the Player Name Input field whenever something is typed in
-    public void SetPlayerName(string value)
-    {
-
-        //Check if the value is empty
-        if (string.IsNullOrEmpty(value))
-        {
-            Debug.LogError("Player Name is null or empty");
-            return;
-        }
-
-        PhotonNetwork.NickName = value;
-        //Display Username on screen
-        playerUsername.text = value;
-    }
 
     #endregion
 

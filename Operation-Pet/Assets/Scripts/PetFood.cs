@@ -24,6 +24,8 @@ public class PetFood : MonoBehaviourPunCallbacks
 
     [SerializeField] private float explosionRadius = 5f;
     [SerializeField] private float explosionForce = 500;
+    [SerializeField] private float upwardMod = 1; //Adjustment to the apparent position of the explosion to make it seem to lift objects.  
+
 
     ScoreManager scoreManager;
     RoundManager roundManager;
@@ -105,7 +107,7 @@ public class PetFood : MonoBehaviourPunCallbacks
             if (rb == null) continue;
 
             // Throw the players away
-            rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardMod);
             Destroy(this.gameObject);
         }
 

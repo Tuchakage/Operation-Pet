@@ -8,6 +8,8 @@ using static teamsEnum;
 public class TestRoleManager : MonoBehaviour
 {
     public TeamModelScriptableObject PlayerModelScriptableObject;
+
+    public GameObject wizardModel;
     //public GameObject[] playerModels;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,7 +45,15 @@ public class TestRoleManager : MonoBehaviour
 
     public void SelectWizard() 
     {
+        teams myTeam = GetTeam(PhotonNetwork.LocalPlayer);
+        string spawnPointName = myTeam.ToString() + " " + roles.Wizard.ToString() + " Spawnpoint";
+        GameObject spawnPoint = GameObject.Find(spawnPointName);
 
+        GameObject roleSelectionPanel = GameObject.Find("Test Role Selection Panel");
+        //Instantiate the Player and disable UI
+        roleSelectionPanel.SetActive(false);
+        SetPlayerRole(roles.Wizard);
+        PhotonNetwork.Instantiate(wizardModel.name, spawnPoint.transform.position, Quaternion.identity, 0);
     }
 
     teams GetTeam(Player player)

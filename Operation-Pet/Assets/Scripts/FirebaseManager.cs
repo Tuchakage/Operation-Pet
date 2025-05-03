@@ -600,7 +600,7 @@ public class FirebaseManager : MonoBehaviour
     public void SignOut() 
     {
         //If a User is logged in
-        if (auth.CurrentUser != null)
+        if (!playWithoutAccount && auth.CurrentUser != null)
         {
             //Set the user to be offline
             StartCoroutine(UpdateOnlineStatusDatabase(false));
