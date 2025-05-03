@@ -62,6 +62,16 @@ public class Pause : MonoBehaviour
     {
         //Reverse the value
         isMenuActive = !isMenuActive;
+
+        //Enable/ Disable the cursor depending on whether the menu can be seen
+        if (isMenuActive)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else 
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
         pauseMenuPanel.SetActive(isMenuActive);
     }
 
@@ -69,6 +79,7 @@ public class Pause : MonoBehaviour
     {
         isMenuActive = false;
         pauseMenuPanel.SetActive(isMenuActive);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void MainMenu() 
