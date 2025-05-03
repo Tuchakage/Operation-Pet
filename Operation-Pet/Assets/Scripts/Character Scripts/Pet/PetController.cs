@@ -28,6 +28,9 @@ public class PetController : MonoBehaviourPun
     private float jumpForce = 5f;
     [SerializeField]
     private float maxSpeed = 5f;
+    //[SerializeField, Range(0.2f, 50f)]
+    //private float rayCastDistance = 1.2f; //Distance for the Raycast that checks if the player is Grounded
+
 
     private Vector3 forceDirection = Vector3.zero;
 
@@ -161,7 +164,7 @@ public class PetController : MonoBehaviourPun
         Ray ray = new Ray(origin, Vector3.down);
 
         //Spawn in the raycast and if it hit something return true
-        if (Physics.Raycast(ray, out RaycastHit hit, 1.2f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1.6f))
         {
             Debug.DrawLine(origin, Vector3.down, Color.red);
             return true;
