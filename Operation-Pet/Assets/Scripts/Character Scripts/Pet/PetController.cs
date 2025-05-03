@@ -52,7 +52,6 @@ public class PetController : MonoBehaviourPun
             cineMachine.LookAt = this.transform;
 
             rb = GetComponent<Rigidbody>();
-            playerCamera.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
         }
 
