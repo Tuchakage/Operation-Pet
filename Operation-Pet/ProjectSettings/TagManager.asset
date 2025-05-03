@@ -12,11 +12,14 @@ TagManager:
   - Spawnpoints
   - Food
   - UIScreen
+  - Ground
+  - CorrectItem
+  - WrongItem
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - targetLayer
   - Water
   - UI
   - 

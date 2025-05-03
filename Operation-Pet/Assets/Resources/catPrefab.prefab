@@ -240,6 +240,10 @@ GameObject:
   - component: {fileID: 8125267655855328589}
   - component: {fileID: 2470883645907544928}
   - component: {fileID: 5691613528152260846}
+  - component: {fileID: -552087882211158158}
+  - component: {fileID: 2219307732610221569}
+  - component: {fileID: -8213414437462459734}
+  - component: {fileID: -9004589088687650819}
   m_Layer: 0
   m_Name: catPrefab
   m_TagString: Player
@@ -370,6 +374,71 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &-552087882211158158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3565553582414268400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7591e3bd271aa94aa28f9889f06422c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  punchCooldown: 1
+  pushBackForce: 2
+  target: {fileID: 0}
+--- !u!114 &2219307732610221569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3565553582414268400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f938cc466cab84eb3e8e342a559464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeTime: 2
+  pushBackForce: 5
+  shrinkFactor: 0.5
+  target: {fileID: 0}
+--- !u!114 &-8213414437462459734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3565553582414268400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da6b176b6ef16d84fb3996ff40c142fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollDistance: 5
+  rollSpeed: 10
+  rollCooldown: 1.5
+--- !u!114 &-9004589088687650819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3565553582414268400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d31744210e25a4086f25871ebf95c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thirdPersonCamera: {fileID: 0}
+  firstPersonCamera: {fileID: 0}
+  firstPersonSpawnPoint: {fileID: 0}
+  renderTexture: {fileID: 0}
+  uiImage: {fileID: 0}
+  trueItem: {fileID: 0}
+  alternateMaterial: {fileID: 0}
 --- !u!1 &4008699936572232526
 GameObject:
   m_ObjectHideFlags: 0

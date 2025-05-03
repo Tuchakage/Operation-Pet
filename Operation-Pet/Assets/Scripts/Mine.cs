@@ -1,5 +1,6 @@
 using UnityEngine;
-public class Mine : MonoBehaviour
+using Photon.Pun;
+public class Mine : MonoBehaviourPunCallbacks
     {
         public float explosionForce = 10.0f; // Force of the mine explosion
         public float explosionRadius = 5.0f; // Radius within which the mine affects objects
@@ -8,10 +9,12 @@ public class Mine : MonoBehaviour
 
         private void Start()
         {
+            if (!photonView.IsMine) return;
             // Automatically detonate the mine after the delay
             Invoke(nameof(Detonate), detonationDelay);
         }
 
+    [PunRPC]
         private void Detonate()
         {
             // Find all colliders within the explosion radius
@@ -30,7 +33,7 @@ public class Mine : MonoBehaviour
             // Destroy the mine object
             Destroy(gameObject);
         }
-
+    [PunRPC]
         private void OnDrawGizmos()
         {
             // Visualize the explosion radius in the editor

@@ -1,36 +1,28 @@
-using Photon.Pun;
-using System.Collections;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
+using System.Collections;
+using System.Collections.Generic;
 
 public class CharacterPunch : MonoBehaviourPunCallbacks
 {
     public float punchCooldown = 1.0f;
     public float pushBackForce = 2.0f;
-    public Transform target; // Assign the target (e.g., the cube) in the Inspector
+    public float punchRange = 2.0f; // Defines the range for detecting targets
+    public LayerMask targetLayer; // Layer for objects that can be punched
     private bool canPunch = true;
 
-    private int hitCount = 0; // Keeps track of how many times the target has been hit
+    private Dictionary<Transform, int> hitCounts = new Dictionary<Transform, int>(); // Tracks hit counts for multiple targets
 
     void Update()
     {
         if (photonView.IsMine)
         {
-            if (target == null)
-            {
-                Debug.LogError("Target is null, cannot proceed with punch!");
-                return;
-            }
-
-
             // Check if the left mouse button is clicked and punching is allowed
-            if (Input.GetMouseButtonDown(0) && canPunch) // 0 represents the left mouse button
+            if (Input.GetMouseButtonDown(0) && canPunch)
             {
-                StartCoroutine(Punch());
+                photonView.RPC("PerformPunchRPC", RpcTarget.AllBuffered);
             }
         }
-        
     }
 
     [PunRPC]
@@ -41,16 +33,26 @@ public class CharacterPunch : MonoBehaviourPunCallbacks
 
     private IEnumerator Punch()
     {
-        // Simulate a punch by checking if the target is in range
-        if (Vector3.Distance(transform.position, target.position) <= 2.0f) // Example range
+        // Find all objects within punch range
+        Collider[] hitTargets = Physics.OverlapSphere(transform.position, punchRange, targetLayer);
+
+        foreach (Collider hit in hitTargets)
         {
-            PushBackTarget();
-            hitCount++;
+            Transform target = hit.transform;
+
+            if (!hitCounts.ContainsKey(target))
+            {
+                hitCounts[target] = 0;
+            }
+
+            PushBackTarget(target);
+            hitCounts[target]++;
 
             // Shrink the target after 3 hits
-            if (hitCount >= 3)
+            if (hitCounts[target] >= 3)
             {
-                ShrinkTarget();
+                ShrinkTarget(target);
+                hitCounts[target] = 0; // Reset hit count
             }
         }
 
@@ -60,7 +62,7 @@ public class CharacterPunch : MonoBehaviourPunCallbacks
         canPunch = true;
     }
 
-    private void PushBackTarget()
+    private void PushBackTarget(Transform target)
     {
         // Apply a force to move the target back
         Rigidbody rb = target.GetComponent<Rigidbody>();
@@ -71,10 +73,9 @@ public class CharacterPunch : MonoBehaviourPunCallbacks
         }
     }
 
-    private void ShrinkTarget()
+    private void ShrinkTarget(Transform target)
     {
         // Reduce the target's size
-        target.localScale *= 0.5f; // Halves the size
-        hitCount = 0; // Reset hit count
+        target.localScale *= 0.5f;
     }
 }

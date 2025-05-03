@@ -1,6 +1,7 @@
 using UnityEngine;
+using Photon.Pun;
 
-public class FloatingPlayertargeting : MonoBehaviour
+public class FloatingPlayertargeting : MonoBehaviourPunCallbacks
 {
     public Camera playerCamera; // Camera for aiming
     public LayerMask targetLayer; // Layer for lockable targets
@@ -11,20 +12,23 @@ public class FloatingPlayertargeting : MonoBehaviour
 
     void Update()
     {
+        if (!photonView.IsMine) return; // Ensure only the local player can lock on
+
         if (Input.GetKeyDown(KeyCode.E)) // Press "E" to lock/unlock target
         {
             if (isLockedOn)
             {
-                UnlockTarget();
+                photonView.RPC("UnlockTargetRPC", RpcTarget.All);
             }
             else
             {
-                LockOnTarget();
+                photonView.RPC("LockOnTargetRPC", RpcTarget.All);
             }
         }
     }
 
-    public void LockOnTarget()
+    [PunRPC]
+    private void LockOnTargetRPC()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -41,10 +45,17 @@ public class FloatingPlayertargeting : MonoBehaviour
         }
     }
 
-    public void UnlockTarget()
+    [PunRPC]
+    public void UnlockTargetRPC()
     {
         lockedTarget = null; // Clear the locked target
         isLockedOn = false;
         Debug.Log("Target unlocked.");
+    }
+
+    // Public method to safely access `isLockedOn` from external scripts
+    public bool GetIsLockedOn()
+    {
+        return isLockedOn;
     }
 }
