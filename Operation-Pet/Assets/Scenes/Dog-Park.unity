@@ -143,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 15668503}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.77, y: -6.87, z: -5.53}
+  m_LocalPosition: {x: -3.27, y: 0, z: -2.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -159,15 +159,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.56
+      value: -0.26999998
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.3
+      value: -4.3700004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -201,13 +201,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (21)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -402,15 +397,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.43
+      value: -2.1400003
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.46
+      value: 1.4699998
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -444,13 +439,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (20)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -469,15 +459,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.45
+      value: 6.74
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.27
+      value: -3.3400006
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -511,13 +501,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (26)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -777,15 +762,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.68
+      value: 5.61
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.31
+      value: 3.62
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -819,13 +804,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (25)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -1484,7 +1464,7 @@ Transform:
   m_GameObject: {fileID: 393919419}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.261504, y: -5.97, z: 0.2642399}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1628,15 +1608,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.84
+      value: -2.5500002
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.79
+      value: 8.719999
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1670,13 +1650,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (32)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -1695,15 +1670,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.44
+      value: -4.1499996
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.52
+      value: 2.4099998
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1737,13 +1712,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (33)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -1869,15 +1839,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.31
+      value: 6.6
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.95
+      value: 0.13000011
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.71
+      value: -8.780001
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1911,13 +1881,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -1936,15 +1901,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.18
+      value: -0.88999987
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.95
+      value: 0.13000011
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.71
+      value: -6.78
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1978,13 +1943,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -2003,15 +1963,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.54
+      value: 5.75
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.36
+      value: 1.7199998
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.05
+      value: 2.8799999
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2045,13 +2005,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -2070,15 +2025,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.73
+      value: -8.44
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.69
+      value: -1.7600002
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2112,13 +2067,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (16)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -2152,7 +2102,7 @@ Transform:
   m_GameObject: {fileID: 555129878}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.09, y: 0, z: 6.5}
+  m_LocalPosition: {x: 8.15, y: 0, z: -2.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2183,7 +2133,7 @@ Transform:
   m_GameObject: {fileID: 562919361}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7399998, y: 0, z: 3.4}
+  m_LocalPosition: {x: 0.37, y: 0, z: -8.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2371,15 +2321,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.23
+      value: 1.06
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.95
+      value: 0.13000011
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.87
+      value: -2.94
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2413,13 +2363,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -2581,15 +2526,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.62
+      value: 4.67
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.36
+      value: 1.7199998
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.33
+      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2623,13 +2568,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -2710,15 +2650,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.61
+      value: 8.9
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.44
+      value: -5.5099998
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2752,13 +2692,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (24)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -3310,7 +3245,7 @@ Transform:
   m_GameObject: {fileID: 777508498}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5215046, y: 8.397721, z: -1.4142399}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3430,7 +3365,7 @@ Transform:
   m_GameObject: {fileID: 813930838}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.261504, y: -7.927721, z: 0.2642399}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3451,15 +3386,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.62
+      value: 4.67
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.77
+      value: -2.8400006
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3493,13 +3428,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (23)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -3518,15 +3448,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.88
+      value: 3.4099998
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.95
+      value: 0.13000011
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.72
+      value: -6.7900004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3560,13 +3490,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -3776,15 +3701,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.82
+      value: 8.11
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.23
+      value: 8.16
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3818,13 +3743,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (30)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -3843,15 +3763,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.01
+      value: -6.7200003
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11
+      value: -5.07
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3885,13 +3805,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (19)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -3975,99 +3890,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1016520769
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1016520772}
-  - component: {fileID: 1016520771}
-  - component: {fileID: 1016520770}
-  m_Layer: 0
-  m_Name: Terrain
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!154 &1016520770
-TerrainCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016520769}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_TerrainData: {fileID: 15600000, guid: 136f5722eb0982e43aec9d194fd22bd9, type: 2}
-  m_EnableTreeColliders: 1
---- !u!218 &1016520771
-Terrain:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016520769}
-  m_Enabled: 1
-  serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: 136f5722eb0982e43aec9d194fd22bd9, type: 2}
-  m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
-  m_SplatMapDistance: 1000
-  m_HeightmapMinimumLODSimplification: 0
-  m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
-  m_DrawHeightmap: 1
-  m_DrawInstanced: 0
-  m_DrawTreesAndFoliage: 1
-  m_StaticShadowCaster: 0
-  m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
-  m_PreserveTreePrototypeLayers: 0
-  m_DeringLightProbesForTrees: 1
-  m_ReceiveGI: 1
-  m_ScaleInLightmap: 0.256
-  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
-  m_GroupingID: 0
-  m_RenderingLayerMask: 1
-  m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
-  m_EnableTreesAndDetailsRayTracing: 0
-  m_TreeMotionVectorModeOverride: 3
---- !u!4 &1016520772
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016520769}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -48.05, y: -1.48, z: -44.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1038266214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4078,15 +3900,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.58
+      value: 4.71
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.24
+      value: 8.17
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4120,13 +3942,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (31)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -4440,15 +4257,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.84
+      value: -8.55
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.99
+      value: -5.06
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4482,13 +4299,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (18)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -4507,15 +4319,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.21
+      value: -4.92
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6
+      value: 6.5299997
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4549,13 +4361,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (14)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -4911,7 +4718,7 @@ Transform:
   m_GameObject: {fileID: 1229076699}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.09, y: 28.8, z: 6.5}
+  m_LocalPosition: {x: 6.8, y: 5, z: 6.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5063,15 +4870,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.29
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.63
+      value: 0.2999997
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5105,13 +4912,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (34)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -5145,7 +4947,7 @@ Transform:
   m_GameObject: {fileID: 1240345539}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7399998, y: 28.8, z: 3.4}
+  m_LocalPosition: {x: 4.14, y: 5, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5161,15 +4963,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.19
+      value: 1.0999999
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.06
+      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.86
+      value: -6.93
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5203,13 +5005,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (9)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -5572,15 +5369,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.08
+      value: -5.79
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.92
+      value: -2.9900002
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5614,13 +5411,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (17)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -5870,15 +5662,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11
+      value: -4.71
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.59
+      value: 0.33999968
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5912,13 +5704,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (10)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -6309,7 +6096,7 @@ Transform:
   m_GameObject: {fileID: 1415764936}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.04, y: 0, z: 8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6600,15 +6387,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.83
+      value: 5.46
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.15
+      value: 6.08
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6642,13 +6429,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (29)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -6740,15 +6522,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.53
+      value: 7.8199997
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.65
+      value: -0.72000027
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6782,13 +6564,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (28)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -6822,7 +6599,7 @@ Transform:
   m_GameObject: {fileID: 1544419960}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.110001, y: 28.8, z: 9.49}
+  m_LocalPosition: {x: -9.36, y: 5, z: 9.49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7012,15 +6789,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14
+      value: -7.71
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.52
+      value: 8.45
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7054,13 +6831,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (12)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -7696,7 +7468,7 @@ Transform:
   m_GameObject: {fileID: 1667807016}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.590001, y: 0, z: 3.4}
+  m_LocalPosition: {x: -2.94, y: 0, z: 5.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8351,7 +8123,7 @@ Transform:
   m_GameObject: {fileID: 1703625345}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.590001, y: 28.8, z: 3.4}
+  m_LocalPosition: {x: -0.21, y: 5, z: 1.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8504,15 +8276,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.379119
+      value: 1.910881
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.007658
+      value: 0.07234192
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.04
+      value: 3.8899999
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8546,13 +8318,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -8674,15 +8441,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.74
+      value: -1.4499998
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.06
+      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.86
+      value: -6.93
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8716,13 +8483,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (8)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -8741,15 +8503,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.39
+      value: -4.1000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.96
+      value: 4.97
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8783,13 +8545,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (15)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -8823,7 +8580,7 @@ Transform:
   m_GameObject: {fileID: 1819258231}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.110001, y: 0, z: 9.49}
+  m_LocalPosition: {x: -7.24, y: 0, z: -2.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9567,10 +9324,11 @@ Transform:
   m_GameObject: {fileID: 1898838369}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.8354626, y: -1.3900633, z: 7.5318027}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 15668504}
   - {fileID: 6987058976383166405}
   - {fileID: 1753273371}
   - {fileID: 605997907}
@@ -9606,7 +9364,6 @@ Transform:
   - {fileID: 420689619}
   - {fileID: 422541760}
   - {fileID: 1239006968}
-  - {fileID: 15668504}
   m_Father: {fileID: 777508499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1913460786
@@ -9619,15 +9376,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.33
+      value: -9.04
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.63
+      value: 6.56
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9661,13 +9418,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (13)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -9686,15 +9438,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.89
+      value: 8.18
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.11
+      value: 3.82
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9728,13 +9480,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (27)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -10411,7 +10158,7 @@ Transform:
   m_GameObject: {fileID: 2063258616}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 28.8, z: 0}
+  m_LocalPosition: {x: -5.24, y: 5, z: -6.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10427,15 +10174,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.08
+      value: -6.79
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14.42
+      value: -8.49
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10469,13 +10216,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (22)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -11139,15 +10881,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.72
+      value: -1.4299998
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.87
+      value: 0.21000004
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.77
+      value: 4.16
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11181,13 +10923,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (11)
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -13255,15 +12992,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.379119
+      value: 1.910881
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.007658
+      value: 0.07234192
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.35214233
+      value: 6.282142
       objectReference: {fileID: 0}
     - target: {fileID: 1850332876229378834, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13297,13 +13034,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position
       objectReference: {fileID: 0}
-    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
-      propertyPath: m_TagString
-      value: Spawnpoints
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 324686807118754610, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
@@ -13832,7 +13564,6 @@ SceneRoots:
   - {fileID: 1625282036}
   - {fileID: 1981880186}
   - {fileID: 1334946772}
-  - {fileID: 1016520772}
   - {fileID: 1221019076}
   - {fileID: 951705067}
   - {fileID: 922917978}
