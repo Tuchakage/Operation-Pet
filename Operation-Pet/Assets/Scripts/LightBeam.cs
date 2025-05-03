@@ -1,6 +1,7 @@
 using UnityEngine;
+using Photon.Pun;
 
-public class LightBeam : MonoBehaviour
+public class LightBeam : MonoBehaviourPunCallbacks
 {
     public GameObject beamPrefab; // Prefab of the beam
     public float beamDuration = 5.0f; // Duration before the beam disappears
@@ -11,11 +12,15 @@ public class LightBeam : MonoBehaviour
 
     void Update()
     {
-        // Check for player input to create the beam (e.g., left mouse button)
-        if (Input.GetKeyDown(KeyCode.Q)) // Left mouse button
+        if(photonView.IsMine)
         {
-            CreateBeam();
+            // Check for player input to create the beam (e.g., left mouse button)
+            if (Input.GetKeyDown(KeyCode.Q)) // Left mouse button
+            {
+                CreateBeam();
+            }
         }
+        
     }
 
     private void CreateBeam()

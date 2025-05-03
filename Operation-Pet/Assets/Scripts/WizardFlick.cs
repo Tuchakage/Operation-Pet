@@ -10,17 +10,17 @@ public class WizardFlick : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if(photonView.IsMine)
+        if (!photonView.IsMine) return;
+         // Check if the left mouse button is clicked and a target is locked
+        if (targetingScript != null && targetingScript.GetIsLockedOn() && Input.GetMouseButtonDown(0)) // Left mouse button
         {
-            // Check if the left mouse button is clicked and a target is locked
-            if (targetingScript != null && targetingScript.GetIsLockedOn() && Input.GetMouseButtonDown(0)) // Left mouse button
-            {
                 FlickTarget();
-            }
         }
+        
         
     }
 
+    [PunRPC]
     private void FlickTarget()
     {
         // Get the currently locked target from the targeting script

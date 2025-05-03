@@ -837,8 +837,9 @@ MonoBehaviour:
   firstPersonSpawnPoint: {fileID: 0}
   renderTexture: {fileID: 0}
   uiImage: {fileID: 0}
-  trueItem: {fileID: 0}
-  alternateMaterial: {fileID: 0}
+  allItems: []
+  standardMaterial: {fileID: 0}
+  trueItemMaterial: {fileID: 0}
 --- !u!1 &7052193602052917680
 GameObject:
   m_ObjectHideFlags: 0

@@ -388,7 +388,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   punchCooldown: 1
   pushBackForce: 2
-  target: {fileID: 0}
+  punchRange: 2
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &2219307732610221569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,7 +407,10 @@ MonoBehaviour:
   chargeTime: 2
   pushBackForce: 5
   shrinkFactor: 0.5
-  target: {fileID: 0}
+  punchRange: 3
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &-8213414437462459734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,8 +443,12 @@ MonoBehaviour:
   firstPersonSpawnPoint: {fileID: 0}
   renderTexture: {fileID: 0}
   uiImage: {fileID: 0}
-  trueItem: {fileID: 0}
-  alternateMaterial: {fileID: 0}
+  allItems:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  standardMaterial: {fileID: 2100000, guid: 45217c7d644f0654898d3849eea1eb87, type: 2}
+  trueItemMaterial: {fileID: 2100000, guid: 089594d4030294e4387e3623fac0bf29, type: 2}
 --- !u!1 &4008699936572232526
 GameObject:
   m_ObjectHideFlags: 0
