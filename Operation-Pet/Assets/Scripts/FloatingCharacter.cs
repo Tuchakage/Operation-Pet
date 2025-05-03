@@ -15,6 +15,13 @@ public class FloatingCharacter : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        //If the object spawned doesn't belong to the player then do nothing
+        if (!photonView.IsMine) 
+        {
+            return;
+        }
+        //Enable the camera
+        characterCamera.enabled = true;
         // Initialize hover offset for smooth motion
         hoverOffset = Random.Range(0, Mathf.PI * 2);
 
@@ -31,6 +38,11 @@ public class FloatingCharacter : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        //If the object spawned doesn't belong to the player then do nothing
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         // Hovering: Smooth up-and-down motion
         float hover = Mathf.Sin(Time.time * hoverSpeed + hoverOffset) * hoverAmplitude;
         Vector3 position = transform.position;
