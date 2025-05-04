@@ -54,6 +54,9 @@ MonoBehaviour:
   anyoneCanPickUp: 0
   explosionRadius: 5
   explosionForce: 500
+  upwardMod: 1
+  mineMaterial: {fileID: 0}
+  foodMaterial: {fileID: 0}
 --- !u!114 &3682920538495401112
 MonoBehaviour:
   m_ObjectHideFlags: 0

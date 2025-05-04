@@ -201,6 +201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -439,6 +443,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -500,6 +508,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -803,6 +815,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1650,6 +1666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1711,6 +1731,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1881,6 +1905,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1942,6 +1970,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2005,6 +2037,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2066,6 +2102,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2363,6 +2403,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2568,6 +2612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2691,6 +2739,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3428,6 +3480,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3489,6 +3545,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3743,6 +3803,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3804,6 +3868,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3941,6 +4009,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4299,6 +4371,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4360,6 +4436,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4912,6 +4992,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5004,6 +5088,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5411,6 +5499,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5703,6 +5795,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6429,6 +6525,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6563,6 +6663,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6830,6 +6934,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8318,6 +8426,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8483,6 +8595,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8544,6 +8660,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9418,6 +9538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9479,6 +9603,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10216,6 +10344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: food spawn position (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10922,6 +11054,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13033,6 +13169,10 @@ PrefabInstance:
     - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
       propertyPath: m_Name
       value: food spawn position
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461563106817131520, guid: 8c0c7dee14a3c442ab57d4a482812487, type: 3}
+      propertyPath: m_TagString
+      value: Spawnpoints
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

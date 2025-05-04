@@ -285,7 +285,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     //Function to check if all teams are ready
     public bool CheckReadyTeams() 
     {
-        Debug.Log("Checking ready");
+        //Debug.Log("Checking ready");
         int readyTeamCount = 0;
        // bool canStartGame = false;
 
