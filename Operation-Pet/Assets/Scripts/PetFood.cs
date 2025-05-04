@@ -26,12 +26,22 @@ public class PetFood : MonoBehaviourPunCallbacks
     [SerializeField] private float explosionForce = 500;
     [SerializeField] private float upwardMod = 1; //Adjustment to the apparent position of the explosion to make it seem to lift objects.  
 
+    public Material mineMaterial;
+    public Material foodMaterial;
+
 
     ScoreManager scoreManager;
     RoundManager roundManager;
+
+    void Awake()
+    {
+        //Keep reference to the food material (This is in awake because in Start() it gets reference to the mine material that is set as the current material
+        //foodMaterial = GetComponent<MeshRenderer>().material;
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
         roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
         //Randomly choose if the food is fake or not
@@ -172,6 +182,8 @@ public class PetFood : MonoBehaviourPunCallbacks
         {
             case teams.Unassigned: //If Unassigned then it is a mine
                 GetComponent<MeshFilter>().mesh =  foodModelScriptableObject.foodModels[5];
+                transform.eulerAngles = new Vector3(180, 0, 0);
+                GetComponent<MeshRenderer>().material = mineMaterial;
                 break;
             case teams.Dog:
                 //Debug.Log(foodModelScriptableObject.foodModels[0].name);
@@ -193,6 +205,16 @@ public class PetFood : MonoBehaviourPunCallbacks
             case teams.Horse:
                 GetComponent<MeshFilter>().mesh = foodModelScriptableObject.foodModels[4];
                 break;
+        }
+    }
+
+    //Called for the Pet Roles when they change every food in the game into the food of their team, this changes the material back to the food (If it is a mine)
+    public void RevertMaterial() 
+    {
+        if (isFake) 
+        {
+            GetComponent<MeshRenderer>().material = foodMaterial;
+            transform.eulerAngles = Vector3.zero;
         }
     }
 

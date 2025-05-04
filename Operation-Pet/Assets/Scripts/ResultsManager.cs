@@ -20,6 +20,9 @@ public class ResultsManager : MonoBehaviourPun
     [SerializeField]
     private List<GameObject> SetsList;
 
+    [SerializeField]
+    private GameObject[] modelsToSpawn;
+
     //Stores the index of the Set from the SetList that should not be destroyed
     private int setToKeep;
 
@@ -127,7 +130,7 @@ public class ResultsManager : MonoBehaviourPun
             //If the set being checked is not the same as the set that needs to stay
             if (SetsList[i] != SetsList[setToKeep]) 
             {
-                Debug.Log(SetsList[i].name + " is going to be removed");
+                //Debug.Log(SetsList[i].name + " is going to be removed");
                 //Get rid of the set in the list
                 Destroy(SetsList[i]);
                 //SetsList[i] = null;
@@ -146,11 +149,8 @@ public class ResultsManager : MonoBehaviourPun
             Transform spawnpoint = SetsList[setToKeep].transform.GetChild(i);
             GameObject model = Instantiate(CheckModelToSpawn(sortedRankedTeams.ElementAt(i).Key), spawnpoint);
             model.transform.localPosition = new Vector3(0, 0, 0);
-            model.GetComponent<BoxCollider>().enabled = false;
-            Rigidbody rb = model.GetComponent<Rigidbody>();
-            Destroy(rb);
-
-            
+            model.transform.localScale = new Vector3(3, 3, 3);
+            model.transform.localEulerAngles = new Vector3(0, 90, 0);
         }
 
         //Let the Master Client tell everyone to update match won stat if they won
@@ -166,23 +166,25 @@ public class ResultsManager : MonoBehaviourPun
 
     GameObject CheckModelToSpawn(teams teamName)
     {
+        Debug.Log("Spawning " + teamName.ToString());
         switch (teamName)
         {
             case teams.Dog:
-                Debug.Log(PlayerModelScriptableObject.playerModels[0].name);
-                return PlayerModelScriptableObject.playerModels[0];
+                Debug.Log(modelsToSpawn[0].name);
+                return modelsToSpawn[0];
             case teams.Cat:
-                Debug.Log(PlayerModelScriptableObject.playerModels[1].name);
-                return PlayerModelScriptableObject.playerModels[1];
+                Debug.Log("Spawn Model: " + modelsToSpawn[1].name);
+                return modelsToSpawn[1];
 
             case teams.Mouse:
-                return PlayerModelScriptableObject.playerModels[2];
+                Debug.Log("Spawn Model: " + modelsToSpawn[2].name);
+                return modelsToSpawn[2];
 
             case teams.Squirrel:
-                return PlayerModelScriptableObject.playerModels[3];
+                return modelsToSpawn[3];
 
             case teams.Horse:
-                return PlayerModelScriptableObject.playerModels[4];
+                return modelsToSpawn[4];
         }
 
         return null;

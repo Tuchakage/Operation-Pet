@@ -78,6 +78,8 @@ public class RoleManager : MonoBehaviourPunCallbacks
             {
                 //Set the food model to be the model for the Pets team (They can only see one type of food)
                 food.GetComponent<PetFood>().SetMesh(myTeam);
+                //If the food is a mine, change the material back to being for food
+                food.GetComponent<PetFood>().RevertMaterial();
             }
         }
 
