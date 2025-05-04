@@ -153,13 +153,11 @@ GameObject:
   - component: {fileID: 6256981044664435170}
   - component: {fileID: 1878482133059037737}
   - component: {fileID: 6762076318631898716}
-  - component: {fileID: 2560525643668902267}
   - component: {fileID: 6150444138206314722}
   - component: {fileID: 1243585233758692212}
   - component: {fileID: 7593291555270998894}
   - component: {fileID: 4824562836015632767}
-  - component: {fileID: 1882265970430759691}
-  - component: {fileID: 905929606504505961}
+  - component: {fileID: 5831327290279868800}
   m_Layer: 0
   m_Name: wizPrefab
   m_TagString: WizardChar
@@ -283,7 +281,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &6256981044664435170
 MonoBehaviour:
@@ -330,22 +328,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flickForce: 15
   targetingScript: {fileID: 4587285166341171621}
---- !u!114 &2560525643668902267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100136730509424109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
+  groundPlayerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &6150444138206314722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,9 +349,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 2560525643668902267}
-  - {fileID: 905929606504505961}
+  ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -385,7 +368,7 @@ MonoBehaviour:
   playerCamera: {fileID: 7693970818388931229}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
   lockOnRange: 10
 --- !u!114 &7593291555270998894
 MonoBehaviour:
@@ -399,11 +382,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641a42e9685aed34ea21a07314b5b912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minePrefab: {fileID: 3334812324052890203, guid: 54bb52fdeca3fe54bb0da41df3df5124, type: 3}
+  minePrefab: {fileID: 3334812324052890203, guid: 916385f9aa184ed4287655cd0a0523f5, type: 3}
   playerCamera: {fileID: 7693970818388931229}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1
+  minePlacementCooldown: 3
 --- !u!114 &4824562836015632767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,22 +408,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1882265970430759691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100136730509424109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a29058ed2398e304cacc515744dfd1c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floatingPlayer: {fileID: 3472152221767592597, guid: 9eac2ab541ace7341a47634eaf66e14e, type: 3}
-  groundPlayer: {fileID: 736160304831308311, guid: dd486c96782e66948a51d55fa9614a4b, type: 3}
-  screenshotDisplay: {fileID: 783814100200076421, guid: ada0d986768b6944aaf0393a1761b21c, type: 3}
---- !u!114 &905929606504505961
+--- !u!114 &5831327290279868800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

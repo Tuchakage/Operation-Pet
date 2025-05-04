@@ -69,6 +69,11 @@ MonoBehaviour:
   - Detonate
   - OnDrawGizmos
   - FlickTarget
+  - PerformChargedPunchRPC
+  - ExplodeRPC
+  - FlickTargetRPC
+  - CreateBeam
+  - ExplodeMine
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

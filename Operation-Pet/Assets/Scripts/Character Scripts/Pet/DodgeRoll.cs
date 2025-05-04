@@ -1,7 +1,5 @@
 using Photon.Pun;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DodgeRoll : MonoBehaviourPunCallbacks
@@ -11,21 +9,25 @@ public class DodgeRoll : MonoBehaviourPunCallbacks
     public float rollCooldown = 1.5f; // Time before the player can roll again
     private bool isRolling = false; // Tracks if the player is currently rolling
     private bool canRoll = true; // Tracks if the player can roll after cooldown
-    private CharacterController characterController; // Reference to the CharacterController
+    private Rigidbody rb; // Reference to Rigidbody
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>(); // Get Rigidbody component
+        rb.interpolation = RigidbodyInterpolation.Interpolate; // Smoother movement
     }
+
     void Update()
     {
         if (!photonView.IsMine) return;
-        // Check for player input to dodge roll (e.g., pressing Left Shift)
+
+        // Check for player input to dodge roll (e.g., pressing Right Shift)
         if (Input.GetKeyDown(KeyCode.RightShift) && canRoll)
         {
-            StartCoroutine(PerformRoll());
+            photonView.RPC("PerformRollRPC", RpcTarget.All);
         }
     }
+
     [PunRPC]
     private void PerformRollRPC()
     {
@@ -43,7 +45,7 @@ public class DodgeRoll : MonoBehaviourPunCallbacks
         float elapsedTime = 0;
         while (elapsedTime < rollTime)
         {
-            characterController.Move(rollDirection * rollSpeed * Time.deltaTime);
+            rb.MovePosition(rb.position + rollDirection * rollSpeed * Time.deltaTime);
             elapsedTime += Time.deltaTime;
             yield return null;
         }

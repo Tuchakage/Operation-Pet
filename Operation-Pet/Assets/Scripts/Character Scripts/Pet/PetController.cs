@@ -6,7 +6,7 @@ using Photon.Pun;
 using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PetController : MonoBehaviourPun
+public class PetController : MonoBehaviourPunCallbacks
 {
     
     InputSystem_Actions playerActionAsset;
@@ -222,6 +222,21 @@ public class PetController : MonoBehaviourPun
         }
     }
 
+    public void ApplyKnockback(Vector3 direction, float force)
+    {
+        if (!photonView.IsMine) return; // Ensure only local player applies force
 
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero; // Reset velocity to avoid unwanted buildup
+            rb.AddForce(direction.normalized * force, ForceMode.Impulse);
+            Debug.Log($"Knockback applied: {direction.normalized * force}");
+        }
+        else
+        {
+            Debug.LogError("Ground Player does not have a Rigidbody!");
+        }
+    }
 
 }

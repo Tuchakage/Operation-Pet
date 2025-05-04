@@ -1,43 +1,38 @@
 using UnityEngine;
 using Photon.Pun;
+
 public class Mine : MonoBehaviourPunCallbacks
+{
+    public float explosionRadius = 5f; // Explosion range
+    public float explosionForce = 10f; // Force applied to nearby objects
+    public LayerMask affectedLayers; // Layers affected by the explosion
+
+    private void OnCollisionEnter(Collision collision)
     {
-        public float explosionForce = 10.0f; // Force of the mine explosion
-        public float explosionRadius = 5.0f; // Radius within which the mine affects objects
-        public float upwardModifier = 2.0f; // Adds upward force to the explosion
-        public float detonationDelay = 2.0f; // Time before the mine detonates
+        if (!photonView.IsMine) return;
 
-        private void Start()
+        // Check if the object that collided has the correct layer or tag
+        if ((affectedLayers.value & (1 << collision.gameObject.layer)) > 0)
         {
-            if (!photonView.IsMine) return;
-            // Automatically detonate the mine after the delay
-            Invoke(nameof(Detonate), detonationDelay);
-        }
-
-    [PunRPC]
-        private void Detonate()
-        {
-            // Find all colliders within the explosion radius
-            Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-
-            // Apply force to each collider with a Rigidbody
-            foreach (Collider collider in colliders)
-            {
-                Rigidbody rb = collider.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardModifier, ForceMode.Impulse);
-                }
-            }
-
-            // Destroy the mine object
-            Destroy(gameObject);
-        }
-    [PunRPC]
-        private void OnDrawGizmos()
-        {
-            // Visualize the explosion radius in the editor
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, explosionRadius);
+            photonView.RPC("ExplodeRPC", RpcTarget.AllBuffered);
         }
     }
+
+    [PunRPC]
+    private void ExplodeRPC()
+    {
+        Collider[] hitObjects = Physics.OverlapSphere(transform.position, explosionRadius, affectedLayers);
+
+        foreach (Collider obj in hitObjects)
+        {
+            Rigidbody rb = obj.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            }
+        }
+
+        // Destroy the mine across the network
+        PhotonNetwork.Destroy(gameObject);
+    }
+}

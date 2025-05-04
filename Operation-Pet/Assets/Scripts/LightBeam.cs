@@ -12,17 +12,16 @@ public class LightBeam : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if(photonView.IsMine)
+        if (!photonView.IsMine) return;
+        // Check for player input to create the beam (e.g., left mouse button)
+        if (Input.GetKeyDown(KeyCode.Q)) // Left mouse button
         {
-            // Check for player input to create the beam (e.g., left mouse button)
-            if (Input.GetKeyDown(KeyCode.Q)) // Left mouse button
-            {
-                CreateBeam();
-            }
+              photonView.RPC("CreateBeam",RpcTarget.All);
         }
         
     }
 
+    [PunRPC]
     private void CreateBeam()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
@@ -32,7 +31,7 @@ public class LightBeam : MonoBehaviourPunCallbacks
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, targetLayer))
         {
             Vector3 beamPosition = hit.point; // Position where reticle is aimed
-            GameObject beam = Instantiate(beamPrefab, beamPosition, Quaternion.identity);
+            GameObject beam = PhotonNetwork.Instantiate("LightBeam", beamPosition, Quaternion.identity);
 
             // Adjust the beam's scale and positioning
             beam.transform.localScale = new Vector3(beamWidth, 5000f, beamWidth);
@@ -42,4 +41,5 @@ public class LightBeam : MonoBehaviourPunCallbacks
             Destroy(beam, beamDuration);
         }
     }
+
 }
