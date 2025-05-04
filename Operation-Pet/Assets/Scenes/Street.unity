@@ -3908,7 +3908,7 @@ MonoBehaviour:
   petSelectBtn: {fileID: 390487229}
   wizardSelectBtn: {fileID: 1475747886}
   roleSelectionScreen: {fileID: 1651634388}
-  wizardModel: {fileID: 3472152221767592597, guid: 9eac2ab541ace7341a47634eaf66e14e, type: 3}
+  wizardModel: {fileID: 1100136730509424109, guid: ebae232a63e347040b6addd6a34b6be3, type: 3}
 --- !u!4 &1179195151
 Transform:
   m_ObjectHideFlags: 0
