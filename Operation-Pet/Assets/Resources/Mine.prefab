@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8369185773918033768}
   - component: {fileID: 7842216026354348995}
   - component: {fileID: 2568387696522799090}
-  - component: {fileID: -7534856067931634424}
   m_Layer: 0
   m_Name: Mine
   m_TagString: Untagged
@@ -105,7 +104,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -123,8 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1301ff05fdd2d4b8cee6f78505f493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionRadius: 5
-  explosionForce: 10
+  explosionRadius: 10
+  explosionForce: 500
+  upwardMod: 1
   affectedLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -150,19 +150,3 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-7534856067931634424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3334812324052890203}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1

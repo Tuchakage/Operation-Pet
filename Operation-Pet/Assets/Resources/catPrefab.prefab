@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: -552087882211158158}
   - component: {fileID: 2219307732610221569}
   - component: {fileID: -8213414437462459734}
-  - component: {fileID: -9004589088687650819}
+  - component: {fileID: -8622983761728264453}
   m_Layer: 6
   m_Name: catPrefab
   m_TagString: Player
@@ -404,11 +404,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f938cc466cab84eb3e8e342a559464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  punchCooldown: 1
-  pushBackForce: 5
-  punchRange: 5
-  disableMovementDuration: 2
-  targetLayer:
+  punchForce: 100
+  upwardForce: 5
+  chargeTime: 2
+  disableMovementDuration: 5
+  playerLayer:
     serializedVersion: 2
     m_Bits: 64
 --- !u!114 &-8213414437462459734
@@ -426,29 +426,20 @@ MonoBehaviour:
   rollDistance: 5
   rollSpeed: 10
   rollCooldown: 1.5
---- !u!114 &-9004589088687650819
+--- !u!114 &-8622983761728264453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3565553582414268400}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27d31744210e25a4086f25871ebf95c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thirdPersonCamera: {fileID: 0}
-  firstPersonCamera: {fileID: 0}
-  firstPersonSpawnPoint: {fileID: 0}
-  renderTexture: {fileID: 0}
-  uiImage: {fileID: 0}
-  allItems:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  standardMaterial: {fileID: 2100000, guid: 45217c7d644f0654898d3849eea1eb87, type: 2}
-  trueItemMaterial: {fileID: 2100000, guid: 089594d4030294e4387e3623fac0bf29, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: 45217c7d644f0654898d3849eea1eb87, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 089594d4030294e4387e3623fac0bf29, type: 2}
 --- !u!1 &4008699936572232526
 GameObject:
   m_ObjectHideFlags: 0

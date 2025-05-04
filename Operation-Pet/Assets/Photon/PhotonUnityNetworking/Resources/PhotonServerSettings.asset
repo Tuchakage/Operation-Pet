@@ -74,6 +74,12 @@ MonoBehaviour:
   - FlickTargetRPC
   - CreateBeam
   - ExplodeMine
+  - SetAllItemsToFakeRPC
+  - RevealRealFoodItemRPC
+  - SetAllFoodToFakeRPC
+  - ResetFoodMaterialsRPC
+  - CaptureSnapshotRPC
+  - ChangeMaterialRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

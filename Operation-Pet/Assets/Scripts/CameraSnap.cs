@@ -1,107 +1,70 @@
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 using Photon.Pun;
+using Photon.Realtime;
+using static teamsEnum;
 
-public class GroundPlayerScreenshot : MonoBehaviourPunCallbacks
+public class PetFoodHighlighter : MonoBehaviourPun
 {
-    public Camera thirdPersonCamera; // Third-person camera
-    public Camera firstPersonCamera; // First-person camera
-    public Transform firstPersonSpawnPoint; // First-person camera spawn location
-    public RenderTexture renderTexture; // Screenshot texture
-    public RawImage uiImage; // UI display for the screenshot
-    public GameObject[] allItems; // Array of all available items
-    public Material standardMaterial; // Normal material for all items
-    public Material trueItemMaterial; // Special material for the real item when screenshot is taken
-    private GameObject trueItem; // The true item for this specific player
+    public Material defaultMaterial;         // Neutral/default appearance
+    public Material highlightMaterial;       // Highlighted appearance for local player’s team
+
+    private MeshRenderer meshRenderer;
+    private teams foodFor;
+
+    private bool isInitialized = false;
+    private bool isMineFood = false;
 
     void Start()
     {
-        if (!photonView.IsMine) return; // Only allow local players to manage their own true item
+        meshRenderer = GetComponent<MeshRenderer>();
+        foodFor = GetComponent<PetFood>().foodFor;
 
-        // Disable first-person camera at start
-        firstPersonCamera.enabled = false;
-
-        // Set first-person camera position to the predefined spawn point
-        firstPersonCamera.transform.position = firstPersonSpawnPoint.position;
-        firstPersonCamera.transform.rotation = firstPersonSpawnPoint.rotation;
-
-        // Assign a unique true item per player
-        AssignTrueItem();
-
-        // Ensure all items start with the standard material
-        foreach (GameObject item in allItems)
-        {
-            item.GetComponent<Renderer>().material = standardMaterial;
-        }
+        // Try to initialize immediately if custom properties are available
+        TryInitialize();
     }
 
     void Update()
     {
-        if (!photonView.IsMine) return; // Only allow local player interaction
-
-        // Press "P" to take a screenshot
-        if (Input.GetKeyDown(KeyCode.P))
+        // If team info hasn't been loaded yet, try again
+        if (!isInitialized)
         {
-            photonView.RPC("CaptureScreenshotRPC", RpcTarget.All);
+            TryInitialize();
+            return;
+        }
+
+        // On key press, reveal or hide based on team match
+        if (Input.GetKey(KeyCode.Q))
+        {
+            if (isMineFood)
+            {
+                SetMaterial(highlightMaterial);
+            }
+            else
+            {
+                SetMaterial(defaultMaterial);
+            }
+        }
+        else
+        {
+            SetMaterial(defaultMaterial);
         }
     }
 
-    private void AssignTrueItem()
+    void TryInitialize()
     {
-        int playerID = photonView.ViewID % allItems.Length; // Assign different true items per player
-        trueItem = allItems[playerID];
-    }
-
-    [PunRPC]
-    private void CaptureScreenshotRPC()
-    {
-        StartCoroutine(CaptureScreenshot());
-    }
-
-    private IEnumerator CaptureScreenshot()
-    {
-        // Switch to first-person view
-        thirdPersonCamera.enabled = false;
-        firstPersonCamera.enabled = true;
-        firstPersonCamera.transform.position = firstPersonSpawnPoint.position;
-        firstPersonCamera.transform.rotation = firstPersonSpawnPoint.rotation;
-
-        // Change material only for the local player’s true item
-        photonView.RPC("RevealTrueItemRPC", RpcTarget.All, photonView.ViewID);
-
-        yield return new WaitForSeconds(0.2f); // Short delay
-
-        // Capture screenshot
-        firstPersonCamera.targetTexture = renderTexture;
-        firstPersonCamera.Render();
-        uiImage.texture = renderTexture;
-
-        yield return new WaitForSeconds(0.2f); // Short delay before reverting
-
-        // Restore normal materials for all items across clients
-        photonView.RPC("ResetItemMaterialsRPC", RpcTarget.All);
-
-        // Switch back to third-person view
-        firstPersonCamera.enabled = false;
-        thirdPersonCamera.enabled = true;
-    }
-
-    [PunRPC]
-    private void RevealTrueItemRPC(int playerViewID)
-    {
-        if (photonView.ViewID == playerViewID) // Ensure only the local player's true item is changed
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Team Name", out object teamObj))
         {
-            trueItem.GetComponent<Renderer>().material = trueItemMaterial;
+            teams myTeam = (teams)teamObj;
+            isMineFood = (myTeam == foodFor);
+            isInitialized = true;
         }
     }
 
-    [PunRPC]
-    private void ResetItemMaterialsRPC()
+    void SetMaterial(Material mat)
     {
-        foreach (GameObject item in allItems)
+        if (meshRenderer != null && meshRenderer.sharedMaterial != mat)
         {
-            item.GetComponent<Renderer>().material = standardMaterial;
+            meshRenderer.sharedMaterial = mat;
         }
     }
 }

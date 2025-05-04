@@ -1,66 +1,76 @@
 using UnityEngine;
 using Photon.Pun;
 using System.Collections;
-using System.Collections.Generic;
 
 public class ChargedPunch : MonoBehaviourPunCallbacks
 {
-    public float punchCooldown = 1.0f;
-    public float pushBackForce = 5.0f;
-    public float punchRange = 3.0f;
-    public float disableMovementDuration = 2.0f; // Time before punched target can move again
-    public LayerMask targetLayer;
-
-    private bool canPunch = true;
-    private Dictionary<Transform, int> hitCounts = new Dictionary<Transform, int>();
+    public float punchForce = 50f; // Increased knockback force
+    public float upwardForce = 5f; // Adds slight upward push
+    public float chargeTime = 2f; // Time required to fully charge
+    public float disableMovementDuration = 2f; // Opponent loses movement for this time
+    public LayerMask playerLayer; // Assigned layer for valid players
+    private bool isCharging = false;
+    private bool isFullyCharged = false;
 
     void Update()
     {
         if (!photonView.IsMine) return;
 
-        if (Input.GetMouseButtonDown(1) && canPunch)
+        // Start charging when holding Right Mouse Button (RMB)
+        if (Input.GetMouseButtonDown(1))
         {
-            photonView.RPC("PerformChargedPunchRPC", RpcTarget.AllBuffered);
+            isCharging = true;
+            StartCoroutine(ChargePunch());
+        }
+
+        // Release punch when Left Mouse Button (LMB) is clicked
+        if (Input.GetMouseButtonDown(0) && isFullyCharged)
+        {
+            photonView.RPC("ExecutePunchRPC", RpcTarget.All);
+            isFullyCharged = false; // Reset charge state
+        }
+
+        // Stop charging if player releases RMB before full charge
+        if (Input.GetMouseButtonUp(1))
+        {
+            isCharging = false;
+            isFullyCharged = false;
+        }
+    }
+
+    private IEnumerator ChargePunch()
+    {
+        yield return new WaitForSeconds(chargeTime);
+
+        if (isCharging) // Only set as fully charged if RMB is still held
+        {
+            isFullyCharged = true;
+            Debug.Log("Punch is fully charged!");
         }
     }
 
     [PunRPC]
-    private void PerformChargedPunchRPC()
+    private void ExecutePunchRPC()
     {
-        if (gameObject.activeInHierarchy)
-            StartCoroutine(Punch());
-    }
-
-    private IEnumerator Punch()
-    {
-        Collider[] hitTargets = Physics.OverlapSphere(transform.position, punchRange, targetLayer);
-
-        foreach (Collider hit in hitTargets)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 3f, playerLayer)) // Check only valid players
         {
-            Transform target = hit.transform;
+            if (hit.collider.CompareTag("Player")) // Ensure only characters with "Player" tag are affected
+            {
+                Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    // Calculate push direction
+                    Vector3 pushDirection = (hit.collider.transform.position - transform.position).normalized;
+                    pushDirection.y += upwardForce; // Add slight upward force
 
-            if (!hitCounts.ContainsKey(target))
-                hitCounts[target] = 0;
+                    // Apply increased knockback force
+                    rb.AddForce(pushDirection * punchForce, ForceMode.Impulse);
 
-            PushBackTarget(target);
-            hitCounts[target]++;
-
-            // Disable movement for a short duration
-            StartCoroutine(DisableMovement(target));
-        }
-
-        canPunch = false;
-        yield return new WaitForSeconds(punchCooldown);
-        canPunch = true;
-    }
-
-    private void PushBackTarget(Transform target)
-    {
-        Rigidbody rb = target.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            Vector3 pushDir = (target.position - transform.position).normalized;
-            rb.AddForce(pushDir * pushBackForce, ForceMode.Impulse);
+                    StartCoroutine(DisableMovement(hit.collider.transform)); // Disable movement for opponent
+                    Debug.Log($"Charged punch landed on {hit.collider.name} with force {punchForce}!");
+                }
+            }
         }
     }
 
@@ -71,7 +81,7 @@ public class ChargedPunch : MonoBehaviourPunCallbacks
         {
             rb.isKinematic = true; // Disable movement
             yield return new WaitForSeconds(disableMovementDuration);
-            rb.isKinematic = false; // Enable movement again
+            rb.isKinematic = false; // Restore movement after 2 seconds
         }
     }
 }

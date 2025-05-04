@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flickForce: 15
-  targetingScript: {fileID: 4587285166341171621}
+  playerCamera: {fileID: 7693970818388931229}
   groundPlayerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -349,7 +349,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 5831327290279868800}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -382,11 +383,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641a42e9685aed34ea21a07314b5b912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minePrefab: {fileID: 3334812324052890203, guid: 916385f9aa184ed4287655cd0a0523f5, type: 3}
+  minePrefab: {fileID: 1710999592873644004, guid: 0e5056dee3e21624d90850e1f6ff7616, type: 3}
   playerCamera: {fileID: 7693970818388931229}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
   minePlacementCooldown: 3
 --- !u!114 &4824562836015632767
 MonoBehaviour:
@@ -471,5 +472,5 @@ MonoBehaviour:
   playerCamera: {fileID: 7693970818388931229}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
   lockOnRange: 10

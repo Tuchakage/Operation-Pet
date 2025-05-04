@@ -798,11 +798,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f938cc466cab84eb3e8e342a559464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  punchForce: 50
+  upwardForce: 5
   chargeTime: 2
-  pushBackForce: 5
-  shrinkFactor: 0.5
-  punchRange: 3
-  targetLayer:
+  disableMovementDuration: 2
+  playerLayer:
     serializedVersion: 2
     m_Bits: 64
 --- !u!114 &-6242413429319339986
@@ -832,14 +832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d31744210e25a4086f25871ebf95c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thirdPersonCamera: {fileID: 0}
-  firstPersonCamera: {fileID: 0}
-  firstPersonSpawnPoint: {fileID: 0}
-  renderTexture: {fileID: 0}
-  uiImage: {fileID: 0}
-  allItems: []
-  standardMaterial: {fileID: 0}
-  trueItemMaterial: {fileID: 0}
+  defaultMaterial: {fileID: 0}
+  highlightMaterial: {fileID: 0}
 --- !u!1 &7052193602052917680
 GameObject:
   m_ObjectHideFlags: 0

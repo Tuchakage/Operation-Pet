@@ -1,38 +1,43 @@
 using UnityEngine;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 public class Mine : MonoBehaviourPunCallbacks
 {
     public float explosionRadius = 5f; // Explosion range
     public float explosionForce = 10f; // Force applied to nearby objects
+    public float upwardMod = 1f; // Controls vertical lift from explosion force
     public LayerMask affectedLayers; // Layers affected by the explosion
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!photonView.IsMine) return;
-
-        // Check if the object that collided has the correct layer or tag
-        if ((affectedLayers.value & (1 << collision.gameObject.layer)) > 0)
+        if (other.CompareTag("Player")) // Check if a player steps on the mine
         {
-            photonView.RPC("ExplodeRPC", RpcTarget.AllBuffered);
+            Debug.Log($"{other.name} triggered the mine!");
+            photonView.RPC("Explode", RpcTarget.All); // Trigger explosion
         }
     }
 
     [PunRPC]
-    private void ExplodeRPC()
+    private void Explode()
     {
-        Collider[] hitObjects = Physics.OverlapSphere(transform.position, explosionRadius, affectedLayers);
+        // Detect all players in explosion radius
+        Collider[] hitObjects = Physics.OverlapSphere(transform.position, explosionRadius);
 
         foreach (Collider obj in hitObjects)
         {
-            Rigidbody rb = obj.GetComponent<Rigidbody>();
-            if (rb != null)
+            if (obj.CompareTag("Player")) // Ensure only players are affected
             {
-                rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+                Rigidbody rb = obj.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardMod);
+                    Debug.Log($"Knockback applied to {obj.name}");
+                }
             }
         }
 
-        // Destroy the mine across the network
-        PhotonNetwork.Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject); // Destroy mine after explosion
     }
+
 }
