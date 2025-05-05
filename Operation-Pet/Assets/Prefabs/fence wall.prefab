@@ -95,6 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2102069395196322471}
+  - component: {fileID: 4796208110907806278}
   m_Layer: 0
   m_Name: fence wall unit
   m_TagString: Untagged
@@ -121,6 +122,27 @@ Transform:
   - {fileID: 8779921954829159292}
   m_Father: {fileID: 5242125258790898289}
   m_LocalEulerAnglesHint: {x: 0, y: 20, z: 0}
+--- !u!65 &4796208110907806278
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225572529320731859}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.2856077, z: 0.07664242}
+  m_Center: {x: -0.00000018378066, y: 0.62831074, z: 0.4616791}
 --- !u!1 &719485690780459217
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +790,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5785755638717955171}
+  - component: {fileID: 4957026000056931693}
   m_Layer: 0
   m_Name: fence wall unit
   m_TagString: Untagged
@@ -794,6 +817,27 @@ Transform:
   - {fileID: 4191585057844141232}
   m_Father: {fileID: 5242125258790898289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4957026000056931693
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2857864613342170375}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.2856077, z: 0.07664242}
+  m_Center: {x: -0.00000018378066, y: 0.62831074, z: 0.4616791}
 --- !u!1 &2868345478829822373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,6 +1535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6596530545136818000}
+  - component: {fileID: 5414002723612713771}
   m_Layer: 0
   m_Name: fence wall unit
   m_TagString: Untagged
@@ -1517,6 +1562,27 @@ Transform:
   - {fileID: 6590627426407663964}
   m_Father: {fileID: 5242125258790898289}
   m_LocalEulerAnglesHint: {x: 0, y: -10, z: 0}
+--- !u!65 &5414002723612713771
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5826104328988427552}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.2856077, z: 0.07664242}
+  m_Center: {x: -0.00000018378066, y: 0.62831074, z: 0.4616791}
 --- !u!1 &6760167555509554259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1612,6 +1678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7527828493756871657}
+  - component: {fileID: 8005760991840616817}
   m_Layer: 0
   m_Name: fence wall unit
   m_TagString: Untagged
@@ -1638,6 +1705,27 @@ Transform:
   - {fileID: 4727912187184135306}
   m_Father: {fileID: 5242125258790898289}
   m_LocalEulerAnglesHint: {x: 0, y: -20, z: 0}
+--- !u!65 &8005760991840616817
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7024699337799404467}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.2856077, z: 0.07664242}
+  m_Center: {x: -0.00000018378066, y: 0.62831074, z: 0.4616791}
 --- !u!1 &7649171902754371302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1819,6 +1907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7156593977620133715}
+  - component: {fileID: 9012028745592219939}
   m_Layer: 0
   m_Name: fence wall unit
   m_TagString: Untagged
@@ -1845,6 +1934,27 @@ Transform:
   - {fileID: 4549159799835553638}
   m_Father: {fileID: 5242125258790898289}
   m_LocalEulerAnglesHint: {x: 0, y: 10, z: 0}
+--- !u!65 &9012028745592219939
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8178361554446386364}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.2856077, z: 0.07664242}
+  m_Center: {x: -0.00000018378066, y: 0.62831074, z: 0.4616791}
 --- !u!1 &8545776274564728775
 GameObject:
   m_ObjectHideFlags: 0

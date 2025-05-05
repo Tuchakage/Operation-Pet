@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 8739903282370994255}
   - component: {fileID: 4280204578951080890}
   - component: {fileID: 4430716592070255291}
+  - component: {fileID: 4345248466771555925}
   m_Layer: 0
   m_Name: pillarWood (2)
   m_TagString: Untagged
@@ -196,6 +197,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4345248466771555925
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721253039276650980}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.16, y: 0.99999994, z: 0.16}
+  m_Center: {x: 0, y: 0.49999997, z: -0.0000000037252903}
 --- !u!1 &1925752998048864981
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +350,7 @@ GameObject:
   - component: {fileID: 1572228253498959284}
   - component: {fileID: 9075001113182277003}
   - component: {fileID: 5738203519807939383}
+  - component: {fileID: 9100266625350479734}
   m_Layer: 0
   m_Name: pillarWood (1)
   m_TagString: Untagged
@@ -404,6 +427,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &9100266625350479734
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4620929305312538739}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.16, y: 0.99999994, z: 0.16}
+  m_Center: {x: 0, y: 0.49999997, z: -0.0000000037252903}
 --- !u!1 &5679141593310466818
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,6 +459,7 @@ GameObject:
   - component: {fileID: 7082069372531309407}
   - component: {fileID: 2599442020970227645}
   - component: {fileID: 4921791638439592126}
+  - component: {fileID: 8212676593484134543}
   m_Layer: 0
   m_Name: pillarWood (3)
   m_TagString: Untagged
@@ -491,6 +536,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8212676593484134543
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5679141593310466818}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.16, y: 0.99999994, z: 0.16}
+  m_Center: {x: 0, y: 0.49999997, z: -0.0000000037252903}
 --- !u!1 &5873544207524141412
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,6 +568,7 @@ GameObject:
   - component: {fileID: 6541713731774563294}
   - component: {fileID: 7883285544832650363}
   - component: {fileID: 5369409124115691697}
+  - component: {fileID: 3263866825728222437}
   m_Layer: 0
   m_Name: pillarWood
   m_TagString: Untagged
@@ -578,6 +645,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3263866825728222437
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5873544207524141412}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.16, y: 0.99999994, z: 0.16}
+  m_Center: {x: 0, y: 0.49999997, z: -0.0000000037252903}
 --- !u!1 &8192203600238044329
 GameObject:
   m_ObjectHideFlags: 0

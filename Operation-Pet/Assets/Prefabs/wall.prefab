@@ -33,6 +33,59 @@ Transform:
   - {fileID: 2637816442588709097}
   m_Father: {fileID: 1781668066499577400}
   m_LocalEulerAnglesHint: {x: 0, y: -30.598, z: 0}
+--- !u!1 &1145548440857811905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2572439012400219409}
+  - component: {fileID: 1416363368788289392}
+  m_Layer: 0
+  m_Name: collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2572439012400219409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145548440857811905}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.005218544, z: 0, w: 0.99998647}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1781668066499577400}
+  m_LocalEulerAnglesHint: {x: 0, y: -0.598, z: 0}
+--- !u!65 &1416363368788289392
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145548440857811905}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 16.006132, y: 12.422838, z: 0.20103595}
+  m_Center: {x: -0.89317805, y: 6.182786, z: -0.0149446465}
 --- !u!1 &1844667280370401051
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +890,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1781668066499577400}
+  - component: {fileID: 2333950010861683248}
   m_Layer: 0
   m_Name: wall
   m_TagString: Untagged
@@ -861,5 +915,27 @@ Transform:
   - {fileID: 4876178526538037656}
   - {fileID: 9162100640113474821}
   - {fileID: 8413695036760407786}
+  - {fileID: 2572439012400219409}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
+--- !u!65 &2333950010861683248
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8379886936968095214}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 16.006132, y: 9.260174, z: 0.25207365}
+  m_Center: {x: -0.893178, y: 4.601454, z: 0.06}
