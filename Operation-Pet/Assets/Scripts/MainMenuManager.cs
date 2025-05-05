@@ -50,6 +50,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
     [SerializeField]
     private TMP_InputField roomName;
+    [SerializeField]
+    private TMP_Text roomNameDisplayText;
 
     //This will be the child named "Content" from the scroll view
     [Header("UI")]
@@ -262,7 +264,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
             SpawnPlayerCards(p);
         }
-        
+
+        roomNameDisplayText.text = PhotonNetwork.CurrentRoom.Name;
 
     }
 
