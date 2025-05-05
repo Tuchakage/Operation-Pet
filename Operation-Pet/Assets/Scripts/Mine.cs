@@ -23,6 +23,7 @@ public class Mine : MonoBehaviourPunCallbacks
     [PunRPC]
     private void Explode()
     {
+        FindObjectOfType<AbilityCooldownUI>().photonView.RPC("StartCooldownRPC", RpcTarget.All, "Mine Explosion", explosionRadius);
         // Play explosion sound
         photonView.RPC("PlayExplosionSoundRPC", RpcTarget.All);
 

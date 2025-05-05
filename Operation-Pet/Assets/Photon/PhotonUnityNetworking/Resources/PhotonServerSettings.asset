@@ -88,6 +88,8 @@ MonoBehaviour:
   - DisableTargetMovementRPC
   - SetBeamVisibilityRPC
   - PlayExplosionSoundRPC
+  - StartCooldownRPC
+  - HighlightFoodRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -51,7 +51,7 @@ public class DodgeRoll : MonoBehaviourPunCallbacks
         }
 
         isRolling = false;
-
+        FindObjectOfType<AbilityCooldownUI>().photonView.RPC("StartCooldownRPC", RpcTarget.All, "Dodge Roll", rollCooldown);
         // Start cooldown
         yield return new WaitForSeconds(rollCooldown);
         canRoll = true;

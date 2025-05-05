@@ -54,6 +54,7 @@ public class CharacterPunch : MonoBehaviourPunCallbacks
         }
 
         canPunch = false;
+        FindObjectOfType<AbilityCooldownUI>().photonView.RPC("StartCooldownRPC", RpcTarget.All, "Punch", punchCooldown);
         yield return new WaitForSeconds(punchCooldown);
         canPunch = true;
     }

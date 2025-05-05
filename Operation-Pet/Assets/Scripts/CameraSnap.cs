@@ -2,17 +2,17 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using static teamsEnum;
+using System.Collections;
 
 public class PetFoodHighlighter : MonoBehaviourPun
 {
-    public Material defaultMaterial;         // Neutral/default appearance
-    public Material highlightMaterial;       // Highlighted appearance for local player’s team
+    public Material highlightMaterial; // Highlighted appearance for local player's team
 
     private MeshRenderer meshRenderer;
     private teams foodFor;
-
     private bool isInitialized = false;
     private bool isMineFood = false;
+    private bool canHighlight = true; // Cooldown control
 
     bool fakeFood;
 
@@ -21,7 +21,7 @@ public class PetFoodHighlighter : MonoBehaviourPun
         meshRenderer = GetComponent<MeshRenderer>();
         foodFor = GetComponent<PetFood>().foodFor;
 
-        //Check if the food is fake
+        // Check if the food is fake
         fakeFood = GetComponent<PetFood>().isFake;
 
         // Try to initialize immediately if custom properties are available
@@ -30,33 +30,40 @@ public class PetFoodHighlighter : MonoBehaviourPun
 
     void Update()
     {
-        // If team info hasn't been loaded yet, try again
         if (!isInitialized)
         {
             TryInitialize();
             return;
         }
 
-        if (!fakeFood) 
+        if (!fakeFood && canHighlight)
         {
-            // On key press, reveal or hide based on team match
-            if (Input.GetKey(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                if (isMineFood)
-                {
-                    SetMaterial(highlightMaterial);
-                }
-                else
-                {
-                    SetMaterial(defaultMaterial);
-                }
-            }
-            else
-            {
-                SetMaterial(defaultMaterial);
+                photonView.RPC("HighlightFoodRPC", RpcTarget.AllBuffered);
+                StartCoroutine(HighlightCooldown());
             }
         }
+    }
 
+    [PunRPC]
+    private void HighlightFoodRPC()
+    {
+        if (isMineFood)
+        {
+            SetMaterial(highlightMaterial);
+        }
+        else
+        {
+            SetMaterial(null); // Removes material if not on the same team
+        }
+    }
+
+    private IEnumerator HighlightCooldown()
+    {
+        canHighlight = false;
+        yield return new WaitForSeconds(3.0f); // 3-second cooldown
+        canHighlight = true;
     }
 
     void TryInitialize()
@@ -71,7 +78,7 @@ public class PetFoodHighlighter : MonoBehaviourPun
 
     void SetMaterial(Material mat)
     {
-        if (meshRenderer != null && meshRenderer.sharedMaterial != mat)
+        if (meshRenderer != null)
         {
             meshRenderer.sharedMaterial = mat;
         }

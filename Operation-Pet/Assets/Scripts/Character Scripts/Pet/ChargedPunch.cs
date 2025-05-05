@@ -60,6 +60,7 @@ public class ChargedPunch : MonoBehaviourPunCallbacks
                 Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
+                    FindObjectOfType<AbilityCooldownUI>().photonView.RPC("StartCooldownRPC", RpcTarget.All, "Charged Punch", chargeTime);
                     // Calculate push direction
                     Vector3 pushDirection = (hit.collider.transform.position - transform.position).normalized;
                     pushDirection.y += upwardForce; // Add slight upward force

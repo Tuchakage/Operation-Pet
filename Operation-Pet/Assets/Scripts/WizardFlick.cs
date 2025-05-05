@@ -70,7 +70,7 @@ public class WizardFlick : MonoBehaviourPunCallbacks
             {
                 Debug.LogError($"Target {lockedTarget.name} does not have a Rigidbody!");
             }
-
+            FindObjectOfType<AbilityCooldownUI>().photonView.RPC("StartCooldownRPC", RpcTarget.All, "Wizard Flick", flickCooldownDuration);
             isTargetLocked = false;
             lockedTarget = null;
         }
