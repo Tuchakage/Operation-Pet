@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using ExitGames.Client.Photon; // Required for Hashtable
 using static teamsEnum;
+
 public class PetFoodHighlighter : MonoBehaviourPun
 {
     public Material defaultMaterial;         // Neutral/default appearance
@@ -11,15 +13,15 @@ public class PetFoodHighlighter : MonoBehaviourPun
 
     private bool isInitialized = false;
     private bool isMineFood = false;
-
-    bool fakeFood;
+    private bool fakeFood;
+    private bool isPlayerTagged = false;
 
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         foodFor = GetComponent<PetFood>().foodFor;
 
-        //Check if the food is fake
+        // Check if the food is fake
         fakeFood = GetComponent<PetFood>().isFake;
 
         // Try to initialize immediately if custom properties are available
@@ -32,6 +34,12 @@ public class PetFoodHighlighter : MonoBehaviourPun
         if (!isInitialized)
         {
             TryInitialize();
+            return;
+        }
+
+        // Only proceed if the player has the "PLAYER" tag
+        if (!isPlayerTagged)
+        {
             return;
         }
 
@@ -54,11 +62,28 @@ public class PetFoodHighlighter : MonoBehaviourPun
                 SetMaterial(defaultMaterial);
             }
         }
-
     }
 
     void TryInitialize()
     {
+        // Check if the local player's custom properties contain the "Tag" key
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Tag", out object tagObj))
+        {
+            string tagValue = tagObj as string;
+            isPlayerTagged = tagValue == "Player";
+        }
+        else
+        {
+            isPlayerTagged = false;
+        }
+
+        // Proceed only if the player is tagged as "PLAYER"
+        if (!isPlayerTagged)
+        {
+            return;
+        }
+
+        // Check if the local player's custom properties contain the "Team Name" key
         if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Team Name", out object teamObj))
         {
             teams myTeam = (teams)teamObj;
@@ -74,5 +99,4 @@ public class PetFoodHighlighter : MonoBehaviourPun
             meshRenderer.sharedMaterial = mat;
         }
     }
-
 }

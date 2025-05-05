@@ -1,6 +1,5 @@
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 using System.Collections;
 
 public class LightBeam : MonoBehaviourPunCallbacks
@@ -11,15 +10,8 @@ public class LightBeam : MonoBehaviourPunCallbacks
     public Color beamColor = Color.white; // Color of the beam
     public Camera playerCamera; // Player's camera for targeting
     public LayerMask targetLayer; // Layer for spawning the beam
+    public LayerMask groundPlayerLayer; // Layer for players that should destroy the beam
     private GameObject beamInstance; // Instantiated beam reference
-    private Player localPlayer; // Stores the local player information
-
-    void Start()
-    {
-        if (!photonView.IsMine) return;
-
-        localPlayer = PhotonNetwork.LocalPlayer;
-    }
 
     void Update()
     {
@@ -28,16 +20,17 @@ public class LightBeam : MonoBehaviourPunCallbacks
         // Check for player input to create the beam
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            photonView.RPC("CreateBeamRPC", RpcTarget.All, localPlayer.ActorNumber);
+            photonView.RPC("CreateBeamRPC", RpcTarget.All);
         }
     }
 
     [PunRPC]
-    private void CreateBeamRPC(int ownerID)
+    private void CreateBeamRPC()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
+        // Perform a raycast to find the target position
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, targetLayer))
         {
             Vector3 beamPosition = hit.point;
@@ -49,29 +42,11 @@ public class LightBeam : MonoBehaviourPunCallbacks
             beamInstance.transform.localScale = new Vector3(beamWidth, 5000f, beamWidth);
             beamInstance.GetComponent<Renderer>().material.color = beamColor;
 
-            // Set beam visibility only for teammates
-            photonView.RPC("SetBeamVisibilityRPC", RpcTarget.All, ownerID);
+            // Attach collision detection
+            beamInstance.AddComponent<BeamCollisionHandler>().InitializeBeam(this);
 
             // Schedule destruction after beamDuration
             photonView.RPC("DestroyBeamRPC", RpcTarget.AllBuffered, beamInstance.GetComponent<PhotonView>().ViewID);
-        }
-    }
-
-    [PunRPC]
-    private void SetBeamVisibilityRPC(int ownerID)
-    {
-        Player beamOwner = PhotonNetwork.CurrentRoom.GetPlayer(ownerID);
-        if (beamOwner == null) return;
-
-        foreach (Player player in PhotonNetwork.PlayerList)
-        {
-            bool isTeammate = player.CustomProperties["Team Name"].Equals(beamOwner.CustomProperties["Team Name"]);
-
-            // Set visibility based on team
-            if (!isTeammate)
-            {
-                beamInstance.GetComponent<Renderer>().enabled = false; // Hide beam from opponents
-            }
         }
     }
 
@@ -94,6 +69,29 @@ public class LightBeam : MonoBehaviourPunCallbacks
         else
         {
             Debug.LogError("Failed to find light beam object for destruction.");
+        }
+    }
+}
+
+public class BeamCollisionHandler : MonoBehaviour
+{
+    private LightBeam parentScript;
+
+    public void InitializeBeam(LightBeam script)
+    {
+        parentScript = script;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (((1 << other.gameObject.layer) & parentScript.groundPlayerLayer) != 0)
+        {
+            PhotonView beamPV = GetComponent<PhotonView>();
+            if (beamPV != null && beamPV.IsMine)
+            {
+                PhotonNetwork.Destroy(gameObject);
+                Debug.Log($"Beam destroyed as ground player entered.");
+            }
         }
     }
 }
