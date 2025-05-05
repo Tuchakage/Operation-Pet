@@ -1,0 +1,14 @@
+PLAYER CONTROLS:
+
+1. PET Controls
+	WASD to move player around along with camera
+	Left Click for normal punch ( has 1 sec cooldown after every punch)
+	Right Click for Charged punch (has 3sec timer to charge which behaves as cooldown as well)
+	Right Shift to perform Dash
+	"P" button to take camera shot of which item is their unique item
+
+2. WIZARD Controls
+	Player moves along X-Y axis only using WASD
+	"Q" spawn a light beam helping PET to find directions
+	Right Click for placing mine 
+	"E" to lock unto player target and then Left Click to flick the player in a direction

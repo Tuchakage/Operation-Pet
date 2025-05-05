@@ -46,6 +46,10 @@ GameObject:
   - component: {fileID: 1220239658603191096}
   - component: {fileID: 7822790558735416625}
   - component: {fileID: 2053255671608202059}
+  - component: {fileID: 3098512379477009391}
+  - component: {fileID: 3961447344792800145}
+  - component: {fileID: 7303096139784500502}
+  - component: {fileID: 5957650289472752952}
   m_Layer: 0
   m_Name: MousePrefab
   m_TagString: Player
@@ -176,6 +180,71 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &3098512379477009391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479179580459627659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d31744210e25a4086f25871ebf95c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thirdPersonCamera: {fileID: 0}
+  firstPersonCamera: {fileID: 0}
+  firstPersonSpawnPoint: {fileID: 0}
+  renderTexture: {fileID: 0}
+  uiImage: {fileID: 0}
+  trueItem: {fileID: 0}
+  alternateMaterial: {fileID: 0}
+--- !u!114 &3961447344792800145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479179580459627659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7591e3bd271aa94aa28f9889f06422c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  punchCooldown: 1
+  pushBackForce: 2
+  target: {fileID: 0}
+--- !u!114 &7303096139784500502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479179580459627659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f938cc466cab84eb3e8e342a559464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeTime: 2
+  pushBackForce: 5
+  shrinkFactor: 0.5
+  target: {fileID: 0}
+--- !u!114 &5957650289472752952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479179580459627659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da6b176b6ef16d84fb3996ff40c142fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollDistance: 5
+  rollSpeed: 10
+  rollCooldown: 1.5
 --- !u!1 &1064270425505307513
 GameObject:
   m_ObjectHideFlags: 0

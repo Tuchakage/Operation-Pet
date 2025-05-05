@@ -59,6 +59,16 @@ MonoBehaviour:
   - IncreaseMatchWonStat
   - PerformPunchRPC
   - PerformRollRPC
+  - ExecutePunchRPC
+  - CaptureScreenshotRPC
+  - ResetItemMaterialsRPC
+  - RevealTrueItemRPC
+  - LockOnTargetRPC
+  - UnlockTargetRPC
+  - PlaceMine
+  - Detonate
+  - OnDrawGizmos
+  - FlickTarget
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

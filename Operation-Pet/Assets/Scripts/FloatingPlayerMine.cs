@@ -1,6 +1,8 @@
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class FloatingPlayerMine : MonoBehaviour
+public class FloatingPlayerMine : MonoBehaviourPunCallbacks
 {
     public GameObject minePrefab; // Prefab of the mine
     public Camera playerCamera; // Camera for reticle targeting
@@ -8,6 +10,7 @@ public class FloatingPlayerMine : MonoBehaviour
 
     void Update()
     {
+        if (!photonView.IsMine) return;
         // Place mine when right mouse button is clicked
         if (Input.GetMouseButtonDown(1)) // Right Mouse Button
         {
@@ -15,6 +18,7 @@ public class FloatingPlayerMine : MonoBehaviour
         }
     }
 
+    [PunRPC]
     private void PlaceMine()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);

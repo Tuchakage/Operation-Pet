@@ -313,6 +313,10 @@ GameObject:
   - component: {fileID: 9056939555648394497}
   - component: {fileID: 7080280281064350264}
   - component: {fileID: 8068131342037594391}
+  - component: {fileID: 1347244125236938864}
+  - component: {fileID: 1319291146538478184}
+  - component: {fileID: -842025531978203372}
+  - component: {fileID: -2605061524038895890}
   m_Layer: 0
   m_Name: HorsePrefab
   m_TagString: Player
@@ -443,6 +447,71 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &1347244125236938864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4052544310665350500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d31744210e25a4086f25871ebf95c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thirdPersonCamera: {fileID: 0}
+  firstPersonCamera: {fileID: 0}
+  firstPersonSpawnPoint: {fileID: 0}
+  renderTexture: {fileID: 0}
+  uiImage: {fileID: 0}
+  trueItem: {fileID: 0}
+  alternateMaterial: {fileID: 0}
+--- !u!114 &1319291146538478184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4052544310665350500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7591e3bd271aa94aa28f9889f06422c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  punchCooldown: 1
+  pushBackForce: 2
+  target: {fileID: 0}
+--- !u!114 &-842025531978203372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4052544310665350500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f938cc466cab84eb3e8e342a559464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeTime: 2
+  pushBackForce: 5
+  shrinkFactor: 0.5
+  target: {fileID: 0}
+--- !u!114 &-2605061524038895890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4052544310665350500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da6b176b6ef16d84fb3996ff40c142fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollDistance: 5
+  rollSpeed: 10
+  rollCooldown: 1.5
 --- !u!1 &4174400470796784563
 GameObject:
   m_ObjectHideFlags: 0

@@ -173,6 +173,10 @@ GameObject:
   - component: {fileID: 8269106668495134366}
   - component: {fileID: 993445621515265112}
   - component: {fileID: 147821960290965051}
+  - component: {fileID: 690455421565881851}
+  - component: {fileID: -1417287851189567882}
+  - component: {fileID: -6464167062939446824}
+  - component: {fileID: -9075815481222470762}
   m_Layer: 0
   m_Name: SquirrelPrefab
   m_TagString: Player
@@ -303,6 +307,71 @@ CapsuleCollider:
   m_Height: 0.14
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &690455421565881851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3379877405300164470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da6b176b6ef16d84fb3996ff40c142fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollDistance: 5
+  rollSpeed: 10
+  rollCooldown: 1.5
+--- !u!114 &-1417287851189567882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3379877405300164470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d31744210e25a4086f25871ebf95c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thirdPersonCamera: {fileID: 0}
+  firstPersonCamera: {fileID: 0}
+  firstPersonSpawnPoint: {fileID: 0}
+  renderTexture: {fileID: 0}
+  uiImage: {fileID: 0}
+  trueItem: {fileID: 0}
+  alternateMaterial: {fileID: 0}
+--- !u!114 &-6464167062939446824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3379877405300164470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7591e3bd271aa94aa28f9889f06422c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  punchCooldown: 1
+  pushBackForce: 2
+  target: {fileID: 0}
+--- !u!114 &-9075815481222470762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3379877405300164470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33f938cc466cab84eb3e8e342a559464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeTime: 2
+  pushBackForce: 5
+  shrinkFactor: 0.5
+  target: {fileID: 0}
 --- !u!1 &3386670758523758278
 GameObject:
   m_ObjectHideFlags: 0

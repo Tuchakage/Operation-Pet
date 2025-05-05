@@ -1,24 +1,26 @@
-using Photon.Pun;
-using System.Collections;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
+using System.Collections;
+using System.Collections.Generic;
 
 public class ChargedPunch : MonoBehaviourPunCallbacks
 {
     public float chargeTime = 2.0f; // Time required to charge the punch
     public float pushBackForce = 5.0f; // Force to knock the target back
     public float shrinkFactor = 0.5f; // Factor by which the target shrinks
-    public Transform target; // Assign the target (e.g., the cube) in the Inspector
+    public float punchRange = 3.0f; // Defines the range for detecting targets
+    public LayerMask targetLayer; // Layer for objects that can be punched
 
     private bool isCharging = false; // Tracks if the punch is being charged
     private bool canPunch = true; // Ensures cooldown after each punch
+    private Dictionary<Transform, int> hitCounts = new Dictionary<Transform, int>(); // Tracks hit counts for multiple targets
 
     void Update()
     {
         if (!photonView.IsMine) return;
-        // Check if the left mouse button is pressed
-        if (Input.GetMouseButtonDown(1) && canPunch) // 0 represents the left mouse button
+
+        // Start charging punch when right mouse button is pressed
+        if (Input.GetMouseButtonDown(1) && canPunch)
         {
             StartCoroutine(ChargePunch());
         }
@@ -38,27 +40,42 @@ public class ChargedPunch : MonoBehaviourPunCallbacks
         while (Input.GetMouseButton(1) && chargeProgress < chargeTime)
         {
             chargeProgress += Time.deltaTime; // Increment charge progress
-            yield return null; // Wait for the next frame
+            yield return null; // Wait for next frame
         }
 
         // If fully charged and button is released, execute the punch
         if (chargeProgress >= chargeTime)
         {
-            ExecutePunch();
+            photonView.RPC("ExecutePunchRPC", RpcTarget.AllBuffered);
         }
 
         isCharging = false;
     }
 
-    private void ExecutePunch()
+    [PunRPC]
+    private void ExecutePunchRPC()
     {
-        if (target != null && Vector3.Distance(transform.position, target.position) <= 3.0f) // Example range
-        {
-            // Knock back the target
-            PushBackTarget();
+        // Find all objects within punch range
+        Collider[] hitTargets = Physics.OverlapSphere(transform.position, punchRange, targetLayer);
 
-            // Shrink the target
-            ShrinkTarget();
+        foreach (Collider hit in hitTargets)
+        {
+            Transform target = hit.transform;
+
+            if (!hitCounts.ContainsKey(target))
+            {
+                hitCounts[target] = 0;
+            }
+
+            PushBackTarget(target);
+            hitCounts[target]++;
+
+            // Shrink the target after 3 hits
+            if (hitCounts[target] >= 3)
+            {
+                ShrinkTarget(target);
+                hitCounts[target] = 0; // Reset hit count
+            }
         }
 
         // Start cooldown after the punch
@@ -68,11 +85,11 @@ public class ChargedPunch : MonoBehaviourPunCallbacks
     private IEnumerator PunchCooldown()
     {
         canPunch = false;
-        yield return new WaitForSeconds(1.0f); // Cooldown duration (adjust as needed)
+        yield return new WaitForSeconds(1.0f); // Cooldown duration
         canPunch = true;
     }
 
-    private void PushBackTarget()
+    private void PushBackTarget(Transform target)
     {
         Rigidbody rb = target.GetComponent<Rigidbody>();
         if (rb != null)
@@ -82,9 +99,8 @@ public class ChargedPunch : MonoBehaviourPunCallbacks
         }
     }
 
-    private void ShrinkTarget()
+    private void ShrinkTarget(Transform target)
     {
-        // Shrink the target's scale
         target.localScale *= shrinkFactor;
     }
 }
