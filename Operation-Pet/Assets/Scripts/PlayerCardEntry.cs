@@ -16,10 +16,11 @@ public class PlayerCardEntry : MonoBehaviour
     public int ownerId;
     public bool isPlayerReady = false;
 
+    //Variables that store the ready buttons images
+    [SerializeField] private GameObject ReadyImageBtn;
+    [SerializeField] private GameObject UnreadyImageBtn;
 
-    public GameObject readyBtn;
-    //Used to turn on the indicator to show that a player is ready
-    public Image ReadyCircleObject;
+
 
     void Start()
     {
@@ -27,11 +28,21 @@ public class PlayerCardEntry : MonoBehaviour
         if (PhotonNetwork.LocalPlayer.ActorNumber != ownerId) 
         {
             //Lose reference to the button and Ready Icon so it doesn't get activated
-            readyBtn = null;
+            ReadyImageBtn.GetComponent<Button>().enabled = false;
+            UnreadyImageBtn.GetComponent<Button>().enabled = false;
+
+            //Disable the button Image
+            ReadyImageBtn.transform.GetChild(0).GetComponent<Image>().enabled = false;
+            UnreadyImageBtn.transform.GetChild(0).GetComponent<Image>().enabled = false;
             return;
         }
+
+        ReadyImageBtn.SetActive(false);
+        UnreadyImageBtn.SetActive(true);
         //Set the OnClick() event for the Ready Button
-        readyBtn.GetComponent<Button>().onClick.AddListener(ReadyUp);
+        ReadyImageBtn.GetComponent<Button>().onClick.AddListener(ReadyUp);
+        UnreadyImageBtn.GetComponent<Button>().onClick.AddListener(ReadyUp);
+
 
         //Initialise a Hashtable to use for the SetCustomProperties Function and set the player being ready to false
         UpdatePlayerReadyProp(false);
@@ -42,7 +53,6 @@ public class PlayerCardEntry : MonoBehaviour
     {
         ownerId = playerId;
         PlayerNameText.text = playerName;
-        readyBtn = GameObject.Find("ReadyBtn");
 
     }
 
@@ -51,24 +61,31 @@ public class PlayerCardEntry : MonoBehaviour
         //Reverses what it currently is
         isPlayerReady = !isPlayerReady;
 
+        SetReadyStatus(isPlayerReady);
+
+
         //Update Hash Table
         UpdatePlayerReadyProp(isPlayerReady);
 
-        //Depending on what the "isPlayerReady" variable is set the text
-        readyBtn.transform.GetChild(0).GetComponent<TMP_Text>().text = isPlayerReady ? "Unready" : "Ready";
 
         Debug.Log("Player Ready = " + isPlayerReady);
 
     }
 
     //Boolean parameter so other players can go into custom properties and assign it
-    public void SetReadyStatus(bool playerReady) 
+    public void SetReadyStatus(bool playerReady)
     {
-        if (ReadyCircleObject) 
+        if (ReadyImageBtn) 
         {
-            //Make Ready Circle Available Or Unavailable
-            ReadyCircleObject.enabled = playerReady;
+            ReadyImageBtn.SetActive(playerReady);
         }
+
+        if (UnreadyImageBtn) 
+        {
+            UnreadyImageBtn.SetActive(!playerReady);
+        }
+        
+        
     }
 
     public static void UpdatePlayerReadyProp(bool playerReady) 

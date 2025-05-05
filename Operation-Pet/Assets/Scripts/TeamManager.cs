@@ -425,7 +425,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
         //Use this to find the Game Object Group of the team for the player card
-        string teamNameCheck = teamToJoin.ToString() + " Team";
+        string teamNameCheck = teamToJoin.ToString() + "PlayerCardPanel";
 
         //Debug.Log("Name of team: " + teamNameCheck);
         //Get reference to the Team Group List (Depending on what was passed through the parameter)
