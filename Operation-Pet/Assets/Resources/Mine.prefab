@@ -127,7 +127,9 @@ MonoBehaviour:
   upwardMod: 1
   affectedLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 3968
+  explosionSound: {fileID: 8300000, guid: 9f1a5000ad1354e72891671cb8cab2f7, type: 3}
+  explosionVolume: 10.84
 --- !u!114 &2568387696522799090
 MonoBehaviour:
   m_ObjectHideFlags: 0

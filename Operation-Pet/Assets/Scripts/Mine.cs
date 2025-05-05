@@ -5,9 +5,11 @@ using Unity.VisualScripting;
 public class Mine : MonoBehaviourPunCallbacks
 {
     public float explosionRadius = 5f; // Explosion range
-    public float explosionForce = 10f; // Force applied to nearby objects
+    public float explosionForce = 10f; // Knockback force
     public float upwardMod = 1f; // Controls vertical lift from explosion force
-    public LayerMask affectedLayers; // Layers affected by the explosion
+    public LayerMask affectedLayers; // Layers affected by explosion
+    public AudioClip explosionSound; // Explosion sound effect
+    public float explosionVolume = 1.0f; // Volume of explosion sound
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,6 +23,9 @@ public class Mine : MonoBehaviourPunCallbacks
     [PunRPC]
     private void Explode()
     {
+        // Play explosion sound
+        photonView.RPC("PlayExplosionSoundRPC", RpcTarget.All);
+
         // Detect all players in explosion radius
         Collider[] hitObjects = Physics.OverlapSphere(transform.position, explosionRadius);
 
@@ -40,4 +45,16 @@ public class Mine : MonoBehaviourPunCallbacks
         PhotonNetwork.Destroy(gameObject); // Destroy mine after explosion
     }
 
+    [PunRPC]
+    private void PlayExplosionSoundRPC()
+    {
+        if (explosionSound != null)
+        {
+            AudioSource.PlayClipAtPoint(explosionSound, transform.position, explosionVolume);
+        }
+        else
+        {
+            Debug.LogError("Explosion sound effect is missing! Assign an AudioClip in Unity.");
+        }
+    }
 }
