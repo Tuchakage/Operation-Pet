@@ -14,10 +14,15 @@ public class PetFoodHighlighter : MonoBehaviourPun
     private bool isInitialized = false;
     private bool isMineFood = false;
 
+    bool fakeFood;
+
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         foodFor = GetComponent<PetFood>().foodFor;
+
+        //Check if the food is fake
+        fakeFood = GetComponent<PetFood>().isFake;
 
         // Try to initialize immediately if custom properties are available
         TryInitialize();
@@ -32,22 +37,26 @@ public class PetFoodHighlighter : MonoBehaviourPun
             return;
         }
 
-        // On key press, reveal or hide based on team match
-        if (Input.GetKey(KeyCode.Q))
+        if (!fakeFood) 
         {
-            if (isMineFood)
+            // On key press, reveal or hide based on team match
+            if (Input.GetKey(KeyCode.Q))
             {
-                SetMaterial(highlightMaterial);
+                if (isMineFood)
+                {
+                    SetMaterial(highlightMaterial);
+                }
+                else
+                {
+                    SetMaterial(defaultMaterial);
+                }
             }
             else
             {
                 SetMaterial(defaultMaterial);
             }
         }
-        else
-        {
-            SetMaterial(defaultMaterial);
-        }
+
     }
 
     void TryInitialize()
