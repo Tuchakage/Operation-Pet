@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using static teamsEnum;
@@ -87,7 +88,7 @@ public class ResultsManager : MonoBehaviourPun
             }
         }
 
-        //Order the Dictionary which will convert it to a IOrderedEnumerable List and then convert it back to a Dictionary using the original keys and the original values
+        //Order the Dictionary which will convert it to a IOrderedEnumerable List and then convert it back to a Dictionary using the original keys and the original values 
         sortedRankedTeams = sortedRankedTeams.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
         /////////// FOR TESTING DELETE LATER ///////////////
@@ -142,15 +143,32 @@ public class ResultsManager : MonoBehaviourPun
 
     void SpawnTeam() 
     {
+        Debug.Log("Spawn Team");
+        // Starting from the last element in spawnpoint List (Which would be first place)
+        // Descending Order so highest is first
+        // To spawn them, for loop needs to start from the last index for spawnpoint
 
+        //1st place = Index 5 (There can only be 5 teams that show up), 1st place in sortedRankedTeams = Index 0
         for (int i = 0; i < sortedRankedTeams.Count; i++) 
         {
-            //Get the child of the set list in order
-            Transform spawnpoint = SetsList[setToKeep].transform.GetChild(i);
+
+            // Max spawnpoints positions - Element in sortedRankedTeams = Spawnpoint index position of child (5 - 0 = 5)
+            int spawnPointIndex = 4 - i;
+
+            Debug.Log("Element at: " + i + "Spawnpoint Index "+spawnPointIndex);
+            //Get the child of the set list in order (It will get 1st place first)
+            Transform spawnpoint = SetsList[setToKeep].transform.GetChild(spawnPointIndex);
+
             GameObject model = Instantiate(CheckModelToSpawn(sortedRankedTeams.ElementAt(i).Key), spawnpoint);
+            //Set the text that displays what rank the team got
+            model.transform.Find("RankTxt").GetComponent<TMP_Text>().text = spawnpoint.name;
             model.transform.localPosition = new Vector3(0, 0, 0);
-            model.transform.localScale = new Vector3(3, 3, 3);
-            model.transform.localEulerAngles = new Vector3(0, 90, 0);
+
+            //If they are not in 1st place then don't show the Crown
+            if (spawnpoint.name != "1st Place") 
+            {
+                model.transform.Find("Crown").gameObject.SetActive(false);
+            }
         }
 
         //Let the Master Client tell everyone to update match won stat if they won
@@ -160,7 +178,8 @@ public class ResultsManager : MonoBehaviourPun
             photonView.RPC("IncreaseMatchWonStat", RpcTarget.All);
             
         }
-        
+
+
 
     }
 
@@ -241,6 +260,11 @@ public class ResultsManager : MonoBehaviourPun
     [PunRPC]
     void IncreaseMatchWonStat() 
     {
+        //If they are playing without an account don't run the rest of the code
+        if (FirebaseManager.Instance.playWithoutAccount) 
+        {
+            return;
+        }
         //Get the team this player is on
         teams myTeam = GetTeam(PhotonNetwork.LocalPlayer);
 

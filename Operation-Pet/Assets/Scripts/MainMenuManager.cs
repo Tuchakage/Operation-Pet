@@ -146,14 +146,8 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
                 statsBtn.gameObject.SetActive(true);
             }
 
-            //Make sure Roles for players are reset
-            Hashtable playerProp = new Hashtable()
-            {
-            {"Role Name",  roles.Unassigned}
-            };
-            //Debug.Log("Team Counter =" +teamCounter + " For "+team);
-            //Set the Custom Properties for the room so that it knows how many players are in each team
-            PhotonNetwork.LocalPlayer.SetCustomProperties(playerProp);
+            StartCoroutine(ResetPlayerTeamProp());
+
         }
 
 
@@ -162,6 +156,7 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
 
         FirebaseManager.Instance.onLoginScene = false;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -642,6 +637,10 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void IncreaseMatchPlayedForAll() 
     {
+        if (FirebaseManager.Instance.playWithoutAccount) 
+        {
+            return;
+        }
         //Increase the amount of games the player has played
         StartCoroutine(FirebaseManager.Instance.UpdateMatchPlayedDatabase());
     }
@@ -653,6 +652,20 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
         yield return new WaitForSeconds(1f);
 
         playerErrorMessage.text = "";
+    }
+
+    System.Collections.IEnumerator ResetPlayerTeamProp()
+    {
+        yield return PhotonNetwork.IsConnectedAndReady;
+
+        //Make sure Roles for players are reset
+        Hashtable playerProp = new Hashtable()
+            {
+            {"Role Name",  roles.Unassigned}
+            };
+        //Debug.Log("Team Counter =" +teamCounter + " For "+team);
+        //Set the Custom Properties for the room so that it knows how many players are in each team
+        PhotonNetwork.LocalPlayer.SetCustomProperties(playerProp);
     }
 
 
