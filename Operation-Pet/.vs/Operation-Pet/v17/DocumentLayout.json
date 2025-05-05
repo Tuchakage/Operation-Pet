@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\lightbeam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\drake\\onedrive\\documents\\github\\operation-pet\\operation-pet\\assets\\scripts\\lightbeam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\lightbeam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,11 +15,11 @@
       "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\drake\\onedrive\\documents\\github\\operation-pet\\operation-pet\\assets\\scripts\\camerasnap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\camerasnap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\camerasnap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\drake\\onedrive\\documents\\github\\operation-pet\\operation-pet\\assets\\scripts\\roundmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\roundmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\roundmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -85,8 +85,7 @@
               "RelativeToolTip": "Assets\\Scripts\\RoundManager.cs",
               "ViewState": "AgIAAMYBAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T21:34:59.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T21:34:59.321Z"
             },
             {
               "$type": "Document",
@@ -132,7 +131,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\LightBeam.cs",
               "ToolTip": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\LightBeam.cs",
               "RelativeToolTip": "Assets\\Scripts\\LightBeam.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAowAIAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-03T14:58:52.388Z",
               "EditorCaption": ""
@@ -147,8 +146,7 @@
               "RelativeToolTip": "Assets\\Scripts\\FloatingPlayerMine.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:46:59.714Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T14:46:59.714Z"
             },
             {
               "$type": "Document",
@@ -160,8 +158,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Mine.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:46:50.713Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T14:46:50.713Z"
             },
             {
               "$type": "Document",
@@ -197,8 +194,7 @@
               "RelativeToolTip": "Assets\\Scripts\\CameraSnap.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAUwEgAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:07:35.296Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T14:07:35.296Z"
             },
             {
               "$type": "Document",

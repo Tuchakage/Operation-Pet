@@ -156,8 +156,8 @@ GameObject:
   - component: {fileID: 6150444138206314722}
   - component: {fileID: 1243585233758692212}
   - component: {fileID: 7593291555270998894}
-  - component: {fileID: 4824562836015632767}
   - component: {fileID: 5831327290279868800}
+  - component: {fileID: -5531609740306328589}
   m_Layer: 0
   m_Name: wizPrefab
   m_TagString: WizardChar
@@ -394,7 +394,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   minePlacementCooldown: 3
---- !u!114 &4824562836015632767
+--- !u!114 &5831327290279868800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100136730509424109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &-5531609740306328589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -413,23 +429,10 @@ MonoBehaviour:
   playerCamera: {fileID: 7693970818388931229}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 4096
---- !u!114 &5831327290279868800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100136730509424109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
+    m_Bits: 1
+  groundPlayerLayer:
+    serializedVersion: 2
+    m_Bits: 3968
 --- !u!1 &7449738437439340402
 GameObject:
   m_ObjectHideFlags: 0
