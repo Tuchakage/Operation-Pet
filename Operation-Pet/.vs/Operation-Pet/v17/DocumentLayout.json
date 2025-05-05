@@ -35,7 +35,7 @@
       "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\character scripts\\pet\\characterpunch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\drake\\onedrive\\documents\\github\\operation-pet\\operation-pet\\assets\\scripts\\abilitycooldownui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\abilitycooldownui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\abilitycooldownui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -81,8 +81,7 @@
               "RelativeToolTip": "Assets\\Scripts\\AbilityCooldownUI.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAswEYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T19:12:58.034Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T19:12:58.034Z"
             },
             {
               "$type": "Document",
@@ -118,8 +117,7 @@
               "RelativeToolTip": "Assets\\Scripts\\LightBeam.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAswGIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:58:52.388Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T14:58:52.388Z"
             },
             {
               "$type": "Document",
@@ -131,8 +129,7 @@
               "RelativeToolTip": "Assets\\Scripts\\FloatingPlayerMine.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:46:59.714Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T14:46:59.714Z"
             },
             {
               "$type": "Document",
@@ -144,8 +141,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Mine.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABkAAACDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:46:50.713Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T14:46:50.713Z"
             },
             {
               "$type": "Document",
@@ -169,8 +165,7 @@
               "RelativeToolTip": "Assets\\Scripts\\WizardFlick.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAgwEgAAACLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:12:55.844Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T14:12:55.844Z"
             },
             {
               "$type": "Document",
@@ -180,7 +175,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\CameraSnap.cs",
               "ToolTip": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\CameraSnap.cs",
               "RelativeToolTip": "Assets\\Scripts\\CameraSnap.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFUAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowE0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-03T14:07:35.296Z",
               "EditorCaption": ""
@@ -195,8 +190,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Character Scripts\\Pet\\DodgeRoll.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAB8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:05:08.122Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T14:05:08.122Z"
             },
             {
               "$type": "Document",
@@ -220,8 +214,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Character Scripts\\Pet\\ChargedPunch.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAQwD4AAACJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:04:11.09Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T14:04:11.09Z"
             },
             {
               "$type": "Document",
@@ -233,8 +226,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Character Scripts\\Pet\\CharacterPunch.cs",
               "ViewState": "AgIAABgAAAAAAAAAAAAmwDgAAAB4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T12:35:41.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-02T12:35:41.264Z"
             },
             {
               "$type": "Document",
