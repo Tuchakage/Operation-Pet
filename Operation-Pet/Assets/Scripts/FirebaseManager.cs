@@ -76,7 +76,6 @@ public class FirebaseManager : MonoBehaviour
             }
             else
             {
-                warningLoginText.text = "No Firebase :(";
                 Debug.LogError("Could not resolve all Firebase dependences:" + dependencyStatus);
             }
         });
@@ -213,7 +212,6 @@ public class FirebaseManager : MonoBehaviour
         auth = FirebaseAuth.DefaultInstance;
         //Get Reference to Firebase Database Instance so we can call the Firebase Database functions to manage our database
         DBreference = FirebaseDatabase.DefaultInstance.RootReference;
-        warningLoginText.text = "WE'RE IN!";
 
     }
 
