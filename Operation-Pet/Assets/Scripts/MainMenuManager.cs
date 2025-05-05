@@ -642,6 +642,10 @@ public class MainMenuManager : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void IncreaseMatchPlayedForAll() 
     {
+        if (FirebaseManager.Instance.playWithoutAccount) 
+        {
+            return;
+        }
         //Increase the amount of games the player has played
         StartCoroutine(FirebaseManager.Instance.UpdateMatchPlayedDatabase());
     }

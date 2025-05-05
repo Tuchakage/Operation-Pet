@@ -335,6 +335,7 @@ MonoBehaviour:
   groundPlayerLayer:
     serializedVersion: 2
     m_Bits: 3968
+  flickCooldownDuration: 5
 --- !u!114 &6150444138206314722
 MonoBehaviour:
   m_ObjectHideFlags: 0
