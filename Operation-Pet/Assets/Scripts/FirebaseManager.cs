@@ -135,8 +135,11 @@ public class FirebaseManager : MonoBehaviour
         }
 
     }
-    
 
+    public void QuitGame() 
+    {
+        Application.Quit();
+    }
 
     void OnApplicationQuit()
     {
