@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5271273911520796425}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_R_hand_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2257544075209240246}
   - component: {fileID: 2213732933626384149}
   - component: {fileID: 7838842880597044960}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5981447730128225383}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_L_leg_hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1797532372238671985}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_R_hand_forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4534952401723766696}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_L_leg_knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 555809672218212051}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_R_leg_foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7365611391433387858}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_Head_joint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7364286806889471937}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_R_leg_knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4295730154758295162}
   - component: {fileID: 7701702219113121947}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: dog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 453004288273433892}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_L_hand_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,7 +468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2402389559299101414}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_L_leg_foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +499,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6557359931655465139}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_Root_joint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,7 +533,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5821701677519621744}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3393290818067183033}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_R_hand_elbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4786175831080757635}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_L_hand_elbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -637,8 +637,7 @@ GameObject:
   - component: {fileID: 252971308219257207}
   - component: {fileID: 4504831694363799530}
   - component: {fileID: -6242413429319339986}
-  - component: {fileID: 34569246556429072}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: DogPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -781,11 +780,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   punchCooldown: 1
-  pushBackForce: 2
+  pushBackForce: 7
   punchRange: 2
   targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 3712
+  maxHitsBeforeStun: 4
+  stunDuration: 3
 --- !u!114 &4504831694363799530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,20 +821,6 @@ MonoBehaviour:
   rollDistance: 5
   rollSpeed: 10
   rollCooldown: 1.5
---- !u!114 &34569246556429072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6264788695838957164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d31744210e25a4086f25871ebf95c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultMaterial: {fileID: 0}
-  highlightMaterial: {fileID: 0}
 --- !u!1 &7052193602052917680
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,7 +830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1143793526058312803}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +862,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5144250296463755773}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_L_hand_forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -906,7 +893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2684583771723554176}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_spine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -940,7 +927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3388939142126448469}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_R_leg_hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -972,7 +959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6933411556888255689}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: cat_Head_joint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

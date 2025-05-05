@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9051607471061954650}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8036226984029184135}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_R_leg_knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8393889677085546988}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_L_hand_forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7502355717592546367}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6258068797505939165}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_Head_joint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,10 +174,9 @@ GameObject:
   - component: {fileID: 993445621515265112}
   - component: {fileID: 147821960290965051}
   - component: {fileID: 690455421565881851}
-  - component: {fileID: -1417287851189567882}
   - component: {fileID: -6464167062939446824}
   - component: {fileID: -9075815481222470762}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: SquirrelPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -322,20 +321,6 @@ MonoBehaviour:
   rollDistance: 5
   rollSpeed: 10
   rollCooldown: 1.5
---- !u!114 &-1417287851189567882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3379877405300164470}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d31744210e25a4086f25871ebf95c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultMaterial: {fileID: 2100000, guid: 45217c7d644f0654898d3849eea1eb87, type: 2}
-  highlightMaterial: {fileID: 2100000, guid: 089594d4030294e4387e3623fac0bf29, type: 2}
 --- !u!114 &-6464167062939446824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,11 +334,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   punchCooldown: 1
-  pushBackForce: 5
+  pushBackForce: 7
   punchRange: 2
   targetLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1920
+  maxHitsBeforeStun: 4
+  stunDuration: 3
 --- !u!114 &-9075815481222470762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +359,7 @@ MonoBehaviour:
   disableMovementDuration: 2
   playerLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1920
 --- !u!1 &3386670758523758278
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5879095521295404887}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_R_leg_foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +400,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2419390830884148997}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_Head_joint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1280274629333580068}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_R_hand_forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +462,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1843686444063836292}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_spine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +496,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7891007867818032014}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_Root_joint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,7 +530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6273028443912158109}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_L_leg_knee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -575,7 +562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2133850349664026672}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_R_hand_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,7 +594,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9219512583117913820}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_L_hand_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -639,7 +626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5230036530014292833}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_R_hand_elbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,7 +658,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5796783309063051647}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_L_leg_hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8657871083368300440}
   - component: {fileID: 818479936666940443}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: squirrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +803,7 @@ GameObject:
   - component: {fileID: 1048088833266594064}
   - component: {fileID: 351395356574404631}
   - component: {fileID: 6842732308486954552}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -909,7 +896,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5545878384170477085}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_L_hand_elbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -941,7 +928,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6384492069338488808}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_L_leg_foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -972,7 +959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 13729862227283853}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: cat_R_leg_hip
   m_TagString: Untagged
   m_Icon: {fileID: 0}

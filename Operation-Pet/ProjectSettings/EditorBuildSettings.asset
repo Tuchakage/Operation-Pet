@@ -18,17 +18,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Testing Scenes/Testing Lobby.unity
     guid: 2ff5a49f9e423a64e8cdbde165a2a98e
   - enabled: 1
-    path: Assets/Scenes/ResultScreen.unity
-    guid: 622ac28ef95692f4aaa445efec3dce23
-  - enabled: 1
-    path: Assets/Scenes/Dog-Park.unity
-    guid: eac1b29fa88a84ce78efd78901e8c944
-  - enabled: 1
     path: Assets/Scenes/Horse Arena.unity
     guid: 2169524cb8f51f4488541a0fa3792544
   - enabled: 1
     path: Assets/Scenes/Street.unity
     guid: 152ddaf2d5488964b99fd6721f4ad03b
+  - enabled: 1
+    path: Assets/Scenes/Dog-Park.unity
+    guid: eac1b29fa88a84ce78efd78901e8c944
+  - enabled: 1
+    path: Assets/Scenes/ResultScreen.unity
+    guid: 622ac28ef95692f4aaa445efec3dce23
   - enabled: 0
     path: Assets/Scenes/Testing Scenes/Testing Gameplay Mechanics.unity
     guid: cf0952e1e0c7ec640922d70eb8542710

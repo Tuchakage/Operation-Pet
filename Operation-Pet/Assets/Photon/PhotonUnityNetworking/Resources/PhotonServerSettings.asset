@@ -80,6 +80,13 @@ MonoBehaviour:
   - ResetFoodMaterialsRPC
   - CaptureSnapshotRPC
   - ChangeMaterialRPC
+  - CreateLightBeamRPC
+  - DestroyLightBeamRPC
+  - CreateBeamRPC
+  - DestroyBeamRPC
+  - HideFloatingPlayerFromGroundPlayers
+  - DisableTargetMovementRPC
+  - SetBeamVisibilityRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

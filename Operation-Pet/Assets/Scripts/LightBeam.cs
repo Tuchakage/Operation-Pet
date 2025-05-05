@@ -1,5 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
+using System.Collections;
 
 public class LightBeam : MonoBehaviourPunCallbacks
 {
@@ -7,39 +9,91 @@ public class LightBeam : MonoBehaviourPunCallbacks
     public float beamDuration = 5.0f; // Duration before the beam disappears
     public float beamWidth = 1.0f; // Width of the beam
     public Color beamColor = Color.white; // Color of the beam
-    public Camera playerCamera; // Player's camera for reticle targeting
-    public LayerMask targetLayer; // Layer of objects where the beam should spawn
+    public Camera playerCamera; // Player's camera for targeting
+    public LayerMask targetLayer; // Layer for spawning the beam
+    private GameObject beamInstance; // Instantiated beam reference
+    private Player localPlayer; // Stores the local player information
+
+    void Start()
+    {
+        if (!photonView.IsMine) return;
+
+        localPlayer = PhotonNetwork.LocalPlayer;
+    }
 
     void Update()
     {
         if (!photonView.IsMine) return;
-        // Check for player input to create the beam (e.g., left mouse button)
-        if (Input.GetKeyDown(KeyCode.Q)) // Left mouse button
+
+        // Check for player input to create the beam
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-              photonView.RPC("CreateBeam",RpcTarget.All);
+            photonView.RPC("CreateBeamRPC", RpcTarget.All, localPlayer.ActorNumber);
         }
-        
     }
 
     [PunRPC]
-    private void CreateBeam()
+    private void CreateBeamRPC(int ownerID)
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        // Perform a raycast to find the target position
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, targetLayer))
         {
-            Vector3 beamPosition = hit.point; // Position where reticle is aimed
-            GameObject beam = PhotonNetwork.Instantiate("LightBeam", beamPosition, Quaternion.identity);
+            Vector3 beamPosition = hit.point;
 
-            // Adjust the beam's scale and positioning
-            beam.transform.localScale = new Vector3(beamWidth, 5000f, beamWidth);
-            beam.GetComponent<Renderer>().material.color = beamColor;
+            // Instantiate the beam using PhotonNetwork
+            beamInstance = PhotonNetwork.Instantiate(beamPrefab.name, beamPosition, Quaternion.identity);
 
-            // Destroy the beam after the duration
-            Destroy(beam, beamDuration);
+            // Adjust the beam's scale and color
+            beamInstance.transform.localScale = new Vector3(beamWidth, 5000f, beamWidth);
+            beamInstance.GetComponent<Renderer>().material.color = beamColor;
+
+            // Set beam visibility only for teammates
+            photonView.RPC("SetBeamVisibilityRPC", RpcTarget.All, ownerID);
+
+            // Schedule destruction after beamDuration
+            photonView.RPC("DestroyBeamRPC", RpcTarget.AllBuffered, beamInstance.GetComponent<PhotonView>().ViewID);
         }
     }
 
+    [PunRPC]
+    private void SetBeamVisibilityRPC(int ownerID)
+    {
+        Player beamOwner = PhotonNetwork.CurrentRoom.GetPlayer(ownerID);
+        if (beamOwner == null) return;
+
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            bool isTeammate = player.CustomProperties["Team Name"].Equals(beamOwner.CustomProperties["Team Name"]);
+
+            // Set visibility based on team
+            if (!isTeammate)
+            {
+                beamInstance.GetComponent<Renderer>().enabled = false; // Hide beam from opponents
+            }
+        }
+    }
+
+    [PunRPC]
+    private void DestroyBeamRPC(int beamViewID)
+    {
+        StartCoroutine(DestroyBeamAfterTimer(beamViewID));
+    }
+
+    private IEnumerator DestroyBeamAfterTimer(int beamViewID)
+    {
+        yield return new WaitForSeconds(beamDuration);
+
+        PhotonView beamPhotonView = PhotonView.Find(beamViewID);
+        if (beamPhotonView != null)
+        {
+            PhotonNetwork.Destroy(beamPhotonView.gameObject);
+            Debug.Log($"Light Beam destroyed after {beamDuration} seconds.");
+        }
+        else
+        {
+            Debug.LogError("Failed to find light beam object for destruction.");
+        }
+    }
 }

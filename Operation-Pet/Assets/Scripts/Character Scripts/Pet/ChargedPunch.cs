@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ChargedPunch : MonoBehaviourPunCallbacks
 {
-    public float punchForce = 50f; // Increased knockback force
+    public float punchForce = 50f; // Knockback force
     public float upwardForce = 5f; // Adds slight upward push
     public float chargeTime = 2f; // Time required to fully charge
     public float disableMovementDuration = 2f; // Opponent loses movement for this time
@@ -23,14 +23,14 @@ public class ChargedPunch : MonoBehaviourPunCallbacks
             StartCoroutine(ChargePunch());
         }
 
-        // Release punch when Left Mouse Button (LMB) is clicked
-        if (Input.GetMouseButtonDown(0) && isFullyCharged)
+        // Throw punch when Right Mouse Button (RMB) is released after full charge
+        if (Input.GetMouseButtonUp(1) && isFullyCharged)
         {
             photonView.RPC("ExecutePunchRPC", RpcTarget.All);
             isFullyCharged = false; // Reset charge state
         }
 
-        // Stop charging if player releases RMB before full charge
+        // Stop charging if RMB is released before full charge
         if (Input.GetMouseButtonUp(1))
         {
             isCharging = false;

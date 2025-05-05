@@ -1,58 +1,42 @@
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
+
 public class FloatingCharacter : MonoBehaviourPunCallbacks
 {
-    public float hoverHeight = 5.0f; // Height above the terrain
-    public float hoverSpeed = 2.0f; // Up-and-down floating speed
+    public float hoverHeight = 5.0f; // Fixed height above terrain
     public float moveSpeed = 5.0f; // Movement speed
-    public float hoverAmplitude = 0.5f; // Amplitude of the hover motion
     public Camera characterCamera; // Assign the Camera in the Inspector
     public float mouseSensitivity = 2.0f; // Sensitivity of mouse movement
-
     private float verticalLookRotation = 0f; // Tracks vertical camera tilt
-    private float hoverOffset;
+
+    public LayerMask groundPlayerLayer; // Layer for ground players
+    public LayerMask floatingPlayerLayer; // Layer for floating players
 
     void Start()
     {
-        //If the object spawned doesn't belong to the player then do nothing
-        if (!photonView.IsMine) 
-        {
-            return;
-        }
-        //Enable the camera
+        if (!photonView.IsMine) return;
+
+        // Enable camera
         characterCamera.enabled = true;
-        // Initialize hover offset for smooth motion
-        hoverOffset = Random.Range(0, Mathf.PI * 2);
 
-        // Ensure the camera starts at the character's position and orientation
-        if (characterCamera != null)
-        {
-            characterCamera.transform.position = transform.position;
-            characterCamera.transform.rotation = transform.rotation;
-        }
-
-        // Lock the cursor to the game window for better camera control
+        // Lock cursor for better camera control
         Cursor.lockState = CursorLockMode.Locked;
+
+        // Set up visibility rules
+        photonView.RPC("HideFloatingPlayerFromGroundPlayers", RpcTarget.AllBuffered);
     }
 
     void Update()
     {
-        //If the object spawned doesn't belong to the player then do nothing
-        if (!photonView.IsMine)
-        {
-            return;
-        }
-        // Hovering: Smooth up-and-down motion
-        float hover = Mathf.Sin(Time.time * hoverSpeed + hoverOffset) * hoverAmplitude;
+        if (!photonView.IsMine) return;
+
+        // Keep floating player at fixed height
         Vector3 position = transform.position;
-        position.y = hoverHeight + hover;
+        position.y = hoverHeight;
         transform.position = position;
 
-        // Movement (WASD or arrow keys)
+        // Movement and camera rotation
         MoveCharacter();
-
-        // Mouse look: Rotate character horizontally and camera vertically
         LookAround();
     }
 
@@ -67,19 +51,35 @@ public class FloatingCharacter : MonoBehaviourPunCallbacks
 
     private void LookAround()
     {
-        // Horizontal rotation (character rotation)
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         transform.Rotate(0, mouseX, 0);
 
-        // Vertical rotation (camera tilt)
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-        verticalLookRotation -= mouseY; // Invert vertical movement for natural control
-        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f); // Limit vertical rotation
+        verticalLookRotation -= mouseY;
+        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 
-        // Apply vertical rotation to the camera
         if (characterCamera != null)
         {
             characterCamera.transform.localRotation = Quaternion.Euler(verticalLookRotation, 0, 0);
+        }
+    }
+
+    [PunRPC]
+    private void HideFloatingPlayerFromGroundPlayers()
+    {
+        GameObject floatingPlayer = gameObject;
+
+        // Check if player belongs to floating layer
+        if (((1 << floatingPlayer.layer) & floatingPlayerLayer) != 0)
+        {
+            foreach (GameObject groundPlayer in GameObject.FindGameObjectsWithTag("Player"))
+            {
+                if (((1 << groundPlayer.layer) & groundPlayerLayer) != 0)
+                {
+                    floatingPlayer.GetComponent<Renderer>().enabled = false; // Make floating player invisible
+                    Physics.IgnoreLayerCollision(floatingPlayer.layer, groundPlayer.layer, true);
+                }
+            }
         }
     }
 }
