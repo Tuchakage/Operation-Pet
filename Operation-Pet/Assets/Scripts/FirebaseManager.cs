@@ -76,6 +76,7 @@ public class FirebaseManager : MonoBehaviour
             }
             else
             {
+                warningLoginText.text = "No Firebase :(";
                 Debug.LogError("Could not resolve all Firebase dependences:" + dependencyStatus);
             }
         });
