@@ -4,94 +4,58 @@ using System.Collections;
 
 public class LightBeam : MonoBehaviourPunCallbacks
 {
-    public GameObject beamPrefab; // Prefab of the beam
-    public float beamDuration = 5.0f; // Duration before the beam disappears
-    public float beamWidth = 1.0f; // Width of the beam
-    public Color beamColor = Color.white; // Color of the beam
-    public Camera playerCamera; // Player's camera for targeting
-    public LayerMask targetLayer; // Layer for spawning the beam
-    public LayerMask groundPlayerLayer; // Layer for players that should destroy the beam
-    private GameObject beamInstance; // Instantiated beam reference
+    public GameObject beamPrefab;           // Prefab of the beam
+    public float beamDuration = 5.0f;       // Duration before the beam disappears
+    public float beamWidth = 1.0f;          // Width of the beam
+    public Color beamColor = Color.white;   // Color of the beam
+    public Camera playerCamera;             // Player's camera for targeting
+    public LayerMask targetLayer;           // Layer for ground targeting
+    public LayerMask groundPlayerLayer;     // Layer for players that should destroy the beam
 
     void Update()
     {
         if (!photonView.IsMine) return;
 
-        // Check for player input to create the beam
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            photonView.RPC("CreateBeamRPC", RpcTarget.All);
+            TryCreateBeam();
         }
     }
 
-    [PunRPC]
-    private void CreateBeamRPC()
+    private void TryCreateBeam()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        // Perform a raycast to find the target position
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, targetLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, targetLayer))
         {
-            Vector3 beamPosition = hit.point;
+            Vector3 spawnPosition = hit.point;
+            GameObject beamInstance = PhotonNetwork.Instantiate(beamPrefab.name, spawnPosition, Quaternion.identity);
 
-            // Instantiate the beam using PhotonNetwork
-            beamInstance = PhotonNetwork.Instantiate(beamPrefab.name, beamPosition, Quaternion.identity);
-
-            // Adjust the beam's scale and color
+            // Scale and color
             beamInstance.transform.localScale = new Vector3(beamWidth, 5000f, beamWidth);
-            beamInstance.GetComponent<Renderer>().material.color = beamColor;
+            Renderer renderer = beamInstance.GetComponent<Renderer>();
+            if (renderer != null)
+                renderer.material.color = beamColor;
 
-            // Attach collision detection
-            beamInstance.AddComponent<BeamCollisionHandler>().InitializeBeam(this);
+            // Attach collision handler and initialize it
+            BeamCollisionHandler collisionHandler = beamInstance.AddComponent<BeamCollisionHandler>();
+            collisionHandler.Initialize(groundPlayerLayer);
 
-            // Schedule destruction after beamDuration
-            photonView.RPC("DestroyBeamRPC", RpcTarget.AllBuffered, beamInstance.GetComponent<PhotonView>().ViewID);
-        }
-    }
-
-    [PunRPC]
-    private void DestroyBeamRPC(int beamViewID)
-    {
-        StartCoroutine(DestroyBeamAfterTimer(beamViewID));
-    }
-
-    private IEnumerator DestroyBeamAfterTimer(int beamViewID)
-    {
-        yield return new WaitForSeconds(beamDuration);
-
-        PhotonView beamPhotonView = PhotonView.Find(beamViewID);
-        if (beamPhotonView != null)
-        {
-            PhotonNetwork.Destroy(beamPhotonView.gameObject);
-            Debug.Log($"Light Beam destroyed after {beamDuration} seconds.");
+            // Start destruction timer
+            StartCoroutine(DestroyBeamAfterTime(beamInstance));
         }
         else
         {
-            Debug.LogError("Failed to find light beam object for destruction.");
+            Debug.Log("No valid ground target hit.");
         }
     }
-}
 
-public class BeamCollisionHandler : MonoBehaviour
-{
-    private LightBeam parentScript;
-
-    public void InitializeBeam(LightBeam script)
+    private IEnumerator DestroyBeamAfterTime(GameObject beam)
     {
-        parentScript = script;
-    }
+        yield return new WaitForSeconds(beamDuration);
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (((1 << other.gameObject.layer) & parentScript.groundPlayerLayer) != 0)
+        if (beam != null && beam.GetComponent<PhotonView>().IsMine)
         {
-            PhotonView beamPV = GetComponent<PhotonView>();
-            if (beamPV != null && beamPV.IsMine)
-            {
-                PhotonNetwork.Destroy(gameObject);
-                Debug.Log($"Beam destroyed as ground player entered.");
-            }
+            PhotonNetwork.Destroy(beam);
         }
     }
 }

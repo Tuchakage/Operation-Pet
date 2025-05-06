@@ -1,102 +1,87 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using ExitGames.Client.Photon; // Required for Hashtable
+using ExitGames.Client.Photon; // For Hashtable
 using static teamsEnum;
+using System.Collections;
 
+[RequireComponent(typeof(PetFood))]
+[RequireComponent(typeof(MeshRenderer))]
 public class PetFoodHighlighter : MonoBehaviourPun
 {
-    public Material defaultMaterial;         // Neutral/default appearance
-    public Material highlightMaterial;       // Highlighted appearance for local player’s team
+    [Header("Highlight Settings")]
+    public Material defaultMaterial;
+    public Material highlightMaterial;
+
     private MeshRenderer meshRenderer;
-    private teams foodFor;
+    private PetFood petFood;
 
-    private bool isInitialized = false;
+    private teams foodFor = teams.Unassigned;
     private bool isMineFood = false;
-    private bool fakeFood;
+    private bool isFakeFood = false;
     private bool isPlayerTagged = false;
+    private bool isInitialized = false;
 
-    void Start()
+    private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        foodFor = GetComponent<PetFood>().foodFor;
+        petFood = GetComponent<PetFood>();
 
-        // Check if the food is fake
-        fakeFood = GetComponent<PetFood>().isFake;
-
-        // Try to initialize immediately if custom properties are available
-        TryInitialize();
+        StartCoroutine(InitializeWhenReady());
     }
 
-    void Update()
+    private IEnumerator InitializeWhenReady()
     {
-        // If team info hasn't been loaded yet, try again
-        if (!isInitialized)
+        // Wait until PetFood has assigned the team
+        while (petFood.foodFor == teams.Unassigned)
         {
-            TryInitialize();
-            return;
+            yield return null;
         }
 
-        // Only proceed if the player has the "PLAYER" tag
-        if (!isPlayerTagged)
+        foodFor = petFood.foodFor;
+        isFakeFood = petFood.isFake;
+
+        // Wait until custom properties are available
+        while (!PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Tag") ||
+               !PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team Name"))
         {
-            return;
+            yield return null;
         }
 
-        if (!fakeFood)
-        {
-            // On key press, reveal or hide based on team match
-            if (Input.GetKey(KeyCode.Q))
-            {
-                if (isMineFood)
-                {
-                    SetMaterial(highlightMaterial);
-                }
-                else
-                {
-                    SetMaterial(defaultMaterial);
-                }
-            }
-            else
-            {
-                SetMaterial(defaultMaterial);
-            }
-        }
+        // Validate tag
+        string tag = PhotonNetwork.LocalPlayer.CustomProperties["Tag"] as string;
+        isPlayerTagged = (tag == "Player");
+
+        // Validate team
+        teams myTeam = (teams)PhotonNetwork.LocalPlayer.CustomProperties["Team Name"];
+        isMineFood = (myTeam == foodFor);
+
+        isInitialized = true;
+
+        Debug.Log($"[Highlighter] Initialized - FoodFor: {foodFor}, MyTeam: {myTeam}, IsMineFood: {isMineFood}, IsFake: {isFakeFood}");
     }
 
-    void TryInitialize()
+    private void Update()
     {
-        // Check if the local player's custom properties contain the "Tag" key
-        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Tag", out object tagObj))
+        if (!isInitialized || !isPlayerTagged || isFakeFood)
+            return;
+
+        if (Input.GetKey(KeyCode.Q))
         {
-            string tagValue = tagObj as string;
-            isPlayerTagged = tagValue == "Player";
+            SetMaterial(isMineFood ? highlightMaterial : defaultMaterial);
         }
         else
         {
-            isPlayerTagged = false;
-        }
-
-        // Proceed only if the player is tagged as "PLAYER"
-        if (!isPlayerTagged)
-        {
-            return;
-        }
-
-        // Check if the local player's custom properties contain the "Team Name" key
-        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("Team Name", out object teamObj))
-        {
-            teams myTeam = (teams)teamObj;
-            isMineFood = (myTeam == foodFor);
-            isInitialized = true;
+            SetMaterial(defaultMaterial);
         }
     }
 
-    void SetMaterial(Material mat)
+    private void SetMaterial(Material mat)
     {
-        if (meshRenderer != null && meshRenderer.sharedMaterial != mat)
+        if (meshRenderer != null && mat != null && meshRenderer.sharedMaterial != mat)
         {
             meshRenderer.sharedMaterial = mat;
+            // Debug.Log($"[Highlighter] Material set to: {mat.name}");
         }
     }
 }

@@ -193,7 +193,7 @@ MonoBehaviour:
   reticle: {fileID: 9055692337783202117}
   defaultColor: {r: 1, g: 0, b: 0, a: 1}
   targetColor: {r: 0.15265143, g: 1, b: 0, a: 1}
-  detectionRange: 5
+  detectionRange: 20
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 3968

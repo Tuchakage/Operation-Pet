@@ -12,19 +12,21 @@ public class FloatingPlayertargeting : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (!photonView.IsMine) return; // Ensure only the local player can lock on
-
-        if (Input.GetKeyDown(KeyCode.E)) // Press "E" to lock/unlock target
+        if (photonView.IsMine)  // Ensure only the local player can lock on
         {
-            if (isLockedOn)
+            if (Input.GetKeyDown(KeyCode.R)) // Press "E" to lock/unlock target
             {
-                photonView.RPC("UnlockTargetRPC", RpcTarget.All);
-            }
-            else
-            {
-                photonView.RPC("LockOnTargetRPC", RpcTarget.All);
+                if (isLockedOn)
+                {
+                    photonView.RPC("UnlockTargetRPC", RpcTarget.All);
+                }
+                else
+                {
+                    photonView.RPC("LockOnTargetRPC", RpcTarget.All);
+                }
             }
         }
+        
     }
 
     [PunRPC]

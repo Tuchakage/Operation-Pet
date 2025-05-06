@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6978444072848098128}
   - component: {fileID: 2358828942514489195}
   - component: {fileID: 6110233539612359817}
-  - component: {fileID: 6560313429570050713}
+  - component: {fileID: -7630911446417953302}
   m_Layer: 0
   m_Name: PetFood
   m_TagString: Food
@@ -154,7 +154,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6560313429570050713
+--- !u!114 &-7630911446417953302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

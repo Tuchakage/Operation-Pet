@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class ReticleTargeting : MonoBehaviour
+public class ReticleTargeting : MonoBehaviourPunCallbacks
 {
     public Image reticle; // UI Image for the reticle
     public Color defaultColor = Color.white;
@@ -13,6 +14,12 @@ public class ReticleTargeting : MonoBehaviour
 
     void Start()
     {
+        if (!photonView.IsMine) // Prevents non-local players from updating reticle
+        {
+            enabled = false;
+            return;
+        }
+
         mainCamera = Camera.main;
     }
 

@@ -10,13 +10,6 @@ public class Mine : MonoBehaviourPunCallbacks
     public LayerMask affectedLayers; // Layers affected by explosion
     public AudioClip explosionSound; // Explosion sound effect
     public float explosionVolume = 1.0f; // Volume of explosion sound
-    public LayerMask groundPlayerLayer; // Layer for ground players
-
-    private void Start()
-    {
-        // Hide the mine from ground players immediately on spawn
-        photonView.RPC("HideMineFromGroundPlayers", RpcTarget.AllBuffered);
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,19 +21,8 @@ public class Mine : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void HideMineFromGroundPlayers()
-    {
-        if (((1 << gameObject.layer) & groundPlayerLayer) != 0)
-        {
-            GetComponent<Renderer>().enabled = false; // Make mine invisible to ground players
-        }
-    }
-
-
-    [PunRPC]
     private void Explode()
     {
-        
         // Play explosion sound
         photonView.RPC("PlayExplosionSoundRPC", RpcTarget.All);
 

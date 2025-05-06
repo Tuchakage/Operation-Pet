@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4454168094084918992}
   - component: {fileID: 2851207275395704407}
   - component: {fileID: 6324421365026876474}
-  - component: {fileID: -8875538082556293874}
+  - component: {fileID: -7203216478143085439}
   m_Layer: 0
   m_Name: LightBeam
   m_TagString: Untagged
@@ -134,23 +134,15 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-8875538082556293874
+--- !u!114 &-7203216478143085439
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6550408575227515164}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 873234ea0b7ad004485742c951d7bff2, type: 3}
+  m_Script: {fileID: 11500000, guid: ad7fa0c81c7c42748b10c3fdf9ddfa28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beamPrefab: {fileID: 6550408575227515164}
-  beamDuration: 5
-  beamWidth: 1
-  beamColor: {r: 1, g: 1, b: 1, a: 1}
-  playerCamera: {fileID: 0}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 1

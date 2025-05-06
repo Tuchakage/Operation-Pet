@@ -19,22 +19,20 @@ public class FloatingPlayerMine : MonoBehaviourPunCallbacks
         // Place mine only if cooldown has ended
         if (Input.GetMouseButtonDown(1) && canPlaceMine) // Right Mouse Button
         {
-            photonView.RPC("PlaceMine", RpcTarget.AllBuffered);
+            PlaceMine();
             StartCoroutine(StartCooldown());
         }
     }
 
-    [PunRPC]
+   
     private void PlaceMine()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        // Perform raycast to find the target position
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, targetLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, targetLayer))
         {
-            Vector3 minePosition = hit.point; // Position where reticle is aimed
-            PhotonNetwork.Instantiate("Mine", minePosition, Quaternion.identity);
+            Vector3 spawnPos = hit.point;
+            PhotonNetwork.Instantiate("Mine", spawnPos, Quaternion.identity);
+            StartCoroutine(StartCooldown());
         }
     }
 
