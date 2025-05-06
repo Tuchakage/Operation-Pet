@@ -60,7 +60,12 @@ public class WizardFlick : MonoBehaviourPunCallbacks
             Rigidbody rb = lockedTarget.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                Vector3 flickDirection = (lockedTarget.position - transform.position).normalized;
+                Vector3 direction = (lockedTarget.position - transform.position).normalized;
+
+                // Add upward lift
+                Vector3 flickDirection = new Vector3(direction.x, 10f, direction.z).normalized;
+
+                // Apply strong upward + backward force
                 rb.AddForce(flickDirection * flickForce, ForceMode.Impulse);
                 Debug.Log($"Flicked Target: {lockedTarget.name} in direction {flickDirection}");
             }

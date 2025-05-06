@@ -1,18 +1,2 @@
 fileFormatVersion: 2
 guid: 27d31744210e25a4086f25871ebf95c0
-MonoImporter:
-  externalObjects: {}
-  serializedVersion: 2
-  defaultReferences:
-  - thirdPersonCamera: {fileID: 3837072588340373123, guid: 26d9c08434e61dc4ebfbc6649577b154, type: 3}
-  - firstPersonCamera: {instanceID: 0}
-  - firstPersonSpawnPoint: {instanceID: 0}
-  - renderTexture: {instanceID: 0}
-  - uiImage: {instanceID: 0}
-  - fakeItemMaterial: {instanceID: 0}
-  - trueItemMaterial: {instanceID: 0}
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 

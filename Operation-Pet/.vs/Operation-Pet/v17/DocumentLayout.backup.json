@@ -3,40 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\lightbeam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\lightbeam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\mine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\floatingplayermine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\floatingplayermine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\floatingplayertargeting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\floatingplayertargeting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\floatingcharacter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\floatingcharacter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\camerasnap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\camerasnap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\wizardflick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\wizardflick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\drake\\onedrive\\documents\\github\\operation-pet\\operation-pet\\assets\\scripts\\recticletargeting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\mine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\petfood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\petfood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\floatingplayertargeting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\floatingplayertargeting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\floatingplayermine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\floatingplayermine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\drake\\onedrive\\documents\\github\\operation-pet\\operation-pet\\assets\\scripts\\lightbeam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\lightbeam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\drake\\onedrive\\documents\\github\\operation-pet\\operation-pet\\assets\\scripts\\beamcollisionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\beamcollisionhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\floatingcharacter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\floatingcharacter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\recticletargeting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\recticletargeting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\roundmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\roundmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|c:\\users\\drake\\onedrive\\documents\\github\\operation-pet\\operation-pet\\assets\\scripts\\camerasnap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\camerasnap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\character scripts\\pet\\dodgeroll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -53,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\abilitycooldownui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\abilitycooldownui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\petfood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\petfood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EE0272B4-01D4-1941-B997-2DC99C30D5D0}|Assembly-CSharp.csproj|C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\assets\\scripts\\character scripts\\pet\\petcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -77,11 +81,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
+              "Title": "BeamCollisionHandler.cs",
+              "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\BeamCollisionHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\BeamCollisionHandler.cs",
+              "ToolTip": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\BeamCollisionHandler.cs",
+              "RelativeToolTip": "Assets\\Scripts\\BeamCollisionHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T16:24:55.151Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "RecticleTargeting.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\RecticleTargeting.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\RecticleTargeting.cs",
@@ -89,12 +106,11 @@
               "RelativeToolTip": "Assets\\Scripts\\RecticleTargeting.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T15:01:39.282Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-06T15:01:39.282Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "FloatingPlayerMine.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\FloatingPlayerMine.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\FloatingPlayerMine.cs",
@@ -107,7 +123,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Mine.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\Mine.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Mine.cs",
@@ -120,7 +136,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "FloatingPlayertargeting.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\FloatingPlayertargeting.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\FloatingPlayertargeting.cs",
@@ -133,20 +149,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 0,
               "Title": "CameraSnap.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\CameraSnap.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CameraSnap.cs",
               "ToolTip": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\CameraSnap.cs",
               "RelativeToolTip": "Assets\\Scripts\\CameraSnap.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAYwAMAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-03T14:07:35.296Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "DodgeRoll.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\Character Scripts\\Pet\\DodgeRoll.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Character Scripts\\Pet\\DodgeRoll.cs",
@@ -154,25 +170,24 @@
               "RelativeToolTip": "Assets\\Scripts\\Character Scripts\\Pet\\DodgeRoll.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAwDoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:05:08.122Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T14:05:08.122Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "WizardFlick.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\WizardFlick.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\WizardFlick.cs",
               "ToolTip": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\WizardFlick.cs",
               "RelativeToolTip": "Assets\\Scripts\\WizardFlick.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAA5wFEAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-03T14:12:55.844Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "RoundManager.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\RoundManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\RoundManager.cs",
@@ -180,12 +195,11 @@
               "RelativeToolTip": "Assets\\Scripts\\RoundManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T21:34:59.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T21:34:59.321Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "LightBeam.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\LightBeam.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\LightBeam.cs",
@@ -198,7 +212,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "CharacterPunch.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\Character Scripts\\Pet\\CharacterPunch.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Character Scripts\\Pet\\CharacterPunch.cs",
@@ -206,12 +220,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Character Scripts\\Pet\\CharacterPunch.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAAwDcAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T12:35:41.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-02T12:35:41.264Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "ChargedPunch.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\Character Scripts\\Pet\\ChargedPunch.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Character Scripts\\Pet\\ChargedPunch.cs",
@@ -219,24 +232,24 @@
               "RelativeToolTip": "Assets\\Scripts\\Character Scripts\\Pet\\ChargedPunch.cs",
               "ViewState": "AgIAACIAAAAAAAAAAAAQwD0AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:04:11.09Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T14:04:11.09Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 3,
               "Title": "PetFood.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\PetFood.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PetFood.cs",
               "ToolTip": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\PetFood.cs",
               "RelativeToolTip": "Assets\\Scripts\\PetFood.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAmwN4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-04T04:28:27.737Z"
+              "WhenOpened": "2025-05-04T04:28:27.737Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "FloatingCharacter.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\FloatingCharacter.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\FloatingCharacter.cs",
@@ -244,12 +257,11 @@
               "RelativeToolTip": "Assets\\Scripts\\FloatingCharacter.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAAcwFQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T15:51:38.787Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-05T15:51:38.787Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "AbilityCooldownUI.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\AbilityCooldownUI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AbilityCooldownUI.cs",
@@ -261,7 +273,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "ThirdPersonAnimation.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Animations\\ThirdPersonAnimation.cs",
               "RelativeDocumentMoniker": "Assets\\Animations\\ThirdPersonAnimation.cs",
@@ -273,7 +285,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "ThirdPersonAnimation.cs",
               "DocumentMoniker": "C:\\Users\\KU73461\\Documents\\Github\\Operation-Pet\\Operation-Pet\\Assets\\Animations\\Cat\\ThirdPersonAnimation.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\KU73461\\Documents\\Github\\Operation-Pet\\Operation-Pet\\Assets\\Animations\\Cat\\ThirdPersonAnimation.cs",
@@ -284,7 +296,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "PetController.cs",
               "DocumentMoniker": "C:\\Users\\drake\\OneDrive\\Documents\\GitHub\\Operation-Pet\\Operation-Pet\\Assets\\Scripts\\Character Scripts\\Pet\\PetController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Character Scripts\\Pet\\PetController.cs",
