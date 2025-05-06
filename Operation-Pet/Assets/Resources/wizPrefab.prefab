@@ -151,10 +151,9 @@ GameObject:
   - component: {fileID: 2919332155417779470}
   - component: {fileID: 5122034355829160167}
   - component: {fileID: 6256981044664435170}
-  - component: {fileID: 1878482133059037737}
   - component: {fileID: 6762076318631898716}
-  - component: {fileID: 6150444138206314722}
   - component: {fileID: 1243585233758692212}
+  - component: {fileID: 6150444138206314722}
   - component: {fileID: 7593291555270998894}
   - component: {fileID: 5831327290279868800}
   - component: {fileID: -5531609740306328589}
@@ -305,19 +304,6 @@ MonoBehaviour:
   floatingPlayerLayer:
     serializedVersion: 2
     m_Bits: 0
---- !u!114 &1878482133059037737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100136730509424109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78abcc6535431cb4c9af6b814fbb5614, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
 --- !u!114 &6762076318631898716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +322,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3968
   flickCooldownDuration: 5
+--- !u!114 &1243585233758692212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100136730509424109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1498396b0bcd6b34d8d042d88088cf45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 7693970818388931229}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 3968
+  lockOnRange: 10
 --- !u!114 &6150444138206314722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,23 +362,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1243585233758692212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100136730509424109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1498396b0bcd6b34d8d042d88088cf45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 7693970818388931229}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 3968
-  lockOnRange: 10
 --- !u!114 &7593291555270998894
 MonoBehaviour:
   m_ObjectHideFlags: 0

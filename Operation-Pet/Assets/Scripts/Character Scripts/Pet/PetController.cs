@@ -10,7 +10,8 @@ public class PetController : MonoBehaviourPunCallbacks
 {
     
     InputSystem_Actions playerActionAsset;
-    InputAction move;
+    InputAction move; //Get inputs for the move action
+    /// </summary>
 
     [SerializeField]
     ThirdPersonAnimation animationScript; //Set the animation values within the script

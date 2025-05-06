@@ -23,22 +23,6 @@ public class ChargedPunch : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (!photonView.IsMine) return;
-
-
-
-        // Throw punch when Right Mouse Button (RMB) is released after full charge
-        if (Input.GetMouseButtonUp(1) && isFullyCharged)
-        {
-
-        }
-
-        // Stop charging if RMB is released before full charge
-        if (Input.GetMouseButtonUp(1))
-        {
-            isCharging = false;
-            isFullyCharged = false;
-        }
     }
 
     void OnEnable()

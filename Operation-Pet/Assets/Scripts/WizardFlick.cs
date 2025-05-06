@@ -1,9 +1,12 @@
 using UnityEngine;
 using Photon.Pun;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class WizardFlick : MonoBehaviourPunCallbacks
 {
+    InputSystem_Actions playerActionAsset;
+
     public float flickForce = 10.0f; // Force applied to flick the target
     public Camera playerCamera; // Camera used to target opponents
     private Transform lockedTarget; // The currently locked target
@@ -13,26 +16,38 @@ public class WizardFlick : MonoBehaviourPunCallbacks
     private bool isTargetLocked = false; // Tracks if a ground player is locked on
     private bool canFlick = true; // Prevents repeated flicking before cooldown
 
-    void Update()
+    void Awake()
+    {
+        playerActionAsset = new InputSystem_Actions();
+    }
+
+    void OnEnable()
     {
         if (!photonView.IsMine) return;
 
-        // Lock onto the closest ground player when Right Mouse Button is clicked
-        if (Input.GetMouseButtonDown(1))
-        {
-            LockOnGroundPlayer();
-        }
+        //Enable the Player Action Map 
+        playerActionAsset.Wizard.Enable();
 
-        // Flick the locked ground player when Left Mouse Button is clicked
-        if (Input.GetMouseButtonDown(0) && isTargetLocked && canFlick)
-        {
-            photonView.RPC("FlickTargetRPC", RpcTarget.AllBuffered);
-            canFlick = false; // Start cooldown
-            StartCoroutine(FlickCooldown()); // Begin cooldown timer
-        }
+        playerActionAsset.Wizard.LockOnTarget.started += LockOnGroundPlayer;
+        playerActionAsset.Wizard.Flick.started += CallFlickRPC;
+
+
     }
 
-    private void LockOnGroundPlayer()
+
+
+    void OnDisable()
+    {
+        if (!photonView.IsMine) return;
+        //Disable the Player Action Map 
+        playerActionAsset.Wizard.Disable();
+
+        playerActionAsset.Wizard.LockOnTarget.started -= LockOnGroundPlayer;
+        playerActionAsset.Wizard.Flick.started -= CallFlickRPC;
+    }
+
+    // Lock onto the closest ground player when Right Mouse Button is clicked
+    private void LockOnGroundPlayer(InputAction.CallbackContext context)
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -51,6 +66,17 @@ public class WizardFlick : MonoBehaviourPunCallbacks
             isTargetLocked = false;
             lockedTarget = null;
             Debug.Log("No Ground Player found.");
+        }
+    }
+
+    void CallFlickRPC(InputAction.CallbackContext context) 
+    {
+        // Flick the locked ground player when Left Mouse Button is clicked
+        if (isTargetLocked && canFlick) 
+        {
+            photonView.RPC("FlickTargetRPC", RpcTarget.AllBuffered);
+            canFlick = false; // Start cooldown
+            StartCoroutine(FlickCooldown()); // Begin cooldown timer
         }
     }
 

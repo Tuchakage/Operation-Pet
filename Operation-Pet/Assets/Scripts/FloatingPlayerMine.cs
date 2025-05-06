@@ -2,9 +2,12 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class FloatingPlayerMine : MonoBehaviourPunCallbacks
 {
+    InputSystem_Actions playerActionAsset;
+
     public GameObject minePrefab; // Prefab of the mine
     public Camera playerCamera; // Camera for reticle targeting
     public LayerMask targetLayer; // Layer for valid mine placement
@@ -12,12 +15,37 @@ public class FloatingPlayerMine : MonoBehaviourPunCallbacks
 
     private bool canPlaceMine = true; // Track whether mine placement is allowed
 
-    void Update()
+    void Awake()
+    {
+        playerActionAsset = new InputSystem_Actions();
+    }
+
+    void OnEnable()
     {
         if (!photonView.IsMine) return;
 
-        // Place mine only if cooldown has ended
-        if (Input.GetMouseButtonDown(1) && canPlaceMine) // Right Mouse Button
+        //Enable the Player Action Map 
+        playerActionAsset.Wizard.Enable();
+
+        playerActionAsset.Wizard.PlaceMine.started += CallPlaceMine;
+
+
+    }
+
+
+
+    void OnDisable()
+    {
+        if (!photonView.IsMine) return;
+        //Disable the Player Action Map 
+        playerActionAsset.Wizard.Disable();
+
+        playerActionAsset.Wizard.PlaceMine.started -= CallPlaceMine;
+    }
+
+    void CallPlaceMine(InputAction.CallbackContext context) 
+    {
+        if (canPlaceMine) 
         {
             photonView.RPC("PlaceMine", RpcTarget.AllBuffered);
             StartCoroutine(StartCooldown());

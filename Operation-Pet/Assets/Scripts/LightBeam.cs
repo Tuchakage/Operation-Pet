@@ -1,9 +1,11 @@
 using UnityEngine;
 using Photon.Pun;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class LightBeam : MonoBehaviourPunCallbacks
 {
+    InputSystem_Actions playerActionAsset;
     public GameObject beamPrefab; // Prefab of the beam
     public float beamDuration = 5.0f; // Duration before the beam disappears
     public float beamWidth = 1.0f; // Width of the beam
@@ -13,15 +15,37 @@ public class LightBeam : MonoBehaviourPunCallbacks
     public LayerMask groundPlayerLayer; // Layer for players that should destroy the beam
     private GameObject beamInstance; // Instantiated beam reference
 
-    void Update()
+
+    void Awake()
+    {
+        playerActionAsset = new InputSystem_Actions();
+    }
+
+    void OnEnable()
     {
         if (!photonView.IsMine) return;
 
-        // Check for player input to create the beam
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            photonView.RPC("CreateBeamRPC", RpcTarget.All);
-        }
+        //Enable the Player Action Map 
+        playerActionAsset.Wizard.Enable();
+
+        playerActionAsset.Wizard.LightBeam.started += CallCreateBeam;
+
+    }
+
+
+
+    void OnDisable()
+    {
+        if (!photonView.IsMine) return;
+        //Disable the Player Action Map 
+        playerActionAsset.Wizard.Disable();
+
+        playerActionAsset.Wizard.LightBeam.started -= CallCreateBeam;
+    }
+
+    void CallCreateBeam(InputAction.CallbackContext context) 
+    {
+        photonView.RPC("CreateBeamRPC", RpcTarget.All);
     }
 
     [PunRPC]

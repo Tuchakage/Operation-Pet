@@ -1,8 +1,11 @@
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.InputSystem;
 
 public class FloatingPlayertargeting : MonoBehaviourPunCallbacks
 {
+    InputSystem_Actions playerActionAsset;
+
     public Camera playerCamera; // Camera for aiming
     public LayerMask targetLayer; // Layer for lockable targets
     public float lockOnRange = 10f; // Maximum range for locking onto a target
@@ -10,22 +13,47 @@ public class FloatingPlayertargeting : MonoBehaviourPunCallbacks
     public Transform lockedTarget { get; private set; } // The currently locked-on target
     public bool isLockedOn { get; private set; } = false; // Tracks if a target is locked
 
-    void Update()
-    {
-        if (!photonView.IsMine) return; // Ensure only the local player can lock on
 
-        if (Input.GetKeyDown(KeyCode.E)) // Press "E" to lock/unlock target
+    void Awake()
+    {
+        playerActionAsset = new InputSystem_Actions();
+    }
+
+    void OnEnable()
+    {
+        if (!photonView.IsMine) return;
+
+        //Enable the Player Action Map 
+        playerActionAsset.Wizard.Enable();
+
+        playerActionAsset.Wizard.Lock.started += ToggleLockOn;
+
+
+    }
+
+
+
+    void OnDisable()
+    {
+        if (!photonView.IsMine) return;
+        //Disable the Player Action Map 
+        playerActionAsset.Wizard.Disable();
+
+        playerActionAsset.Wizard.Lock.started -= ToggleLockOn;
+    }
+
+    void ToggleLockOn(InputAction.CallbackContext context) 
+    {
+        if (isLockedOn)
         {
-            if (isLockedOn)
-            {
-                photonView.RPC("UnlockTargetRPC", RpcTarget.All);
-            }
-            else
-            {
-                photonView.RPC("LockOnTargetRPC", RpcTarget.All);
-            }
+            photonView.RPC("UnlockTargetRPC", RpcTarget.All);
+        }
+        else
+        {
+            photonView.RPC("LockOnTargetRPC", RpcTarget.All);
         }
     }
+
 
     [PunRPC]
     private void LockOnTargetRPC()
