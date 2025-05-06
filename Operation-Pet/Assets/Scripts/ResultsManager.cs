@@ -50,6 +50,8 @@ public class ResultsManager : MonoBehaviourPun
         //No need to Sync Scenes because anyone can go back to the main menu at any time
         PhotonNetwork.AutomaticallySyncScene = false;
 
+        Cursor.lockState = CursorLockMode.None;
+
     }
     // Update is called once per frame
     void Update()

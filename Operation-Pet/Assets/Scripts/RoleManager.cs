@@ -71,7 +71,7 @@ public class RoleManager : MonoBehaviourPunCallbacks
         List<GameObject> foodInGameList = new List<GameObject>();
         foodInGameList = GameObject.FindGameObjectsWithTag("Food").ToList<GameObject>();
 
-        if (roundManager.GetCurrentRound() <= 3) 
+        if (roundManager.GetCurrentRound() <= 4) 
         {
             //Foreach food that was found
             foreach (var food in foodInGameList)
