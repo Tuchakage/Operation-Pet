@@ -11,7 +11,7 @@ public class FloatingCharacter : MonoBehaviourPunCallbacks
     public float hoverHeight = 5.0f; // Fixed height above terrain
     public float moveSpeed = 5.0f; // Movement speed
     public Camera characterCamera; // Assign the Camera in the Inspector
-    public float mouseSensitivity = 2.0f; // Sensitivity of mouse movement
+    public float mouseSensitivity = 1.0f; // Sensitivity of mouse movement
     private float verticalLookRotation = 0f; // Tracks vertical camera tilt
 
     public LayerMask groundPlayerLayer; // Layer for ground players
@@ -84,10 +84,10 @@ public class FloatingCharacter : MonoBehaviourPunCallbacks
 
     private void LookAround()
     {
-        float mouseX = playerActionAsset.Wizard.Look.ReadValue<Vector2>().x * mouseSensitivity;
+        float mouseX = playerActionAsset.Wizard.Look.ReadValue<Vector2>().x;
         transform.Rotate(0, mouseX, 0);
 
-        float mouseY = playerActionAsset.Wizard.Look.ReadValue<Vector2>().y * mouseSensitivity;
+        float mouseY = playerActionAsset.Wizard.Look.ReadValue<Vector2>().y;
         verticalLookRotation -= mouseY;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 

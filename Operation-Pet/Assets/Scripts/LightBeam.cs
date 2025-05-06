@@ -1,9 +1,12 @@
 using UnityEngine;
 using Photon.Pun;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class LightBeam : MonoBehaviourPunCallbacks
 {
+    InputSystem_Actions playerActionAsset;
+
     public GameObject beamPrefab;           // Prefab of the beam
     public float beamDuration = 5.0f;       // Duration before the beam disappears
     public float beamWidth = 1.0f;          // Width of the beam
@@ -12,17 +15,34 @@ public class LightBeam : MonoBehaviourPunCallbacks
     public LayerMask targetLayer;           // Layer for ground targeting
     public LayerMask groundPlayerLayer;     // Layer for players that should destroy the beam
 
-    void Update()
+    void Awake()
+    {
+        playerActionAsset = new InputSystem_Actions();
+    }
+
+    void OnEnable()
     {
         if (!photonView.IsMine) return;
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TryCreateBeam();
-        }
+        //Enable the Player Action Map 
+        playerActionAsset.Wizard.Enable();
+
+        playerActionAsset.Wizard.LightBeam.started += TryCreateBeam;
+
     }
 
-    private void TryCreateBeam()
+
+
+    void OnDisable()
+    {
+        if (!photonView.IsMine) return;
+        //Disable the Player Action Map 
+        playerActionAsset.Wizard.Disable();
+
+        playerActionAsset.Wizard.LightBeam.started -= TryCreateBeam;
+    }
+
+    private void TryCreateBeam(InputAction.CallbackContext context)
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, targetLayer))

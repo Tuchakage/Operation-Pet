@@ -457,15 +457,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Lock"",
-                    ""type"": ""Button"",
-                    ""id"": ""646311f6-13f7-42bb-bf69-068b501e737f"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""LightBeam"",
                     ""type"": ""Button"",
                     ""id"": ""c5568f54-5eaa-4b44-bbcc-1d23c93a7ed2"",
@@ -664,7 +655,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a14b1651-99c8-4de6-87bd-2eadd3a25bac"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -696,30 +687,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5081662a-8226-43fa-93a2-dab9b60a1a2d"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Lock"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a89c4f2d-74ae-4248-9c5c-a8ba067f09fb"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Lock"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""078f464b-d5df-4159-9b1b-82cfc2c2a7bc"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -1356,7 +1325,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Wizard_Look = m_Wizard.FindAction("Look", throwIfNotFound: true);
         m_Wizard_LockOnTarget = m_Wizard.FindAction("LockOnTarget", throwIfNotFound: true);
         m_Wizard_Flick = m_Wizard.FindAction("Flick", throwIfNotFound: true);
-        m_Wizard_Lock = m_Wizard.FindAction("Lock", throwIfNotFound: true);
         m_Wizard_LightBeam = m_Wizard.FindAction("LightBeam", throwIfNotFound: true);
         m_Wizard_PlaceMine = m_Wizard.FindAction("PlaceMine", throwIfNotFound: true);
         // UI
@@ -1529,7 +1497,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Wizard_Look;
     private readonly InputAction m_Wizard_LockOnTarget;
     private readonly InputAction m_Wizard_Flick;
-    private readonly InputAction m_Wizard_Lock;
     private readonly InputAction m_Wizard_LightBeam;
     private readonly InputAction m_Wizard_PlaceMine;
     public struct WizardActions
@@ -1540,7 +1507,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Wizard_Look;
         public InputAction @LockOnTarget => m_Wrapper.m_Wizard_LockOnTarget;
         public InputAction @Flick => m_Wrapper.m_Wizard_Flick;
-        public InputAction @Lock => m_Wrapper.m_Wizard_Lock;
         public InputAction @LightBeam => m_Wrapper.m_Wizard_LightBeam;
         public InputAction @PlaceMine => m_Wrapper.m_Wizard_PlaceMine;
         public InputActionMap Get() { return m_Wrapper.m_Wizard; }
@@ -1564,9 +1530,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Flick.started += instance.OnFlick;
             @Flick.performed += instance.OnFlick;
             @Flick.canceled += instance.OnFlick;
-            @Lock.started += instance.OnLock;
-            @Lock.performed += instance.OnLock;
-            @Lock.canceled += instance.OnLock;
             @LightBeam.started += instance.OnLightBeam;
             @LightBeam.performed += instance.OnLightBeam;
             @LightBeam.canceled += instance.OnLightBeam;
@@ -1589,9 +1552,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Flick.started -= instance.OnFlick;
             @Flick.performed -= instance.OnFlick;
             @Flick.canceled -= instance.OnFlick;
-            @Lock.started -= instance.OnLock;
-            @Lock.performed -= instance.OnLock;
-            @Lock.canceled -= instance.OnLock;
             @LightBeam.started -= instance.OnLightBeam;
             @LightBeam.performed -= instance.OnLightBeam;
             @LightBeam.canceled -= instance.OnLightBeam;
@@ -1793,7 +1753,6 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnLockOnTarget(InputAction.CallbackContext context);
         void OnFlick(InputAction.CallbackContext context);
-        void OnLock(InputAction.CallbackContext context);
         void OnLightBeam(InputAction.CallbackContext context);
         void OnPlaceMine(InputAction.CallbackContext context);
     }

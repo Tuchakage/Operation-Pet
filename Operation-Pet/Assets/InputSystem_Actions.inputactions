@@ -434,15 +434,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Lock",
-                    "type": "Button",
-                    "id": "646311f6-13f7-42bb-bf69-068b501e737f",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "LightBeam",
                     "type": "Button",
                     "id": "c5568f54-5eaa-4b44-bbcc-1d23c93a7ed2",
@@ -641,7 +632,7 @@
                 {
                     "name": "",
                     "id": "a14b1651-99c8-4de6-87bd-2eadd3a25bac",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
@@ -673,30 +664,8 @@
                 },
                 {
                     "name": "",
-                    "id": "5081662a-8226-43fa-93a2-dab9b60a1a2d",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Lock",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a89c4f2d-74ae-4248-9c5c-a8ba067f09fb",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Lock",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "078f464b-d5df-4159-9b1b-82cfc2c2a7bc",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
