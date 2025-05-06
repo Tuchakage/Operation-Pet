@@ -2,9 +2,12 @@ using UnityEngine;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class CharacterPunch : MonoBehaviourPunCallbacks
 {
+    InputSystem_Actions playerActionAsset;
+
     public float punchCooldown = 1.0f; // Cooldown between punches
     public float pushBackForce = 2.0f; // Knockback force
     public float punchRange = 2.0f; // Punch reach distance
@@ -15,18 +18,51 @@ public class CharacterPunch : MonoBehaviourPunCallbacks
     private bool canPunch = true;
     private Dictionary<Transform, int> hitCounts = new Dictionary<Transform, int>();
 
+    void Awake()
+    {
+        playerActionAsset = new InputSystem_Actions();
+    }
+
     void Update()
+    {
+
+
+    }
+
+    void OnEnable()
     {
         if (!photonView.IsMine) return;
 
-        if (Input.GetMouseButtonDown(0) && canPunch)
+        //Enable the Player Action Map 
+        playerActionAsset.Pet.Enable();
+
+        //Subscribe the Jump Event to Jump function
+        playerActionAsset.Pet.LightAttack.started += RPCPerformPunch;
+
+
+    }
+
+
+    void OnDisable()
+    {
+        if (!photonView.IsMine) return;
+        //Disable the Player Action Map 
+        playerActionAsset.Pet.Disable();
+
+        //UnSubscribe the Jump Event from the Jump function
+        playerActionAsset.Pet.LightAttack.started -= RPCPerformPunch;
+    }
+
+    void RPCPerformPunch(InputAction.CallbackContext context)
+    {
+        if (canPunch)
         {
-            photonView.RPC("PerformPunchRPC", RpcTarget.AllBuffered);
+            photonView.RPC("PerformPunch", RpcTarget.AllBuffered);
         }
     }
 
     [PunRPC]
-    private void PerformPunchRPC()
+    private void PerformPunch()
     {
         if (gameObject.activeInHierarchy)
             StartCoroutine(Punch());

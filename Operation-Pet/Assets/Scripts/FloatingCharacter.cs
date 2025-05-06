@@ -1,8 +1,13 @@
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.InputSystem;
+using System;
 
 public class FloatingCharacter : MonoBehaviourPunCallbacks
 {
+    InputSystem_Actions playerActionAsset;
+    InputAction move; //Get inputs for the move action
+
     public float hoverHeight = 5.0f; // Fixed height above terrain
     public float moveSpeed = 5.0f; // Movement speed
     public Camera characterCamera; // Assign the Camera in the Inspector
@@ -11,7 +16,10 @@ public class FloatingCharacter : MonoBehaviourPunCallbacks
 
     public LayerMask groundPlayerLayer; // Layer for ground players
     public LayerMask floatingPlayerLayer; // Layer for floating players
-
+    void Awake()
+    {
+        playerActionAsset = new InputSystem_Actions();
+    }
     void Start()
     {
         if (!photonView.IsMine) return;
@@ -35,15 +43,40 @@ public class FloatingCharacter : MonoBehaviourPunCallbacks
         position.y = hoverHeight;
         transform.position = position;
 
-        // Movement and camera rotation
         MoveCharacter();
         LookAround();
     }
 
+    void OnEnable()
+    {
+        if (!photonView.IsMine) return;
+
+        //Enable the Player Action Map 
+        playerActionAsset.Wizard.Enable();
+
+        //playerActionAsset.Wizard.Move.started += MoveCharacter;
+        //playerActionAsset.Wizard.Look.started += LookAround;
+
+        //Get the inputs for the move action
+        move = playerActionAsset.Wizard.Move;
+    }
+
+
+
+    void OnDisable()
+    {
+        if (!photonView.IsMine) return;
+        //Disable the Player Action Map 
+        playerActionAsset.Wizard.Disable();
+
+        //playerActionAsset.Wizard.Move.started -= MoveCharacter;
+        //playerActionAsset.Wizard.Look.started -= LookAround;
+    }
+
     private void MoveCharacter()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = move.ReadValue<Vector2>().x;
+        float vertical = move.ReadValue<Vector2>().y;
 
         Vector3 movement = new Vector3(horizontal, 0, vertical).normalized * moveSpeed * Time.deltaTime;
         transform.Translate(movement, Space.World);
@@ -51,10 +84,10 @@ public class FloatingCharacter : MonoBehaviourPunCallbacks
 
     private void LookAround()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseX = playerActionAsset.Wizard.Look.ReadValue<Vector2>().x * mouseSensitivity;
         transform.Rotate(0, mouseX, 0);
 
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        float mouseY = playerActionAsset.Wizard.Look.ReadValue<Vector2>().y * mouseSensitivity;
         verticalLookRotation -= mouseY;
         verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
 
