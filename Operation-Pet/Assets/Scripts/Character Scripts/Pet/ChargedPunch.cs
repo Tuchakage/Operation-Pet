@@ -1,9 +1,13 @@
 using UnityEngine;
 using Photon.Pun;
 using System.Collections;
+using UnityEngine.InputSystem;
+using System;
 
 public class ChargedPunch : MonoBehaviourPunCallbacks
 {
+    InputSystem_Actions playerActionAsset;
+
     public float punchForce = 50f; // Knockback force
     public float upwardForce = 5f; // Adds slight upward push
     public float chargeTime = 2f; // Time required to fully charge
@@ -12,22 +16,21 @@ public class ChargedPunch : MonoBehaviourPunCallbacks
     private bool isCharging = false;
     private bool isFullyCharged = false;
 
+    void Awake()
+    {
+        playerActionAsset = new InputSystem_Actions();
+    }
+
     void Update()
     {
         if (!photonView.IsMine) return;
 
-        // Start charging when holding Right Mouse Button (RMB)
-        if (Input.GetMouseButtonDown(1))
-        {
-            isCharging = true;
-            StartCoroutine(ChargePunch());
-        }
+
 
         // Throw punch when Right Mouse Button (RMB) is released after full charge
         if (Input.GetMouseButtonUp(1) && isFullyCharged)
         {
-            photonView.RPC("ExecutePunchRPC", RpcTarget.All);
-            isFullyCharged = false; // Reset charge state
+
         }
 
         // Stop charging if RMB is released before full charge
@@ -38,10 +41,55 @@ public class ChargedPunch : MonoBehaviourPunCallbacks
         }
     }
 
+    void OnEnable()
+    {
+        playerActionAsset.Pet.HeavyAttack.started += CallChargePunch;
+
+        playerActionAsset.Pet.HeavyAttack.canceled += ReleaseChargePunch;
+
+        //Enable the Player Action Map 
+        playerActionAsset.Pet.Enable();
+
+    }
+
+    void ReleaseChargePunch(InputAction.CallbackContext context)
+    {
+        Debug.Log("Released");
+        if (isFullyCharged)
+        {
+            photonView.RPC("ExecutePunchRPC", RpcTarget.All);
+            isFullyCharged = false; // Reset charge state
+        }
+        else 
+        {
+            isCharging = false;
+            isFullyCharged = false;
+        }
+    }
+
+    void CallChargePunch(InputAction.CallbackContext context)
+    {
+        Debug.Log("Pressed");
+        if (!photonView.IsMine) return;
+
+        isCharging = true;
+        StartCoroutine(ChargePunch());
+    }
+
+    void OnDisable()
+    {
+        playerActionAsset.Pet.Disable();
+
+        playerActionAsset.Pet.HeavyAttack.started -= CallChargePunch;
+
+        playerActionAsset.Pet.HeavyAttack.canceled -= ReleaseChargePunch;
+    }
+
+
     private IEnumerator ChargePunch()
     {
+        
         yield return new WaitForSeconds(chargeTime);
-
         if (isCharging) // Only set as fully charged if RMB is still held
         {
             isFullyCharged = true;

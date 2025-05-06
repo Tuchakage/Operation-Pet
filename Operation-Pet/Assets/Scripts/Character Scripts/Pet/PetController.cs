@@ -70,25 +70,30 @@ public class PetController : MonoBehaviourPunCallbacks
 
     void OnEnable()
     {
+        if (!photonView.IsMine) return;
+
+        //Enable the Player Action Map 
+        playerActionAsset.Pet.Enable();
+
         //Subscribe the Jump Event to Jump function
-        playerActionAsset.Player.Jump.started += Jump;
-        playerActionAsset.Player.Attack.started += Attack;
+        playerActionAsset.Pet.Jump.started += Jump;
+        playerActionAsset.Pet.LightAttack.started += Attack;
 
         //Get the inputs for the move action
-        move = playerActionAsset.Player.Move;
-        //Enable the Player Action Map 
-        playerActionAsset.Player.Enable();
+        move = playerActionAsset.Pet.Move;
+
     }
 
 
     void OnDisable()
     {
+        if (!photonView.IsMine) return;
         //Disable the Player Action Map 
-        playerActionAsset.Player.Disable();
+        playerActionAsset.Pet.Disable();
 
         //UnSubscribe the Jump Event from the Jump function
-        playerActionAsset.Player.Jump.started += Jump;
-        playerActionAsset.Player.Attack.started -= Attack;
+        playerActionAsset.Pet.Jump.started -= Jump;
+        playerActionAsset.Pet.LightAttack.started -= Attack;
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -112,10 +117,7 @@ public class PetController : MonoBehaviourPunCallbacks
 
     void FixedUpdate()
     {
-        if (!photonView.IsMine)
-        {
-            return;
-        }
+        if (!photonView.IsMine) return;
         //Depends on whether we are moving left or right relative to the camera
         forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementForce;
 
